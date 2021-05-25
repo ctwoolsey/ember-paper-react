@@ -8,9 +8,10 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       legacyDecorators: true,
+      jsx: true,
     },
   },
-  plugins: ['ember'],
+  plugins: ['babel', 'ember', 'react'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
@@ -19,7 +20,11 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    'ember/no-jquery': 'error',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
+  },
   overrides: [
     // node files
     {
