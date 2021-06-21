@@ -3,10 +3,10 @@
     'use strict';
 
     return {
-      'default': self['React'],
+      default: self['ReactDOM'],
       __esModule: true,
     };
   }
 
-  define('react', [], vendorModule);
+  define('react-dom', [], vendorModule);
 })();

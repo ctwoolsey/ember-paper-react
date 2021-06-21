@@ -1,12 +1,12 @@
-(function() {
+(function () {
   function vendorModule() {
     'use strict';
 
     return {
-      'default': self['ReactDOM'],
+      default: self['React'],
       __esModule: true,
     };
   }
 
-  define('react-dom', [], vendorModule);
+  define('react', [], vendorModule);
 })();

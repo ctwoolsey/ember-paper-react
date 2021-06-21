@@ -5,7 +5,8 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
     babel: {
-      plugins: ['transform-react-jsx'],
+      presets: ['@babel/preset-react'],
+      plugins: ['@babel/plugin-syntax-jsx']
     },
   });
 
@@ -16,7 +17,7 @@ module.exports = function (defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  app.import({
+  /*app.import({
     development: 'node_modules/react/umd/react.development.js',
     // production: 'node_modules/react/umd/react.production.min.js'
   });
@@ -24,11 +25,16 @@ module.exports = function (defaults) {
   app.import({
     development: 'node_modules/react-dom/umd/react-dom.development.js',
     // production: 'node_modules/react-dom/umd/react-dom.production.min.js'
-  });
+  });*/
+/*
+  app.import('node_modules/react/umd/react.development.js');
+  app.import('node_modules/react-dom/umd/react-dom.development.js');
 
   app.import('vendor/shims/react.js');
+  console.log('Vendor Path: ' + this.treePaths.vendor);
+  //app.import(path.join(this.treePaths.vendor, 'shims/react.js');
   app.import('vendor/shims/react-dom.js');
-
+*/
   const { maybeEmbroider } = require('@embroider/test-setup');
   return maybeEmbroider(app);
 };
