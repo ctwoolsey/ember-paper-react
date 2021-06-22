@@ -1,8 +1,7 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { orange } from '@material-ui/core/colors';
-import { theme } from "./material-ui-theme/theme-creation";
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { theme } from "../material-ui-theme/theme-creation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +33,7 @@ function CustomCheckbox() {
   },
 });*/
 
-export default function Rcheckbox() {
+export default function ReactCheckbox() {
   return (
     <ThemeProvider theme={theme}>
       <CustomCheckbox />
