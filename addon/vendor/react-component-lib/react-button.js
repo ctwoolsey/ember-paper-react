@@ -8,7 +8,11 @@ export function ReactButton(props) {
   return (
     <ThemeProvider theme={theme}>
       <Button onClick={props.onclick}
-              variant="contained"
+              {...(props.variant ? {variant: props.variant} : {})}
+              size={props.size}
+              disabled={props.disabled}
+              disableElevation={props.disableElevation}
+              href={props.href}
               color="primary">
         {props.value}
       </Button>

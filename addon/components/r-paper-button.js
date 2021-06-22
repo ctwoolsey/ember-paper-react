@@ -9,14 +9,25 @@ export default class RPaperButton extends Component {
   }
 
   handleClick() {
-    this.args.onClick();
+    return this.args.onClick() || null;
   }
 
   @action
   inserted(element) {
     console.log('I was inserted: ' + element.innerHTML);
     this.handleClick = this.handleClick.bind(this);
-    ReactDOM.render(<ReactButton value={element.innerHTML} onclick={this.handleClick}/>, element);
+    let size = this.args.size || '';
+    let variant = this.args.variant || null;
+    let disabled = this.args.disabled || false;
+    let href = this.args.href || null;
+    let disableElevation = this.args.disableElevation || null;
+    ReactDOM.render(<ReactButton variant={variant}
+                                 size={size}
+                                 value={element.innerHTML}
+                                 disabled={disabled}
+                                 disableElevation={disableElevation}
+                                 href={href}
+                                 onclick={this.handleClick}/>, element);
   }
 
   willDestroy() {
