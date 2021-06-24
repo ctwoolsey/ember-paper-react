@@ -8,7 +8,6 @@ export default class MyCheckboxComponent extends Component {
   }
 
   inserted(element) {
-    console.log('I was inserted');
     ReactDOM.render(<ReactCheckbox/>, element);
   }
 
