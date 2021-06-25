@@ -12,8 +12,15 @@ module.exports = {
     let app = appOrAddon.app || appOrAddon;
     this._super.included.apply(this, arguments);
 
-    app.import('node_modules/react/umd/react.development.js');
-    app.import('node_modules/react-dom/umd/react-dom.development.js');
+    app.import({
+      development: 'node_modules/react/umd/react.development.js',
+      production: 'node_modules/react/umd/react.production.min.js'
+    });
+
+    app.import({
+      development: 'node_modules/react-dom/umd/react-dom.development.js',
+      production: 'node_modules/react-dom/umd/react-dom.production.min.js'
+    });
 
   }
 };
