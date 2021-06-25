@@ -13,13 +13,13 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     app.import({
-      development: 'node_modules/react/umd/react.development.js',
-      production: 'node_modules/react/umd/react.production.min.js'
+      development: require.resolve('react/umd/react.development.js'),
+      production: require.resolve('react/umd/react.production.min.js')
     });
 
     app.import({
-      development: 'node_modules/react-dom/umd/react-dom.development.js',
-      production: 'node_modules/react-dom/umd/react-dom.production.min.js'
+      development: require.resolve('react-dom/umd/react-dom.development.js'),
+      production: require.resolve('react-dom/umd/react-dom.production.min.js')
     });
 
   }
