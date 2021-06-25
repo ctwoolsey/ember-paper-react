@@ -4,21 +4,26 @@ import {theme} from "../material-ui-theme/theme-creation";
 import { ThemeProvider } from '@material-ui/core/styles';
 
 
-export const ReactButton = React.forwardRef((props, ref) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Button onClick={props.onclick}
-              {...(props.variant ? { variant: props.variant } : {})}
-              size={props.size}
-              disabled={props.disabled}
-              disableElevation={props.disableElevation}
-              href={props.href}
-              ref={ref}
-              color="primary">
-      </Button>
-    </ThemeProvider>
-  );
-});
+export class ReactButton extends React.Component{
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
 
-//https://stackoverflow.com/questions/51526461/how-to-use-react-forwardref-in-a-class-based-component
-//https://stackoverflow.com/questions/62800572/how-to-use-forward-ref-in-class-component
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <Button onClick={this.props.onclick}
+                {...(this.props.variant ? {variant: this.props.variant} : {})}
+                size={this.props.size}
+                disabled={this.props.disabled}
+                disableElevation={this.props.disableElevation}
+                href={this.props.href}
+                ref={this.props.myRef}
+                color="primary">
+          {this.props.value}
+        </Button>
+      </ThemeProvider>
+    );
+  }
+}
