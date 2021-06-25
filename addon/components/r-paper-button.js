@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import {ReactButton} from "../vendor/react-component-lib/react-button"
+import {ReactButton} from "../react-component-lib/react-button"
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import ReactCheckbox from "../vendor/react-component-lib/react-checkbox";
+import ReactCheckbox from "../react-component-lib/react-checkbox";
 import ReactDOM from 'react-dom';
 
 export default class MyCheckboxComponent extends Component {
