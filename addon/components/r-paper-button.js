@@ -31,6 +31,7 @@ export default class RPaperButton extends Component {
       this.reactRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
     }
     this.el.insertAdjacentElement('afterend', this.reactRef.current);
+    this.cloneAttributes(this.reactRef.current, this.el);
     this.el.remove();
   }
 
@@ -41,6 +42,26 @@ export default class RPaperButton extends Component {
     }
 
     return fragment;
+  }
+
+  cloneAttributes(target, source) {
+    [...source.attributes].forEach( attr => {
+      if (attr.nodeName === 'class') {
+        source.classList.forEach(className => {
+          target.classList.add(className);
+        });
+      } else
+        if (attr.nodeName === 'style') {
+          let styleArr = attr.nodeValue.split(';');
+          styleArr.forEach(style => {
+            let stylePieces = style.split(':');
+            target.style[stylePieces[0]] = stylePieces[1];
+
+          });
+        } else {
+          target.setAttribute(attr.nodeName, attr.nodeValue)
+        }
+    });
   }
 
   @action
