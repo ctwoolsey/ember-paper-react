@@ -12,6 +12,7 @@ export default class RPaperButton extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
+    this.sd = null;
   }
 
   handleClick() {
@@ -28,10 +29,10 @@ export default class RPaperButton extends Component {
    */
   renderElement() {
     if (this.el.hasChildNodes()) {
-      this.reactRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
+      this.reactRef.current.buttonRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
     }
-    this.el.insertAdjacentElement('afterend', this.reactRef.current);
-    this.cloneAttributes(this.reactRef.current, this.el);
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.buttonRef.current);
+    this.cloneAttributes(this.reactRef.current.buttonRef.current, this.el);
     this.el.remove();
   }
 
@@ -64,6 +65,19 @@ export default class RPaperButton extends Component {
     });
   }
 
+  get disabled() {
+    console.log('in get disabled');
+    this.updateDisabled();
+    return this.args.disabled || false;
+  }
+
+  updateDisabled() {
+    if (this.reactRef) {
+      console.log('updating disabled');
+      this.reactRef.current.setDisabled(this.args.disabled || false);
+    }
+  }
+
   @action
   inserted(element) {
     this.el = element;
@@ -71,7 +85,7 @@ export default class RPaperButton extends Component {
 
     let size = this.args.size || '';
     let variant = this.args.variant || null;
-    let disabled = this.args.disabled || false;
+    let disabled = this.disabled;
     let href = this.args.href || null;
     let disableElevation = this.args.disableElevation || null;
     this.reactRef = React.createRef();
@@ -90,13 +104,27 @@ export default class RPaperButton extends Component {
                                                                            disabled={disabled}
                                                                            disableElevation={disableElevation}
                                                                            href={href}
-                                                                           myRef={this.reactRef}
+                                                                           ref={this.reactRef}
                                                                            onclick={this.handleClick}/>, element.parentElement);
-    ReactDOM.render(reactButtonPortal, document.createElement('div'));
+    console.log('portal created');
+    this.reactButton = ReactDOM.render(reactButtonPortal, document.createElement('div'));
+    console.log('button dom rendered');
+    /*this.sd = ReactDOM.render(<ReactButton variant={variant}
+                                 size={size}
+                                 disabled={disabled}
+                                 disableElevation={disableElevation}
+                                 href={href}
+                                 myRef={this.reactRef}
+                                 onclick={this.handleClick}/>, element);
+    console.log('button dom rendered');*/
   }
 
   willDestroy() {
-    ReactDOM.unmountComponentAtNode(this.ref);
+    ReactDOM.unmountComponentAtNode(this.reactRef);
     super.willDestroy();
   }
+
+  /*
+    code works when not using portals.  So need to find if there is a way to do this code without a portal.
+   */
 }

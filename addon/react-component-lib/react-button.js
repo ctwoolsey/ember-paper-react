@@ -8,18 +8,31 @@ export class ReactButton extends React.Component{
   constructor(props) {
     super(props);
     this.props = props;
+    this.state = { disabled: this.props.disabled };
+    this.buttonRef = React.createRef();
+    this.setDisabled = this.setDisabled.bind(this);
+  }
+
+  setDisabled(disabled) {
+    this.setState({ disabled: disabled});
+    console.log('state set');
+  }
+
+  componentDidMount() {
+    console.log('component mounted');
   }
 
   render() {
+    const { disabled } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Button onClick={this.props.onclick}
                 {...(this.props.variant ? {variant: this.props.variant} : {})}
                 size={this.props.size}
-                disabled={this.props.disabled}
+                disabled={disabled}
                 disableElevation={this.props.disableElevation}
                 href={this.props.href}
-                ref={this.props.myRef}
+                ref={this.buttonRef}
                 color="primary">
           {this.props.value}
         </Button>
@@ -27,3 +40,5 @@ export class ReactButton extends React.Component{
     );
   }
 }
+
+//https://www.nearform.com/blog/forget-everything-you-learned-about-react-hooks-rock/
