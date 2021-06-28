@@ -8,25 +8,53 @@ export class ReactButton extends React.Component{
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = { disabled: this.props.disabled };
+    this.state = { disabled: this.props.disabled,
+                   variant: this.props.variant,
+                   size: this.props.size,
+                   href: this.props.href,
+                   disableElevation: this.props.disableElevation};
     this.buttonRef = React.createRef();
+
+    //properties
     this.setDisabled = this.setDisabled.bind(this);
+    this.setVariant = this.setVariant.bind(this);
+    this.setSize = this.setSize.bind(this);
+    this.setHref = this.setHref.bind(this);
+    this.setDisableElevation = this.setDisableElevation.bind(this);
   }
 
   setDisabled(disabled) {
-    this.setState({ disabled: disabled});
+    this.setState({ disabled: disabled });
   }
 
+  setVariant(variant) {
+    this.setState({ variant: variant});
+  }
+
+  setSize(size) {
+    this.setState( {size: size});
+  }
+
+  setHref(href) {
+    this.setState( {href: href});
+  }
+
+  setDisableElevation(disableElevation) {
+    this.setState( {disableElevation: disableElevation});
+  }
+
+  /* End Properties */
+
   render() {
-    const { disabled } = this.state;
+    const { disabled, variant, size, href, disableElevation } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Button onClick={this.props.onclick}
-                {...(this.props.variant ? {variant: this.props.variant} : {})}
-                size={this.props.size}
+                {...(variant ? {variant: variant} : {})}
+                size={size}
                 disabled={disabled}
-                disableElevation={this.props.disableElevation}
-                href={this.props.href}
+                disableElevation={disableElevation}
+                href={href}
                 ref={this.buttonRef}
                 color="primary">
           {this.props.value}

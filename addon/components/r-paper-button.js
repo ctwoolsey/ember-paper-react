@@ -66,12 +66,43 @@ export default class RPaperButton extends Component {
     });
   }
 
+  /* material-ui properties */
   @action
   disabled() {
     if (this.reactRef) {
       this.reactRef.current.setDisabled(this.args.disabled || false);
     }
   }
+
+  @action
+  variant() {
+    if (this.reactRef) {
+      this.reactRef.current.setVariant(this.args.variant || null);
+    }
+  }
+
+  @action
+  size() {
+    if (this.reactRef) {
+      this.reactRef.current.setSize(this.args.size || '');
+    }
+  }
+
+  @action
+  href() {
+    if (this.reactRef) {
+      this.reactRef.current.setHref(this.args.href || null);
+    }
+  }
+
+  @action
+  disableElevation() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisableElevation(this.args.disableElevation || null);
+    }
+  }
+
+  /* end material-ui properties */
 
   @action
   inserted(element) {

@@ -1,1 +1,7 @@
-<span ...attributes {{did-insert this.inserted }} {{did-update this.disabled @disabled}}>{{yield}}</span>
+<span ...attributes
+  {{did-insert this.inserted }}
+  {{did-update this.disabled @disabled}}
+  {{did-update this.variant @variant}}
+  {{did-update this.size @size}}
+  {{did-update this.href @href}}
+  {{did-update this.disableElevation @disableElevation}}>{{yield}}</span>
