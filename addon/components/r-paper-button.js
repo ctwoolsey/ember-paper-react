@@ -7,6 +7,7 @@ import { action } from "@ember/object";
 
 
 export default class RPaperButton extends Component {
+
   constructor() {
     super(...arguments);
     this.reactRef = null;
@@ -65,15 +66,9 @@ export default class RPaperButton extends Component {
     });
   }
 
-  get disabled() {
-    console.log('in get disabled');
-    this.updateDisabled();
-    return this.args.disabled || false;
-  }
-
-  updateDisabled() {
+  @action
+  disabled() {
     if (this.reactRef) {
-      console.log('updating disabled');
       this.reactRef.current.setDisabled(this.args.disabled || false);
     }
   }
@@ -85,7 +80,7 @@ export default class RPaperButton extends Component {
 
     let size = this.args.size || '';
     let variant = this.args.variant || null;
-    let disabled = this.disabled;
+    let disabled = this.args.disabled || false;
     let href = this.args.href || null;
     let disableElevation = this.args.disableElevation || null;
     this.reactRef = React.createRef();
@@ -106,17 +101,9 @@ export default class RPaperButton extends Component {
                                                                            href={href}
                                                                            ref={this.reactRef}
                                                                            onclick={this.handleClick}/>, element.parentElement);
-    console.log('portal created');
+
     this.reactButton = ReactDOM.render(reactButtonPortal, document.createElement('div'));
-    console.log('button dom rendered');
-    /*this.sd = ReactDOM.render(<ReactButton variant={variant}
-                                 size={size}
-                                 disabled={disabled}
-                                 disableElevation={disableElevation}
-                                 href={href}
-                                 myRef={this.reactRef}
-                                 onclick={this.handleClick}/>, element);
-    console.log('button dom rendered');*/
+
   }
 
   willDestroy() {
@@ -124,7 +111,4 @@ export default class RPaperButton extends Component {
     super.willDestroy();
   }
 
-  /*
-    code works when not using portals.  So need to find if there is a way to do this code without a portal.
-   */
 }

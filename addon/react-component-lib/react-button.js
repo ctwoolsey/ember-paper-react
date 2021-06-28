@@ -15,11 +15,6 @@ export class ReactButton extends React.Component{
 
   setDisabled(disabled) {
     this.setState({ disabled: disabled});
-    console.log('state set');
-  }
-
-  componentDidMount() {
-    console.log('component mounted');
   }
 
   render() {
@@ -40,5 +35,3 @@ export class ReactButton extends React.Component{
     );
   }
 }
-
-//https://www.nearform.com/blog/forget-everything-you-learned-about-react-hooks-rock/
