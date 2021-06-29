@@ -13,12 +13,70 @@ export default class RPaperButton extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
-    this.sd = null;
   }
 
   handleClick() {
-    return this.args.onClick() || null;
+    return (this.args.onClick && this.args.onClick()) || null;
   }
+
+  /* material-ui properties */
+  @action
+  disabled() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisabled(this.args.disabled || false);
+    }
+  }
+
+  @action
+  variant() {
+    if (this.reactRef) {
+      this.reactRef.current.setVariant(this.args.variant || null);
+    }
+  }
+
+  @action
+  size() {
+    if (this.reactRef) {
+      this.reactRef.current.setSize(this.args.size || '');
+    }
+  }
+
+  @action
+  href() {
+    if (this.reactRef) {
+      this.reactRef.current.setHref(this.args.href || null);
+    }
+  }
+
+  @action
+  disableElevation() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisableElevation(this.args.disableElevation || null);
+    }
+  }
+
+  @action
+  disableFocusRipple() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisableFocusRipple(this.args.disableFocusRipple || null);
+    }
+  }
+
+  @action
+  disableRipple() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisableRipple(this.args.disableRipple || null);
+    }
+  }
+
+  @action
+  fullWidth() {
+    if (this.reactRef) {
+      this.reactRef.current.setFullWidth(this.args.fullWidth || null);
+    }
+  }
+
+  /* end material-ui properties */
 
   /*
     Once rendered, the block content from this ember component is inserted into the appropriate area of the
@@ -66,44 +124,6 @@ export default class RPaperButton extends Component {
     });
   }
 
-  /* material-ui properties */
-  @action
-  disabled() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisabled(this.args.disabled || false);
-    }
-  }
-
-  @action
-  variant() {
-    if (this.reactRef) {
-      this.reactRef.current.setVariant(this.args.variant || null);
-    }
-  }
-
-  @action
-  size() {
-    if (this.reactRef) {
-      this.reactRef.current.setSize(this.args.size || '');
-    }
-  }
-
-  @action
-  href() {
-    if (this.reactRef) {
-      this.reactRef.current.setHref(this.args.href || null);
-    }
-  }
-
-  @action
-  disableElevation() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableElevation(this.args.disableElevation || null);
-    }
-  }
-
-  /* end material-ui properties */
-
   @action
   inserted(element) {
     this.el = element;
@@ -114,6 +134,9 @@ export default class RPaperButton extends Component {
     let disabled = this.args.disabled || false;
     let href = this.args.href || null;
     let disableElevation = this.args.disableElevation || null;
+    let disableFocusRipple = this.args.disableFocusRipple || null;
+    let disableRipple = this.args.disableRipple || null;
+    let fullWidth = this.args.fullWidth || null;
     this.reactRef = React.createRef();
 
     /*
@@ -126,12 +149,15 @@ export default class RPaperButton extends Component {
 
      */
     const reactButtonPortal = ReactDOM.createPortal(<ReactButton variant={variant}
-                                                                           size={size}
-                                                                           disabled={disabled}
-                                                                           disableElevation={disableElevation}
-                                                                           href={href}
-                                                                           ref={this.reactRef}
-                                                                           onclick={this.handleClick}/>, element.parentElement);
+                                                                 size={size}
+                                                                 disabled={disabled}
+                                                                 disableElevation={disableElevation}
+                                                                 disableFocusRipple={disableFocusRipple}
+                                                                 disableRipple={disableRipple}
+                                                                 fullWidth={fullWidth}
+                                                                 href={href}
+                                                                 ref={this.reactRef}
+                                                                 onclick={this.handleClick}/>, element.parentElement);
 
     this.reactButton = ReactDOM.render(reactButtonPortal, document.createElement('div'));
 
