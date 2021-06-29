@@ -13,6 +13,11 @@ export default class RPaperButton extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
+    this.style = {
+      root: {
+        backgroundColor: 'red',
+      }
+    };
   }
 
   handleClick() {

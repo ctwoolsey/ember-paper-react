@@ -73,21 +73,19 @@ export class ReactButton extends React.Component{
             fullWidth
           } = this.state;
     return (
-      <ThemeProvider theme={theme}>
-        <Button onClick={this.props.onclick}
-                {...(variant ? {variant: variant} : {})}
-                size={size}
-                disabled={disabled}
-                disableElevation={disableElevation}
-                disableFocusRipple={disableFocusRipple}
-                disableRipple={disableRipple}
-                fullWidth={fullWidth}
-                href={href}
-                ref={this.buttonRef}
-                color="primary">
-          {this.props.value}
-        </Button>
-      </ThemeProvider>
+      <Button onClick={this.props.onclick}
+              {...(variant ? {variant: variant} : {})}
+              size={size}
+              disabled={disabled}
+              disableElevation={disableElevation}
+              disableFocusRipple={disableFocusRipple}
+              disableRipple={disableRipple}
+              fullWidth={fullWidth}
+              href={href}
+              ref={this.buttonRef}
+              color="primary">
+        {this.props.value}
+      </Button>
     );
   }
 }
