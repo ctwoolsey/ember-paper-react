@@ -4,20 +4,17 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
+import {inject as service} from '@ember/service';
 
 
 export default class RPaperButton extends Component {
+  @service() themeManager;
 
   constructor() {
     super(...arguments);
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
-    this.style = {
-      root: {
-        backgroundColor: 'red',
-      }
-    };
   }
 
   handleClick() {
@@ -81,6 +78,25 @@ export default class RPaperButton extends Component {
     }
   }
 
+  @action
+  localThemeChanged() {
+    console.log('localThemeChanged');
+    if (this.reactRef) {
+      this.reactRef.current.setTheme(this.useTheme());
+    }
+  }
+
+  @action
+  globalThemeChanged() {
+    if (this.reactRef) {
+      this.reactRef.current.setTheme(this.useTheme());
+    }
+  }
+
+  useTheme() {
+    return this.args.theme || this.themeManager.theme || null;
+  }
+
   /* end material-ui properties */
 
   /*
@@ -93,10 +109,10 @@ export default class RPaperButton extends Component {
    */
   renderElement() {
     if (this.el.hasChildNodes()) {
-      this.reactRef.current.buttonRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
     }
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.buttonRef.current);
-    this.cloneAttributes(this.reactRef.current.buttonRef.current, this.el);
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.el.remove();
   }
 
@@ -142,6 +158,9 @@ export default class RPaperButton extends Component {
     let disableFocusRipple = this.args.disableFocusRipple || null;
     let disableRipple = this.args.disableRipple || null;
     let fullWidth = this.args.fullWidth || null;
+    //let theme = this.args.theme || null;
+    let theme = this.useTheme(); //this.themeManager.theme;//this.themeToUse(); //this.themeManager.theme || this.args.theme || null;
+    console.log('Button creating reactRef');
     this.reactRef = React.createRef();
 
     /*
@@ -153,18 +172,19 @@ export default class RPaperButton extends Component {
       once rendered, the runloop will call renderElement() for further processing.
 
      */
-    const reactButtonPortal = ReactDOM.createPortal(<ReactButton variant={variant}
+    const reactPortal = ReactDOM.createPortal(<ReactButton variant={variant}
                                                                  size={size}
                                                                  disabled={disabled}
                                                                  disableElevation={disableElevation}
                                                                  disableFocusRipple={disableFocusRipple}
                                                                  disableRipple={disableRipple}
                                                                  fullWidth={fullWidth}
+                                                                 theme={theme}
                                                                  href={href}
                                                                  ref={this.reactRef}
                                                                  onclick={this.handleClick}/>, element.parentElement);
 
-    this.reactButton = ReactDOM.render(reactButtonPortal, document.createElement('div'));
+    ReactDOM.render(reactPortal, document.createElement('div'));
 
   }
 

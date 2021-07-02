@@ -7,4 +7,6 @@
   {{did-update this.disableElevation @disableElevation}}
   {{did-update this.disableFocusRipple @disableFocusRipple}}
   {{did-update this.disableRipple @disableRipple}}
-  {{did-update this.fullWidth @fullWidth}}>{{yield}}</span>
+  {{did-update this.fullWidth @fullWidth}}
+  {{did-update this.globalThemeChanged this.themeManager.theme}}
+  {{did-update this.localThemeChanged @theme}}>{{yield}}</span>

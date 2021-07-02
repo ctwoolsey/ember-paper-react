@@ -1,8 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import {theme} from "../material-ui-theme/theme-creation";
 import { ThemeProvider } from '@material-ui/core/styles';
-
 
 export class ReactButton extends React.Component{
   constructor(props) {
@@ -15,9 +13,10 @@ export class ReactButton extends React.Component{
                    disableElevation: this.props.disableElevation,
                    disableFocusRipple: this.props.disableFocusRipple,
                    disableRipple: this.props.disableRipple,
-                   fullWidth: this.props.fullWidth
+                   fullWidth: this.props.fullWidth,
+                   theme: this.props.theme
                  };
-    this.buttonRef = React.createRef();
+    this.componentRef = React.createRef();
 
     //properties
     this.setDisabled = this.setDisabled.bind(this);
@@ -28,6 +27,7 @@ export class ReactButton extends React.Component{
     this.setDisableFocusRipple = this.setDisableFocusRipple.bind(this);
     this.setDisableRipple = this.setDisableRipple.bind(this);
     this.setFullWidth = this.setFullWidth.bind(this);
+    this.setTheme = this.setTheme.bind(this);
   }
 
   setDisabled(disabled) {
@@ -62,6 +62,11 @@ export class ReactButton extends React.Component{
     this.setState( {fullWidth: fullWidth});
   }
 
+  setTheme(theme) {
+    console.log('in set theme');
+    this.setState( {theme: theme});
+  }
+
   render() {
     const { disabled,
             variant,
@@ -70,22 +75,26 @@ export class ReactButton extends React.Component{
             disableElevation,
             disableFocusRipple,
             disableRipple,
-            fullWidth
+            fullWidth,
+            theme
           } = this.state;
+
     return (
-      <Button onClick={this.props.onclick}
-              {...(variant ? {variant: variant} : {})}
-              size={size}
-              disabled={disabled}
-              disableElevation={disableElevation}
-              disableFocusRipple={disableFocusRipple}
-              disableRipple={disableRipple}
-              fullWidth={fullWidth}
-              href={href}
-              ref={this.buttonRef}
-              color="primary">
-        {this.props.value}
-      </Button>
+      <ThemeProvider {...(theme ? {theme: theme} : {})}>
+        <Button onClick={this.props.onclick}
+                {...(variant ? {variant: variant} : {})}
+                size={size}
+                disabled={disabled}
+                disableElevation={disableElevation}
+                disableFocusRipple={disableFocusRipple}
+                disableRipple={disableRipple}
+                fullWidth={fullWidth}
+                href={href}
+                ref={this.componentRef}
+                color="primary">
+          {this.props.value}
+        </Button>
+      </ThemeProvider>
     );
   }
 }
