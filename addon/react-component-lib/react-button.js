@@ -14,6 +14,7 @@ export class ReactButton extends React.Component{
                    disableFocusRipple: this.props.disableFocusRipple,
                    disableRipple: this.props.disableRipple,
                    fullWidth: this.props.fullWidth,
+                   color: this.props.color,
                    theme: this.props.theme
                  };
     this.componentRef = React.createRef();
@@ -27,6 +28,7 @@ export class ReactButton extends React.Component{
     this.setDisableFocusRipple = this.setDisableFocusRipple.bind(this);
     this.setDisableRipple = this.setDisableRipple.bind(this);
     this.setFullWidth = this.setFullWidth.bind(this);
+    this.setColor = this.setColor.bind(this);
     this.setTheme = this.setTheme.bind(this);
   }
 
@@ -62,8 +64,11 @@ export class ReactButton extends React.Component{
     this.setState( {fullWidth: fullWidth});
   }
 
+  setColor(color) {
+    this.setState( {color: color});
+  }
+
   setTheme(theme) {
-    console.log('in set theme');
     this.setState( {theme: theme});
   }
 
@@ -76,6 +81,7 @@ export class ReactButton extends React.Component{
             disableFocusRipple,
             disableRipple,
             fullWidth,
+            color,
             theme
           } = this.state;
 
@@ -91,7 +97,7 @@ export class ReactButton extends React.Component{
                 fullWidth={fullWidth}
                 href={href}
                 ref={this.componentRef}
-                color="primary">
+                {...(color ? {color: color} : {})}>
           {this.props.value}
         </Button>
       </ThemeProvider>

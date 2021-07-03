@@ -25,6 +25,36 @@ $ ember install --save -dev ember-paper-react
 
 Usage
 ==============================================================================
+<i>Theming</i>
+------------------------------------------------------------------------------
+If you wish to theme the material-ui components using predefined colors from material-ui, you will need to install "@material-ui/core".
+
+```$ npm install --save -dev @material-ui/core```
+
+To use the material-ui theme palette globally, inject the service 'themeManager'.  This should be done within application.js.
+
+<i>application.js</i>
+```
+import pink from '@material-ui/core/colors/pink';
+import green from '@material-ui/core/colors/green';
+
+export default class ApplicationController extends Controller {
+  @service themeManager;
+
+  constructor() {
+    super(...arguments);
+    this.themeManager.theme = this.themeManager.createTheme({
+      primary: {
+        main: pink[500]
+      },
+      secondary: {
+        main: green[500]
+      }
+    });
+  }
+}
+```
+To change the global theme, this same pattern can be called from anywhere in the ember app.  To change a specific component, modify the appropriate css file.
 
 <i>Button</i>
 ------------------------------------------------------------------------------

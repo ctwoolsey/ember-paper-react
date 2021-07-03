@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
-import {inject as service} from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default class RPaperCheckbox extends Component {
-  @service() themeManager;
+  @service themeManager;
 
   constructor() {
     super(...arguments);
@@ -21,21 +21,17 @@ export default class RPaperCheckbox extends Component {
   }
 
   @action
-  localThemeChanged() {
+  color() {
     if (this.reactRef) {
-      this.reactRef.current.setTheme(this.useTheme());
+      this.reactRef.current.setColor(this.args.color || null);
     }
   }
 
   @action
   globalThemeChanged() {
     if (this.reactRef) {
-      this.reactRef.current.setTheme(this.useTheme());
+      this.reactRef.current.setTheme(this.themeManager.theme);
     }
-  }
-
-  useTheme() {
-    return this.args.theme || this.themeManager.theme || null;
   }
 
   renderElement() {
@@ -69,8 +65,8 @@ export default class RPaperCheckbox extends Component {
     this.el = element;
     scheduleOnce('render', this, this.renderElement);
 
-    //let theme = this.args.theme || null;
-    let theme = this.useTheme(); //this.themeManager.theme;//this.themeToUse(); //this.themeManager.theme || this.args.theme || null;
+    let color = this.args.color || null;
+    let theme = this.themeManager.theme || null;
     this.reactRef = React.createRef();
 
     /*
@@ -83,13 +79,13 @@ export default class RPaperCheckbox extends Component {
 
      */
     const reactPortal = ReactDOM.createPortal(<ReactCheckbox
+                                                                 color={color}
                                                                  theme={theme}
                                                                  ref={this.reactRef}
                                                                  onclick={this.handleClick}
                                                                  />, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 
   willDestroy() {

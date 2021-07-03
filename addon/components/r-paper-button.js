@@ -4,11 +4,10 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
-import {inject as service} from '@ember/service';
-
+import { inject as service } from '@ember/service';
 
 export default class RPaperButton extends Component {
-  @service() themeManager;
+  @service themeManager;
 
   constructor() {
     super(...arguments);
@@ -79,22 +78,17 @@ export default class RPaperButton extends Component {
   }
 
   @action
-  localThemeChanged() {
-    console.log('localThemeChanged');
+  color() {
     if (this.reactRef) {
-      this.reactRef.current.setTheme(this.useTheme());
+      this.reactRef.current.setColor(this.args.color || null);
     }
   }
 
   @action
   globalThemeChanged() {
-    if (this.reactRef) {
-      this.reactRef.current.setTheme(this.useTheme());
-    }
-  }
-
-  useTheme() {
-    return this.args.theme || this.themeManager.theme || null;
+      if (this.reactRef) {
+        this.reactRef.current.setTheme(this.themeManager.theme);
+      }
   }
 
   /* end material-ui properties */
@@ -158,11 +152,9 @@ export default class RPaperButton extends Component {
     let disableFocusRipple = this.args.disableFocusRipple || null;
     let disableRipple = this.args.disableRipple || null;
     let fullWidth = this.args.fullWidth || null;
-    //let theme = this.args.theme || null;
-    let theme = this.useTheme(); //this.themeManager.theme;//this.themeToUse(); //this.themeManager.theme || this.args.theme || null;
-    console.log('Button creating reactRef');
+    let color = this.args.color || null;
+    let theme = this.themeManager.theme || null;
     this.reactRef = React.createRef();
-
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
       the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
@@ -179,6 +171,7 @@ export default class RPaperButton extends Component {
                                                                  disableFocusRipple={disableFocusRipple}
                                                                  disableRipple={disableRipple}
                                                                  fullWidth={fullWidth}
+                                                                 color={color}
                                                                  theme={theme}
                                                                  href={href}
                                                                  ref={this.reactRef}

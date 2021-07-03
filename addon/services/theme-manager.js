@@ -8,20 +8,4 @@ export default class ThemeManagerService extends Service {
   createTheme(palette) {
     return createMuiTheme({palette: palette});
   }
-
-  /*set theme(theme) {
-    console.log('set theme called');
-    this._theme = theme;
-  }*/
-
-  /*get theme() {
-    console.log('get theme called');
-    return this.theme;
-  }*/
-
-  /*get counter() {
-    console.log('counter called (in service): ' + this.counter);
-    return this.counter;
-  }*/
-
 }

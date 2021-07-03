@@ -7,21 +7,27 @@ export class ReactCheckbox extends React.Component{
     super(props);
     this.props = props;
     this.state = {
+      color: this.props.color,
       theme: this.props.theme
     };
     this.componentRef = React.createRef();
 
     //properties
+    this.setColor = this.setColor.bind(this);
     this.setTheme = this.setTheme.bind(this);
   }
 
+  setColor(color) {
+    this.setState( {color: color});
+  }
+
   setTheme(theme) {
-    console.log('in cb set theme');
     this.setState( {theme: theme});
   }
 
   render() {
     const {
+      color,
       theme
     } = this.state;
 
@@ -30,54 +36,9 @@ export class ReactCheckbox extends React.Component{
         <Checkbox
           onClick={this.props.onclick}
           ref={this.componentRef}
-          color="primary" />
+          {...(color ? {color: color} : {})}
+        />
       </ThemeProvider>
     );
   }
 }
-
-
-/*const useStyles = makeStyles((theme) => ({
-  root: {
-    color: theme.palette.primary.main, //theme.status.danger,
-    '&$checked': {
-      color: theme.palette.secondary.main, //theme.status.danger,
-    },
-  },
-  checked: {},
-}));
-
-function CustomCheckbox() {
-  const classes = useStyles();
-
-  return (
-    <Checkbox
-      defaultChecked
-      classes={{
-        root: classes.root,
-        checked: classes.checked,
-      }}
-    />
-  );
-}*/
-
-/*const theme = createMuiTheme({
-  status: {
-    danger: orange[500],
-  },
-});*/
-/*export default function ReactCheckbox() {
-  return (
-    <ThemeProvider theme={theme}>
-      <CustomCheckbox />
-    </ThemeProvider>
-  );
-}*/
-/*export default function ReactCheckbox() {
-  return (
-    <ThemeProvider  >
-      <Checkbox
-        defaultChecked />
-    </ThemeProvider>
-  );
-}*/
