@@ -89,7 +89,7 @@ export class ReactButton extends React.Component{
       <ThemeProvider {...(theme ? {theme: theme} : {})}>
         <Button onClick={this.props.onclick}
                 {...(variant ? {variant: variant} : {})}
-                size={size}
+                {...(size ? {size: size} : {})}
                 disabled={disabled}
                 disableElevation={disableElevation}
                 disableFocusRipple={disableFocusRipple}

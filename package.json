@@ -28,6 +28,8 @@
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.14.5",
     "@babel/plugin-transform-react-jsx": "^7.14.3",
+    "@ember/render-modifiers": "^1.0.2",
+    "@material-ui/core": "4.11.4",
     "ember-auto-import": "^1.11.3",
     "ember-cli-babel": "^7.26.3",
     "ember-cli-htmlbars": "^5.7.1",
@@ -35,8 +37,7 @@
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-react": "^7.23.2",
     "react": "*",
-    "react-dom": "*",
-    "@material-ui/core": "4.11.4"
+    "react-dom": "*"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
