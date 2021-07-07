@@ -35,8 +35,8 @@ export default class RPaperCheckbox extends Component {
   }
 
   renderElement() {
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current.parentElement);
+    this.cloneAttributes(this.reactRef.current.componentRef.current.parentElement, this.el);
     this.el.remove();
   }
 

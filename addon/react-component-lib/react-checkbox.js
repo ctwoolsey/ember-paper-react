@@ -31,13 +31,20 @@ export class ReactCheckbox extends React.Component{
       theme
     } = this.state;
 
+    /*
+        span wrapping checkbox is needed because when the user clicks
+        on the Checkbox component, material-ui clears out classes, so
+        classes have to be added to this span.
+     */
     return (
       <ThemeProvider {...(theme ? {theme: theme} : {})}>
-        <Checkbox
-          onClick={this.props.onclick}
-          ref={this.componentRef}
-          {...(color ? {color: color} : {})}
-        />
+        <span>
+          <Checkbox
+            onClick={this.props.onclick}
+            ref={this.componentRef}
+            {...(color ? {color: color} : {})}
+          />
+        </span>
       </ThemeProvider>
     );
   }

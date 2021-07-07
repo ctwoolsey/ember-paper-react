@@ -14,6 +14,14 @@ export default class RPaperButton extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
+    this.addedClasses = [];
+    if (this.args.class) {
+      this.addedClasses = this.args.class.split(' ');
+    }
+    this.addedStyles = [];
+    if (this.args.style) {
+      this.addedStyles = this.args.style.split(';');
+    }
   }
 
   handleClick() {
@@ -21,6 +29,40 @@ export default class RPaperButton extends Component {
   }
 
   /* material-ui properties */
+  @action
+  class() {
+    if (this.reactRef) {
+      //remove old class names
+      this.addedClasses.forEach(className => {
+        this.reactRef.current.componentRef.current.classList.remove(className);
+      });
+      //save new class list
+      this.addedClasses = this.args.class.split(' ');
+      this.addedClasses.forEach(className => {
+        this.reactRef.current.componentRef.current.classList.add(className);
+      });
+
+    }
+  }
+
+  @action
+  style() {
+    if (this.reactRef) {
+      //remove old style names
+      this.addedStyles.forEach(styleItem => {
+        let stylePieces = styleItem.split(':');
+        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
+      });
+      //save new style list
+      this.addedStyles = this.args.style.split(';');
+      this.addedStyles.forEach(styleItem => {
+        let stylePieces = styleItem.split(':');
+        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
+      });
+
+    }
+  }
+
   @action
   disabled() {
     if (this.reactRef) {
@@ -107,6 +149,8 @@ export default class RPaperButton extends Component {
     }
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.initializeDynamicClasses();
+    this.initializeDynamicStyles();
     this.el.remove();
   }
 
@@ -136,6 +180,19 @@ export default class RPaperButton extends Component {
         } else {
           target.setAttribute(attr.nodeName, attr.nodeValue)
         }
+    });
+  }
+
+  initializeDynamicClasses() {
+    this.addedClasses.forEach(className => {
+      this.reactRef.current.componentRef.current.classList.add(className);
+    });
+  }
+
+  initializeDynamicStyles() {
+    this.addedStyles.forEach(styleItem => {
+      let stylePieces = styleItem.split(':');
+      this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
     });
   }
 
