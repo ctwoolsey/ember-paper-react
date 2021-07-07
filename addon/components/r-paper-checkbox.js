@@ -14,6 +14,11 @@ export default class RPaperCheckbox extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
+
+    this.addedStyles = [];
+    if (this.args.style) {
+      this.addedStyles = this.args.style.split(';');
+    }
   }
 
   handleClick() {
@@ -21,9 +26,41 @@ export default class RPaperCheckbox extends Component {
   }
 
   @action
+  class() {
+    if (this.reactRef) {
+      this.reactRef.current.setClass(this.args.class || false);
+    }
+  }
+
+  @action
+  style() {
+    if (this.reactRef) {
+      //remove old style names
+      this.addedStyles.forEach(styleItem => {
+        let stylePieces = styleItem.split(':');
+        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
+      });
+      //save new style list
+      this.addedStyles = this.args.style.split(';');
+      this.addedStyles.forEach(styleItem => {
+        let stylePieces = styleItem.split(':');
+        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
+      });
+
+    }
+  }
+
+  @action
   color() {
     if (this.reactRef) {
       this.reactRef.current.setColor(this.args.color || null);
+    }
+  }
+
+  @action
+  checked() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
     }
   }
 
@@ -35,18 +72,14 @@ export default class RPaperCheckbox extends Component {
   }
 
   renderElement() {
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current.parentElement);
-    this.cloneAttributes(this.reactRef.current.componentRef.current.parentElement, this.el);
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.initializeDynamicStyles();
     this.el.remove();
   }
 
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
-      if (attr.nodeName === 'class') {
-        source.classList.forEach(className => {
-          target.classList.add(className);
-        });
-      } else
       if (attr.nodeName === 'style') {
         let styleArr = attr.nodeValue.split(';');
         styleArr.forEach(style => {
@@ -54,9 +87,16 @@ export default class RPaperCheckbox extends Component {
           target.style[stylePieces[0]] = stylePieces[1];
 
         });
-      } else {
+      } else if (attr.nodeName !== 'class') { //ignore class
         target.setAttribute(attr.nodeName, attr.nodeValue)
       }
+    });
+  }
+
+  initializeDynamicStyles() {
+    this.addedStyles.forEach(styleItem => {
+      let stylePieces = styleItem.split(':');
+      this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
     });
   }
 
@@ -67,6 +107,7 @@ export default class RPaperCheckbox extends Component {
 
     let color = this.args.color || null;
     let theme = this.themeManager.theme || null;
+    let classString = this.args.class || '';
     this.reactRef = React.createRef();
 
     /*
@@ -79,11 +120,12 @@ export default class RPaperCheckbox extends Component {
 
      */
     const reactPortal = ReactDOM.createPortal(<ReactCheckbox
-                                                                 color={color}
-                                                                 theme={theme}
-                                                                 ref={this.reactRef}
-                                                                 onclick={this.handleClick}
-                                                                 />, element.parentElement);
+                                                 class={classString}
+                                                 color={color}
+                                                 theme={theme}
+                                                 ref={this.reactRef}
+                                                 onclick={this.handleClick}
+                                              />, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
   }

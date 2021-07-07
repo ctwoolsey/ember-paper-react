@@ -15,7 +15,8 @@ export class ReactButton extends React.Component{
                    disableRipple: this.props.disableRipple,
                    fullWidth: this.props.fullWidth,
                    color: this.props.color,
-                   theme: this.props.theme
+                   theme: this.props.theme,
+                   classString: this.props.class
                  };
     this.componentRef = React.createRef();
 
@@ -30,6 +31,11 @@ export class ReactButton extends React.Component{
     this.setFullWidth = this.setFullWidth.bind(this);
     this.setColor = this.setColor.bind(this);
     this.setTheme = this.setTheme.bind(this);
+    this.setClass = this.setClass.bind(this);
+  }
+
+  setClass(classes) {
+    this.setState({classString: classes})
   }
 
   setDisabled(disabled) {
@@ -82,12 +88,14 @@ export class ReactButton extends React.Component{
             disableRipple,
             fullWidth,
             color,
-            theme
+            theme,
+            classString
           } = this.state;
 
     return (
       <ThemeProvider {...(theme ? {theme: theme} : {})}>
         <Button onClick={this.props.onclick}
+                {...(classString ? {className: classString} : {})}
                 {...(variant ? {variant: variant} : {})}
                 {...(size ? {size: size} : {})}
                 disabled={disabled}

@@ -14,10 +14,7 @@ export default class RPaperButton extends Component {
     this.reactRef = null;
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
-    this.addedClasses = [];
-    if (this.args.class) {
-      this.addedClasses = this.args.class.split(' ');
-    }
+
     this.addedStyles = [];
     if (this.args.style) {
       this.addedStyles = this.args.style.split(';');
@@ -32,16 +29,7 @@ export default class RPaperButton extends Component {
   @action
   class() {
     if (this.reactRef) {
-      //remove old class names
-      this.addedClasses.forEach(className => {
-        this.reactRef.current.componentRef.current.classList.remove(className);
-      });
-      //save new class list
-      this.addedClasses = this.args.class.split(' ');
-      this.addedClasses.forEach(className => {
-        this.reactRef.current.componentRef.current.classList.add(className);
-      });
-
+      this.reactRef.current.setClass(this.args.class || false);
     }
   }
 
@@ -149,7 +137,6 @@ export default class RPaperButton extends Component {
     }
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicClasses();
     this.initializeDynamicStyles();
     this.el.remove();
   }
@@ -165,27 +152,16 @@ export default class RPaperButton extends Component {
 
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
-      if (attr.nodeName === 'class') {
-        source.classList.forEach(className => {
-          target.classList.add(className);
-        });
-      } else
-        if (attr.nodeName === 'style') {
-          let styleArr = attr.nodeValue.split(';');
-          styleArr.forEach(style => {
-            let stylePieces = style.split(':');
-            target.style[stylePieces[0]] = stylePieces[1];
+      if (attr.nodeName === 'style') {
+        let styleArr = attr.nodeValue.split(';');
+        styleArr.forEach(style => {
+          let stylePieces = style.split(':');
+          target.style[stylePieces[0]] = stylePieces[1];
 
-          });
-        } else {
+        });
+      } else if (attr.nodeName !== 'class'){  // ignore class
           target.setAttribute(attr.nodeName, attr.nodeValue)
         }
-    });
-  }
-
-  initializeDynamicClasses() {
-    this.addedClasses.forEach(className => {
-      this.reactRef.current.componentRef.current.classList.add(className);
     });
   }
 
@@ -211,6 +187,7 @@ export default class RPaperButton extends Component {
     let fullWidth = this.args.fullWidth || null;
     let color = this.args.color || null;
     let theme = this.themeManager.theme || null;
+    let classString = this.args.class || '';
     this.reactRef = React.createRef();
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
@@ -221,18 +198,20 @@ export default class RPaperButton extends Component {
       once rendered, the runloop will call renderElement() for further processing.
 
      */
-    const reactPortal = ReactDOM.createPortal(<ReactButton variant={variant}
-                                                                 size={size}
-                                                                 disabled={disabled}
-                                                                 disableElevation={disableElevation}
-                                                                 disableFocusRipple={disableFocusRipple}
-                                                                 disableRipple={disableRipple}
-                                                                 fullWidth={fullWidth}
-                                                                 color={color}
-                                                                 theme={theme}
-                                                                 href={href}
-                                                                 ref={this.reactRef}
-                                                                 onclick={this.handleClick}/>, element.parentElement);
+    const reactPortal = ReactDOM.createPortal(<ReactButton
+                                                 class={classString}
+                                                 variant={variant}
+                                                 size={size}
+                                                 disabled={disabled}
+                                                 disableElevation={disableElevation}
+                                                 disableFocusRipple={disableFocusRipple}
+                                                 disableRipple={disableRipple}
+                                                 fullWidth={fullWidth}
+                                                 color={color}
+                                                 theme={theme}
+                                                 href={href}
+                                                 ref={this.reactRef}
+                                                 onclick={this.handleClick}/>, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 

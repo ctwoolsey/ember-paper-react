@@ -83,8 +83,8 @@ The most basic usage is:
 ```
 To make the button useful, the following options are supported:
 * ```@onClick={{fn this.myOnClickHandler}}```
-* ```@class={{this.class}}```<i>*</i>
-* ```@style={{this.style}}```<i>**</i>
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```<i>*</i>
 * ```@variant={{this.variant}}```
 * ```@size={{this.size}}```
 * ```@href={{this.href}}```
@@ -94,9 +94,7 @@ To make the button useful, the following options are supported:
 * ```@disableRipple={{this.disableRipple}}```
 * ```@fullWidth={{this.fullWidth}}```
 
-<i>*</i> The use of the ```@class``` attribute is meant for dynamic classes tracked by ember, if the class is static it can be added to the normal ```HTML class``` attribute.
-
-<i>**</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
+<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
 If you want to set the 'tabIndex'  set it as a normal HTML attribute.  ```<RPaperButton tabIndex="2"></RPaperButton>```
 
