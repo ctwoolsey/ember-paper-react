@@ -19,17 +19,36 @@ Installation
 ==============================================================================
 
 ```
-$ ember install --save -dev ember-paper-react
+$ ember install --save --dev ember-paper-react
 ```
-
+This addon requires the use of SASS.
+```
+$ ember install --save ember-cli-sass
+```
+In the ```ember-cli-build.js``` file add the following:
+```
+let app = new EmberApp(defaults, {
+    // Add options here
+    sassOptions: {
+      extension: 'scss'
+    }
+  });
+```
+rename the ```app/styles/app.css``` file to ```app.scss```
 
 Usage
 ==============================================================================
+<i>Layout</i>
+------------------------------------------------------------------------------
+This addon uses React's ```material-ui``` components but layout styling is done as in ```ember-paper```. This is because material-ui styling is done through react constructs and would not allow styling via ember's HTML.
+
+[See ember-paper layout docs »](https://miguelcobain.github.io/ember-paper/#/layout/introduction) 
+
 <i>Theming</i>
 ------------------------------------------------------------------------------
 If you wish to theme the material-ui components using predefined colors from material-ui, you will need to install "@material-ui/core".
 
-```$ npm install --save -dev @material-ui/core```
+```$ npm install --save --dev @material-ui/core```
 
 To use the material-ui theme palette globally, inject the service 'themeManager'.  This should be done within application.js.
 
