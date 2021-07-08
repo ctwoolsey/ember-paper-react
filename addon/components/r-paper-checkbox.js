@@ -5,6 +5,7 @@ import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
+import { ReactFormControlLabel } from "../react-component-lib/react-form-control-label";
 
 export default class RPaperCheckbox extends Component {
   @service themeManager;
@@ -182,6 +183,7 @@ export default class RPaperCheckbox extends Component {
     let labelPlacement = this.args.labelPlacement || 'end';
     this.reactRef = React.createRef();
 
+    const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
       the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
@@ -191,7 +193,27 @@ export default class RPaperCheckbox extends Component {
       once rendered, the runloop will call renderElement() for further processing.
 
      */
-    const reactPortal = ReactDOM.createPortal(<ReactCheckbox
+
+    const reactPortal = ReactDOM.createPortal(<LabeledCheckBox
+      class={classString}
+      color={color}
+      checked={checked}
+      disabled={disabled}
+      disableRipple={disableRipple}
+      indeterminate={indeterminate}
+      required={required}
+      size={size}
+      value={value}
+      label={label}
+      labelPlacement={labelPlacement}
+      theme={theme}
+      ref={this.reactRef}
+      onChange={this.handleClick}
+    />, element.parentElement);
+
+    ReactDOM.render(reactPortal, document.createElement('div'));
+
+    /*const reactPortal = ReactDOM.createPortal(<ReactCheckbox
                                                  class={classString}
                                                  color={color}
                                                  checked={checked}
@@ -208,7 +230,7 @@ export default class RPaperCheckbox extends Component {
                                                  onchange={this.handleClick}
                                               />, element.parentElement);
 
-    ReactDOM.render(reactPortal, document.createElement('div'));
+    ReactDOM.render(reactPortal, document.createElement('div'));*/
 
   }
 

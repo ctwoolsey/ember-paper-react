@@ -6,16 +6,19 @@ export function ReactFormControlLabel(ControlComponent) {
   return class extends React.Component {
     constructor(props) {
       super(props);
-      const {value, theme, disabled, checked, label, labelPlacement, ...controlProps } = this.props;
+      const {onChange, inputRef, value, theme, disabled, checked, label, labelPlacement, ...controlProps } = this.props;
       this.state = {
-        value: value,
-        disabled: disabled,
         checked: checked,
+        disabled: disabled,
         label: label,
         labelPlacement: labelPlacement,
-        theme: theme
+        theme: theme,
+        value: value
       };
-      this.controlProps = [...controlProps];
+      this.onChange = onChange;
+      this.inputRef = inputRef;
+      //this.controlProps = [...controlProps];
+      this.controlProps = controlProps;
 
       this.componentRef = React.createRef();
 
@@ -55,25 +58,26 @@ export function ReactFormControlLabel(ControlComponent) {
     render() {
 
       const {
-        value,
-        disabled,
         checked,
+        disabled,
         label,
         labelPlacement,
-        theme
+        theme,
+        value
       } = this.state;
 
       return (
         <ThemeProvider {...(theme ? { theme: theme } : {})}>
           <FormControlLabel
-            {...(value ? { value: value } : {})}
-            {...(disabled ? { disabled: disabled } : {})}
-            {...(this.props.onchange ? { onChange: this.props.onchange } : {function(){}})}
             {...(checked ? { checked: checked } : {})}
-            control={<ControlComponent {...this.controlProps}/>}
-            ref={this.componentRef}
+            {...(disabled ? { disabled: disabled } : {})}
             {...(label ? { label: label } :  { label: '' })}
             {...(labelPlacement ? { labelPlacement: labelPlacement } : {})}
+            {...(value ? { value: value } : {})}
+            ref={this.componentRef}
+            {...(this.inputRef ? { inputRef: this.inputRef } : {})}
+            {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
+            control={<ControlComponent {...this.controlProps}/>}
           />
         </ThemeProvider>
       );
