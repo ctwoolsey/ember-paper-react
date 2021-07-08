@@ -65,6 +65,62 @@ export default class RPaperCheckbox extends Component {
   }
 
   @action
+  indeterminate() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  disabled() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  disableRipple() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  required() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  value() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  label() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  labelPlacement() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
+  size() {
+    if (this.reactRef) {
+      //this.reactRef.current.setChecked(this.args.checked || null);
+    }
+  }
+
+  @action
   globalThemeChanged() {
     if (this.reactRef) {
       this.reactRef.current.setTheme(this.themeManager.theme);
@@ -72,7 +128,14 @@ export default class RPaperCheckbox extends Component {
   }
 
   renderElement() {
+    /*if (this.args.label) {
+      this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current.parentElement);
+    } else {
+      this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    }*/
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+
+    //where should itmems be cloned and placed.
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
     this.el.remove();
@@ -108,6 +171,15 @@ export default class RPaperCheckbox extends Component {
     let color = this.args.color || null;
     let theme = this.themeManager.theme || null;
     let classString = this.args.class || '';
+    let checked = this.args.checked || false;
+    let disabled = this.args.disabled || false;
+    let disableRipple = this.args.disableRipple || null;
+    let indeterminate = this.args.indeterminate || false;
+    let required = this.args.required || false;
+    let size = this.args.size || '';
+    let value = this.args.value || null;
+    let label = this.args.label || null;
+    let labelPlacement = this.args.labelPlacement || 'end';
     this.reactRef = React.createRef();
 
     /*
@@ -122,12 +194,22 @@ export default class RPaperCheckbox extends Component {
     const reactPortal = ReactDOM.createPortal(<ReactCheckbox
                                                  class={classString}
                                                  color={color}
+                                                 checked={checked}
+                                                 disabled={disabled}
+                                                 disableRipple={disableRipple}
+                                                 indeterminate={indeterminate}
+                                                 required={required}
+                                                 size={size}
+                                                 value={value}
+                                                 label={label}
+                                                 labelPlacement={labelPlacement}
                                                  theme={theme}
                                                  ref={this.reactRef}
-                                                 onclick={this.handleClick}
+                                                 onchange={this.handleClick}
                                               />, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
+
   }
 
   willDestroy() {
