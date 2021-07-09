@@ -1,7 +1,5 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import { ThemeProvider } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 /* Does not currently implement:
     checkedIcon, icon, id, indeterminateIcon
@@ -19,8 +17,7 @@ export class ReactCheckbox extends React.Component{
       indeterminate: this.props.indeterminate,
       required: this.props.required,
       size: this.props.size,
-      value: this.props.value,
-      theme: this.props.theme
+      value: this.props.value
     };
     this.componentRef = React.createRef();
     this.onChange = this.props.onChange;
@@ -37,7 +34,6 @@ export class ReactCheckbox extends React.Component{
     this.setRequired = this.setRequired.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setValue = this.setValue.bind(this);
-    this.setTheme = this.setTheme.bind(this);
 
   }
   setChecked(checked) {
@@ -76,10 +72,6 @@ export class ReactCheckbox extends React.Component{
     this.setState( {value: value});
   }
 
-  setTheme(theme) {
-    this.setState( {theme: theme});
-  }
-
   render() {
     const {
       checked,
@@ -90,8 +82,7 @@ export class ReactCheckbox extends React.Component{
       indeterminate,
       required,
       size,
-      value,
-      theme
+      value
     } = this.state;
 
     return (
@@ -110,24 +101,5 @@ export class ReactCheckbox extends React.Component{
           {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
         />
     );
-
-    /*return (
-      <ThemeProvider {...(theme ? { theme: theme } : {})}>
-        <Checkbox
-          {...(checked ? { checked: checked } : {})}
-          {...(classString ? { className: classString } : {})}
-          {...(color ? { color: color } : {})}
-          {...(disabled ? { disabled: disabled } : {})}
-          {...(disableRipple ? { disableRipple: disableRipple } : {})}
-          {...(indeterminate ? { indeterminate: indeterminate } : {})}
-          {...(required ? { required: required } : {})}
-          {...(size ? { size: size } : {})}
-          {...(value ? { value: value } : {})}
-          ref={this.componentRef}
-          {...(this.inputRef ? { inputRef: this.inputRef } : {})}
-          {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
-        />
-      </ThemeProvider>
-    );*/
   }
 }

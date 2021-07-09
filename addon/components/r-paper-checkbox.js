@@ -6,6 +6,7 @@ import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { ReactFormControlLabel } from "../react-component-lib/react-form-control-label";
+import { ReactThemeProvider } from "../react-component-lib/ReactThemeProvider";
 
 export default class RPaperCheckbox extends Component {
   @service themeManager;
@@ -13,6 +14,8 @@ export default class RPaperCheckbox extends Component {
   constructor() {
     super(...arguments);
     this.reactRef = null;
+    this.inputReactRef = null;
+
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
 
@@ -52,72 +55,102 @@ export default class RPaperCheckbox extends Component {
   }
 
   @action
-  color() {
-    if (this.reactRef) {
-      this.reactRef.current.setColor(this.args.color || null);
-    }
-  }
-
-  @action
   checked() {
     if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+      this.reactRef.current.setChecked(this.args.checked || null);
     }
   }
 
   @action
-  indeterminate() {
-    if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+  color() {
+    if (this.args.label) {
+      if (this.inputReactRef) {
+        this.inputReactRef.current.setColor(this.args.color || null);
+      }
+    } else {
+      if (this.reactRef) {
+        this.reactRef.current.setColor(this.args.color || null);
+      }
     }
   }
 
   @action
   disabled() {
     if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+      this.reactRef.current.setDisabled(this.args.disabled || null);
     }
   }
 
   @action
   disableRipple() {
-    if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+    if (this.args.label) {
+      if (this.inputReactRef) {
+        this.inputReactRef.current.setDisableRipple(this.args.disableRipple || null);
+      }
+    } else {
+      if (this.reactRef) {
+        this.reactRef.current.setDisableRipple(this.args.disableRipple || null);
+      }
     }
   }
 
   @action
-  required() {
-    if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
-    }
-  }
-
-  @action
-  value() {
-    if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+  indeterminate() {
+    if (this.args.label) {
+      if (this.inputReactRef) {
+        this.inputReactRef.current.setIndeterminate(this.args.indeterminate || null);
+      }
+    } else {
+      if (this.reactRef) {
+        this.reactRef.current.setIndeterminate(this.args.indeterminate || null);
+      }
     }
   }
 
   @action
   label() {
     if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+      this.reactRef.current.setLabel(this.args.label || null);
     }
   }
 
   @action
   labelPlacement() {
     if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+      this.reactRef.current.setLabelPlacement(this.args.labelPlacement || null);
+    }
+  }
+
+  @action
+  required() {
+    if (this.args.label) {
+      if (this.inputReactRef) {
+        this.inputReactRef.current.setRequired(this.args.required || null);
+      }
+    } else {
+      if (this.reactRef) {
+        this.reactRef.current.setRequired(this.args.required || null);
+      }
     }
   }
 
   @action
   size() {
+    if (this.args.label) {
+      if (this.inputReactRef) {
+        this.inputReactRef.current.setSize(this.args.size || null);
+      }
+    } else {
+      if (this.reactRef) {
+        this.reactRef.current.setSize(this.args.size || null);
+      }
+    }
+  }
+
+  @action
+  value() {
     if (this.reactRef) {
-      //this.reactRef.current.setChecked(this.args.checked || null);
+      this.reactRef.current.setValue(this.args.value || '');
     }
   }
 
@@ -129,14 +162,9 @@ export default class RPaperCheckbox extends Component {
   }
 
   renderElement() {
-    /*if (this.args.label) {
-      this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current.parentElement);
-    } else {
-      this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    }*/
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
 
-    //where should itmems be cloned and placed.
+    //where should items be cloned and placed. ?on input or on label etc.
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
     this.el.remove();
@@ -169,21 +197,28 @@ export default class RPaperCheckbox extends Component {
     this.el = element;
     scheduleOnce('render', this, this.renderElement);
 
-    let color = this.args.color || null;
-    let theme = this.themeManager.theme || null;
-    let classString = this.args.class || '';
-    let checked = this.args.checked || false;
-    let disabled = this.args.disabled || false;
-    let disableRipple = this.args.disableRipple || null;
-    let indeterminate = this.args.indeterminate || false;
-    let required = this.args.required || false;
-    let size = this.args.size || '';
-    let value = this.args.value || null;
-    let label = this.args.label || null;
-    let labelPlacement = this.args.labelPlacement || 'end';
     this.reactRef = React.createRef();
+    this.inputReactRef = React.createRef();
 
-    const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
+    /* What is childRef vs controlRef, etc... */
+
+    let props = {
+      checked: this.args.checked || false,
+      classString: this.args.class || '',
+      color: this.args.color || null,
+      disabled: this.args.disabled || false,
+      disableRipple: this.args.disableRipple || null,
+      indeterminate: this.args.indeterminate || false,
+      label: this.args.label || null,
+      labelPlacement: this.args.labelPlacement || 'end',
+      size: this.args.size || '',
+      theme: this.themeManager.theme || null,
+      value: this.args.value || null,
+      controlRef: this.inputReactRef,
+      childRef: this.reactRef,
+      onChange: this.handleClick
+    };
+
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
       the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
@@ -194,43 +229,21 @@ export default class RPaperCheckbox extends Component {
 
      */
 
-    const reactPortal = ReactDOM.createPortal(<LabeledCheckBox
-      class={classString}
-      color={color}
-      checked={checked}
-      disabled={disabled}
-      disableRipple={disableRipple}
-      indeterminate={indeterminate}
-      required={required}
-      size={size}
-      value={value}
-      label={label}
-      labelPlacement={labelPlacement}
-      theme={theme}
-      ref={this.reactRef}
-      onChange={this.handleClick}
-    />, element.parentElement);
+    let reactPortal = null;
+    if (this.args.label) {
+      const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
+      const ThemedLabeledCheckBox = ReactThemeProvider(LabeledCheckBox);
+      reactPortal = ReactDOM.createPortal(<ThemedLabeledCheckBox
+        {...props}
+      />, element.parentElement);
+    } else {
+      const ThemedCheckBox = ReactThemeProvider(ReactCheckbox);
+      reactPortal = ReactDOM.createPortal(<ThemedCheckBox
+        {...props}
+      />, element.parentElement);
+    }
 
     ReactDOM.render(reactPortal, document.createElement('div'));
-
-    /*const reactPortal = ReactDOM.createPortal(<ReactCheckbox
-                                                 class={classString}
-                                                 color={color}
-                                                 checked={checked}
-                                                 disabled={disabled}
-                                                 disableRipple={disableRipple}
-                                                 indeterminate={indeterminate}
-                                                 required={required}
-                                                 size={size}
-                                                 value={value}
-                                                 label={label}
-                                                 labelPlacement={labelPlacement}
-                                                 theme={theme}
-                                                 ref={this.reactRef}
-                                                 onchange={this.handleClick}
-                                              />, element.parentElement);
-
-    ReactDOM.render(reactPortal, document.createElement('div'));*/
 
   }
 

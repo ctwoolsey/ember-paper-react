@@ -1,23 +1,23 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export function ReactFormControlLabel(ControlComponent) {
   return class extends React.Component {
     constructor(props) {
       super(props);
-      const {onChange, inputRef, value, theme, disabled, checked, label, labelPlacement, ...controlProps } = this.props;
+      /* controlRef puts a ref on the control element as opposed to inputRef, which puts it on the input element itself */
+      const {onChange, inputRef, controlRef, value, disabled, checked, label, labelPlacement, ...controlProps } = this.props;
       this.state = {
         checked: checked,
         disabled: disabled,
         label: label,
         labelPlacement: labelPlacement,
-        theme: theme,
         value: value
       };
       this.onChange = onChange;
       this.inputRef = inputRef;
-      //this.controlProps = [...controlProps];
+      this.controlRef = controlRef;
+
       this.controlProps = controlProps;
 
       this.componentRef = React.createRef();
@@ -28,7 +28,6 @@ export function ReactFormControlLabel(ControlComponent) {
       this.setChecked = this.setChecked.bind(this);
       this.setLabel = this.setLabel.bind(this);
       this.setLabelPlacement = this.setLabelPlacement.bind(this);
-      this.setTheme = this.setTheme.bind(this);
     }
 
     setValue(value) {
@@ -51,10 +50,6 @@ export function ReactFormControlLabel(ControlComponent) {
       this.setState( {labelPlacement: placement});
     }
 
-    setTheme(theme) {
-      this.setState( {theme: theme});
-    }
-
     render() {
 
       const {
@@ -62,12 +57,10 @@ export function ReactFormControlLabel(ControlComponent) {
         disabled,
         label,
         labelPlacement,
-        theme,
         value
       } = this.state;
 
       return (
-        <ThemeProvider {...(theme ? { theme: theme } : {})}>
           <FormControlLabel
             {...(checked ? { checked: checked } : {})}
             {...(disabled ? { disabled: disabled } : {})}
@@ -77,9 +70,8 @@ export function ReactFormControlLabel(ControlComponent) {
             ref={this.componentRef}
             {...(this.inputRef ? { inputRef: this.inputRef } : {})}
             {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
-            control={<ControlComponent {...this.controlProps}/>}
+            control={<ControlComponent {...(this.controlRef ? { ref: this.controlRef } : {})} {...this.controlProps}/>}
           />
-        </ThemeProvider>
       );
     }
   }
