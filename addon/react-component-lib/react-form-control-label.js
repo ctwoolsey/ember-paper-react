@@ -1,19 +1,23 @@
 import React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { ReactConditionalThemeProvider } from "./ReactConditionalThemeProvider";
+import { ReactThemeBase } from "./ReactThemeBase";
+
 
 export function ReactFormControlLabel(ControlComponent) {
-  return class extends React.Component {
+  return class extends ReactThemeBase {
     constructor(props) {
       super(props);
       /* controlRef puts a ref on the control element as opposed to inputRef, which puts it on the input element itself */
-      const {onChange, inputRef, controlRef, value, disabled, checked, label, labelPlacement, ...controlProps } = this.props;
-      this.state = {
+      const {checked, disabled, label, labelPlacement, theme, value, onChange, inputRef, controlRef, ...controlProps } = this.props;
+      Object.assign(this.state, {
         checked: checked,
         disabled: disabled,
         label: label,
         labelPlacement: labelPlacement,
         value: value
-      };
+      });
+
       this.onChange = onChange;
       this.inputRef = inputRef;
       this.controlRef = controlRef;
@@ -23,23 +27,19 @@ export function ReactFormControlLabel(ControlComponent) {
       this.componentRef = React.createRef();
 
       //properties
-      this.setValue = this.setValue.bind(this);
-      this.setDisabled = this.setDisabled.bind(this);
       this.setChecked = this.setChecked.bind(this);
+      this.setDisabled = this.setDisabled.bind(this);
       this.setLabel = this.setLabel.bind(this);
       this.setLabelPlacement = this.setLabelPlacement.bind(this);
-    }
-
-    setValue(value) {
-      this.setState( {value: value});
-    }
-
-    setDisabled(disabled) {
-      this.setState( {disabled: disabled});
+      this.setValue = this.setValue.bind(this);
     }
 
     setChecked(checked) {
       this.setState( {checked: checked});
+    }
+
+    setDisabled(disabled) {
+      this.setState( {disabled: disabled});
     }
 
     setLabel(label) {
@@ -50,17 +50,22 @@ export function ReactFormControlLabel(ControlComponent) {
       this.setState( {labelPlacement: placement});
     }
 
-    render() {
+    setValue(value) {
+      this.setState( {value: value});
+    }
 
+    render() {
       const {
         checked,
         disabled,
         label,
         labelPlacement,
+        theme,
         value
       } = this.state;
 
       return (
+        <ReactConditionalThemeProvider theme={theme}>
           <FormControlLabel
             {...(checked ? { checked: checked } : {})}
             {...(disabled ? { disabled: disabled } : {})}
@@ -72,7 +77,8 @@ export function ReactFormControlLabel(ControlComponent) {
             {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
             control={<ControlComponent {...(this.controlRef ? { ref: this.controlRef } : {})} {...this.controlProps}/>}
           />
-      );
+        </ReactConditionalThemeProvider>
+      )
     }
   }
 }

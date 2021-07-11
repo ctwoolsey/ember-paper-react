@@ -1,14 +1,16 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import { ReactThemeBase } from "./ReactThemeBase";
+import { ReactConditionalThemeProvider } from "./ReactConditionalThemeProvider";
 
 /* Does not currently implement:
     checkedIcon, icon, id, indeterminateIcon
 */
-export class ReactCheckbox extends React.Component{
+export class ReactCheckbox extends ReactThemeBase{
   constructor(props) {
     super(props);
-    this.props = props;
-    this.state = {
+    //this.props = props;
+    Object.assign(this.state, {
       checked: this.props.checked,
       classString: this.props.class,
       color: this.props.color,
@@ -17,8 +19,10 @@ export class ReactCheckbox extends React.Component{
       indeterminate: this.props.indeterminate,
       required: this.props.required,
       size: this.props.size,
+      theme: this.props.theme,
       value: this.props.value
-    };
+    });
+
     this.componentRef = React.createRef();
     this.onChange = this.props.onChange;
     this.inputProps = this.props.inputProps;
@@ -82,10 +86,12 @@ export class ReactCheckbox extends React.Component{
       indeterminate,
       required,
       size,
+      theme,
       value
     } = this.state;
 
     return (
+      <ReactConditionalThemeProvider theme={theme}>
         <Checkbox
           {...(checked ? { checked: checked } : {})}
           {...(classString ? { className: classString } : {})}
@@ -100,6 +106,7 @@ export class ReactCheckbox extends React.Component{
           {...(this.inputRef ? { inputRef: this.inputRef } : {})}
           {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
         />
+      </ReactConditionalThemeProvider>
     );
   }
 }

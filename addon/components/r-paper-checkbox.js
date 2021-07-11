@@ -6,7 +6,7 @@ import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { ReactFormControlLabel } from "../react-component-lib/react-form-control-label";
-import { ReactThemeProvider } from "../react-component-lib/ReactThemeProvider";
+import { ReactThemeProvider } from "../react-component-lib/ReactConditionalThemeProvider";
 
 export default class RPaperCheckbox extends Component {
   @service themeManager;
@@ -215,7 +215,8 @@ export default class RPaperCheckbox extends Component {
       theme: this.themeManager.theme || null,
       value: this.args.value || null,
       controlRef: this.inputReactRef,
-      childRef: this.reactRef,
+      //childRef: this.reactRef,
+      ref: this.reactRef,
       onChange: this.handleClick
     };
 
@@ -232,6 +233,18 @@ export default class RPaperCheckbox extends Component {
     let reactPortal = null;
     if (this.args.label) {
       const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
+      reactPortal = ReactDOM.createPortal(<LabeledCheckBox
+        {...props}
+      />, element.parentElement);
+    } else {
+      reactPortal = ReactDOM.createPortal(<ReactCheckbox
+        {...props}
+      />, element.parentElement);
+    }
+
+    /*let reactPortal = null;
+    if (this.args.label) {
+      const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
       const ThemedLabeledCheckBox = ReactThemeProvider(LabeledCheckBox);
       reactPortal = ReactDOM.createPortal(<ThemedLabeledCheckBox
         {...props}
@@ -241,7 +254,7 @@ export default class RPaperCheckbox extends Component {
       reactPortal = ReactDOM.createPortal(<ThemedCheckBox
         {...props}
       />, element.parentElement);
-    }
+    }*/
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 
