@@ -1,10 +1,7 @@
-import { ReactCheckRadioSwitch } from "./react-check-radio-switch";
+import { ReactLabeledCheckRadioSwitch } from "./react-labeled-check-radio-switch";
 import Radio from '@material-ui/core/Radio';
 
-/* Does not currently implement:
-    checkedIcon, icon, indeterminateIcon
-*/
-export class ReactRadio extends ReactCheckRadioSwitch {
+export class ReactRadio extends ReactLabeledCheckRadioSwitch {
   constructor(props) {
     super(props);
     this.controlType = Radio;

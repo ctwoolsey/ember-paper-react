@@ -85,14 +85,15 @@ To make the button useful, the following options are supported:
 * ```@onClick={{fn this.myOnClickHandler}}```
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```<i>*</i>
-* ```@variant={{this.variant}}```
-* ```@size={{this.size}}```
-* ```@href={{this.href}}```
 * ```@disabled={{this.disabled}}```
 * ```@disableElevation={{this.disableElevation}}```
 * ```@disableFocusRipple={{this.disableFocusRipple}}```
 * ```@disableRipple={{this.disableRipple}}```
 * ```@fullWidth={{this.fullWidth}}```
+* ```@href={{this.href}}```
+* ```@size={{this.size}}```
+* ```@theme={{this.theme}}``` <i>attach global theme to component</i>
+* ```@variant={{this.variant}}```
 
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
@@ -105,7 +106,34 @@ See the material documentation for possible values for these options.
 
 <b>Note:</b> Icon and Upload buttons are not implemented.  Complex Buttons should be able to be created using ember and css.
 
+<i>Checkbox, Radio, Switch</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```
+<RPaperCheckbox/>
+<RPaperRadio/>
+<RPaperSwitch/>
+```
+To make the components useful, the following options are supported:
 
+* ```@onChange={{fn this.myOnChangeHandler}}```
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```<i>*</i>
+* ```@checked={{this.checked}}```
+* ```@color={{this.color}}```
+* ```@disabled={{this.disabled}}```
+* ```@disableRipple={{this.disableRipple}}```
+* ```@edge={{this.edge}}``` <i>used only by radio</i>
+* ```@indeterminate={{this.indeterminate}}``` <i>used only by checkbox</i>
+* ```@label={{this.label}}```
+* ```@labelPlacement={{this.labelPlacement}}```
+* ```@required={{this.required}}```
+* ```@size={{this.size}}```
+* ```@theme={{this.theme}}``` <i>attach global theme to component</i>
+* ```@value={{this.value}}```
+* to attach the 'name' attribute to the radio component use either ```@radioName="someName"``` or a simple HTML ```name="someName"``` attribute
+
+<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
 
 Contributing

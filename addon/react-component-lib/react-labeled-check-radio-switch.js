@@ -1,40 +1,33 @@
 import React from 'react';
-import { ReactFormControlLabel } from "./react-form-control-label";
-import { ReactThemeBase } from "./react-theme-base";
+import { ReactThemeBase } from "./base/react-theme-base";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 /* Does not currently implement:
     checkedIcon, icon, id, indeterminateIcon
 */
-export class ReactCheckRadioSwitch extends ReactThemeBase{
+export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
   constructor(props) {
     super(props);
 
-    const {checked, classString, color, disabled, disableRipple, edge, indeterminate, label, labelPlacement, required, size, value, onChange, inputProps, controlRef, inputRef } = this.props;
+    this.state = {
+      checked: props.checked,
+      classString: props.classString,
+      color: props.color,
+      disabled: props.disabled,
+      disableRipple: props.disableRipple,
+      edge: props.edge, //unique to switch
+      indeterminate: props.indeterminate, //unique to checkbox
+      label: props.label,
+      labelPlacement: props.labelPlacement,
+      required: props.required,
+      size: props.size,
+      value: props.value
+    };
 
-    Object.assign(this.state, {
-      checked: checked,
-      classString: classString,
-      color: color,
-      disabled: disabled,
-      disableRipple: disableRipple,
-      edge: edge, //unique to switch
-      indeterminate: indeterminate,
-      label,
-      labelPlacement,
-      required: required,
-      size: size,
-      value: value
-    });
-
-    //componentRef always refers to the outmost component
     this.componentRef = React.createRef();
-    this.controlRef = controlRef;
-    this.onChange = onChange;
-    this.inputProps = inputProps;
-    this.inputRef = inputRef;
 
-    //properties
+    //methods
     this.setChecked = this.setChecked.bind(this);
     this.setClass = this.setClass.bind(this);
     this.setColor = this.setColor.bind(this);
@@ -47,12 +40,7 @@ export class ReactCheckRadioSwitch extends ReactThemeBase{
     this.setRequired = this.setRequired.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setValue = this.setValue.bind(this);
-    this.testRef = this.testRef.bind(this);
 
-  }
-
-  testRef() {
-    console.log('React-check-radio-switch, testRef called');
   }
 
   setChecked(checked) {
@@ -120,32 +108,30 @@ export class ReactCheckRadioSwitch extends ReactThemeBase{
       value
     } = this.state;
 
-    let ComponentTagName = this.controlType;
-
-    if (label) {
-      ComponentTagName = ReactFormControlLabel(ComponentTagName);
-    }
+    const ControlTagName = this.controlType;
 
     return (
       <ReactConditionalThemeProvider theme={theme}>
-        <ComponentTagName
+        <FormControlLabel
+          ref={this.componentRef}
           {...(checked ? { checked: checked } : {})}
           {...(classString ? { className: classString } : {})}
-          {...(color ? { color: color } : {})}
           {...(disabled ? { disabled: disabled } : {})}
-          {...(disableRipple ? { disableRipple: disableRipple } : {})}
-          {...(edge ? { edge: edge } : {})}
-          {...(indeterminate ? { indeterminate: indeterminate } : {})}
-          {...(label ? { label: label } :  { label: {} })}
-          {...(label ? { labelPlacement: labelPlacement } : {})}
-          {...(required ? { required: required } : {})}
-          {...(size ? { size: size } : {})}
+          {...(label ? { label: label } : { label: '' })}
+          {...(labelPlacement ? { labelPlacement: labelPlacement } : {})}
           {...(value ? { value: value } : {})}
-          {...(label ? { controlRef: this.controlRef } :  {})}
-          ref={this.componentRef}
-          {...(this.inputProps ? { inputProps: this.inputProps } : {})}
-          {...(this.inputRef ? { inputRef: this.inputRef } : {})}
-          {...(this.onChange ? { onChange: this.onChange } : {function(){}})}
+          {...(this.props.inputRef ? { inputRef: this.props.inputRef } : {})}
+          {...(this.props.onChange ? { onChange: this.props.onChange } : { onChange: function() {} })}
+          control={<ControlTagName
+            {...(color ? { color: color } : {})}
+            {...(disableRipple ? { disableRipple: disableRipple } : {})}
+            {...(edge ? { edge: edge } : {})} //used by switch
+            {...(indeterminate ? { indeterminate: indeterminate } : {})} //used by checkbox
+            {...(this.props.inputProps ? { inputProps: this.props.inputProps } : {})}
+            {...(this.props.name ? { name: this.props.name } : {})}  //used by Radio
+            {...(required ? { required: required } : {})}
+            {...(size ? { size: size } : {})}
+          />}
         />
       </ReactConditionalThemeProvider>
     )

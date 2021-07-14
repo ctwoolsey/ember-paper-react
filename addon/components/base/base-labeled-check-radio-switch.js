@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-/*import { ReactCheckbox, ReactSwitch, ReactRadio} from "../../react-component-lib/";*/
 import { ReactCheckbox } from "../../react-component-lib/react-checkbox";
 import { ReactRadio } from "../../react-component-lib/react-radio";
 import { ReactSwitch } from "../../react-component-lib/react-switch";
@@ -9,14 +8,15 @@ import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 
-export default class BaseCheckRadioSwitchComponent extends Component {
+
+/* Currently does not handle passing inputProps or use inputRef */
+
+export default class BaseLabeledCheckRadioSwitchComponent extends Component {
   @service themeManager;
 
   constructor() {
     super(...arguments);
     this.reactRef = null;
-    this.controlRef = null;
-
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
 
@@ -24,6 +24,8 @@ export default class BaseCheckRadioSwitchComponent extends Component {
     if (this.args.style) {
       this.addedStyles = this.args.style.split(';');
     }
+
+    this.radioName = null;
   }
 
   handleClick() {
@@ -156,6 +158,8 @@ export default class BaseCheckRadioSwitchComponent extends Component {
           target.style[stylePieces[0]] = stylePieces[1];
 
         });
+      } else if (attr.nodeName === 'name') {
+        this.radioName = attr.nodeValue;
       } else if (attr.nodeName !== 'class') { //ignore class
         target.setAttribute(attr.nodeName, attr.nodeValue)
       }
@@ -175,9 +179,6 @@ export default class BaseCheckRadioSwitchComponent extends Component {
     scheduleOnce('render', this, this.renderElement);
 
     this.reactRef = React.createRef();
-    this.controlRef = React.createRef();
-
-    /* What is childRef vs controlRef, etc... */
 
     let props = {
       checked: this.args.checked || false,
@@ -189,11 +190,10 @@ export default class BaseCheckRadioSwitchComponent extends Component {
       indeterminate: this.args.indeterminate || false,
       label: this.args.label || null,
       labelPlacement: this.args.labelPlacement || 'end',
+      name: this.args.radioName || this.radioName,  //used by radio
       size: this.args.size || null,
       theme: this.themeManager.theme || null,
       value: this.args.value || '',
-      controlRef: this.controlRef,
-      //childRef: this.reactRef,
       ref: this.reactRef,
       onChange: this.handleClick
     };

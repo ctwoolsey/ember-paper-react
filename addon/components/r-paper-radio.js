@@ -1,6 +1,6 @@
-import BaseCheckRadioSwitchComponent from "./base/base-check-radio-switch";
+import BaseLabeledCheckRadioSwitchComponent from "./base/base-labeled-check-radio-switch";
 
-export default class RPaperRadioComponent extends BaseCheckRadioSwitchComponent {
+export default class RPaperRadioComponent extends BaseLabeledCheckRadioSwitchComponent {
   constructor() {
     super(...arguments);
     this.controlType = 'radio';

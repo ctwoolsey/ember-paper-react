@@ -8,7 +8,7 @@ export class ReactThemeBase extends React.Component{
       theme: theme
     };
 
-    //properties
+    //methods
     this.setTheme = this.setTheme.bind(this);
   }
 

@@ -5,22 +5,21 @@ import { ThemeProvider } from '@material-ui/core/styles';
 export class ReactButton extends React.Component{
   constructor(props) {
     super(props);
-    this.props = props;
-    this.state = { disabled: this.props.disabled,
-                   variant: this.props.variant,
-                   size: this.props.size,
-                   href: this.props.href,
-                   disableElevation: this.props.disableElevation,
-                   disableFocusRipple: this.props.disableFocusRipple,
-                   disableRipple: this.props.disableRipple,
-                   fullWidth: this.props.fullWidth,
-                   color: this.props.color,
-                   theme: this.props.theme,
-                   classString: this.props.class
+    this.state = { disabled: props.disabled,
+                   variant: props.variant,
+                   size: props.size,
+                   href: props.href,
+                   disableElevation: props.disableElevation,
+                   disableFocusRipple: props.disableFocusRipple,
+                   disableRipple: props.disableRipple,
+                   fullWidth: props.fullWidth,
+                   color: props.color,
+                   theme: props.theme,
+                   classString: props.class
                  };
     this.componentRef = React.createRef();
 
-    //properties
+    //methods
     this.setDisabled = this.setDisabled.bind(this);
     this.setVariant = this.setVariant.bind(this);
     this.setSize = this.setSize.bind(this);
