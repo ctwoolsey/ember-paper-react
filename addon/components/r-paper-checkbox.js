@@ -5,8 +5,6 @@ import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
-import { ReactFormControlLabel } from "../react-component-lib/react-form-control-label";
-import { ReactThemeProvider } from "../react-component-lib/ReactConditionalThemeProvider";
 
 export default class RPaperCheckbox extends Component {
   @service themeManager;
@@ -14,7 +12,7 @@ export default class RPaperCheckbox extends Component {
   constructor() {
     super(...arguments);
     this.reactRef = null;
-    this.inputReactRef = null;
+    this.controlRef = null;
 
     this.el = null;
     this.handleClick = this.handleClick.bind(this);
@@ -63,14 +61,8 @@ export default class RPaperCheckbox extends Component {
 
   @action
   color() {
-    if (this.args.label) {
-      if (this.inputReactRef) {
-        this.inputReactRef.current.setColor(this.args.color || null);
-      }
-    } else {
-      if (this.reactRef) {
-        this.reactRef.current.setColor(this.args.color || null);
-      }
+    if (this.reactRef) {
+      this.reactRef.current.setColor(this.args.color || null);
     }
   }
 
@@ -83,27 +75,15 @@ export default class RPaperCheckbox extends Component {
 
   @action
   disableRipple() {
-    if (this.args.label) {
-      if (this.inputReactRef) {
-        this.inputReactRef.current.setDisableRipple(this.args.disableRipple || null);
-      }
-    } else {
-      if (this.reactRef) {
-        this.reactRef.current.setDisableRipple(this.args.disableRipple || null);
-      }
+    if (this.reactRef) {
+      this.reactRef.current.setDisableRipple(this.args.disableRipple || null);
     }
   }
 
   @action
   indeterminate() {
-    if (this.args.label) {
-      if (this.inputReactRef) {
-        this.inputReactRef.current.setIndeterminate(this.args.indeterminate || null);
-      }
-    } else {
-      if (this.reactRef) {
-        this.reactRef.current.setIndeterminate(this.args.indeterminate || null);
-      }
+    if (this.reactRef) {
+      this.reactRef.current.setIndeterminate(this.args.indeterminate || null);
     }
   }
 
@@ -123,27 +103,15 @@ export default class RPaperCheckbox extends Component {
 
   @action
   required() {
-    if (this.args.label) {
-      if (this.inputReactRef) {
-        this.inputReactRef.current.setRequired(this.args.required || null);
-      }
-    } else {
-      if (this.reactRef) {
-        this.reactRef.current.setRequired(this.args.required || null);
-      }
+    if (this.reactRef) {
+      this.reactRef.current.setRequired(this.args.required || null);
     }
   }
 
   @action
   size() {
-    if (this.args.label) {
-      if (this.inputReactRef) {
-        this.inputReactRef.current.setSize(this.args.size || null);
-      }
-    } else {
-      if (this.reactRef) {
-        this.reactRef.current.setSize(this.args.size || null);
-      }
+    if (this.reactRef) {
+      this.reactRef.current.setSize(this.args.size || null);
     }
   }
 
@@ -164,7 +132,6 @@ export default class RPaperCheckbox extends Component {
   renderElement() {
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
 
-    //where should items be cloned and placed. ?on input or on label etc.
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
     this.el.remove();
@@ -198,7 +165,7 @@ export default class RPaperCheckbox extends Component {
     scheduleOnce('render', this, this.renderElement);
 
     this.reactRef = React.createRef();
-    this.inputReactRef = React.createRef();
+    this.controlRef = React.createRef();
 
     /* What is childRef vs controlRef, etc... */
 
@@ -211,50 +178,16 @@ export default class RPaperCheckbox extends Component {
       indeterminate: this.args.indeterminate || false,
       label: this.args.label || null,
       labelPlacement: this.args.labelPlacement || 'end',
-      size: this.args.size || '',
+      size: this.args.size || null,
       theme: this.themeManager.theme || null,
-      value: this.args.value || null,
-      controlRef: this.inputReactRef,
+      value: this.args.value || '',
+      controlRef: this.controlRef,
       //childRef: this.reactRef,
       ref: this.reactRef,
       onChange: this.handleClick
     };
 
-    /*
-      React attaches events to the parent container, so by creating a portal and then rendering,
-      the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
-      For inspiration:
-      https://stackoverflow.com/questions/30686796/react-render-replace-container-instead-of-inserting-into/58385910#58385910
-
-      once rendered, the runloop will call renderElement() for further processing.
-
-     */
-
-    let reactPortal = null;
-    if (this.args.label) {
-      const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
-      reactPortal = ReactDOM.createPortal(<LabeledCheckBox
-        {...props}
-      />, element.parentElement);
-    } else {
-      reactPortal = ReactDOM.createPortal(<ReactCheckbox
-        {...props}
-      />, element.parentElement);
-    }
-
-    /*let reactPortal = null;
-    if (this.args.label) {
-      const LabeledCheckBox = ReactFormControlLabel(ReactCheckbox);
-      const ThemedLabeledCheckBox = ReactThemeProvider(LabeledCheckBox);
-      reactPortal = ReactDOM.createPortal(<ThemedLabeledCheckBox
-        {...props}
-      />, element.parentElement);
-    } else {
-      const ThemedCheckBox = ReactThemeProvider(ReactCheckbox);
-      reactPortal = ReactDOM.createPortal(<ThemedCheckBox
-        {...props}
-      />, element.parentElement);
-    }*/
+    const reactPortal = ReactDOM.createPortal(<ReactCheckbox {...props}/>, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 
