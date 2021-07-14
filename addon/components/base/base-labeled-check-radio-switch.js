@@ -1,4 +1,3 @@
-import Component from '@glimmer/component';
 import { ReactCheckbox } from "../../react-component-lib/react-checkbox";
 import { ReactRadio } from "../../react-component-lib/react-radio";
 import { ReactSwitch } from "../../react-component-lib/react-switch";
@@ -6,55 +5,17 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
-import { inject as service } from '@ember/service';
+import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
+import BaseReactEmberComponent from "./base-react-ember";
 
 
 /* Currently does not handle passing inputProps or use inputRef */
 
-export default class BaseLabeledCheckRadioSwitchComponent extends Component {
-  @service themeManager;
+export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.reactRef = null;
-    this.el = null;
-    this.handleClick = this.handleClick.bind(this);
-
-    this.addedStyles = [];
-    if (this.args.style) {
-      this.addedStyles = this.args.style.split(';');
-    }
-
     this.radioName = null;
-  }
-
-  handleClick() {
-    return (this.args.onClick && this.args.onClick()) || null;
-  }
-
-  @action
-  class() {
-    if (this.reactRef) {
-      this.reactRef.current.setClass(this.args.class || false);
-    }
-  }
-
-  @action
-  style() {
-    if (this.reactRef) {
-      //remove old style names
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
-      });
-      //save new style list
-      this.addedStyles = this.args.style.split(';');
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-      });
-
-    }
   }
 
   @action
@@ -135,45 +96,6 @@ export default class BaseLabeledCheckRadioSwitchComponent extends Component {
   }
 
   @action
-  globalThemeChanged() {
-    if (this.reactRef) {
-      this.reactRef.current.setTheme(this.themeManager.theme);
-    }
-  }
-
-  renderElement() {
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicStyles();
-    this.el.remove();
-  }
-
-  cloneAttributes(target, source) {
-    [...source.attributes].forEach( attr => {
-      if (attr.nodeName === 'style') {
-        let styleArr = attr.nodeValue.split(';');
-        styleArr.forEach(style => {
-          let stylePieces = style.split(':');
-          target.style[stylePieces[0]] = stylePieces[1];
-
-        });
-      } else if (attr.nodeName === 'name') {
-        this.radioName = attr.nodeValue;
-      } else if (attr.nodeName !== 'class') { //ignore class
-        target.setAttribute(attr.nodeName, attr.nodeValue)
-      }
-    });
-  }
-
-  initializeDynamicStyles() {
-    this.addedStyles.forEach(styleItem => {
-      let stylePieces = styleItem.split(':');
-      this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-    });
-  }
-
-  @action
   inserted(element) {
     this.el = element;
     scheduleOnce('render', this, this.renderElement);
@@ -186,8 +108,8 @@ export default class BaseLabeledCheckRadioSwitchComponent extends Component {
       color: this.args.color || null,
       disabled: this.args.disabled || false,
       disableRipple: this.args.disableRipple || null,
-      edge: this.args.edge || false,
-      indeterminate: this.args.indeterminate || false,
+      edge: this.args.edge || false, //used by switch
+      indeterminate: this.args.indeterminate || false, //used by checkbox
       label: this.args.label || null,
       labelPlacement: this.args.labelPlacement || 'end',
       name: this.args.radioName || this.radioName,  //used by radio
@@ -195,21 +117,21 @@ export default class BaseLabeledCheckRadioSwitchComponent extends Component {
       theme: this.themeManager.theme || null,
       value: this.args.value || '',
       ref: this.reactRef,
-      onChange: this.handleClick
+      onChange: this.handleClickChange
     };
 
     let ControlComponent;
     switch(this.controlType) {
-      case 'checkbox':
+      case COMPONENT_TYPES.CHECKBOX:
         ControlComponent = ReactCheckbox;
         delete props.edge;
         break;
-      case 'radio':
+      case COMPONENT_TYPES.RADIO:
         ControlComponent = ReactRadio;
         delete props.edge;
         delete props.indeterminate;
         break;
-      case 'switch':
+      case COMPONENT_TYPES.SWITCH:
         ControlComponent = ReactSwitch;
         delete props.indeterminate;
         break;
@@ -219,10 +141,4 @@ export default class BaseLabeledCheckRadioSwitchComponent extends Component {
     ReactDOM.render(reactPortal, document.createElement('div'));
 
   }
-
-  willDestroy() {
-    ReactDOM.unmountComponentAtNode(this.reactRef);
-    super.willDestroy();
-  }
-
 }

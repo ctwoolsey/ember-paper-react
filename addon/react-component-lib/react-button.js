@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ReactThemeBase } from "./base/react-theme-base";
+import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactButton extends React.Component{
+export class ReactButton extends ReactThemeBase{
   constructor(props) {
     super(props);
     this.state = { disabled: props.disabled,
@@ -92,7 +93,7 @@ export class ReactButton extends React.Component{
           } = this.state;
 
     return (
-      <ThemeProvider {...(theme ? {theme: theme} : {})}>
+      <ReactConditionalThemeProvider theme={theme}>
         <Button onClick={this.props.onclick}
                 {...(classString ? {className: classString} : {})}
                 {...(variant ? {variant: variant} : {})}
@@ -107,7 +108,7 @@ export class ReactButton extends React.Component{
                 {...(color ? {color: color} : {})}>
           {this.props.value}
         </Button>
-      </ThemeProvider>
+      </ReactConditionalThemeProvider>
     );
   }
 }

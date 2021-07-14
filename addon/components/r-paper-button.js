@@ -1,54 +1,15 @@
-import Component from '@glimmer/component';
 import {ReactButton} from "../react-component-lib/react-button"
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
-import { inject as service } from '@ember/service';
+import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
+import BaseReactEmberComponent from "./base/base-react-ember";
 
-export default class RPaperButton extends Component {
-  @service themeManager;
-
+export default class RPaperButton extends BaseReactEmberComponent {
   constructor() {
     super(...arguments);
-    this.reactRef = null;
-    this.el = null;
-    this.handleClick = this.handleClick.bind(this);
-
-    this.addedStyles = [];
-    if (this.args.style) {
-      this.addedStyles = this.args.style.split(';');
-    }
-  }
-
-  handleClick() {
-    return (this.args.onClick && this.args.onClick()) || null;
-  }
-
-  /* material-ui properties */
-  @action
-  class() {
-    if (this.reactRef) {
-      this.reactRef.current.setClass(this.args.class || false);
-    }
-  }
-
-  @action
-  style() {
-    if (this.reactRef) {
-      //remove old style names
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
-      });
-      //save new style list
-      this.addedStyles = this.args.style.split(';');
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-      });
-
-    }
+    this.componentType = COMPONENT_TYPES.BUTTON;
   }
 
   @action
@@ -114,13 +75,6 @@ export default class RPaperButton extends Component {
     }
   }
 
-  @action
-  globalThemeChanged() {
-      if (this.reactRef) {
-        this.reactRef.current.setTheme(this.themeManager.theme);
-      }
-  }
-
   /* end material-ui properties */
 
   /*
@@ -135,10 +89,7 @@ export default class RPaperButton extends Component {
     if (this.el.hasChildNodes()) {
       this.reactRef.current.componentRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
     }
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicStyles();
-    this.el.remove();
+    super.renderElement();
   }
 
   fragmentFromBlockContent() {
@@ -148,28 +99,6 @@ export default class RPaperButton extends Component {
     }
 
     return fragment;
-  }
-
-  cloneAttributes(target, source) {
-    [...source.attributes].forEach( attr => {
-      if (attr.nodeName === 'style') {
-        let styleArr = attr.nodeValue.split(';');
-        styleArr.forEach(style => {
-          let stylePieces = style.split(':');
-          target.style[stylePieces[0]] = stylePieces[1];
-
-        });
-      } else if (attr.nodeName !== 'class'){  // ignore class
-          target.setAttribute(attr.nodeName, attr.nodeValue)
-        }
-    });
-  }
-
-  initializeDynamicStyles() {
-    this.addedStyles.forEach(styleItem => {
-      let stylePieces = styleItem.split(':');
-      this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-    });
   }
 
   @action
@@ -211,15 +140,10 @@ export default class RPaperButton extends Component {
                                                  theme={theme}
                                                  href={href}
                                                  ref={this.reactRef}
-                                                 onclick={this.handleClick}/>, element.parentElement);
+                                                 onclick={this.handleClickChange}/>, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 
-  }
-
-  willDestroy() {
-    ReactDOM.unmountComponentAtNode(this.reactRef);
-    super.willDestroy();
   }
 
 }
