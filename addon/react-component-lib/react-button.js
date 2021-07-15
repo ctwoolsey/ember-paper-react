@@ -105,9 +105,7 @@ export class ReactButton extends ReactThemeBase{
                 fullWidth={fullWidth}
                 href={href}
                 ref={this.componentRef}
-                {...(color ? {color: color} : {})}>
-          {this.props.value}
-        </Button>
+                {...(color ? {color: color} : {})}/>
       </ReactConditionalThemeProvider>
     );
   }

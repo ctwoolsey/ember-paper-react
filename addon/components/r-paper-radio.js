@@ -5,5 +5,7 @@ export default class RPaperRadioComponent extends BaseLabeledCheckRadioSwitchCom
   constructor() {
     super(...arguments);
     this.controlType = COMPONENT_TYPES.RADIO;
+    this.handleName = true;
   }
+
 }

@@ -3,6 +3,7 @@ const COMPONENT_TYPES = {
   CHECKBOX: 'checkbox',
   RADIO: 'radio',
   SWITCH: 'switch',
+  TEXTFIELD: 'textfield',
   NOT_SET: 'notSet'
 }
 

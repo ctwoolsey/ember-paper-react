@@ -22,12 +22,20 @@ export default class BaseReactEmberComponent extends Component {
       this.addedStyles = this.args.style.split(';');
     }
     this.controlType = COMPONENT_TYPES.NOT_SET;
+    this.handleName = false;
+    this.nameValue = null;
 
   }
 
-  handleClickChange() {
+  handleClickChange(event) {
     console.log('click change');
-    return (this.args.onClickChange && this.args.onClickChange()) || null;
+    if (this.args.onClick) {
+      return this.args.onClick();
+    } else if (this.args.onChange) {
+      return this.args.onChange(event.target.value);
+    } else {
+      return null;
+    }
   }
 
   @action
@@ -78,8 +86,8 @@ export default class BaseReactEmberComponent extends Component {
           target.style[stylePieces[0]] = stylePieces[1];
 
         });
-      } else if (this.controlType === COMPONENT_TYPES.RADIO && attr.nodeName === 'name') {
-        this.radioName = attr.nodeValue;
+      } else if (attr.nodeName === 'name' && this.handleName) {
+        this.nameValue = attr.nodeValue;
       } else if (attr.nodeName !== 'class') { //ignore class
         target.setAttribute(attr.nodeName, attr.nodeValue)
       }
