@@ -77,6 +77,15 @@ export default class BaseReactEmberComponent extends Component {
     this.el.remove();
   }
 
+  fragmentFromBlockContent() {
+    let fragment = document.createDocumentFragment();
+    while (this.el.hasChildNodes()) {
+      fragment.appendChild(this.el.firstChild);
+    }
+
+    return fragment;
+  }
+
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
       if (attr.nodeName === 'style') {

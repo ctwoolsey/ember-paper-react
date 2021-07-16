@@ -185,9 +185,10 @@ export class ReactTextField extends ReactThemeBase{
           {...(this.props.selectProps ? { SelectProps: this.props.selectProps } : {})}
           {...(size ? {size: size} : {})}
           {...(this.props.type ? { type: this.props.type } : {})}
-          {...(value ? {value: value} : {})}
+          {...(value ? {value: value} : {value: ''})}
           {...(variant ? {variant: variant} : {})}
         >
+          <option>Dummy Option</option>
         </TextField>
       </ReactConditionalThemeProvider>
     );

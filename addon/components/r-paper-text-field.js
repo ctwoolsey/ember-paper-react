@@ -133,6 +133,13 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     }
   }
 
+  renderElement() {
+    if (this.args.select && this.el.hasChildNodes()) {
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
+    }
+    super.renderElement();
+  }
+
   @action
   inserted(element) {
     this.el = element;
@@ -165,7 +172,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       rows: this.args.rows || null,
       rowsMax: this.args.rowsMax || null,
       select: this.args.select || null,
-      selectProps: this.args.selectProps || null,
+      selectProps: this.args.selectProps ||  {},
       size: this.args.size || null,
       theme: this.themeManager.theme || null,
       type: this.args.type || null,
@@ -174,6 +181,11 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       ref: this.reactRef,
       onChange: this.handleClickChange
     };
+
+    //Currently when there is a select, only native mode is supported.
+    if (this.args.select) {
+      props.selectProps.native = true;
+    }
 
     const reactPortal = ReactDOM.createPortal(<ReactTextField {...props}/>, element.parentElement);
 
