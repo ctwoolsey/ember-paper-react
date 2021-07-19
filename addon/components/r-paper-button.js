@@ -87,7 +87,7 @@ export default class RPaperButton extends BaseReactEmberComponent {
    */
   renderElement() {
     if (this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiButton-label')[0].appendChild(this.fragmentFromBlockContent());
+      this.reactRef.current.componentRef.current.appendChild(this.fragmentFromBlockContent());
     }
     super.renderElement();
   }
