@@ -17,12 +17,13 @@ export class ReactTextField extends ReactThemeBase{
       label: props.label,
       margin: props.margin,
       maxRows: props.maxRows,
+      minRows: props.minRows,
       multiline: props.multiline,
       placeholder: props.placeholder,
       required: props.required,
       rows: props.rows,
-      rowsMax: props.rowsMax,
       size: props.size,
+      sx: props.sx,
       theme: props.theme,
       value: props.value,
       variant: props.variant
@@ -41,12 +42,13 @@ export class ReactTextField extends ReactThemeBase{
     this.setLabel = this.setLabel.bind(this);
     this.setMargin = this.setMargin.bind(this);
     this.setMaxRows = this.setMaxRows.bind(this);
+    this.setMinRows = this.setMinRows.bind(this);
     this.setMultiline = this.setMultiline.bind(this);
     this.setPlaceholder = this.setPlaceholder.bind(this);
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
-    this.setRowsMax = this.setRowsMax.bind(this);
     this.setSize = this.setSize.bind(this);
+    this.setSx = this.setSx.bind(this);
     this.setTheme = this.setTheme.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setVariant = this.setVariant.bind(this);
@@ -92,6 +94,10 @@ export class ReactTextField extends ReactThemeBase{
     this.setState( {maxRows: maxRows});
   }
 
+  setMinRows(minRows) {
+    this.setState( {minRows: minRows});
+  }
+
   setMultiline(multiline) {
     this.setState( {multiline: multiline});
   }
@@ -108,12 +114,12 @@ export class ReactTextField extends ReactThemeBase{
     this.setState( {rows: rows});
   }
 
-  setRowsMax(rowsMax) {
-    this.setState( {rowsMax: rowsMax});
-  }
-
   setSize(size) {
     this.setState( {size: size});
+  }
+
+  setSx(sx) {
+    this.setState( {sx: sx});
   }
 
   setTheme(theme) {
@@ -140,12 +146,13 @@ export class ReactTextField extends ReactThemeBase{
       label,
       margin,
       maxRows,
+      minRows,
       multiline,
       placeholder,
       required,
       rows,
-      rowsMax,
       size,
+      sx,
       theme,
       value,
       variant
@@ -175,15 +182,16 @@ export class ReactTextField extends ReactThemeBase{
           {...(label ? {label: label} : {})}
           {...(margin ? {margin: margin} : {})}
           {...(maxRows ? {maxRows: maxRows} : {})}
+          {...(minRows ? {minRows: minRows} : {})}
           {...(multiline ? {multiline: multiline} : {})}
           {...(this.props.inputName ? {name: this.props.inputName} : {})}
           {...(placeholder ? {placeholder: placeholder} : {})}
           {...(required ? {required: required} : {})}
           {...(rows ? {rows: rows} : {})}
-          {...(rowsMax ? {rowsMax: rowsMax} : {})}
           {...(this.props.select ? {select: this.props.select} : {})}
           {...(this.props.selectProps ? { SelectProps: this.props.selectProps } : {})}
           {...(size ? {size: size} : {})}
+          {...(sx ? {sx: sx} : {})}
           {...(this.props.type ? { type: this.props.type } : {})}
           {...(value ? {value: value} : {value: ''})}
           {...(variant ? {variant: variant} : {})}

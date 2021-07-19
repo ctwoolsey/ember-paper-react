@@ -78,6 +78,13 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
   }
 
   @action
+  minRows() {
+    if (this.reactRef) {
+      this.reactRef.current.setMinRows(this.args.minRows || null);
+    }
+  }
+
+  @action
   multiline() {
     if (this.reactRef) {
       this.reactRef.current.setMultiline(this.args.multiline || null);
@@ -106,16 +113,16 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
   }
 
   @action
-  rowsMax() {
+  size() {
     if (this.reactRef) {
-      this.reactRef.current.setRowsMax(this.args.rowsMax || null);
+      this.reactRef.current.setSize(this.args.size || null);
     }
   }
 
   @action
-  size() {
+  sx() {
     if (this.reactRef) {
-      this.reactRef.current.setSize(this.args.size || null);
+      this.reactRef.current.setSx(this.args.sx || null);
     }
   }
 
@@ -135,7 +142,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
 
   renderElement() {
     if (this.args.select && this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
     }
     super.renderElement();
   }
@@ -165,15 +172,16 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       label: this.args.label || null,
       margin: this.args.margin || null,
       maxRows: this.args.maxRows || null,
+      minRows: this.args.minRows || null,
       multiline: this.args.multiline || null,
       inputName: this.args.inputName || this.nameValue,
       placeholder: this.args.placeholder || null,
       required: this.args.required || null,
       rows: this.args.rows || null,
-      rowsMax: this.args.rowsMax || null,
       select: this.args.select || null,
       selectProps: this.args.selectProps ||  {},
       size: this.args.size || null,
+      sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
       type: this.args.type || null,
       value: this.args.value || null,
