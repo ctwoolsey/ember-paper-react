@@ -151,8 +151,30 @@ To make the components useful, all options are supported, in addition to the sta
 
 <b>Note:</b> this component can also act as a select component.  When ```@select={{true}}``` is set, the component will automatically add the object ```{native:true}``` to the ```selectProps``` property.  ```<option/>``` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported. 
 
+<i>Autocomplete</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```
+<RPaperAutoComplete @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
+```
+To make the components useful, all options are supported, except for ```clearIcon``` and ```popupIcon```.  In addition to the standard options, the following options have been added:
 
-Contributing
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```<i>*</i>
+
+<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
+
+Also, a few additional options are provided to handle the TextField portion of the component:
+
+* ```@color={{this.color}}```
+* ```@error={{this.error}}```
+* ```@formHelperTextProps={{this.formHelperTextProps}}```
+* ```@helperText={{this.helperText}}```
+* ```@inputLabelProps={{this.inputLabelProps}}```
+* ```@label={{this.label}}```
+* ```@required={{this.required}}```
+* ```@variant={{this.variant}}```
+
 ==============================================================================
 
 TBD

@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import ReactDOM from 'react-dom';
-import React from 'react';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
@@ -28,7 +27,6 @@ export default class BaseReactEmberComponent extends Component {
   }
 
   handleClickChange(event) {
-    console.log('click change');
     if (this.args.onClick) {
       return this.args.onClick();
     } else if (this.args.onChange) {

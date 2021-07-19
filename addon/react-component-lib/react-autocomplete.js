@@ -81,6 +81,8 @@ export class ReactAutocomplete extends ReactThemeBase{
     this.setRequired = this.setRequired.bind(this);
     this.setVariant = this.setVariant.bind(this);
 
+    this.renderTextField = this.renderTextField.bind(this);
+
   }
 
   setChipProps(chipProps) {
@@ -213,6 +215,31 @@ export class ReactAutocomplete extends ReactThemeBase{
     this.setState({variant: variant});
   }
 
+  renderTextField(params) {
+    const {
+      color,
+      error,
+      helperText,
+      label,
+      required,
+      variant
+    } = this.state;
+
+    return (
+      <TextField
+        {...params}
+        {...(color ? {color: color} : {})}
+        {...(error ? {error: error} : {})}
+        {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
+        {...(helperText ? {helperText: helperText} : {})}
+        {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
+        {...(label ? {label: label} : {})}
+        {...(required ? {required: required} : {})}
+        {...(variant ? {variant: variant} : {})}
+      />
+    )
+  }
+
   render() {
 
     /* properties not currently implemented: clearIcon, popupIcon
@@ -243,14 +270,7 @@ export class ReactAutocomplete extends ReactThemeBase{
       size,
       sx,
       theme,
-      value,
-      //The following are used by TextField
-      color,
-      error,
-      helperText,
-      label,
-      required,
-      variant
+      value
     } = this.state;
 
     return (
@@ -313,19 +333,7 @@ export class ReactAutocomplete extends ReactThemeBase{
           {...(size ? {size: size} : {})}
           {...(sx ? {sx: sx} : {})}
           {...(value ? {value: value} : {value: ''})}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              {...(color ? {color: color} : {})}
-              {...(error ? {error: error} : {})}
-              {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
-              {...(helperText ? {helperText: helperText} : {})}
-              {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
-              {...(label ? {label: label} : {})}
-              {...(required ? {required: required} : {})}
-              {...(variant ? {variant: variant} : {})}
-            />
-          )}
+          renderInput={this.renderTextField}
         />
       </ReactConditionalThemeProvider>
     );

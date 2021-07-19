@@ -1,4 +1,5 @@
 const COMPONENT_TYPES = {
+  AUTOCOMPLETE: 'autocomplete',
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
   RADIO: 'radio',

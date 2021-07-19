@@ -10,8 +10,9 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
 
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.TEXTFIELD;
-    this.handleName = true;
+    this.controlType = COMPONENT_TYPES.AUTOCOMPLETE;
+    this.handleClickChange = this.handleChange.bind(this);
+
   }
 
   @action
@@ -215,6 +216,14 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
   variant() {
     if (this.reactRef) {
       this.reactRef.current.setVariant(this.args.variant || null);
+    }
+  }
+
+  handleChange(event, value, reason, details) {
+    if (this.args.onChange) {
+      return this.args.onChange(event, value, reason, details);
+    } else {
+      return null;
     }
   }
 
