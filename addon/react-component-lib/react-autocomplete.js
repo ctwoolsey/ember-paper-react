@@ -1,119 +1,182 @@
 import React from 'react';
-import Autocomplete from '@material-ui/lab/AutoComplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 import { ReactThemeBase } from "./base/react-theme-base";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
 export class ReactAutocomplete extends ReactThemeBase{
   constructor(props) {
     super(props);
+
     this.state = {
+      chipProps: props.chipProps,
       classString: props.classString,
-      color: props.color,
+      clearText: props.clearText,
+      closeText: props.closeText,
+      componentsProps: props.componentsProps,
       defaultValue: props.defaultValue,
+      disableClearable: props.disableClearable,
       disabled: props.disabled,
-      error: props.error,
-      fullWidth: props.fullWidth,
-      helperText: props.helperText,
-      label: props.label,
-      margin: props.margin,
-      maxRows: props.maxRows,
-      multiline: props.multiline,
-      placeholder: props.placeholder,
-      required: props.required,
-      rows: props.rows,
-      rowsMax: props.rowsMax,
+      disabledItemsFocusable: props.disabledItemsFocusable,
+      filterOptions: props.filterOptions,
+      filterSelectedOptions: props.filterSelectedOptions,
+      forcePopupIcon: props.forcePopupIcon,
+      getOptionDisabled: props.getOptionDisabled,
+      groupBy: props.groupBy,
+      inputValue: props.inputValue,
+      listboxProps: props.listboxProps,
+      loading: props.loading,
+      loadingText: props.loadingText,
+      noOptionsText: props.noOptionsText,
+      open: props.open,
+      openText: props.openText,
+      options: props.options,
       size: props.size,
+      sx: props.sx,
       theme: props.theme,
       value: props.value,
+      //The following are used by TextField
+      color: props.color,
+      error: props.error,
+      helperText: props.helperText,
+      label: props.label,
+      required: props.required,
       variant: props.variant
     };
 
     this.componentRef = React.createRef();
 
     //methods
+    this.setChipProps = this.setChipProps.bind(this);
     this.setClass = this.setClass.bind(this);
-    this.setColor = this.setColor.bind(this);
+    this.setClearText = this.setClearText.bind(this);
+    this.setCloseText = this.setCloseText.bind(this);
+    this.setComponentsProps = this.setComponentsProps.bind(this);
     this.setDefaultValue = this.setDefaultValue.bind(this);
+    this.setDisableClearable = this.setDisableClearable.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
-    this.setError = this.setError.bind(this);
-    this.setFullWidth = this.setFullWidth.bind(this);
-    this.setHelperText = this.setHelperText.bind(this);
-    this.setLabel = this.setLabel.bind(this);
-    this.setMargin = this.setMargin.bind(this);
-    this.setMaxRows = this.setMaxRows.bind(this);
-    this.setMultiline = this.setMultiline.bind(this);
-    this.setPlaceholder = this.setPlaceholder.bind(this);
-    this.setRequired = this.setRequired.bind(this);
-    this.setRows = this.setRows.bind(this);
-    this.setRowsMax = this.setRowsMax.bind(this);
+    this.setDisabledItemsFocusable = this.setDisabledItemsFocusable.bind(this);
+    this.setFilterOptions = this.setFilterOptions.bind(this);
+    this.setFilterSelectedOptions = this.setFilterSelectedOptions.bind(this);
+    this.setForcePopupIcon = this.setForcePopupIcon.bind(this);
+    this.setGetOptionDisabled = this.setGetOptionDisabled.bind(this);
+    this.setGroupBy = this.setGroupBy.bind(this);
+    this.setInputValue = this.setInputValue.bind(this);
+    this.setListboxProps = this.setListboxProps.bind(this);
+    this.setLoading = this.setLoading.bind(this);
+    this.setLoadingText = this.setLoadingText.bind(this);
+    this.setNoOptionsText = this.setNoOptionsText.bind(this);
+    this.setOpen = this.setOpen.bind(this);
+    this.setOpenText = this.setOpenText.bind(this);
+    this.setOptions = this.setOptions.bind(this);
     this.setSize = this.setSize.bind(this);
+    this.setSx = this.setSx.bind(this);
     this.setTheme = this.setTheme.bind(this);
     this.setValue = this.setValue.bind(this);
+    //The following are used by TextField
+    this.setColor = this.setColor.bind(this);
+    this.setError = this.setError.bind(this);
+    this.setHelperText = this.setHelperText.bind(this);
+    this.setLabel = this.setLabel.bind(this);
+    this.setRequired = this.setRequired.bind(this);
     this.setVariant = this.setVariant.bind(this);
+
+  }
+
+  setChipProps(chipProps) {
+    this.setState({chipProps: chipProps})
   }
 
   setClass(classes) {
     this.setState({classString: classes})
   }
 
-  setColor(color) {
-    this.setState( {color: color});
+  setClearText(text) {
+    this.setState( {clearText: text});
+  }
+
+  setCloseText(text) {
+    this.setState( {closeText: text});
+  }
+
+  setComponentsProps(props) {
+    this.setState( {componentProps: props});
   }
 
   setDefaultValue(defaultValue) {
     this.setState({ defaultValue: defaultValue });
   }
 
+  setDisableClearable(disableClearable) {
+    this.setState({disableClearable: disableClearable});
+  }
+
   setDisabled(disabled) {
     this.setState({ disabled: disabled });
   }
 
-  setError(error) {
-    this.setState({ error: error });
+  setDisabledItemsFocusable(disabledItemsFocusable) {
+    this.setState({ disabledItemsFocusable: disabledItemsFocusable });
   }
 
-  setFullWidth(fullWidth) {
-    this.setState( {fullWidth: fullWidth});
+  setFilterOptions(filterOptions) {
+    this.setState( {filterOptions: filterOptions});
   }
 
-  setHelperText(helperText) {
-    this.setState( {helperText: helperText});
+  setFilterSelectedOptions(filterSelectedOptions) {
+    this.setState( {filterSelectedOptions: filterSelectedOptions});
   }
 
-  setLabel(label) {
-    this.setState( {label: label});
+  setForcePopupIcon(forcePopupIcon) {
+    this.setState( {forcePopupIcon: forcePopupIcon});
   }
 
-  setMargin(margin) {
-    this.setState( {margin: margin});
+  setGetOptionDisabled(getOptionDisabled) {
+    this.setState( {getOptionDisabled: getOptionDisabled});
   }
 
-  setMaxRows(maxRows) {
-    this.setState( {maxRows: maxRows});
+  setGroupBy(groupBy) {
+    this.setState( {groupBy: groupBy});
   }
 
-  setMultiline(multiline) {
-    this.setState( {multiline: multiline});
+  setInputValue(inputValue) {
+    this.setState( {inputValue: inputValue});
   }
 
-  setPlaceholder(placeholder) {
-    this.setState( {placeholder: placeholder});
+  setListboxProps(listboxProps) {
+    this.setState( {listboxProps: listboxProps});
   }
 
-  setRequired(required) {
-    this.setState( {required: required});
+  setLoading(loading) {
+    this.setState( {loading: loading});
   }
 
-  setRows(rows) {
-    this.setState( {rows: rows});
+  setLoadingText(loadingText) {
+    this.setState( {loadingText: loadingText});
   }
 
-  setRowsMax(rowsMax) {
-    this.setState( {rowsMax: rowsMax});
+  setNoOptionsText(noOptionsText) {
+    this.setState( {noOptionsText: noOptionsText});
+  }
+
+  setOpen(open) {
+    this.setState( {open: open});
+  }
+
+  setOpenText(openText) {
+    this.setState( {openText: openText});
+  }
+
+  setOptions(options) {
+    this.setState( {options: options});
   }
 
   setSize(size) {
     this.setState( {size: size});
+  }
+
+  setSx(sx) {
+    this.setState({ sx: sx});
   }
 
   setTheme(theme) {
@@ -124,133 +187,146 @@ export class ReactAutocomplete extends ReactThemeBase{
     this.setState({value: value});
   }
 
+  //The following are used by TextField
+
+  setColor(color) {
+    this.setState({color: color});
+  }
+
+  setError(error) {
+    this.setState({error: error});
+  }
+
+  setHelperText(helperText) {
+    this.setState({helperText: helperText});
+  }
+
+  setLabel(label) {
+    this.setState({label: label});
+  }
+
+  setRequired(required) {
+    this.setState({required: required});
+  }
+
   setVariant(variant) {
-    this.setState({ variant: variant});
+    this.setState({variant: variant});
   }
 
   render() {
-    /*const {
-      classString,
-      color,
-      defaultValue,
-      disabled,
-      error,
-      fullWidth,
-      helperText,
-      label,
-      margin,
-      maxRows,
-      multiline,
-      placeholder,
-      required,
-      rows,
-      rowsMax,
-      size,
-      theme,
-      value,
-      variant
-    } = this.state;*/
 
+    /* properties not currently implemented: clearIcon, popupIcon
+    */
     const {
-      autoComplete,
-      autoHighlight,
-      autoSelect,
-      blurOnSelect,
-      ChipProps,
-      classes,
-      clearOnBlur,
-      clearOnEscape,
+      chipProps,
+      classString,
       clearText,
-      closeIcon,
       closeText,
-      debug,
+      componentsProps,
       defaultValue,
       disableClearable,
-      disableCloseOnSelect,
       disabled,
       disabledItemsFocusable,
-      disableListWrap,
-      disablePortal,
       filterOptions,
       filterSelectedOptions,
       forcePopupIcon,
-      freeSolo,
-      fullWidth,
-      getLimitTagsText,
       getOptionDisabled,
-      getOptionLabel,
-      getOptionSelected,
       groupBy,
-      handleHomeEndKeys,
-      id,
-      includeInputInList,
       inputValue,
-      limitTags,
-      ListboxComponent,
-      ListboxProps,
+      listboxProps,
       loading,
       loadingText,
-      multiple,
       noOptionsText,
-      onChange,
-      onClose,
-      onHighlightChange,
-      onInputChange,
-      onOpen,
-      openOnFocus,,
+      open,
       openText,
       options,
-      PaperComponent,
-      PopperComponent,
-      popupIcon,
-      renderGroup,
-      renderInput,
-      renderOption,
-      renderTags,
-      getTagProps,
-      selectOnFocus,
-      value
+      size,
+      sx,
+      theme,
+      value,
+      //The following are used by TextField
+      color,
+      error,
+      helperText,
+      label,
+      required,
+      variant
     } = this.state;
-
 
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <Autocomplete
           ref={this.componentRef}
+          {...(options ? {options: options} : {})}
           onChange={this.props.onChange}
+          {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
+          {...(this.props.onHighlightChange ? {onHighlightChange: this.props.onHighlightChange} : {})}
+          {...(this.props.onInputChange ? {onInputChange: this.props.onInputChange} : {})}
+          {...(this.props.onOpen ? {onOpen: this.props.onOpen} : {})}
           {...(this.props.autoComplete ? {autoComplete: this.props.autoComplete} : {})}
-          {...(this.props.autoFocus ? {autoFocus: this.props.autoFocus} : {})}
+          {...(this.props.autoHighlight ? {autoHighlight: this.props.autoHighlight} : {})}
+          {...(this.props.autoSelect ? {autoSelect: this.props.autoSelect} : {})}
+          {...(this.props.blurOnSelect ? {blurOnSelect: this.props.blurOnSelect} : {})}
+          {...(chipProps ? {ChipProps: chipProps} : {})}
           {...(classString ? {className: classString} : {})}
-          {...(color ? {color: color} : {})}
+          {...(this.props.clearOnBlur ? {clearOnBlur: this.props.clearOnBlur} : {})}
+          {...(this.props.clearOnEscape ? {clearOnEscape: this.props.clearOnEscape} : {})}
+          {...(clearText ? {clearText: clearText} : {})}
+          {...(closeText ? {closeText: closeText} : {})}
+          {...(componentsProps ? {componentsProps: componentsProps} : {})}
           {...(defaultValue ? {defaultValue: defaultValue} : {})}
+          {...(disableClearable ? {disableClearable: disableClearable} : {})}
+          {...(this.props.disableCloseOnSelect ? {disableCloseOnSelect: this.props.disableCloseOnSelect} : {})}
           disabled={disabled}
-          error={error}
-          {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
-          fullWidth={fullWidth}
-          {...(helperText ? {helperText: helperText} : {})}
-          {...(this.props.inputId ? {id: this.props.inputId} : {})}
-          {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
-          {...(this.props.inputAttributes ? {inputProps: this.props.inputAttributes} : {})}
-          {...(this.props.inputProps ? {InputProps: this.props.inputProps} : {})}
-          {...(this.props.inputRef ? { inputRef: this.props.inputRef } : {})}
-          {...(label ? {label: label} : {})}
-          {...(margin ? {margin: margin} : {})}
-          {...(maxRows ? {maxRows: maxRows} : {})}
-          {...(multiline ? {multiline: multiline} : {})}
-          {...(this.props.inputName ? {name: this.props.inputName} : {})}
-          {...(placeholder ? {placeholder: placeholder} : {})}
-          {...(required ? {required: required} : {})}
-          {...(rows ? {rows: rows} : {})}
-          {...(rowsMax ? {rowsMax: rowsMax} : {})}
-          {...(this.props.select ? {select: this.props.select} : {})}
-          {...(this.props.selectProps ? { SelectProps: this.props.selectProps } : {})}
+          {...(disabledItemsFocusable ? {disabledItemsFocusable: disabledItemsFocusable} : {})}
+          {...(this.props.disableListWrap ? {disableListWrap: this.props.disableListWrap} : {})}
+          {...(this.props.disablePortal ? {disablePortal: this.props.disablePortal} : {})}
+          {...(filterOptions ? {filterOptions: filterOptions} : {})}
+          {...(filterSelectedOptions ? {filterSelectedOptions: filterSelectedOptions} : {})}
+          {...(forcePopupIcon ? {forcePopupIcon: forcePopupIcon} : {})}
+          {...(this.props.freeSolo ? {freeSolo: this.props.freeSolo} : {})}
+          {...(this.props.getLimitTagsText ? {getLimitTagsText: this.props.getLimitTagsText} : {})}
+          {...(getOptionDisabled ? {getOptionDisabled: getOptionDisabled} : {})}
+          {...(this.props.getOptionLabel ? {getOptionLabel: this.props.getOptionLabel} : {})}
+          {...(groupBy ? {groupBy: groupBy} : {})}
+          {...(this.props.handleHomeEndKeys ? {handleHomeEndKeys: this.props.handleHomeEndKeys} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
+          {...(this.props.includeInputInList ? {includeInputInList: this.props.includeInputInList} : {})}
+          {...(inputValue ? {inputValue: inputValue} : {})}
+          {...(this.props.isOptionEqualToValue ? {isOptionEqualToValue: this.props.isOptionEqualToValue} : {})}
+          {...(this.props.limitTags ? {limitTags: this.props.limitTags} : {})}
+          {...(this.props.listboxComponent ? {ListboxComponent: this.props.listboxComponent} : {})}
+          {...(listboxProps ? {ListboxProps: listboxProps} : {})}
+          {...(loading ? {loading: loading} : {})}
+          {...(loadingText ? {loadingText: loadingText} : {})}
+          {...(this.props.multiple ? {multiple: this.props.multiple} : {})}
+          {...(noOptionsText ? {noOptionsText: noOptionsText} : {})}
+          {...(open ? {open: open} : {})}
+          {...(this.props.openOnFocus ? {openOnFocus: this.props.openOnFocus} : {})}
+          {...(openText ? {openText: openText} : {})}
+          {...(this.props.paperComponent ? {PaperComponent: this.props.paperComponent} : {})}
+          {...(this.props.popperComponent ? {PopperComponent: this.props.popperComponent} : {})}
+          {...(this.props.renderGroup ? {renderGroup: this.props.renderGroup} : {})}
+          {...(this.props.renderOption ? {renderOption: this.props.renderOption} : {})}
+          {...(this.props.renderTags ? {renderTags: this.props.renderTags} : {})}
+          {...(this.props.selectOnFocus ? {renderTags: this.props.selectOnFocus} : {})}
           {...(size ? {size: size} : {})}
-          {...(this.props.type ? { type: this.props.type } : {})}
+          {...(sx ? {sx: sx} : {})}
           {...(value ? {value: value} : {value: ''})}
-          {...(variant ? {variant: variant} : {})}
-        >
-          <option>Dummy Option</option>
-        </Autocomplete>
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              {...(color ? {color: color} : {})}
+              {...(error ? {error: error} : {})}
+              {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
+              {...(helperText ? {helperText: helperText} : {})}
+              {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
+              {...(label ? {label: label} : {})}
+              {...(required ? {required: required} : {})}
+              {...(variant ? {variant: variant} : {})}
+            />
+          )}
+        />
       </ReactConditionalThemeProvider>
     );
   }
