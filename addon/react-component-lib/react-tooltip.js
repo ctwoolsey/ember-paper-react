@@ -1,5 +1,6 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
 import { ReactThemeBase } from "./base/react-theme-base";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
@@ -118,7 +119,7 @@ export class ReactTooltip extends ReactThemeBase{
           {...(this.props.transitionComponent ? {TransitionComponent: this.props.transitionComponent} : {})}
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
-          <span>Dummy Child</span>
+          <Button>Dummy Tooltip Child</Button>
         </Tooltip>
       </ReactConditionalThemeProvider>
     );

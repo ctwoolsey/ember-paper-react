@@ -12,6 +12,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     super(...arguments);
     this.controlType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = null;
+    this.useButton = this.args.useButton || true;
 
   }
 
@@ -73,7 +74,13 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
 
   renderElement() {
     if (this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.replaceChildren(this.fragmentFromBlockContent());
+      if (!this.useButton) {
+        this.reactRef.current.componentRef.current.replaceChildren(this.fragmentFromBlockContent());
+      } else {
+        //remove Dummy Child Text
+        this.reactRef.current.componentRef.current.childNodes[0].remove();
+        this.reactRef.current.componentRef.current.prepend(this.fragmentFromBlockContent());
+      }
     }
     super.renderElement();
   }
