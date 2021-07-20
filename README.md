@@ -230,10 +230,11 @@ To make the components useful, all options are supported, including these additi
 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```<i>*</i>
+* ```@disabled```<i>**</i>  
 * ```@useButton={{true/false}}``` - default ```true```, when ```true```, the ```RPaperTooltip``` children are insterted into a ```Button``` component, if ```false``` the content is just inserted into the tooltip component and must be styled.
 
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-
+<i>**</i> Disabled will only function if ```@useButton``` is ```true```
 
 ==============================================================================
 

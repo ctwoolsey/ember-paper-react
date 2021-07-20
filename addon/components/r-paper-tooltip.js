@@ -24,6 +24,13 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
   }
 
   @action
+  disabled() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisabled(this.args.disabled || false);
+    }
+  }
+
+  @action
   disableFocusListener() {
     if (this.reactRef) {
       this.reactRef.current.setDisableFocusListener(this.args.disableFocusListener || null);
@@ -72,14 +79,14 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     }
   }
 
+
   renderElement() {
     if (this.el.hasChildNodes()) {
       if (!this.useButton) {
         this.reactRef.current.componentRef.current.replaceChildren(this.fragmentFromBlockContent());
       } else {
-        //remove Dummy Child Text
-        this.reactRef.current.componentRef.current.childNodes[0].remove();
-        this.reactRef.current.componentRef.current.prepend(this.fragmentFromBlockContent());
+        this.reactRef.current.componentRef.current.childNodes[0].childNodes[0].remove();
+        this.reactRef.current.componentRef.current.childNodes[0].prepend(this.fragmentFromBlockContent());
       }
     }
     super.renderElement();
@@ -97,6 +104,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
       arrow: this.args.arrow || null,
       classString: this.args.class || '',
       describeChild: this.args.describeChild || null,
+      disabled: this.args.disabled || false,
       disableFocusListener: this.args.disableFocusListener || null,
       disableHoverListener: this.args.disableHoverListener || null,
       disableInteractive: this.args.disableInteractive || null,

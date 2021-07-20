@@ -11,6 +11,7 @@ export class ReactTooltip extends ReactThemeBase{
     this.state = {
       title: props.title,
       classString: props.classString,
+      disabled: props.disabled,
       disableFocusListener: props.disableFocusListener,
       disableHoverListener: props.disableHoverListener,
       disableInteractive: props.disableInteractive,
@@ -26,6 +27,7 @@ export class ReactTooltip extends ReactThemeBase{
     //methods
     this.setTitle = this.setTitle.bind(this);
     this.setClass = this.setClass.bind(this);
+    this.setDisabled = this.setDisabled.bind(this);
     this.setDisableFocusListener = this.setDisableFocusListener.bind(this);
     this.setDisableHoverListener = this.setDisableHoverListener.bind(this);
     this.setDisableInteractive = this.setDisableInteractive.bind(this);
@@ -42,6 +44,10 @@ export class ReactTooltip extends ReactThemeBase{
 
   setClass(classes) {
     this.setState({classString: classes})
+  }
+
+  setDisabled(disabled) {
+    this.setState({disabled: disabled});
   }
 
   setDisableFocusListener(disableFocusListener) {
@@ -80,6 +86,7 @@ export class ReactTooltip extends ReactThemeBase{
     const {
       title,
       classString,
+      disabled,
       disableFocusListener,
       disableHoverListener,
       disableInteractive,
@@ -119,7 +126,9 @@ export class ReactTooltip extends ReactThemeBase{
           {...(this.props.transitionComponent ? {TransitionComponent: this.props.transitionComponent} : {})}
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
-          <Button>Dummy Tooltip Child</Button>
+          <span>
+            <Button {...(disabled ? { disabled: disabled} : {})}>Dummy Tooltip Child</Button>
+          </span>
         </Tooltip>
       </ReactConditionalThemeProvider>
     );
