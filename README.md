@@ -26,7 +26,7 @@ This addon requires the use of SASS.
 $ ember install --save ember-cli-sass
 ```
 In the ```ember-cli-build.js``` file add the following:
-```
+```angular2html
 let app = new EmberApp(defaults, {
     // Add options here
     sassOptions: {
@@ -53,7 +53,7 @@ If you wish to theme the material-ui components using predefined colors from mat
 To use the material-ui theme palette globally, inject the service 'themeManager'.  This should be done within application.js.
 
 <i>application.js</i>
-```
+```angular2html
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
 
@@ -78,7 +78,7 @@ To change the global theme, this same pattern can be called from anywhere in the
 <i>Button</i>
 ------------------------------------------------------------------------------
 The most basic usage is:
-```
+```angular2html
 <RPaperButton>{{content you want displayed}}</RPaperButton>
 ```
 To make the button useful, the following options are supported:
@@ -109,7 +109,7 @@ See the material documentation for possible values for these options.
 <i>Checkbox, Radio, Switch</i>
 ------------------------------------------------------------------------------
 The most basic usage is:
-```
+```angular2html
 <RPaperCheckbox/>
 <RPaperRadio/>
 <RPaperSwitch/>
@@ -138,8 +138,8 @@ To make the components useful, the following options are supported:
 <i>TextField</i>
 ------------------------------------------------------------------------------
 The most basic usage is:
-```
-<RPaperTextField @label"My Label" @onChange={{this.onTextFieldChanged}}/>
+```angular2html
+<RPaperTextField @label"My Label" @value={{this.textFieldValue}} @onChange={{this.onTextFieldChanged}}/>
 ```
 To make the components useful, all options are supported, in addition to the standard options, a few additional options are provided:
 
@@ -149,12 +149,55 @@ To make the components useful, all options are supported, in addition to the sta
 
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
-<b>Note:</b> this component can also act as a select component.  When ```@select={{true}}``` is set, the component will automatically add the object ```{native:true}``` to the ```selectProps``` property.  ```<option/>``` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported. 
+<b>Note:</b> this component can also act as a select component.  When ```@select={{true}}``` is set, the component will automatically add the object ```{native:true}``` to the ```selectProps``` property.  ```<option/>``` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.
+
+<i>Input Masking</i>
+-----------------------------------------
+This ```TextField``` has the capability for input masking.  It uses the [inputmask](https://github.com/RobinHerbots/Inputmask/) library.
+
+To use the mask feature the following options are available (only ```@mask``` is required):
+
+* ```@mask``` - In the ```inputmask``` documentation this is the object or string that is input into the ```Inputmask()``` initializer.
+* ```@maskDefaults```
+* ```@maskDefinitions```
+* ```@maskAliases```
+
+When using input masking, the onChange function will return two values for convenience.  The first will be the ```unmasked value``` and the second will be the ```masked value```.
+
+Example:
+```angular2html
+<RPaperTextField @label="InputMaskDemo" @mask={{this.mask}} @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
+<div>
+  Unmasked Value: {{this.unMaskedTextValue}}
+</div>
+<div>
+  Masked Value: {{this.maskedTextValue}}
+</div>
+```
+```angular2html
+//in controller
+export default class ApplicationController extends Controller {
+  @tracked unMaskedTextValue;
+  @tracked maskedTextValue;
+
+  constructor() {
+    super(...arguments);
+    this.mask = 'aa-9{4}';
+  }
+
+  @action
+  onChangeHandler(unmaskedValue, maskedValue) {
+    this.maskedTextValue = value;
+    this.unMaskedTextValue = unmaskedValue;
+  }
+}
+```
+
 
 <i>Autocomplete</i>
 ------------------------------------------------------------------------------
 The most basic usage is:
-```
+```angular2html
 <RPaperAutoComplete @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
 ```
 To make the components useful, all options are supported, except for ```clearIcon``` and ```popupIcon```.  In addition to the standard options, the following options have been added:

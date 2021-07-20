@@ -5,6 +5,7 @@ import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactTextField } from "../react-component-lib/react-text-field";
+import Inputmask from "inputmask";
 
 export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
 
@@ -12,6 +13,23 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     super(...arguments);
     this.controlType = COMPONENT_TYPES.TEXTFIELD;
     this.handleName = true;
+    this.inputmask = null;
+    if (this.args.mask) {
+      this.handleClickChange = this.handleChange.bind(this);
+    }
+
+    if (this.args.mask) {
+      if (this.args.maskDefaults) {
+        Inputmask.extendDefaults(this.args.maskDefaults);
+      }
+      if (this.args.maskDefinitions) {
+        Inputmask.extendDefinitions(this.args.maskDefinitions);
+      }
+      if (this.args.maskAlias) {
+        Inputmask.extendAliases(this.args.maskAliases);
+      }
+    }
+
   }
 
   @action
@@ -144,7 +162,21 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     if (this.args.select && this.el.hasChildNodes()) {
       this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
     }
+
+    if (this.args.mask) {
+      this.inputmask = Inputmask(this.args.mask).mask(this.inputRef.current);
+    }
+
     super.renderElement();
+  }
+
+  handleChange(event) {
+    if (this.args.onChange && this.args.mask) {
+      //if there is a mask return the unmasked value first, and the masked value second.
+      return this.args.onChange(this.inputmask.unmaskedvalue(), event.target.value );
+    } else {
+      return null;
+    }
   }
 
   @action
@@ -153,7 +185,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     scheduleOnce('render', this, this.renderElement);
 
     this.reactRef = React.createRef();
-    //currently does not implement inputRef
+    this.inputRef = React.createRef();
 
     let props = {
       autoComplete: this.args.autoComplete || null,
@@ -187,6 +219,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       value: this.args.value || null,
       variant: this.args.variant || null,
       ref: this.reactRef,
+      inputRef: this.inputRef,
       onChange: this.handleClickChange
     };
 
