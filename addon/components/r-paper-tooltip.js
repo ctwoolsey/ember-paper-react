@@ -72,9 +72,9 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
   }
 
   renderElement() {
-   /* if (this.args.select && this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
-    }*/
+    if (this.el.hasChildNodes()) {
+      this.reactRef.current.componentRef.current.replaceChildren(this.fragmentFromBlockContent());
+    }
     super.renderElement();
   }
 

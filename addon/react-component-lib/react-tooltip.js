@@ -1,10 +1,9 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import TextField from '@material-ui/core/TextField';
 import { ReactThemeBase } from "./base/react-theme-base";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactAutocomplete extends ReactThemeBase{
+export class ReactTooltip extends ReactThemeBase{
   constructor(props) {
     super(props);
 
@@ -119,7 +118,7 @@ export class ReactAutocomplete extends ReactThemeBase{
           {...(this.props.transitionComponent ? {TransitionComponent: this.props.transitionComponent} : {})}
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
-          <span>Hover over me</span>
+          <span>Dummy Child</span>
         </Tooltip>
       </ReactConditionalThemeProvider>
     );
