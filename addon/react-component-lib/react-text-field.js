@@ -26,8 +26,6 @@ export class ReactTextField extends ReactBaseWithTheme{
       variant: props.variant
     });
 
-    this.componentRef = React.createRef();
-
     //methods
     this.setColor = this.setColor.bind(this);
     this.setDefaultValue = this.setDefaultValue.bind(this);

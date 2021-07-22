@@ -1,8 +1,11 @@
 import { ReactThemeBase } from "./react-theme-base";
+import React from "react";
 
 export class ReactBaseWithTheme extends ReactThemeBase{
   constructor(props) {
     super(props);
+    this.componentRef = React.createRef();
+
     this.state = Object.assign(this.state, {
       classString: props.classString,
       sx: props.sx

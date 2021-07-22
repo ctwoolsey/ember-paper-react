@@ -19,8 +19,6 @@ export class ReactTooltip extends ReactBaseWithTheme{
       placement: props.placement
     });
 
-    this.componentRef = React.createRef();
-
     //methods
     this.setTitle = this.setTitle.bind(this);
     this.setDisabled = this.setDisabled.bind(this);

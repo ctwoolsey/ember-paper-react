@@ -41,8 +41,6 @@ export class ReactAutocomplete extends ReactBaseWithTheme{
       variant: props.variant
     });
 
-    this.componentRef = React.createRef();
-
     //methods
     this.setChipProps = this.setChipProps.bind(this);
     this.setClearText = this.setClearText.bind(this);

@@ -25,8 +25,6 @@ export class ReactLabeledCheckRadioSwitch extends ReactBaseWithTheme{
       value: props.value
     });
 
-    this.componentRef = React.createRef();
-
     //methods
     this.setChecked = this.setChecked.bind(this);
     this.setColor = this.setColor.bind(this);

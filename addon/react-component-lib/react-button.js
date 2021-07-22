@@ -19,8 +19,6 @@ export class ReactButton extends ReactBaseWithTheme{
         variant: props.variant
       });
 
-    this.componentRef = React.createRef();
-
     //methods
     this.setColor = this.setColor.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
