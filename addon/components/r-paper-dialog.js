@@ -12,6 +12,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     super(...arguments);
     this.controlType = COMPONENT_TYPES.DIALOG;
     this.handleClickChange = null;
+    this.dialogRender = this.dialogRender.bind(this);
   }
 
   @action
@@ -51,16 +52,26 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
 
 
   renderElement() {
+    //maybe will need to call this and hide the content until it is inserted into the dialog?
+    //or open the dialog but set an attribute that makes it hidden initially? While the children get added?
+
     //this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current, this.el);
+    //this.cloneAttributes(this.reactRef.current, this.el);
     //this.initializeDynamicStyles();
     //this.el.remove();
+  }
+
+  dialogRender(insertElement) {
+    console.log('in dialog render');
+    insertElement.replaceChildren(this.fragmentFromBlockContent());
+    //this.cloneAttributes(this.reactRef.current, this.el);
+    //this.initializeDynamicStyles();
+    this.el.remove();
   }
 
   @action
   inserted(element) {
     this.el = element;
-    scheduleOnce('render', this, this.renderElement);
 
     this.reactRef = React.createRef();
 
@@ -84,7 +95,8 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
       transitionComponent: this.args.transitionComponent || null,
       transitionDuration: this.args.transitionDuration || null,
       transitionProps: this.args.transitionProps || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      dialogRenderCallback: this.dialogRender
     };
 
     const reactPortal = ReactDOM.createPortal(<ReactDialog {...props}/>, element.parentElement);

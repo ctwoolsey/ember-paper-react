@@ -1,9 +1,9 @@
 import React from 'react';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import { ReactThemeBase } from "../base/react-theme-base";
 import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
 
-export class ReactDialogTitle extends ReactThemeBase{
+export class ReactDialogContentText extends ReactThemeBase{
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ export class ReactDialogTitle extends ReactThemeBase{
 
     return (
       <ReactConditionalThemeProvider theme={theme}>
-        <DialogTitle
+        <DialogContentText
           {...(classString ? {className: classString} : {})}
           {...(sx ? {sx: sx} : {})}
           ref={this.componentRef}
