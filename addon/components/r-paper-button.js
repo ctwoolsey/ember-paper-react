@@ -13,30 +13,16 @@ export default class RPaperButton extends BaseReactEmberComponent {
   }
 
   @action
+  color() {
+    if (this.reactRef) {
+      this.reactRef.current.setColor(this.args.color || null);
+    }
+  }
+
+  @action
   disabled() {
     if (this.reactRef) {
       this.reactRef.current.setDisabled(this.args.disabled || false);
-    }
-  }
-
-  @action
-  variant() {
-    if (this.reactRef) {
-      this.reactRef.current.setVariant(this.args.variant || null);
-    }
-  }
-
-  @action
-  size() {
-    if (this.reactRef) {
-      this.reactRef.current.setSize(this.args.size || '');
-    }
-  }
-
-  @action
-  href() {
-    if (this.reactRef) {
-      this.reactRef.current.setHref(this.args.href || null);
     }
   }
 
@@ -69,9 +55,23 @@ export default class RPaperButton extends BaseReactEmberComponent {
   }
 
   @action
-  color() {
+  href() {
     if (this.reactRef) {
-      this.reactRef.current.setColor(this.args.color || null);
+      this.reactRef.current.setHref(this.args.href || null);
+    }
+  }
+
+  @action
+  size() {
+    if (this.reactRef) {
+      this.reactRef.current.setSize(this.args.size || '');
+    }
+  }
+
+  @action
+  variant() {
+    if (this.reactRef) {
+      this.reactRef.current.setVariant(this.args.variant || null);
     }
   }
 
@@ -96,19 +96,24 @@ export default class RPaperButton extends BaseReactEmberComponent {
   inserted(element) {
     this.el = element;
     scheduleOnce('render', this, this.renderElement);
-
-    let size = this.args.size || '';
-    let variant = this.args.variant || null;
-    let disabled = this.args.disabled || false;
-    let href = this.args.href || null;
-    let disableElevation = this.args.disableElevation || null;
-    let disableFocusRipple = this.args.disableFocusRipple || null;
-    let disableRipple = this.args.disableRipple || null;
-    let fullWidth = this.args.fullWidth || null;
-    let color = this.args.color || null;
-    let theme = this.themeManager.theme || null;
-    let classString = this.args.class || '';
     this.reactRef = React.createRef();
+
+    let props = {
+      classString: this.args.class || '',
+      color: this.args.color || null,
+      disabled: this.args.disabled || false,
+      disableElevation: this.args.disableElevation || null,
+      disableFocusRipple: this.args.disableFocusRipple || null,
+      disableRipple: this.args.disableRipple || null,
+      fullWidth: this.args.fullWidth || null,
+      href: this.args.href || null,
+      onClick: this.handleClickChange,
+      size: this.args.size || '',
+      sx: this.args.sx || null,
+      theme: this.themeManager.theme || null,
+      variant: this.args.variant || null,
+      ref: this.reactRef
+    }
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
       the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
@@ -118,20 +123,7 @@ export default class RPaperButton extends BaseReactEmberComponent {
       once rendered, the runloop will call renderElement() for further processing.
 
      */
-    const reactPortal = ReactDOM.createPortal(<ReactButton
-                                                 class={classString}
-                                                 variant={variant}
-                                                 size={size}
-                                                 disabled={disabled}
-                                                 disableElevation={disableElevation}
-                                                 disableFocusRipple={disableFocusRipple}
-                                                 disableRipple={disableRipple}
-                                                 fullWidth={fullWidth}
-                                                 color={color}
-                                                 theme={theme}
-                                                 href={href}
-                                                 ref={this.reactRef}
-                                                 onclick={this.handleClickChange}/>, element.parentElement);
+    const reactPortal = ReactDOM.createPortal(<ReactButton {...props}/>, element.parentElement);
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 

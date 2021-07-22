@@ -4,7 +4,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
   constructor(props) {
     super(props);
     this.state = Object.assign(this.state, {
-      classString: props.class,
+      classString: props.classString,
       sx: props.sx
     });
 

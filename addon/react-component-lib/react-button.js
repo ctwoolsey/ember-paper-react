@@ -69,8 +69,6 @@ export class ReactButton extends ReactBaseWithTheme{
     this.setState({ variant: variant});
   }
 
-
-
   render() {
     const {
       classString,
@@ -90,7 +88,7 @@ export class ReactButton extends ReactBaseWithTheme{
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <Button
-          onClick={this.props.onclick}
+          onClick={this.props.onClick}
           {...(classString ? {className: classString} : {})}
           {...(color ? {color: color} : {})}
           disabled={disabled}

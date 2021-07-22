@@ -44,6 +44,13 @@ export default class BaseReactEmberComponent extends Component {
   }
 
   @action
+  sx() {
+    if (this.reactRef) {
+      this.reactRef.current.setSx(this.args.sx || null);
+    }
+  }
+
+  @action
   style() {
     if (this.reactRef) {
       //remove old style names

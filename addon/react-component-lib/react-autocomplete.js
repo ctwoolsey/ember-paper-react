@@ -1,16 +1,15 @@
 import React from 'react';
 import Autocomplete from '@material-ui/core/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { ReactThemeBase } from "./base/react-theme-base";
+import { ReactBaseWithTheme } from "./base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactAutocomplete extends ReactThemeBase{
+export class ReactAutocomplete extends ReactBaseWithTheme{
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = Object.assign(this.state, {
       chipProps: props.chipProps,
-      classString: props.classString,
       clearText: props.clearText,
       closeText: props.closeText,
       componentsProps: props.componentsProps,
@@ -32,8 +31,6 @@ export class ReactAutocomplete extends ReactThemeBase{
       openText: props.openText,
       options: props.options,
       size: props.size,
-      sx: props.sx,
-      theme: props.theme,
       value: props.value,
       //The following are used by TextField
       color: props.color,
@@ -42,13 +39,12 @@ export class ReactAutocomplete extends ReactThemeBase{
       label: props.label,
       required: props.required,
       variant: props.variant
-    };
+    });
 
     this.componentRef = React.createRef();
 
     //methods
     this.setChipProps = this.setChipProps.bind(this);
-    this.setClass = this.setClass.bind(this);
     this.setClearText = this.setClearText.bind(this);
     this.setCloseText = this.setCloseText.bind(this);
     this.setComponentsProps = this.setComponentsProps.bind(this);
@@ -70,8 +66,6 @@ export class ReactAutocomplete extends ReactThemeBase{
     this.setOpenText = this.setOpenText.bind(this);
     this.setOptions = this.setOptions.bind(this);
     this.setSize = this.setSize.bind(this);
-    this.setSx = this.setSx.bind(this);
-    this.setTheme = this.setTheme.bind(this);
     this.setValue = this.setValue.bind(this);
     //The following are used by TextField
     this.setColor = this.setColor.bind(this);
@@ -87,10 +81,6 @@ export class ReactAutocomplete extends ReactThemeBase{
 
   setChipProps(chipProps) {
     this.setState({chipProps: chipProps})
-  }
-
-  setClass(classes) {
-    this.setState({classString: classes})
   }
 
   setClearText(text) {
@@ -175,14 +165,6 @@ export class ReactAutocomplete extends ReactThemeBase{
 
   setSize(size) {
     this.setState( {size: size});
-  }
-
-  setSx(sx) {
-    this.setState({ sx: sx});
-  }
-
-  setTheme(theme) {
-    this.setState( {theme: theme});
   }
 
   setValue(value) {

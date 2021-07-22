@@ -138,13 +138,6 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
   }
 
   @action
-  sx() {
-    if (this.reactRef) {
-      this.reactRef.current.setSx(this.args.sx || null);
-    }
-  }
-
-  @action
   value() {
     if (this.reactRef) {
       this.reactRef.current.setValue(this.args.value || '');

@@ -1,16 +1,16 @@
 import React from 'react';
-import { ReactThemeBase } from "./base/react-theme-base";
+import { ReactBaseWithTheme } from "./base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 /* Does not currently implement:
     checkedIcon, icon, id, indeterminateIcon
 */
-export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
+export class ReactLabeledCheckRadioSwitch extends ReactBaseWithTheme{
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = Object.assign(this.state, {
       checked: props.checked,
       classString: props.classString,
       color: props.color,
@@ -23,13 +23,12 @@ export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
       required: props.required,
       size: props.size,
       value: props.value
-    };
+    });
 
     this.componentRef = React.createRef();
 
     //methods
     this.setChecked = this.setChecked.bind(this);
-    this.setClass = this.setClass.bind(this);
     this.setColor = this.setColor.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
     this.setDisableRipple = this.setDisableRipple.bind(this);
@@ -45,10 +44,6 @@ export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
 
   setChecked(checked) {
     this.setState( {checked: checked});
-  }
-
-  setClass(classes) {
-    this.setState({classString: classes})
   }
 
   setColor(color) {
@@ -104,6 +99,7 @@ export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
       labelPlacement,
       required,
       size,
+      sx,
       theme,
       value
     } = this.state;
@@ -131,6 +127,7 @@ export class ReactLabeledCheckRadioSwitch extends ReactThemeBase{
             {...(this.props.name ? { name: this.props.name } : {})}  //used by Radio
             {...(required ? { required: required } : {})}
             {...(size ? { size: size } : {})}
+            {...(sx ? { sx: sx } : {})}
           />}
         />
       </ReactConditionalThemeProvider>

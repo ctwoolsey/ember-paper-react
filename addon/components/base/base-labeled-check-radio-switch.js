@@ -113,6 +113,7 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
       labelPlacement: this.args.labelPlacement || 'end',
       name: this.args.radioName || this.nameValue,  //used by radio
       size: this.args.size || null,
+      sx: this.args.size || null,
       theme: this.themeManager.theme || null,
       value: this.args.value || '',
       ref: this.reactRef,

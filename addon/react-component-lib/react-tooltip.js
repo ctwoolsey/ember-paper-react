@@ -1,32 +1,28 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
-import { ReactThemeBase } from "./base/react-theme-base";
+import { ReactBaseWithTheme } from "./base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactTooltip extends ReactThemeBase{
+export class ReactTooltip extends ReactBaseWithTheme{
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = Object.assign(this.state, {
       title: props.title,
-      classString: props.classString,
       disabled: props.disabled,
       disableFocusListener: props.disableFocusListener,
       disableHoverListener: props.disableHoverListener,
       disableInteractive: props.disableInteractive,
       disableTouchListener: props.disableTouchListener,
       open: props.open,
-      placement: props.placement,
-      sx: props.sx,
-      theme: props.theme,
-    };
+      placement: props.placement
+    });
 
     this.componentRef = React.createRef();
 
     //methods
     this.setTitle = this.setTitle.bind(this);
-    this.setClass = this.setClass.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
     this.setDisableFocusListener = this.setDisableFocusListener.bind(this);
     this.setDisableHoverListener = this.setDisableHoverListener.bind(this);
@@ -34,16 +30,10 @@ export class ReactTooltip extends ReactThemeBase{
     this.setDisableTouchListener = this.setDisableTouchListener.bind(this);
     this.setOpen = this.setOpen.bind(this);
     this.setPlacement = this.setPlacement.bind(this);
-    this.setSx = this.setSx.bind(this);
-    this.setTheme = this.setTheme.bind(this);
   }
 
   setTitle(title) {
     this.setState({title: title})
-  }
-
-  setClass(classes) {
-    this.setState({classString: classes})
   }
 
   setDisabled(disabled) {
@@ -72,14 +62,6 @@ export class ReactTooltip extends ReactThemeBase{
 
   setPlacement(placement) {
     this.setState( {placement: placement});
-  }
-
-  setSx(sx) {
-    this.setState({ sx: sx});
-  }
-
-  setTheme(theme) {
-    this.setState( {theme: theme});
   }
 
   render() {

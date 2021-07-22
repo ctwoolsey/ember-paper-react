@@ -72,14 +72,6 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     }
   }
 
-  @action
-  sx() {
-    if (this.reactRef) {
-      this.reactRef.current.setSx(this.args.sx || null);
-    }
-  }
-
-
   renderElement() {
     if (this.el.hasChildNodes()) {
       if (!this.useButton) {

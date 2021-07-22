@@ -1,13 +1,12 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { ReactThemeBase } from "./base/react-theme-base";
+import { ReactBaseWithTheme } from "./base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactTextField extends ReactThemeBase{
+export class ReactTextField extends ReactBaseWithTheme{
   constructor(props) {
     super(props);
-    this.state = {
-      classString: props.classString,
+    this.state = Object.assign(this.state, {
       color: props.color,
       defaultValue: props.defaultValue,
       disabled: props.disabled,
@@ -23,16 +22,13 @@ export class ReactTextField extends ReactThemeBase{
       required: props.required,
       rows: props.rows,
       size: props.size,
-      sx: props.sx,
-      theme: props.theme,
       value: props.value,
       variant: props.variant
-    };
+    });
 
     this.componentRef = React.createRef();
 
     //methods
-    this.setClass = this.setClass.bind(this);
     this.setColor = this.setColor.bind(this);
     this.setDefaultValue = this.setDefaultValue.bind(this);
     this.setDisabled = this.setDisabled.bind(this);
@@ -48,14 +44,8 @@ export class ReactTextField extends ReactThemeBase{
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
     this.setSize = this.setSize.bind(this);
-    this.setSx = this.setSx.bind(this);
-    this.setTheme = this.setTheme.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setVariant = this.setVariant.bind(this);
-  }
-
-  setClass(classes) {
-    this.setState({classString: classes})
   }
 
   setColor(color) {
@@ -116,14 +106,6 @@ export class ReactTextField extends ReactThemeBase{
 
   setSize(size) {
     this.setState( {size: size});
-  }
-
-  setSx(sx) {
-    this.setState( {sx: sx});
-  }
-
-  setTheme(theme) {
-    this.setState( {theme: theme});
   }
 
   setValue(value) {

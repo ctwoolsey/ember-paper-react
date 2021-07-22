@@ -43,14 +43,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     }
   }
 
-  @action
-  sx() {
-    if (this.reactRef) {
-      this.reactRef.current.setSx(this.args.sx || null);
-    }
-  }
-
-
   renderElement() {
     //maybe will need to call this and hide the content until it is inserted into the dialog?
     //or open the dialog but set an attribute that makes it hidden initially? While the children get added?
