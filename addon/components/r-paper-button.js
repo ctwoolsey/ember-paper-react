@@ -89,6 +89,7 @@ export default class RPaperButton extends BaseReactEmberComponent {
     if (this.el.hasChildNodes()) {
       this.reactRef.current.componentRef.current.appendChild(this.fragmentFromBlockContent());
     }
+
     super.renderElement();
   }
 

@@ -1,9 +1,10 @@
-import { ReactThemeBase } from "./react-theme-base";
+import { ReactBaseWithTheme } from "./react-base-with-theme";
 
-export class ReactDialogHelperBase extends ReactThemeBase{
+export class ReactDialogHelperBase extends ReactBaseWithTheme{
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state, { disabled: props.disabled,
+    this.state = Object.assign(this.state, {
+      disabled: props.disabled,
       variant: props.variant,
       size: props.size,
       href: props.href,
@@ -11,8 +12,7 @@ export class ReactDialogHelperBase extends ReactThemeBase{
       disableFocusRipple: props.disableFocusRipple,
       disableRipple: props.disableRipple,
       fullWidth: props.fullWidth,
-      color: props.color,
-      classString: props.class
+      color: props.color
     });
   }
 

@@ -3,7 +3,7 @@ const COMPONENT_TYPES = {
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
   DIALOG: 'dialog',
-  DIALOG_ACTION: 'dialogAction',
+  DIALOG_ACTIONS: 'dialogActions',
   DIALOG_CONTENT: 'dialogContent',
   DIALOG_CONTENT_TEXT: 'dialogContentText',
   DIALOG_TITLE: 'dialogTitle',
