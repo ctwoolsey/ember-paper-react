@@ -27,9 +27,15 @@ export default class RPaperDialogActionsComponent extends BaseReactEmberComponen
     this.el.remove();
   }
 
+  getChildren() {
+    let children = this.el.children;
+    let childrenFragment = document.createDocumentFragment();
+  }
+
   @action
   inserted(element) {
     this.el = element;
+    this.getChildren();
     scheduleOnce('render', this, this.renderElement);
     scheduleOnce('afterRender', this, this.afterRenderElement);
     this.reactRef = React.createRef();

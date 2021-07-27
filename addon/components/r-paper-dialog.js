@@ -13,6 +13,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     this.controlType = COMPONENT_TYPES.DIALOG;
     this.handleClickChange = null;
     this.dialogRender = this.dialogRender.bind(this);
+    this.dialogContents = [];
   }
 
   @action
@@ -43,7 +44,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     }
   }
 
-  renderElement() {
+  /*renderElement() {
     //maybe will need to call this and hide the content until it is inserted into the dialog?
     //or open the dialog but set an attribute that makes it hidden initially? While the children get added?
 
@@ -51,21 +52,69 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     //this.cloneAttributes(this.reactRef.current, this.el);
     //this.initializeDynamicStyles();
     //this.el.remove();
+  }*/
+
+  renderElement() {
+ //   this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+ //   this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+ //   this.initializeDynamicStyles();
+
+  }
+
+  afterRenderElement() {
+    /*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
+      while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
+        this.reactRef.current.componentRef.current.appendChild(this.el.nextSibling.nextSibling);
+      }
+    }*/
+    let currentElement = this.el.nextSibling;
+    //if (currentElement && currentElement.nextSibling) {
+    while (currentElement && currentElement.nextSibling) {
+      this.dialogContents.push(currentElement.nextSibling);
+      currentElement = currentElement.nextSibling;
+    }
+    /*while (!currentElement.hasClass('end-children')) {
+
+      currentElement = currentElement.nextSibling;
+    }*/
+    //}
+
+    this.el.remove();
   }
 
   dialogRender(insertElement) {
     console.log('in dialog render');
-    insertElement.replaceChildren(this.fragmentFromBlockContent());
+    this.dialogContents.forEach((dialogContent, index) => {
+      if (index === 1) {
+        insertElement.replaceChildren(dialogContent);
+      } else {
+        insertElement.appendChild(dialogContent);
+      }
+    })
+    //insertElement.replaceChildren(this.fragmentFromBlockContent());
+    /*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
+      while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
+        insertElement.appendChild(this.el.nextSibling.nextSibling);
+      }
+    }*/
+//    insertElement.replaceChildren(this.fragment);
     //this.cloneAttributes(this.reactRef.current, this.el);
     //this.initializeDynamicStyles();
-    this.el.remove();
+    //this.el.remove();
+  }
+
+  getDialogContents() {
+
   }
 
   @action
   inserted(element) {
     this.el = element;
-
+    scheduleOnce('render', this, this.renderElement);
+    scheduleOnce('afterRender', this, this.afterRenderElement);
     this.reactRef = React.createRef();
+//    this.fragment = this.fragmentFromBlockContent();
+    //this.el.remove();
 
     let props = {
       open: this.args.open || false,
