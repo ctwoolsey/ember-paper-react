@@ -4,11 +4,8 @@ import React from 'react';
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
-import { inject as service } from '@ember/service';
 
 export default class RPaperDialogActionsComponent extends BaseReactEmberComponent {
-  @service renderStack;
-
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG_ACTIONS;
