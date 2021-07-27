@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
@@ -46,78 +45,18 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     }
   }
 
-  /*renderElement() {
-    //maybe will need to call this and hide the content until it is inserted into the dialog?
-    //or open the dialog but set an attribute that makes it hidden initially? While the children get added?
-
-    //this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    //this.cloneAttributes(this.reactRef.current, this.el);
-    //this.initializeDynamicStyles();
-    //this.el.remove();
-  }*/
-
   renderElement() {
     console.log(this.componentType + ' render');
-    //this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    //this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    //this.initializeDynamicStyles();
-
 
     this.setChildrenFragment();
     this.el.remove();
 
     this.renderStack.renderNextObject();
- //   this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
- //   this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
- //   this.initializeDynamicStyles();
-
   }
-
-  /*afterRenderElement() {
-    /!*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-      while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-        this.reactRef.current.componentRef.current.appendChild(this.el.nextSibling.nextSibling);
-      }
-    }*!/
-    let currentElement = this.el.nextSibling;
-    //if (currentElement && currentElement.nextSibling) {
-    while (currentElement && currentElement.nextSibling) {
-      this.dialogContents.push(currentElement.nextSibling);
-      currentElement = currentElement.nextSibling;
-    }
-    /!*while (!currentElement.hasClass('end-children')) {
-
-      currentElement = currentElement.nextSibling;
-    }*!/
-    //}
-
-    this.el.remove();
-  }*/
 
   dialogRender(insertElement) {
     console.log('in dialog render');
     insertElement.replaceChildren(this.childrenFragment);
-    /*this.dialogContents.forEach((dialogContent, index) => {
-      if (index === 1) {
-        insertElement.replaceChildren(dialogContent);
-      } else {
-        insertElement.appendChild(dialogContent);
-      }
-    })*/
-    //insertElement.replaceChildren(this.fragmentFromBlockContent());
-    /*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-      while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-        insertElement.appendChild(this.el.nextSibling.nextSibling);
-      }
-    }*/
-//    insertElement.replaceChildren(this.fragment);
-    //this.cloneAttributes(this.reactRef.current, this.el);
-    //this.initializeDynamicStyles();
-    //this.el.remove();
-  }
-
-  getDialogContents() {
-
   }
 
   saveChildren(childrenContainer) {
@@ -131,13 +70,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
   @action
   inserted(element) {
     super.inserted(element);
-    //this.el = element;
-    //scheduleOnce('render', this, this.renderElement);
-    //scheduleOnce('afterRender', this, this.afterRenderElement);
-    //this.reactRef = React.createRef();
-
-//    this.fragment = this.fragmentFromBlockContent();
-    //this.el.remove();
 
     let props = {
       open: this.args.open || false,

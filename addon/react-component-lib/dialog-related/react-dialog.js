@@ -2,12 +2,7 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { ReactThemeBase } from "../base/react-theme-base";
 import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-
+import { ReactChildrenHolder } from "./react-children-holder";
 
 
 export class ReactDialog extends ReactThemeBase{
@@ -21,12 +16,10 @@ export class ReactDialog extends ReactThemeBase{
       fullWidth: props.fullWidth,
       maxWidth: props.maxWidth,
       sx: props.sx,
-      theme: props.theme,
+      theme: props.theme
     };
 
     this.componentRef = React.createRef();
-    this.insertElement = null;
-    this.spanRef = React.createRef();
 
     //methods
     this.setOpen = this.setOpen.bind(this);
@@ -67,49 +60,6 @@ export class ReactDialog extends ReactThemeBase{
     this.setState( {theme: theme});
   }
 
-  /*componentDidMount() {
-    if (this.spanRef.current) {
-      this.spanRef.current.innerhtml = 'It changed';
-    }
-  }*/
-
-  componentDidMount() {
-    console.log('Dialog did mount');
-  }
-
-  componentWillUnmount() {
-    console.log('Dialog will unmount');
-  }
-
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log('Should Dialog Update');
-    if (!nextState.open && this.props.saveChildrenCallback) {
-      this.props.saveChildrenCallback(this.insertElement);
-    }
-    return true;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('Dialog Did Update');
-    //if (!this.addedEmberChildren) {
-      if (!prevState.open && this.state.open) {
-        this.addedEmberChildren = true;
-        setTimeout(this.addEmberChildren, 50);
-      }
-    //}
-  }
-
-  addEmberChildren() {
-    if (this.spanRef.current) {
-      this.insertElement = this.spanRef.current.parentElement;
-    }
-    if (this.spanRef.current && this.props.dialogRenderCallback) {
-      this.props.dialogRenderCallback(this.insertElement);
-      //this.spanRef.current.parentElement.appendChild(this.props.content);
-    } else {
-      setTimeout(this.addEmberChildren, 50);
-    }
-  }
 
   render() {
 
@@ -147,7 +97,10 @@ export class ReactDialog extends ReactThemeBase{
           {...(this.props.transitionDuration ? {TransitionDuration: this.props.transitionDuration} : {})}
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
-          <div ref={this.spanRef}><span>Dummy Children</span></div>
+          <ReactChildrenHolder
+            {...(this.props.dialogRenderCallback ? {dialogRenderCallback: this.props.dialogRenderCallback} : {})}
+            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
+          />
         </Dialog>
       </ReactConditionalThemeProvider>
     );
