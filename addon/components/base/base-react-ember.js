@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
+import React from "react";
+import { scheduleOnce } from "@ember/runloop";
+import { v4 as uuidv4 } from 'uuid';
 
 
 /* Currently does not handle passing inputProps or use inputRef */
 
 export default class BaseReactEmberComponent extends Component {
   @service themeManager;
+  @service renderStack;
 
   constructor() {
     super(...arguments);
@@ -20,11 +24,73 @@ export default class BaseReactEmberComponent extends Component {
     if (this.args.style) {
       this.addedStyles = this.args.style.split(';');
     }
-    this.controlType = COMPONENT_TYPES.NOT_SET;
+    this.componentType = COMPONENT_TYPES.NOT_SET;
     this.handleName = false;
     this.nameValue = null;
+    this.childrenFragment = null;
+    this.lastChildClassName = uuidv4();
 
   }
+
+  isEndElement(child) {
+    if (!child.classList) {
+      return false;
+    } else {
+      return child.classList.contains(this.lastChildClassName);
+    }
+  }
+
+  doesComponentHaveReactChildren() {
+    let result = false;
+    let child = this.el.nextElementSibling;
+    while (child && !this.isEndElement(child) && !result) {
+      let currentElement = child;
+      child = child.nextElementSibling;
+      result = this.isElementAnEmberPaperReactComponent(currentElement);
+    }
+
+    return result;
+  }
+
+  isElementAnEmberPaperReactComponent(element) {
+    if (!element.classList) {
+      return false;
+    } else {
+      for (let componentTypeKey in COMPONENT_TYPES) {
+        if (element.classList.contains(COMPONENT_TYPES[componentTypeKey])) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
+  setChildrenFragment() {
+    let child = this.el.nextSibling;
+    if (this.reactRef.current.componentRef.current) {
+      child = this.reactRef.current.componentRef.current.nextSibling;
+    }
+
+    this.childrenFragment = document.createDocumentFragment();
+    while (child && !this.isEndElement(child)) {
+      let currentElement = child;
+      child = child.nextSibling;
+      this.childrenFragment.appendChild(currentElement);
+    }
+    child.remove();
+  }
+  /*isNodeAnEmberPaperReactComponent(node) {
+    if (!node.classList) {
+      return false;
+    } else {
+      for (let componentTypeKey in COMPONENT_TYPES) {
+        if (node.classList.contains(COMPONENT_TYPES[componentTypeKey])) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }*/
 
   handleClickChange(event) {
     if (this.args.onClick) {
@@ -76,20 +142,31 @@ export default class BaseReactEmberComponent extends Component {
   }
 
   renderElement() {
+    console.log(this.componentType + ' render');
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
+
+
+    this.setChildrenFragment();
+    this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
     this.el.remove();
+
+    this.renderStack.renderNextObject();
+    /*this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.initializeDynamicStyles();
+    this.el.remove();*/
   }
 
-  fragmentFromBlockContent() {
+  /*fragmentFromBlockContent() {
     let fragment = document.createDocumentFragment();
     while (this.el.hasChildNodes()) {
       fragment.appendChild(this.el.firstChild);
     }
 
     return fragment;
-  }
+  }*/
 
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
@@ -113,6 +190,18 @@ export default class BaseReactEmberComponent extends Component {
       let stylePieces = styleItem.split(':');
       this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
     });
+  }
+
+  @action
+  inserted(element) {
+    console.log('inserted ' + this.componentType);
+    this.el = element;
+    this.reactRef = React.createRef();
+    if (this.doesComponentHaveReactChildren()) {
+      this.renderStack.addRenderObject(this.renderElement);
+    } else {
+      scheduleOnce('render', this, this.renderElement);
+    }
   }
 
   willDestroy() {

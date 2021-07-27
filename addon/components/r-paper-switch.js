@@ -4,6 +4,6 @@ import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 export default class RPaperSwitchComponent extends BaseLabeledCheckRadioSwitchComponent {
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.SWITCH;
+    this.componentType = COMPONENT_TYPES.SWITCH;
   }
 }

@@ -10,7 +10,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
 
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.AUTOCOMPLETE;
+    this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = this.handleChange.bind(this);
 
   }
@@ -231,6 +231,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
   @action
   inserted(element) {
     this.el = element;
+    this.labelElementWithComponent();
     scheduleOnce('render', this, this.renderElement);
 
     this.reactRef = React.createRef();

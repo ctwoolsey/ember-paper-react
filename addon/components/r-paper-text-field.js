@@ -11,7 +11,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.TEXTFIELD;
+    this.componentType = COMPONENT_TYPES.TEXTFIELD;
     this.handleName = true;
     this.inputmask = null;
     if (this.args.mask) {

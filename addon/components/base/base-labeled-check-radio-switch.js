@@ -121,7 +121,7 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
     };
 
     let ControlComponent;
-    switch(this.controlType) {
+    switch(this.componentType) {
       case COMPONENT_TYPES.CHECKBOX:
         ControlComponent = ReactCheckbox;
         delete props.edge;

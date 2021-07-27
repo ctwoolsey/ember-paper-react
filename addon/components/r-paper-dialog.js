@@ -10,10 +10,12 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.DIALOG;
+    this.componentType = COMPONENT_TYPES.DIALOG;
     this.handleClickChange = null;
     this.dialogRender = this.dialogRender.bind(this);
     this.dialogContents = [];
+    this.renderElement = this.renderElement.bind(this);
+    this.saveChildren = this.saveChildren.bind(this);
   }
 
   @action
@@ -55,42 +57,53 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
   }*/
 
   renderElement() {
+    console.log(this.componentType + ' render');
+    //this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    //this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    //this.initializeDynamicStyles();
+
+
+    this.setChildrenFragment();
+    this.el.remove();
+
+    this.renderStack.renderNextObject();
  //   this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
  //   this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
  //   this.initializeDynamicStyles();
 
   }
 
-  afterRenderElement() {
-    /*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
+  /*afterRenderElement() {
+    /!*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
       while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
         this.reactRef.current.componentRef.current.appendChild(this.el.nextSibling.nextSibling);
       }
-    }*/
+    }*!/
     let currentElement = this.el.nextSibling;
     //if (currentElement && currentElement.nextSibling) {
     while (currentElement && currentElement.nextSibling) {
       this.dialogContents.push(currentElement.nextSibling);
       currentElement = currentElement.nextSibling;
     }
-    /*while (!currentElement.hasClass('end-children')) {
+    /!*while (!currentElement.hasClass('end-children')) {
 
       currentElement = currentElement.nextSibling;
-    }*/
+    }*!/
     //}
 
     this.el.remove();
-  }
+  }*/
 
   dialogRender(insertElement) {
     console.log('in dialog render');
-    this.dialogContents.forEach((dialogContent, index) => {
+    insertElement.replaceChildren(this.childrenFragment);
+    /*this.dialogContents.forEach((dialogContent, index) => {
       if (index === 1) {
         insertElement.replaceChildren(dialogContent);
       } else {
         insertElement.appendChild(dialogContent);
       }
-    })
+    })*/
     //insertElement.replaceChildren(this.fragmentFromBlockContent());
     /*if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
       while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
@@ -107,12 +120,22 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
 
   }
 
+  saveChildren(childrenContainer) {
+    this.childrenFragment = document.createDocumentFragment();
+    while (childrenContainer.hasChildNodes()) {
+      this.childrenFragment.appendChild(childrenContainer.firstChild);
+    }
+  }
+
+
   @action
   inserted(element) {
-    this.el = element;
-    scheduleOnce('render', this, this.renderElement);
-    scheduleOnce('afterRender', this, this.afterRenderElement);
-    this.reactRef = React.createRef();
+    super.inserted(element);
+    //this.el = element;
+    //scheduleOnce('render', this, this.renderElement);
+    //scheduleOnce('afterRender', this, this.afterRenderElement);
+    //this.reactRef = React.createRef();
+
 //    this.fragment = this.fragmentFromBlockContent();
     //this.el.remove();
 
@@ -137,7 +160,8 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
       transitionDuration: this.args.transitionDuration || null,
       transitionProps: this.args.transitionProps || null,
       ref: this.reactRef,
-      dialogRenderCallback: this.dialogRender
+      dialogRenderCallback: this.dialogRender,
+      saveChildrenCallback: this.saveChildren
     };
 
     const reactPortal = ReactDOM.createPortal(<ReactDialog {...props}/>, element.parentElement);

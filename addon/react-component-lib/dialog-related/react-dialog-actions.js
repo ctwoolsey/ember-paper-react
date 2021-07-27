@@ -8,6 +8,19 @@ export class ReactDialogActions extends ReactDialogHelperBase{
     super(props);
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log('Should Action Update');
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('Action did update');
+  }
+
+  componentDidMount() {
+    console.log('Action mounted');
+  }
+
   render() {
     const {
       sx,

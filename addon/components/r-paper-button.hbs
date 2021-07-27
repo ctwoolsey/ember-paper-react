@@ -1,4 +1,4 @@
-<span ...attributes
+<span class={{this.componentType}} ...attributes
   {{did-insert this.inserted }}
   {{did-update this.class @class}}
   {{did-update this.style @style}}
@@ -13,4 +13,5 @@
   {{did-update this.size @size}}
   {{did-update this.sx @sx}}
   {{did-update this.variant @variant}}
-  >{{yield}}</span>
+  ></span>
+{{yield}}<div class={{this.lastChildClassName}}></div>

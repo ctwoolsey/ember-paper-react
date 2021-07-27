@@ -5,8 +5,10 @@ import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
+import { inject as service } from '@ember/service';
 
 export default class RPaperButton extends BaseReactEmberComponent {
+
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.BUTTON;
@@ -85,19 +87,35 @@ export default class RPaperButton extends BaseReactEmberComponent {
     For clean up, the original r-paper-button html is removed leaving only the React button component with the
     Ember block content inside of it.
    */
-  renderElement() {
-    if (this.el.hasChildNodes()) {
+  /*renderElement() {
+    console.log('render button');
+    /!*if (this.el.hasChildNodes()) {
       this.reactRef.current.componentRef.current.appendChild(this.fragmentFromBlockContent());
     }
 
     super.renderElement();
-  }
+    this.renderStack.renderNextObject();*!/
+
+    ///
+
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.initializeDynamicStyles();
+
+
+    this.setChildrenFragment();
+    this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
+    this.el.remove();
+
+    this.renderStack.renderNextObject();
+  }*/
 
   @action
   inserted(element) {
-    this.el = element;
-    scheduleOnce('render', this, this.renderElement);
-    this.reactRef = React.createRef();
+    super.inserted(element);
+
+    //scheduleOnce('render', this, this.renderElement);
+
 
     let props = {
       classString: this.args.class || '',

@@ -67,6 +67,19 @@ export class ReactButton extends ReactBaseWithTheme{
     this.setState({ variant: variant});
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log('Should Button Update');
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('Button did update');
+  }
+
+  componentDidMount() {
+    console.log('Button mounted');
+  }
+
   render() {
     const {
       classString,

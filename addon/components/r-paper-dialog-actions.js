@@ -5,40 +5,70 @@ import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
+import { inject as service } from '@ember/service';
 
 export default class RPaperDialogActionsComponent extends BaseReactEmberComponent {
+  @service renderStack;
+
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG_ACTIONS;
+    this.renderElement = this.renderElement.bind(this);
   }
 
-  renderElement() {
+  /*renderElement() {
+    console.log('render action');
+    /!*this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
+    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
+    this.initializeDynamicStyles();
+
+
+    this.afterRenderElement();
+    this.renderStack.renderNextObject();*!/
+
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
-  }
 
-  afterRenderElement() {
-    if (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-      while (this.el.nextSibling && this.el.nextSibling.nextSibling) {
-        this.reactRef.current.componentRef.current.appendChild(this.el.nextSibling.nextSibling);
-      }
-    }
+
+    this.setChildrenFragment();
+    this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
     this.el.remove();
-  }
 
-  getChildren() {
-    let children = this.el.children;
+    this.renderStack.renderNextObject();
+  }*/
+
+  /*afterRenderElement() {
+    console.log('after render action');
+    //because the react element is inserted adjecent future children of the react component are siblings.
+    let child = this.reactRef.current.componentRef.current.nextSibling;
     let childrenFragment = document.createDocumentFragment();
+    while (child && !this.isEndElement(child)) {
+      let currentElement = child;
+      child = child.nextSibling;
+      childrenFragment.appendChild(currentElement);
+    }
+
+    this.reactRef.current.componentRef.current.replaceChildren(childrenFragment);
+
+    child.remove();
+    this.el.remove();
+  }*/
+
+
+  readyToRender() {
+    console.log('Actions ready to render');
+    this.getChildren();
   }
 
   @action
   inserted(element) {
-    this.el = element;
-    this.getChildren();
-    scheduleOnce('render', this, this.renderElement);
-    scheduleOnce('afterRender', this, this.afterRenderElement);
-    this.reactRef = React.createRef();
+    super.inserted(element);
+    /*if (this.doesComponentHaveReactChildren()) {
+      this.renderStack.addRenderObject(this.renderElement);
+    }*/
+    //scheduleOnce('render', this, this.renderElement);
+    //scheduleOnce('afterRender', this, this.afterRenderElement)
 
     let props = {
       classString: this.args.class || '',

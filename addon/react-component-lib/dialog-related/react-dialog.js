@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
 
+
 export class ReactDialog extends ReactThemeBase{
   constructor(props) {
     super(props);
@@ -24,6 +25,7 @@ export class ReactDialog extends ReactThemeBase{
     };
 
     this.componentRef = React.createRef();
+    this.insertElement = null;
     this.spanRef = React.createRef();
 
     //methods
@@ -71,24 +73,38 @@ export class ReactDialog extends ReactThemeBase{
     }
   }*/
 
+  componentDidMount() {
+    console.log('Dialog did mount');
+  }
+
+  componentWillUnmount() {
+    console.log('Dialog will unmount');
+  }
+
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log('Should Component Update');
+    console.log('Should Dialog Update');
+    if (!nextState.open && this.props.saveChildrenCallback) {
+      this.props.saveChildrenCallback(this.insertElement);
+    }
     return true;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('Component Did Update');
-    if (!this.addedEmberChildren) {
+    console.log('Dialog Did Update');
+    //if (!this.addedEmberChildren) {
       if (!prevState.open && this.state.open) {
         this.addedEmberChildren = true;
         setTimeout(this.addEmberChildren, 50);
       }
-    }
+    //}
   }
 
   addEmberChildren() {
+    if (this.spanRef.current) {
+      this.insertElement = this.spanRef.current.parentElement;
+    }
     if (this.spanRef.current && this.props.dialogRenderCallback) {
-      this.props.dialogRenderCallback(this.spanRef.current.parentElement);
+      this.props.dialogRenderCallback(this.insertElement);
       //this.spanRef.current.parentElement.appendChild(this.props.content);
     } else {
       setTimeout(this.addEmberChildren, 50);
@@ -131,22 +147,7 @@ export class ReactDialog extends ReactThemeBase{
           {...(this.props.transitionDuration ? {TransitionDuration: this.props.transitionDuration} : {})}
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
-          <span ref={this.spanRef}>Dummy Children</span>
-          <DialogTitle id="alert-dialog-title">
-            {"Use Google's location service?"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous
-              location data to Google, even when no apps are running.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button>Disagree</Button>
-            <Button>
-              Agree
-            </Button>
-          </DialogActions>
+          <div ref={this.spanRef}><span>Dummy Children</span></div>
         </Dialog>
       </ReactConditionalThemeProvider>
     );

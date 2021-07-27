@@ -10,7 +10,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.controlType = COMPONENT_TYPES.AUTOCOMPLETE;
+    this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = null;
     this.useButton = this.args.useButton || true;
 
