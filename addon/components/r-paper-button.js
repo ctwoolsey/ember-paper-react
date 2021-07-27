@@ -1,11 +1,9 @@
 import {ReactButton} from "../react-component-lib/react-button"
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
-import { inject as service } from '@ember/service';
 
 export default class RPaperButton extends BaseReactEmberComponent {
 
@@ -87,35 +85,10 @@ export default class RPaperButton extends BaseReactEmberComponent {
     For clean up, the original r-paper-button html is removed leaving only the React button component with the
     Ember block content inside of it.
    */
-  /*renderElement() {
-    console.log('render button');
-    /!*if (this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.appendChild(this.fragmentFromBlockContent());
-    }
-
-    super.renderElement();
-    this.renderStack.renderNextObject();*!/
-
-    ///
-
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicStyles();
-
-
-    this.setChildrenFragment();
-    this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-    this.el.remove();
-
-    this.renderStack.renderNextObject();
-  }*/
 
   @action
   inserted(element) {
     super.inserted(element);
-
-    //scheduleOnce('render', this, this.renderElement);
-
 
     let props = {
       classString: this.args.class || '',
@@ -138,8 +111,6 @@ export default class RPaperButton extends BaseReactEmberComponent {
       the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
       For inspiration:
       https://stackoverflow.com/questions/30686796/react-render-replace-container-instead-of-inserting-into/58385910#58385910
-
-      once rendered, the runloop will call renderElement() for further processing.
 
      */
     const reactPortal = ReactDOM.createPortal(<ReactButton {...props}/>, element.parentElement);

@@ -25,10 +25,6 @@ export class ReactChildrenHolder extends React.Component{
     return false; //Don't let dialog manually update the dialog children;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('Children Holder Did Update');
-  }
-
   render() {
     return (
       <span ref={this.spanRef} className="children-holder"></span>

@@ -29,7 +29,6 @@ export class ReactDialog extends ReactThemeBase{
     this.setMaxWidth = this.setMaxWidth.bind(this);
     this.setSx = this.setSx.bind(this);
     this.setTheme = this.setTheme.bind(this);
-    this.addEmberChildren = this.addEmberChildren.bind(this);
   }
 
   setOpen(open) {

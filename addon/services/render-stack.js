@@ -8,23 +8,16 @@ export default class RenderStackService extends Service {
     this.renderStack = A();
   }
 
-  addRenderObject(callback) {
+  addRenderCallback(callback) {
     this.renderStack.pushObject(callback);
   }
 
-  /*removeRenderObject() {
-    return this.renderStack.popObject();
-  }*/
 
-  renderNextObject() {
+  renderNext() {
     let callback = this.renderStack.popObject();
     if (callback) {
       callback();
     }
   }
-
-  /*isThisMe(element) {
-    return element === this.renderStack.lastObject[0];
-  }*/
 
 }

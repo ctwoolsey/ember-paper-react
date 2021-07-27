@@ -79,18 +79,6 @@ export default class BaseReactEmberComponent extends Component {
     }
     child.remove();
   }
-  /*isNodeAnEmberPaperReactComponent(node) {
-    if (!node.classList) {
-      return false;
-    } else {
-      for (let componentTypeKey in COMPONENT_TYPES) {
-        if (node.classList.contains(COMPONENT_TYPES[componentTypeKey])) {
-          return true;
-        }
-      }
-      return false;
-    }
-  }*/
 
   handleClickChange(event) {
     if (this.args.onClick) {
@@ -152,21 +140,8 @@ export default class BaseReactEmberComponent extends Component {
     this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
     this.el.remove();
 
-    this.renderStack.renderNextObject();
-    /*this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicStyles();
-    this.el.remove();*/
+    this.renderStack.renderNext();
   }
-
-  /*fragmentFromBlockContent() {
-    let fragment = document.createDocumentFragment();
-    while (this.el.hasChildNodes()) {
-      fragment.appendChild(this.el.firstChild);
-    }
-
-    return fragment;
-  }*/
 
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
@@ -198,7 +173,7 @@ export default class BaseReactEmberComponent extends Component {
     this.el = element;
     this.reactRef = React.createRef();
     if (this.doesComponentHaveReactChildren()) {
-      this.renderStack.addRenderObject(this.renderElement);
+      this.renderStack.addRenderCallback(this.renderElement);
     } else {
       scheduleOnce('render', this, this.renderElement);
     }

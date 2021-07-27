@@ -12,7 +12,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     this.componentType = COMPONENT_TYPES.DIALOG;
     this.handleClickChange = null;
     this.dialogRender = this.dialogRender.bind(this);
-    this.dialogContents = [];
     this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
   }
@@ -51,7 +50,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     this.setChildrenFragment();
     this.el.remove();
 
-    this.renderStack.renderNextObject();
+    this.renderStack.renderNext();
   }
 
   dialogRender(insertElement) {
