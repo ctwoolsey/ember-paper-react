@@ -236,6 +236,33 @@ To make the components useful, all options are supported, including these additi
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 <i>**</i> Disabled will only function if ```@useButton``` is ```true```
 
+
+<i>Dialog</i>
+------------------------------------------------------------------------------
+The most common usage is:
+```angular2html
+<RPaperDialog @open={{this.dialogOpen}}>
+  <RPaperDialogTitle id="dialog-title">
+    My Dialog Title
+  </RPaperDialogTitle>
+  <RPaperDialogContent>
+    <RPaperDialogContentText id="dialog-description">
+      Here is some dialog content.
+    </RPaperDialogContentText>
+  </RPaperDialogContent>
+  <RPaperDialogActions>
+    <RPaperButton @onClick={{this.onDialogCancelClicked}}>Cancel</RPaperButton>
+    <RPaperButton @onClick={{this.onDialogCloseClicked}}>Close</RPaperButton>
+  </RPaperDialogActions>
+</RPaperDialog>
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```<i>*</i>
+
+<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
+
 ==============================================================================
 
 TBD
