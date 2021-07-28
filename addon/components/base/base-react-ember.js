@@ -137,7 +137,13 @@ export default class BaseReactEmberComponent extends Component {
 
 
     this.setChildrenFragment();
-    this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
+    if (!this.renderChildren) {
+      if (this.childrenFragment.childNodes.length > 0) {
+        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
+      }
+    }else {
+      this.renderChildren();
+    }
     this.el.remove();
 
     this.renderStack.renderNext();

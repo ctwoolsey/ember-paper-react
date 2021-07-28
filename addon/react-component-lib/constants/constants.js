@@ -10,6 +10,7 @@ const COMPONENT_TYPES = {
   RADIO: 'ember-paper-react-radio',
   SWITCH: 'ember-paper-react-switch',
   TEXTFIELD: 'ember-paper-react-textfield',
+  TOOLTIP: 'ember-paper-react-tooltip',
   NOT_SET: 'ember-paper-react-notSet'
 };
 

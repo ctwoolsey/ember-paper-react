@@ -151,11 +151,13 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     }
   }
 
-  renderElement() {
-    if (this.args.select && this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
+  renderChildren() {
+    if (this.args.select && this.childrenFragment.childNodes.length > 0) {
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.childrenFragment);
     }
+  }
 
+  renderElement() {
     if (this.args.mask) {
       this.inputmask = Inputmask(this.args.mask).mask(this.inputRef.current);
     }
@@ -174,10 +176,8 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
 
   @action
   inserted(element) {
-    this.el = element;
-    scheduleOnce('render', this, this.renderElement);
+    super.inserted(element);
 
-    this.reactRef = React.createRef();
     this.inputRef = React.createRef();
 
     let props = {

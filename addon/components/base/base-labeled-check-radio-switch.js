@@ -3,7 +3,6 @@ import { ReactRadio } from "../../react-component-lib/react-radio";
 import { ReactSwitch } from "../../react-component-lib/react-switch";
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base-react-ember";
@@ -12,7 +11,6 @@ import BaseReactEmberComponent from "./base-react-ember";
 /* Currently does not handle passing inputProps or use inputRef */
 
 export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmberComponent {
-
   constructor() {
     super(...arguments);
   }
@@ -96,10 +94,7 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
 
   @action
   inserted(element) {
-    this.el = element;
-    scheduleOnce('render', this, this.renderElement);
-
-    this.reactRef = React.createRef();
+    super.inserted(element);
 
     let props = {
       checked: this.args.checked || false,
@@ -136,9 +131,8 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
         delete props.indeterminate;
         break;
     }
+
     const reactPortal = ReactDOM.createPortal(<ControlComponent {...props}/>, element.parentElement);
-
     ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 }

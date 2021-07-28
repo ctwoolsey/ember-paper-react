@@ -10,9 +10,9 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
+    this.componentType = COMPONENT_TYPES.TOOLTIP;
     this.handleClickChange = null;
-    this.useButton = this.args.useButton || true;
+    this.useButton = (this.args.useButton === false) ? false: true;
 
   }
 
@@ -72,24 +72,20 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     }
   }
 
-  renderElement() {
-    if (this.el.hasChildNodes()) {
+  renderChildren() {
+    if (this.childrenFragment.childNodes.length > 0) {
       if (!this.useButton) {
-        this.reactRef.current.componentRef.current.replaceChildren(this.fragmentFromBlockContent());
+        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
       } else {
         this.reactRef.current.componentRef.current.childNodes[0].childNodes[0].remove();
-        this.reactRef.current.componentRef.current.childNodes[0].prepend(this.fragmentFromBlockContent());
+        this.reactRef.current.componentRef.current.childNodes[0].prepend(this.childrenFragment);
       }
     }
-    super.renderElement();
   }
 
   @action
   inserted(element) {
-    this.el = element;
-    scheduleOnce('render', this, this.renderElement);
-
-    this.reactRef = React.createRef();
+    super.inserted(element);
 
     let props = {
       title: this.args.title || null,
@@ -122,9 +118,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     };
 
     const reactPortal = ReactDOM.createPortal(<ReactTooltip {...props}/>, element.parentElement);
-
     ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 }
 

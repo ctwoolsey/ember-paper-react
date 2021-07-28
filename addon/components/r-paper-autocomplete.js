@@ -220,21 +220,10 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     }
   }
 
-
-  renderElement() {
-    if (this.args.select && this.el.hasChildNodes()) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiSelect-select')[0].replaceChildren(this.fragmentFromBlockContent());
-    }
-    super.renderElement();
-  }
-
   @action
   inserted(element) {
-    this.el = element;
-    this.labelElementWithComponent();
-    scheduleOnce('render', this, this.renderElement);
+    super.inserted(element);
 
-    this.reactRef = React.createRef();
     //currently does not implement inputRef
 
     let props = {
@@ -305,12 +294,10 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       label: this.args.label || null,
       required: this.args.required || null,
       variant: this.args.variant || null
-  };
+    };
 
     const reactPortal = ReactDOM.createPortal(<ReactAutocomplete {...props}/>, element.parentElement);
-
     ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 }
 
