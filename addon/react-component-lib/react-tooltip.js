@@ -19,47 +19,6 @@ export class ReactTooltip extends ReactBaseWithTheme{
       placement: props.placement
     });
 
-    //methods
-    this.setTitle = this.setTitle.bind(this);
-    this.setDisabled = this.setDisabled.bind(this);
-    this.setDisableFocusListener = this.setDisableFocusListener.bind(this);
-    this.setDisableHoverListener = this.setDisableHoverListener.bind(this);
-    this.setDisableInteractive = this.setDisableInteractive.bind(this);
-    this.setDisableTouchListener = this.setDisableTouchListener.bind(this);
-    this.setOpen = this.setOpen.bind(this);
-    this.setPlacement = this.setPlacement.bind(this);
-  }
-
-  setTitle(title) {
-    this.setState({title: title})
-  }
-
-  setDisabled(disabled) {
-    this.setState({disabled: disabled});
-  }
-
-  setDisableFocusListener(disableFocusListener) {
-    this.setState( {disableFocusListener: disableFocusListener});
-  }
-
-  setDisableHoverListener(disableHoverListener) {
-    this.setState( {disableHoverListener: disableHoverListener});
-  }
-
-  setDisableInteractive(disableInteractive) {
-    this.setState( {disableInteractive: disableInteractive});
-  }
-
-  setDisableTouchListener(disableTouchListener) {
-    this.setState({ disableTouchListener: disableTouchListener });
-  }
-
-  setOpen(open) {
-    this.setState( {open: open});
-  }
-
-  setPlacement(placement) {
-    this.setState( {placement: placement});
   }
 
   render() {

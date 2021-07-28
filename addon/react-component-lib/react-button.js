@@ -20,64 +20,7 @@ export class ReactButton extends ReactBaseWithTheme{
       });
 
     //methods
-    this.setColor = this.setColor.bind(this);
-    this.setDisabled = this.setDisabled.bind(this);
-    this.setDisableElevation = this.setDisableElevation.bind(this);
-    this.setDisableFocusRipple = this.setDisableFocusRipple.bind(this);
-    this.setDisableRipple = this.setDisableRipple.bind(this);
-    this.setFullWidth = this.setFullWidth.bind(this);
-    this.setHref = this.setHref.bind(this);
-    this.setSize = this.setSize.bind(this);
-    this.setVariant = this.setVariant.bind(this);
-  }
 
-  setColor(color) {
-    this.setState( {color: color});
-  }
-
-  setDisabled(disabled) {
-    this.setState({ disabled: disabled });
-  }
-
-  setDisableElevation(disableElevation) {
-    this.setState( {disableElevation: disableElevation});
-  }
-
-  setDisableFocusRipple(disableFocusRipple) {
-    this.setState( {disableFocusRipple: disableFocusRipple});
-  }
-
-  setDisableRipple(disableRipple) {
-    this.setState( {disableRipple: disableRipple});
-  }
-
-  setFullWidth(fullWidth) {
-    this.setState( {fullWidth: fullWidth});
-  }
-
-  setHref(href) {
-    this.setState( {href: href});
-  }
-
-  setSize(size) {
-    this.setState( {size: size});
-  }
-
-  setVariant(variant) {
-    this.setState({ variant: variant});
-  }
-
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log('Should Button Update');
-    return true;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('Button did update');
-  }
-
-  componentDidMount() {
-    console.log('Button mounted');
   }
 
   render() {

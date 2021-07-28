@@ -26,62 +26,8 @@ export class ReactLabeledCheckRadioSwitch extends ReactBaseWithTheme{
     });
 
     //methods
-    this.setChecked = this.setChecked.bind(this);
-    this.setColor = this.setColor.bind(this);
-    this.setDisabled = this.setDisabled.bind(this);
-    this.setDisableRipple = this.setDisableRipple.bind(this);
-    this.setEdge = this.setEdge.bind(this);
-    this.setIndeterminate = this.setIndeterminate.bind(this);
-    this.setLabel = this.setLabel.bind(this);
-    this.setLabelPlacement = this.setLabelPlacement.bind(this);
-    this.setRequired = this.setRequired.bind(this);
-    this.setSize = this.setSize.bind(this);
-    this.setValue = this.setValue.bind(this);
 
-  }
 
-  setChecked(checked) {
-    this.setState( {checked: checked});
-  }
-
-  setColor(color) {
-    this.setState( {color: color});
-  }
-
-  setDisabled(disabled) {
-    this.setState( {disabled: disabled});
-  }
-
-  setDisableRipple(disableRipple) {
-    this.setState( {disableRipple: disableRipple});
-  }
-
-  setEdge(edge) {
-    this.setState( {edge: edge});
-  }
-
-  setIndeterminate(indeterminate) {
-    this.setState( {indeterminate: indeterminate});
-  }
-
-  setLabel(label) {
-    this.setState( {label: label});
-  }
-
-  setLabelPlacement(placement) {
-    this.setState( {labelPlacement: placement});
-  }
-
-  setRequired(required) {
-    this.setState( {required: required});
-  }
-
-  setSize(size) {
-    this.setState( {size: size});
-  }
-
-  setValue(value) {
-    this.setState( {value: value});
   }
 
   render() {

@@ -1,11 +1,11 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { ReactThemeBase } from "../base/react-theme-base";
+import { ReactDialogHelperBase } from "../base/react-dialog-helper-base";
 import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
 import { ReactChildrenHolder } from "./react-children-holder";
 
 
-export class ReactDialog extends ReactThemeBase{
+export class ReactDialog extends ReactDialogHelperBase{
   constructor(props) {
     super(props);
     this.addedEmberChildren = false;
@@ -21,42 +21,6 @@ export class ReactDialog extends ReactThemeBase{
 
     this.componentRef = React.createRef();
 
-    //methods
-    this.setOpen = this.setOpen.bind(this);
-    this.setClass = this.setClass.bind(this);
-    this.setFullScreen = this.setFullScreen.bind(this);
-    this.setFullWidth = this.setFullWidth.bind(this);
-    this.setMaxWidth = this.setMaxWidth.bind(this);
-    this.setSx = this.setSx.bind(this);
-    this.setTheme = this.setTheme.bind(this);
-  }
-
-  setOpen(open) {
-    this.setState( {open: open});
-  }
-
-  setClass(classes) {
-    this.setState({classString: classes})
-  }
-
-  setFullScreen(fullScreen) {
-    this.setState({fullScreen: fullScreen});
-  }
-
-  setFullWidth(fullWidth) {
-    this.setState( {fullWidth: fullWidth});
-  }
-
-  setMaxWidth(maxWidth) {
-    this.setState( {maxWidth: maxWidth});
-  }
-
-  setSx(sx) {
-    this.setState({ sx: sx});
-  }
-
-  setTheme(theme) {
-    this.setState( {theme: theme});
   }
 
 
