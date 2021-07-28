@@ -1,4 +1,3 @@
-import Component from '@glimmer/component';
 import ReactDOM from 'react-dom';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
@@ -6,11 +5,10 @@ import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
 import React from "react";
 import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
+import BaseReactEmberActionsComponent from "./base-react-ember-actions";
 
 
-/* Currently does not handle passing inputProps or use inputRef */
-
-export default class BaseReactEmberComponent extends Component {
+export default class BaseReactEmberComponent extends BaseReactEmberActionsComponent {
   @service themeManager;
   @service renderStack;
 
@@ -90,47 +88,7 @@ export default class BaseReactEmberComponent extends Component {
     }
   }
 
-  @action
-  class() {
-    if (this.reactRef) {
-      this.reactRef.current.setClass(this.args.class || false);
-    }
-  }
-
-  @action
-  sx() {
-    if (this.reactRef) {
-      this.reactRef.current.setSx(this.args.sx || null);
-    }
-  }
-
-  @action
-  style() {
-    if (this.reactRef) {
-      //remove old style names
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
-      });
-      //save new style list
-      this.addedStyles = this.args.style.split(';');
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-      });
-
-    }
-  }
-
-  @action
-  globalThemeChanged() {
-    if (this.reactRef) {
-      this.reactRef.current.setTheme(this.themeManager.theme);
-    }
-  }
-
   renderElement() {
-    console.log(this.componentType + ' render');
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
@@ -175,7 +133,6 @@ export default class BaseReactEmberComponent extends Component {
 
   @action
   inserted(element) {
-    console.log('inserted ' + this.componentType);
     this.el = element;
     this.reactRef = React.createRef();
     if (this.doesComponentHaveReactChildren()) {

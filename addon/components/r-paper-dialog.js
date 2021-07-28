@@ -16,37 +16,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     this.saveChildren = this.saveChildren.bind(this);
   }
 
-  @action
-  open() {
-    if (this.reactRef) {
-      this.reactRef.current.setOpen(this.args.open || null);
-    }
-  }
-
-  @action
-  fullScreen() {
-    if (this.reactRef) {
-      this.reactRef.current.setFullScreen(this.args.fullScreen || null);
-    }
-  }
-
-  @action
-  fullWidth() {
-    if (this.reactRef) {
-      this.reactRef.current.setFullWidth(this.args.fullWidth || false);
-    }
-  }
-
-  @action
-  maxWidth() {
-    if (this.reactRef) {
-      this.reactRef.current.setMaxWidth(this.args.maxWidth || null);
-    }
-  }
-
   renderElement() {
-    console.log(this.componentType + ' render');
-
     this.setChildrenFragment();
     this.el.remove();
 
@@ -54,7 +24,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
   }
 
   dialogRender(insertElement) {
-    console.log('in dialog render');
     insertElement.replaceChildren(this.childrenFragment);
   }
 

@@ -12,69 +12,6 @@ export default class RPaperButton extends BaseReactEmberComponent {
     this.componentType = COMPONENT_TYPES.BUTTON;
   }
 
-  @action
-  color() {
-    if (this.reactRef) {
-      this.reactRef.current.setColor(this.args.color || null);
-    }
-  }
-
-  @action
-  disabled() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisabled(this.args.disabled || false);
-    }
-  }
-
-  @action
-  disableElevation() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableElevation(this.args.disableElevation || null);
-    }
-  }
-
-  @action
-  disableFocusRipple() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableFocusRipple(this.args.disableFocusRipple || null);
-    }
-  }
-
-  @action
-  disableRipple() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableRipple(this.args.disableRipple || null);
-    }
-  }
-
-  @action
-  fullWidth() {
-    if (this.reactRef) {
-      this.reactRef.current.setFullWidth(this.args.fullWidth || null);
-    }
-  }
-
-  @action
-  href() {
-    if (this.reactRef) {
-      this.reactRef.current.setHref(this.args.href || null);
-    }
-  }
-
-  @action
-  size() {
-    if (this.reactRef) {
-      this.reactRef.current.setSize(this.args.size || '');
-    }
-  }
-
-  @action
-  variant() {
-    if (this.reactRef) {
-      this.reactRef.current.setVariant(this.args.variant || null);
-    }
-  }
-
   /* end material-ui properties */
 
   /*

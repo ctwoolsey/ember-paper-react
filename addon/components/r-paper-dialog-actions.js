@@ -12,11 +12,6 @@ export default class RPaperDialogActionsComponent extends BaseReactEmberComponen
     this.renderElement = this.renderElement.bind(this);
   }
 
-  readyToRender() {
-    console.log('Actions ready to render');
-    this.getChildren();
-  }
-
   @action
   inserted(element) {
     super.inserted(element);

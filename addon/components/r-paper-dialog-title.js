@@ -12,11 +12,6 @@ export default class RPaperDialogTitleComponent extends BaseReactEmberComponent 
     this.renderElement = this.renderElement.bind(this);
   }
 
-  readyToRender() {
-    console.log('Title ready to render');
-    this.getChildren();
-  }
-
   @action
   inserted(element) {
     super.inserted(element);

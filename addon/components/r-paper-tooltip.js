@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
@@ -12,64 +11,8 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.TOOLTIP;
     this.handleClickChange = null;
-    this.useButton = (this.args.useButton === false) ? false: true;
+    this.useButton = (this.args.useButton !== false);
 
-  }
-
-  @action
-  title() {
-    if (this.reactRef) {
-      this.reactRef.current.setTitle(this.args.title || null);
-    }
-  }
-
-  @action
-  disabled() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisabled(this.args.disabled || false);
-    }
-  }
-
-  @action
-  disableFocusListener() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableFocusListener(this.args.disableFocusListener || null);
-    }
-  }
-
-  @action
-  disableHoverListener() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableHoverListener(this.args.disableHoverListener || null);
-    }
-  }
-
-  @action
-  disableInteractive() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableInteractive(this.args.disableInteractive || null);
-    }
-  }
-
-  @action
-  disableTouchListener() {
-    if (this.reactRef) {
-      this.reactRef.current.setDisableTouchListener(this.args.disableTouchListener || null);
-    }
-  }
-
-  @action
-  open() {
-    if (this.reactRef) {
-      this.reactRef.current.setOpen(this.args.open || null);
-    }
-  }
-
-  @action
-  placement() {
-    if (this.reactRef) {
-      this.reactRef.current.setPlacement(this.args.placement || null);
-    }
   }
 
   renderChildren() {

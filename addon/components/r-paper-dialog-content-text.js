@@ -13,10 +13,6 @@ export default class RPaperDialogContentTextComponent extends BaseReactEmberComp
     this.renderElement = this.renderElement.bind(this);
   }
 
-  readyToRender() {
-    this.getChildren();
-  }
-
   @action
   inserted(element) {
     super.inserted(element);
