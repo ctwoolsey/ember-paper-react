@@ -244,6 +244,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  imgProps() {
+    if (this.reactRef) {
+      this.reactRef.current.setImgProps(this.args.imgProps || null);
+    }
+  }
+
+  @action
   indeterminate() {
     if (this.reactRef) {
       this.reactRef.current.setIndeterminate(this.args.indeterminate || null);
@@ -380,6 +387,27 @@ export default class BaseReactEmberActionsComponent extends Component {
   size() {
     if (this.reactRef) {
       this.reactRef.current.setSize(this.args.size || null);
+    }
+  }
+
+  @action
+  sizes() {
+    if (this.reactRef) {
+      this.reactRef.current.setSizes(this.args.sizes || null);
+    }
+  }
+
+  @action
+  src() {
+    if (this.reactRef) {
+      this.reactRef.current.setSrc(this.args.src || null);
+    }
+  }
+
+  @action
+  srcSet() {
+    if (this.reactRef) {
+      this.reactRef.current.setSrcSet(this.args.srcSet || null);
     }
   }
 
