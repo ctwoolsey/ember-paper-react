@@ -263,6 +263,19 @@ To make the components useful, all options are supported, including these additi
 
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
+<i>Avatar</i>
+------------------------------------------------------------------------------
+This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
+
+The most basic usage is:
+```angular2html
+<RPaperAvatar>H</RPaperAvatar>
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 ==============================================================================
 
 TBD

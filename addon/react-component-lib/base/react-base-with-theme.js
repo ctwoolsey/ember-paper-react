@@ -44,6 +44,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setGroupBy = this.setGroupBy.bind(this);
     this.setHelperText = this.setHelperText.bind(this);
     this.setHref = this.setHref.bind(this);
+    this.setImgProps = this.setImgProps.bind(this);
     this.setIndeterminate = this.setIndeterminate.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
     this.setLabel = this.setLabel.bind(this);
@@ -65,6 +66,9 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
     this.setSize = this.setSize.bind(this);
+    this.setSizes = this.setSizes.bind(this);
+    this.setSrc = this.setSrc.bind(this);
+    this.setSrcSet = this.setSrcSet.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setVariant = this.setVariant.bind(this);
     this.setTitle = this.setTitle.bind(this);
@@ -190,6 +194,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {href: href});
   }
 
+  setImgProps(imgProps) {
+    this.setState( {imgProps: imgProps});
+  }
+
   setIndeterminate(indeterminate) {
     this.setState( {indeterminate: indeterminate});
   }
@@ -272,6 +280,18 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setSize(size) {
     this.setState( {size: size});
+  }
+
+  setSizes(sizes) {
+    this.setState( {sizes: sizes});
+  }
+
+  setSrc(src) {
+    this.setState( {src: src});
+  }
+
+  setSrcSet(srcSet) {
+    this.setState( {srcSet: srcSet});
   }
 
   setTitle(title) {

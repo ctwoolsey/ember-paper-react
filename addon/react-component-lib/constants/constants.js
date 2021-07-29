@@ -1,5 +1,6 @@
 const COMPONENT_TYPES = {
   AUTOCOMPLETE: 'ember-paper-react-autocomplete',
+  AVATAR: 'ember-paper-react-avatar',
   BUTTON: 'ember-paper-react-button',
   CHECKBOX: 'ember-paper-react-checkbox',
   DIALOG: 'ember-paper-react-dialog',
