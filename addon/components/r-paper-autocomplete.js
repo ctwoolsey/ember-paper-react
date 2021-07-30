@@ -40,7 +40,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       autoSelect: this.args.autoSelect || null,
       blurOnSelect: this.args.blurOnSelect || null,
       chipProps: this.args.chipProps || null,
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       clearOnBlur: this.args.clearOnBlur || null,
       clearOnEscape: this.args.clearOnEscape || null,
       clearText: this.args.clearText || null,

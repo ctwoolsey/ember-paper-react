@@ -7,12 +7,12 @@ export default class BaseReactEmberActionsComponent extends Component {
     super(...arguments);
   }
   //Actions that all components use
-  @action
+ /* @action
   class() {
     if (this.reactRef) {
       this.reactRef.current.setClass(this.args.class || false);
     }
-  }
+  }*/
 
   @action
   sx() {
@@ -65,6 +65,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   clearText() {
     if (this.reactRef) {
       this.reactRef.current.setClearText(this.args.clearText || null);
+    }
+  }
+
+  @action
+  clickable() {
+    if (this.reactRef) {
+      this.reactRef.current.setClickable(this.args.clickable || null);
     }
   }
 

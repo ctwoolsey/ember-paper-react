@@ -64,7 +64,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     let props = {
       autoComplete: this.args.autoComplete || null,
       autoFocus: this.args.autoFocus || null,
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       color: this.args.color || null,
       defaultValue: this.args.defaultValue || null,
       disabled: this.args.disabled || false,

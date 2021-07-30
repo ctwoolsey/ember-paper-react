@@ -28,7 +28,7 @@ export default class RPaperButton extends BaseReactEmberComponent {
     super.inserted(element);
 
     let props = {
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       color: this.args.color || null,
       disabled: this.args.disabled || false,
       disableElevation: this.args.disableElevation || null,

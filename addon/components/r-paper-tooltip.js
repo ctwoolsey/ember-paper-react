@@ -33,7 +33,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
     let props = {
       title: this.args.title || null,
       arrow: this.args.arrow || null,
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       describeChild: this.args.describeChild || null,
       disabled: this.args.disabled || false,
       disableFocusListener: this.args.disableFocusListener || null,

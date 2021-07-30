@@ -17,7 +17,7 @@ export default class RPaperAvatarComponent extends BaseReactEmberComponent {
     super.inserted(element);
 
     let props = {
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       alt: this.args.alt || null,
       component: this.args.component || false,
       imgProps: this.args.imgProps || null,

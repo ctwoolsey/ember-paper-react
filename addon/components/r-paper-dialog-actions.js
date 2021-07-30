@@ -17,7 +17,7 @@ export default class RPaperDialogActionsComponent extends BaseReactEmberComponen
     super.inserted(element);
 
     let props = {
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       disableSpacing: this.args.disableSpacing || null,
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,

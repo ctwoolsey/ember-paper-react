@@ -18,6 +18,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     //general methods
     this.setChipProps = this.setChipProps.bind(this);
     this.setClearText = this.setClearText.bind(this);
+    this.setClickable = this.setClickable.bind(this);
     this.setCloseText = this.setCloseText.bind(this);
     this.setChecked = this.setChecked.bind(this);
     this.setColor = this.setColor.bind(this);
@@ -92,6 +93,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setClearText(text) {
     this.setState( {clearText: text});
+  }
+
+  setClickable(clickable) {
+    this.setState( {clickable: clickable});
   }
 
   setCloseText(text) {

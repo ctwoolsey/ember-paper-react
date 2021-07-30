@@ -44,7 +44,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
       ariaDescribedBy: this.args.ariaDescribedBy || '',
       ariaLabelledBy: this.args.ariaLabelledBy || '',
       backdropComponent: this.args.backdropComponent || null,
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       disableEscapeKeyDown: this.args.disableEscapeKeyDown || null,
       fullScreen: this.args.fullScreen || null,
       fullWidth: this.args.fullWidth || null,

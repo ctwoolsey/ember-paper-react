@@ -27,6 +27,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.nameValue = null;
     this.childrenFragment = null;
     this.lastChildClassName = uuidv4();
+    this.fixedClassString = '';
 
   }
 
@@ -107,6 +108,26 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.renderStack.renderNext();
   }
 
+  mergeClassWithClassString() {
+    return this.args.class ? this.fixedClassString + ' ' + this.args.class : this.fixedClassString;
+  }
+
+  initializeAndMergeClassWithClassString() {
+    [...this.el.attributes].forEach( attr => {
+      if (attr.nodeName === 'class') {
+        this.fixedClassString = attr.nodeValue;
+      }
+    });
+    return this.mergeClassWithClassString();
+  }
+
+  @action
+  class() {
+    if (this.reactRef) {
+      this.reactRef.current.setClass(this.mergeClassWithClassString());
+    }
+  }
+
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
       if (attr.nodeName === 'style') {
@@ -118,7 +139,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
         });
       } else if (attr.nodeName === 'name' && this.handleName) {
         this.nameValue = attr.nodeValue;
-      } else if (attr.nodeName !== 'class') { //ignore class
+      } else if (attr.nodeName !== 'class') {
         target.setAttribute(attr.nodeName, attr.nodeValue)
       }
     });

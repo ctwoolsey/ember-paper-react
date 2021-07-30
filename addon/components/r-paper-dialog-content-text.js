@@ -18,7 +18,7 @@ export default class RPaperDialogContentTextComponent extends BaseReactEmberComp
     super.inserted(element);
 
     let props = {
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
       ref: this.reactRef

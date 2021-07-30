@@ -21,7 +21,7 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
 
     let props = {
       checked: this.args.checked || false,
-      classString: this.args.class || '',
+      classString: this.initializeAndMergeClassWithClassString() || '',
       color: this.args.color || null,
       disabled: this.args.disabled || false,
       disableRipple: this.args.disableRipple || null,

@@ -3,6 +3,7 @@ const COMPONENT_TYPES = {
   AVATAR: 'ember-paper-react-avatar',
   BUTTON: 'ember-paper-react-button',
   CHECKBOX: 'ember-paper-react-checkbox',
+  CHIP: 'ember-paper-react-chip',
   DIALOG: 'ember-paper-react-dialog',
   DIALOG_ACTIONS: 'ember-paper-react-dialogActions',
   DIALOG_CONTENT: 'ember-paper-react-dialogContent',
