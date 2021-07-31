@@ -16,6 +16,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setSx = this.setSx.bind(this);
 
     //general methods
+    this.setBaseClassName = this.setBaseClassName.bind(this);
     this.setChipProps = this.setChipProps.bind(this);
     this.setClearText = this.setClearText.bind(this);
     this.setClickable = this.setClickable.bind(this);
@@ -45,6 +46,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setGroupBy = this.setGroupBy.bind(this);
     this.setHelperText = this.setHelperText.bind(this);
     this.setHref = this.setHref.bind(this);
+    this.setIconName = this.setIconName.bind(this);
     this.setImgProps = this.setImgProps.bind(this);
     this.setIndeterminate = this.setIndeterminate.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
@@ -75,8 +77,12 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setTitle = this.setTitle.bind(this);
   }
 
+  setBaseClassName(baseClassName) {
+    this.setState({baseClassName: baseClassName});
+  }
+
   setClass(classes) {
-    this.setState({classString: classes})
+    this.setState({classString: classes});
   }
 
   setSx(sx) {
@@ -197,6 +203,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setHref(href) {
     this.setState( {href: href});
+  }
+
+  setIconName(iconName) {
+    this.setState( {iconName: iconName});
   }
 
   setImgProps(imgProps) {

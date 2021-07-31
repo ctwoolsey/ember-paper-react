@@ -40,6 +40,7 @@ export class ReactChip extends ReactBaseWithTheme{
           {...(color ? {color: color} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           disabled={disabled}
+          {...(this.props.icon ? {icon: this.props.icon} : {})}
           label={label}
           {...(this.props.onClick ? {onClick: this.props.onClick} : {})}
           {...(this.props.onDelete ? {onDelete: this.props.onDelete} : {})}

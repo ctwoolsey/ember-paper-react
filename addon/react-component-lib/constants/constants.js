@@ -9,6 +9,7 @@ const COMPONENT_TYPES = {
   DIALOG_CONTENT: 'ember-paper-react-dialogContent',
   DIALOG_CONTENT_TEXT: 'ember-paper-react-dialogContentText',
   DIALOG_TITLE: 'ember-paper-react-dialogTitle',
+  FONT_ICON: 'ember-paper-react-icon',
   RADIO: 'ember-paper-react-radio',
   SWITCH: 'ember-paper-react-switch',
   TEXTFIELD: 'ember-paper-react-textfield',

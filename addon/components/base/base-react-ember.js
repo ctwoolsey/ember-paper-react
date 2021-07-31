@@ -6,6 +6,7 @@ import React from "react";
 import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
 import BaseReactEmberActionsComponent from "./base-react-ember-actions";
+import Icon from '@material-ui/core/Icon';
 
 
 export default class BaseReactEmberComponent extends BaseReactEmberActionsComponent {
@@ -29,6 +30,17 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.lastChildClassName = uuidv4();
     this.fixedClassString = '';
 
+  }
+
+  createIcon(icon, iconProps) {
+    if (icon) {
+      let props = iconProps ? iconProps : {};
+      return React.createElement(icon, props);
+    } else if (iconProps) { //used for native FontAwesome for example
+      return React.createElement(Icon, iconProps);
+    } else {
+      return null;
+    }
   }
 
   isEndElement(child) {

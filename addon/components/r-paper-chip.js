@@ -18,13 +18,13 @@ export default class RPaperChip extends BaseReactEmberComponent {
     super.inserted(element);
 
     let props = {
-      //avatar: this.args.avatar ? <ChipAvatar/> : null,
       avatar: this.args.avatar ? <ReactAvatar {...this.args.avatar}/> : null,
       classString: this.initializeAndMergeClassWithClassString() || '',
       clickable: this.args.clickable || null,
       color: this.args.color || null,
       component: this.args.component || null,
       disabled: this.args.disabled || false,
+      icon: this.createIcon(this.args.icon, this.args.iconProps),
       label: this.args.label || null,
       onClick: this.handleClickChange,
       onDelete: this.args.onDelete || null,
