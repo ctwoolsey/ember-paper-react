@@ -9,9 +9,11 @@ export class ReactChip extends ReactBaseWithTheme{
     super(props);
     this.state = Object.assign(this.state,
       {
+        avatar: props.avatar,
         clickable: props.clickable,
         color: props.color,
         disabled: props.disabled,
+        icon: props.icon,
         label: props.label,
         size: props.size,
         variant: props.variant
@@ -20,10 +22,12 @@ export class ReactChip extends ReactBaseWithTheme{
 
   render() {
     const {
+      avatar,
       classString,
       clickable,
       color,
       disabled,
+      icon,
       label,
       size,
       sx,
@@ -34,13 +38,13 @@ export class ReactChip extends ReactBaseWithTheme{
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <Chip
-          {...(this.props.avatar ? {avatar: this.props.avatar} : {})}
+          {...(avatar ? {avatar: avatar} : {})}
           {...(classString ? {className: classString} : {})}
           {...(clickable ? {clickable: clickable} : {})}
           {...(color ? {color: color} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           disabled={disabled}
-          {...(this.props.icon ? {icon: this.props.icon} : {})}
+          {...(icon ? {icon: icon} : {})}
           label={label}
           {...(this.props.onClick ? {onClick: this.props.onClick} : {})}
           {...(this.props.onDelete ? {onDelete: this.props.onDelete} : {})}

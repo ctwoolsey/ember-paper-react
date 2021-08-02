@@ -16,6 +16,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setSx = this.setSx.bind(this);
 
     //general methods
+    this.setAvatar = this.setAvatar.bind(this);
     this.setBaseClassName = this.setBaseClassName.bind(this);
     this.setChipProps = this.setChipProps.bind(this);
     this.setClearText = this.setClearText.bind(this);
@@ -46,6 +47,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setGroupBy = this.setGroupBy.bind(this);
     this.setHelperText = this.setHelperText.bind(this);
     this.setHref = this.setHref.bind(this);
+    this.setIcon = this.setIcon.bind(this);
     this.setIconName = this.setIconName.bind(this);
     this.setImgProps = this.setImgProps.bind(this);
     this.setIndeterminate = this.setIndeterminate.bind(this);
@@ -66,6 +68,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setOptions = this.setOptions.bind(this);
     this.setPlaceholder = this.setPlaceholder.bind(this);
     this.setPlacement = this.setPlacement.bind(this);
+    this.setReactIcon = this.setReactIcon.bind(this);
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
     this.setSize = this.setSize.bind(this);
@@ -75,6 +78,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setValue = this.setValue.bind(this);
     this.setVariant = this.setVariant.bind(this);
     this.setTitle = this.setTitle.bind(this);
+  }
+
+  setAvatar(avatar) {
+    this.setState( {avatar: avatar});
   }
 
   setBaseClassName(baseClassName) {
@@ -205,6 +212,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {href: href});
   }
 
+  setIcon(icon) {
+    this.setState( {icon: icon});
+  }
+
   setIconName(iconName) {
     this.setState( {iconName: iconName});
   }
@@ -283,6 +294,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setPlacement(placement) {
     this.setState( {placement: placement});
+  }
+
+  setReactIcon(reactIcon) {
+    this.setState( {reactIcon: reactIcon});
   }
 
   setRequired(required) {

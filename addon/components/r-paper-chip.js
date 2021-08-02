@@ -14,6 +14,13 @@ export default class RPaperChip extends BaseReactEmberComponent {
   }
 
   @action
+  iconChanged() {
+    if (this.reactRef) {
+      this.reactRef.current.setIcon(this.createIcon(this.args.icon, this.args.iconProps) || null);
+    }
+  }
+
+  @action
   inserted(element) {
     super.inserted(element);
 

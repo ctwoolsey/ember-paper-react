@@ -7,12 +7,12 @@ export default class BaseReactEmberActionsComponent extends Component {
     super(...arguments);
   }
   //Actions that all components use
- /* @action
+  @action
   class() {
     if (this.reactRef) {
-      this.reactRef.current.setClass(this.args.class || false);
+      this.reactRef.current.setClass(this.mergeClassWithClassString());
     }
-  }*/
+  }
 
   @action
   sx() {
@@ -47,6 +47,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   //Combined Actions that some components use
+  @action
+  avatar() {
+    if (this.reactRef) {
+      this.reactRef.current.setAvatar(this.args.avatar || null);
+    }
+  }
+
   @action
   checked() {
     if (this.reactRef) {
@@ -251,6 +258,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  iconName() {
+    if (this.reactRef) {
+      this.reactRef.current.setIconName(this.args.iconName || null);
+    }
+  }
+
+  @action
   imgProps() {
     if (this.reactRef) {
       this.reactRef.current.setImgProps(this.args.imgProps || null);
@@ -373,6 +387,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   placement() {
     if (this.reactRef) {
       this.reactRef.current.setPlacement(this.args.placement || null);
+    }
+  }
+
+  @action
+  reactIcon() {
+    if (this.reactRef) {
+      this.reactRef.current.setReactIcon(this.args.reactIcon || null);
     }
   }
 

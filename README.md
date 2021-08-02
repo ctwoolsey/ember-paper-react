@@ -267,14 +267,83 @@ To make the components useful, all options are supported, including these additi
 ------------------------------------------------------------------------------
 This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
 
-The most basic usage is:
+The most basic usages is:
 ```angular2html
-<RPaperAvatar>H</RPaperAvatar>
+<RPaperChip>H</RPaperChip>
 ```
 To make the components useful, all options are supported, including these additional options:
 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
+
+<i>Chip</i>
+------------------------------------------------------------------------------
+The most basic usages are:
+```angular2html
+<RPaperChip @avatar={{this.avatarProps}} @label="avatar chip"/>
+<RPaperChip @icon={{this.chipIcon}} @label="icon chip"/> //uses a react material-ui Icon
+<RPaperChip @iconProps={{this.chipIconProps}} @label="icon chip"/> //uses font awesome properties
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
+To use an avatar in the chip:
+
+To use an icon in the chip:
+
+<i>Icons</i>
+------------------------------------------------------------------------------
+This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
+
+There are four different ways of creating icons, similar to the React Icon specification.
+```angular2html
+<RPaperIcon @baseClassName="material-icons-two-tone" @iconName="add_circle"/>  //Google Material Font Item
+<RPaperIcon @baseClassName="fas" @class="fa-award"/>  //Font Awesome Font
+<RPaperIcon @reactIcon={{this.chipIcon}}/> //React Material-UI Icon
+<RPaperIcon @hasPath={{true}}>  //SVG Icon
+  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+</RPaperIcon>
+  
+
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
+To use a ```Font Icon```: 
+In the head of the ```index.html``` file add the icon fonts you want to use.  For example:
+```angular2html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Material+Icons+Two+Tone"
+/>
+```
+
+To use a ```Fontawesome Icon```
+Note: the ember-fontawesome package will not work for react based font awesome icons.
+In the ember app:
+1) In the head of the ```index.html``` file add the fontawesome fonts you want to use.  For example: 
+```angular2html
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+/>
+```
+
+To use a ```React Material Icon```:
+In the ember app:
+1) Install material-ui icons package: ```npm install @material-ui/icons@next```
+2) Import the material-ui icon:  ```import AccessAlarmRounded from '@material-ui/icons/AccessAlarmRounded';```
+3) Pass the instance of ```AccessAlarmRounded``` to the ```@reactIcon``` property of ```<RPaperIcon/>```
+
+To use a ```SVG Icon with path```
+1) Set the ```@hasPath``` property of ```<RPaperIcon/>``` to ```true```
+2) Include a ```path``` element with a ```d``` attribute.  Only 1 ```path```element will work. No attributes will be copied to react.
+
+
 
 ==============================================================================
 

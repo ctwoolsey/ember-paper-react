@@ -133,13 +133,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     return this.mergeClassWithClassString();
   }
 
-  @action
-  class() {
-    if (this.reactRef) {
-      this.reactRef.current.setClass(this.mergeClassWithClassString());
-    }
-  }
-
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
       if (attr.nodeName === 'style') {
