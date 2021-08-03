@@ -293,6 +293,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  invisible() {
+    if (this.reactRef) {
+      this.reactRef.current.setInvisible(this.args.invisible || null);
+    }
+  }
+
+  @action
   label() {
     if (this.reactRef) {
       this.reactRef.current.setLabel(this.args.label || null);

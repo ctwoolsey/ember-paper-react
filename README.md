@@ -406,6 +406,24 @@ To make the components useful, all options are supported, including these additi
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
 
+<i>Background</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```angular2html
+<RPaperButton @variant="contained" @onClick={{this.onToggleBackdrop}}>Show backdrop</RPaperButton>
+<RPaperBackdrop
+  @open={{this.backdropOpen}}
+  @onClick={{this.handleBackdropClose}}
+>
+  <RPaperCircularProgress/>
+</RPaperBackdrop>
+```
+
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 
 ==============================================================================
 

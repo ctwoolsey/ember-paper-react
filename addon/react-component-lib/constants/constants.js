@@ -2,6 +2,7 @@ const COMPONENT_TYPES = {
   APPBAR: 'ember-paper-react-appbar',
   AUTOCOMPLETE: 'ember-paper-react-autocomplete',
   AVATAR: 'ember-paper-react-avatar',
+  BACKDROP: 'ember-paper-backdrop',
   BUTTON: 'ember-paper-react-button',
   CHECKBOX: 'ember-paper-react-checkbox',
   CHIP: 'ember-paper-react-chip',

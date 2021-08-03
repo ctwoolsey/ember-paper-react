@@ -53,6 +53,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setImgProps = this.setImgProps.bind(this);
     this.setIndeterminate = this.setIndeterminate.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
+    this.setInvisible = this.setInvisible.bind(this);
     this.setLabel = this.setLabel.bind(this);
     this.setLabelPlacement = this.setLabelPlacement.bind(this);
     this.setListboxProps = this.setListboxProps.bind(this);
@@ -236,6 +237,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setInputValue(inputValue) {
     this.setState( {inputValue: inputValue});
+  }
+
+  setInvisible(invisible) {
+    this.setState( {invisible: invisible});
   }
 
   setLabel(label) {
