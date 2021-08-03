@@ -9,7 +9,7 @@ export default class RPaperIconComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.FONT_ICON;
+    this.componentType = COMPONENT_TYPES.ICON;
     if (this.args.hasPath) {
       this.renderChildren = this.renderPathChildren;
     }

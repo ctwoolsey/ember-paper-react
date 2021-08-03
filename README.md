@@ -343,6 +343,23 @@ To use a ```SVG Icon with path```
 1) Set the ```@hasPath``` property of ```<RPaperIcon/>``` to ```true```
 2) Include a ```path``` element with a ```d``` attribute.  Only 1 ```path```element will work. No attributes will be copied to react.
 
+<i>Drawer/SwipeableDrawer</i>
+------------------------------------------------------------------------------
+The most basic usages are:
+```angular2html
+//A Swipeable Drawer
+<RPaperDrawer @anchor="right" @open={{this.drawerOpen}} @onClose={{this.onDrawerClose}} @swipeable={{true}} @onOpen={{this.onDrawerOpen}}>
+  <div>Your Drawer Content</div>
+</RPaperDrawer>
+//A Regular Drawer
+<RPaperDrawer @anchor="right" @open={{this.drawerOpen}} @onClose={{this.onDrawerClose}}>
+  <div>Your Drawer Content</div>
+</RPaperDrawer>
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
 
 
 ==============================================================================

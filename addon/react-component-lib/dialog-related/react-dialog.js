@@ -2,7 +2,7 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { ReactDialogHelperBase } from "../base/react-dialog-helper-base";
 import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
-import { ReactChildrenHolder } from "./react-children-holder";
+import { ReactChildrenHolder } from "../utility/react-children-holder";
 
 
 export class ReactDialog extends ReactDialogHelperBase{
@@ -51,7 +51,6 @@ export class ReactDialog extends ReactDialogHelperBase{
           {...(maxWidth ? {maxWidth: maxWidth} : {})}
           {...(this.props.onBackdropClick ? {onBackdropClick: this.props.onBackdropClick} : {})}
           {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
-          {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
           {...(this.props.paperComponent ? {PaperComponent: this.props.paperComponent} : {})}
           {...(this.props.paperProps ? {PaperProps: this.props.paperProps} : {})}
           {...(this.props.scroll ? {scroll: this.props.scroll} : {})}
@@ -61,7 +60,7 @@ export class ReactDialog extends ReactDialogHelperBase{
           {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
         >
           <ReactChildrenHolder
-            {...(this.props.dialogRenderCallback ? {dialogRenderCallback: this.props.dialogRenderCallback} : {})}
+            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
             {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
           />
         </Dialog>

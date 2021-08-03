@@ -11,7 +11,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG;
     this.handleClickChange = null;
-    this.dialogRender = this.dialogRender.bind(this);
+    this.reactRender = this.reactRender.bind(this);
     this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
   }
@@ -23,7 +23,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     this.renderStack.renderNext();
   }
 
-  dialogRender(insertElement) {
+  reactRender(insertElement) {
     insertElement.replaceChildren(this.childrenFragment);
   }
 
@@ -60,7 +60,7 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
       transitionDuration: this.args.transitionDuration || null,
       transitionProps: this.args.transitionProps || null,
       ref: this.reactRef,
-      dialogRenderCallback: this.dialogRender,
+      reactRenderCallback: this.reactRender,
       saveChildrenCallback: this.saveChildren
     };
 

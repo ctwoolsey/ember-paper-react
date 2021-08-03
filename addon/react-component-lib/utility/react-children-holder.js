@@ -7,8 +7,8 @@ export class ReactChildrenHolder extends React.Component{
   }
 
   componentDidMount() {
-    if (this.spanRef.current && this.props.dialogRenderCallback) {
-      this.props.dialogRenderCallback(this.spanRef.current)
+    if (this.spanRef.current && this.props.reactRenderCallback) {
+      this.props.reactRenderCallback(this.spanRef.current)
     }
   }
 
