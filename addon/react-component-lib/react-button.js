@@ -19,8 +19,6 @@ export class ReactButton extends ReactBaseWithTheme{
         variant: props.variant
       });
 
-    //methods
-
   }
 
   render() {

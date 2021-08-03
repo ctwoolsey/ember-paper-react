@@ -66,6 +66,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setOpen = this.setOpen.bind(this);
     this.setOpenText = this.setOpenText.bind(this);
     this.setOptions = this.setOptions.bind(this);
+    this.setPosition = this.setPosition.bind(this);
     this.setPlaceholder = this.setPlaceholder.bind(this);
     this.setPlacement = this.setPlacement.bind(this);
     this.setReactIcon = this.setReactIcon.bind(this);
@@ -286,6 +287,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setOptions(options) {
     this.setState( {options: options});
+  }
+
+  setPosition(position) {
+    this.setState( {position: position});
   }
 
   setPlaceholder(placeholder) {

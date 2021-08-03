@@ -162,7 +162,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.el = element;
     this.reactRef = React.createRef();
     if (this.doesComponentHaveReactChildren()) {
-      this.renderStack.addRenderCallback(this.renderElement);
+      this.renderStack.addRenderCallback(this.renderElement, this);
     } else {
       scheduleOnce('render', this, this.renderElement);
     }

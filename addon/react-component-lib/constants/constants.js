@@ -1,4 +1,5 @@
 const COMPONENT_TYPES = {
+  APPBAR: 'ember-paper-react-appbar',
   AUTOCOMPLETE: 'ember-paper-react-autocomplete',
   AVATAR: 'ember-paper-react-avatar',
   BUTTON: 'ember-paper-react-button',
@@ -14,6 +15,7 @@ const COMPONENT_TYPES = {
   RADIO: 'ember-paper-react-radio',
   SWITCH: 'ember-paper-react-switch',
   TEXTFIELD: 'ember-paper-react-textfield',
+  TOOLBAR: 'ember-paper-react-toolbar',
   TOOLTIP: 'ember-paper-react-tooltip',
   NOT_SET: 'ember-paper-react-notSet'
 };
