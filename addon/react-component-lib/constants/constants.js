@@ -5,6 +5,7 @@ const COMPONENT_TYPES = {
   BUTTON: 'ember-paper-react-button',
   CHECKBOX: 'ember-paper-react-checkbox',
   CHIP: 'ember-paper-react-chip',
+  CIRCULAR_PROGRESS: 'ember-paper-react-circular-progress',
   DIALOG: 'ember-paper-react-dialog',
   DIALOG_ACTIONS: 'ember-paper-react-dialogActions',
   DIALOG_CONTENT: 'ember-paper-react-dialogContent',

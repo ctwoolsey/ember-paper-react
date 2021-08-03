@@ -394,6 +394,18 @@ To make the components useful, all other options are supported, including these 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
 
+<i>CircularProgress</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```angular2html
+<RPaperCircularProgress/>
+```
+
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 
 ==============================================================================
 
