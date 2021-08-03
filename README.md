@@ -361,6 +361,39 @@ To make the components useful, all options are supported, including these additi
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
 
+<i>Appbar/Toolbar</i>
+------------------------------------------------------------------------------
+The most basic usages are:
+```angular2html
+<RPaperAppbar position="static">
+  <RPaperToolbar>
+    <div>My App bar</div>
+  </RPaperToolbar>
+</RPaperAppbar>
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
+<i>Menu/MenuItem</i>
+------------------------------------------------------------------------------
+The most basic usages are:
+```angular2html
+<RPaperButton id="menuTrigger" @onClick={{this.onToggleMenu}}>Toggle Menu</RPaperButton>
+<RPaperMenu @triggerId="menuTrigger" @open={{this.menuOpen}} @onClose={{this.onMenuClose}}>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 1</RPaperMenuItem>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 2</RPaperMenuItem>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 3</RPaperMenuItem>
+</RPaperMenu>
+```
+
+Note:  The ```anchorEl``` option is not explicitly supported.  Instead ```@triggerID```  must be given the ```id``` of the anchoring element.
+To make the components useful, all other options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 
 ==============================================================================
 

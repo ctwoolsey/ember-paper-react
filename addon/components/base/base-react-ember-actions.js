@@ -153,6 +153,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  disableTouchRipple() {
+    if (this.reactRef) {
+      this.reactRef.current.setDisableTouchRipple(this.args.disableTouchRipple || null);
+    }
+  }
+
+  @action
   disableClearable() {
     if (this.reactRef) {
       this.reactRef.current.setDisableClearable(this.args.disableClearable || null);

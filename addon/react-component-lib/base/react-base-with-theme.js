@@ -35,6 +35,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setDisableElevation = this.setDisableElevation.bind(this);
     this.setDisableFocusRipple = this.setDisableFocusRipple.bind(this);
     this.setDisableRipple = this.setDisableRipple.bind(this);
+    this.setDisableTouchRipple = this.setDisableTouchRipple.bind(this);
     this.setDisabledItemsFocusable = this.setDisabledItemsFocusable.bind(this);
     this.setEdge = this.setEdge.bind(this);
     this.setError = this.setError.bind(this);
@@ -163,6 +164,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setDisableRipple(disableRipple) {
     this.setState( {disableRipple: disableRipple});
+  }
+
+  setDisableTouchRipple(disableTouchRipple) {
+    this.setState( {disableTouchRipple: disableTouchRipple});
   }
 
   setDisabledItemsFocusable(disabledItemsFocusable) {
