@@ -27,7 +27,8 @@ export default class RPaperAvatarComponent extends BaseReactEmberComponent {
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
       variant: this.args.variant || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactAvatar {...props}/>, element.parentElement);

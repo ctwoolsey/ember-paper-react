@@ -19,6 +19,7 @@ export class ReactDialogContentText extends ReactDialogHelperBase{
       <ReactConditionalThemeProvider theme={theme}>
         <DialogContentText
           {...(classString ? {className: classString} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
           ref={this.componentRef}
         />

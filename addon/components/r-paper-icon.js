@@ -48,7 +48,8 @@ export default class RPaperIconComponent extends BaseReactEmberComponent {
       iconName: this.args.iconName || null,
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactIcon {...props}/>, element.parentElement);

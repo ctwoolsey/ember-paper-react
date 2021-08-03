@@ -68,6 +68,7 @@ export class ReactTextField extends ReactBaseWithTheme{
           {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
           fullWidth={fullWidth}
           {...(helperText ? {helperText: helperText} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(this.props.inputId ? {id: this.props.inputId} : {})}
           {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
           {...(this.props.inputAttributes ? {inputProps: this.props.inputAttributes} : {})}

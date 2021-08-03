@@ -45,6 +45,7 @@ export class ReactDrawer extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(this.props.elevation ? {elevation: this.props.elevation} : {})}
           {...(this.props.hideBackdrop ? {hideBackdrop: this.props.hideBackdrop} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(this.props.modalProps ? {ModalProps: this.props.modalProps} : {})}
           {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
           {...(open ? {open: open} : {open: false})}

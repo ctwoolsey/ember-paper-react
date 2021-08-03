@@ -3,17 +3,18 @@ import React from 'react';
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
-import { ReactDialog } from "../react-component-lib/dialog-related/react-dialog";
+import { ReactMenu } from "../react-component-lib/react-menu";
 
-export default class RPaperDialogComponent extends BaseReactEmberComponent {
+export default class RPaperMenuComponent extends BaseReactEmberComponent {
 
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.DIALOG;
+    this.componentType = COMPONENT_TYPES.MENU;
     this.handleClickChange = null;
     this.reactRender = this.reactRender.bind(this);
     this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
+    this.findAnchorEl = this.findAnchorEl.bind(this);
   }
 
   renderElement() {
@@ -34,43 +35,48 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     }
   }
 
+  findAnchorEl() {
+    let anchorEl = null;
+
+    if (this.args.triggerId) {
+      anchorEl = document.getElementById(this.args.triggerId);
+    }
+
+    return anchorEl;
+  }
 
   @action
   inserted(element) {
     super.inserted(element);
 
     let props = {
-      open: this.args.open || false,
-      ariaDescribedBy: this.args.ariaDescribedBy || '',
-      ariaLabelledBy: this.args.ariaLabelledBy || '',
-      backdropComponent: this.args.backdropComponent || null,
+      anchorEl: this.findAnchorEl(),
+      autoFocus: this.args.autoFocus || null,
+      children: this.args.children || null,
       classString: this.initializeAndMergeClassWithClassString() || '',
-      disableEscapeKeyDown: this.args.disableEscapeKeyDown || null,
-      fullScreen: this.args.fullScreen || null,
-      fullWidth: this.args.fullWidth || null,
-      maxWidth: this.args.maxWidth || false,
-      onBackdropClick: this.args.onBackdropClick || null,
+      disableAutoFocusItem: this.args.disableAutoFocusItem || null,
+      menuListProps: this.args.menuListProps || null,
       onClose: this.args.onClose || null,
-      paperComponent: this.args.paperComponent || null,
-      paperProps: this.args.paperProps || null,
-      scroll: this.args.scroll || null,
+      open: this.args.open || false,
+      popoverClasses: this.args.popoverClasses || null,
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
-      transitionComponent: this.args.transitionComponent || null,
       transitionDuration: this.args.transitionDuration || null,
       transitionProps: this.args.transitionProps || null,
+      variant: this.args.variant || null,
       ref: this.reactRef,
       id: this.findElementId(),
       reactRenderCallback: this.reactRender,
       saveChildrenCallback: this.saveChildren
     };
 
-    const reactPortal = ReactDOM.createPortal(<ReactDialog {...props}/>, element.parentElement);
-
+    const reactPortal = ReactDOM.createPortal(<ReactMenu {...props}/>, element.parentElement);
     ReactDOM.render(reactPortal, document.createElement('div'));
 
   }
 }
+
+
 
 
 

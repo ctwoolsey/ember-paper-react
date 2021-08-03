@@ -25,7 +25,8 @@ export default class RPaperAppbarComponent extends BaseReactEmberComponent {
       position: this.args.position || null,
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactAppbar {...props}/>, element.parentElement);

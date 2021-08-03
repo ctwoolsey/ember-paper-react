@@ -57,6 +57,7 @@ export class ReactLabeledCheckRadioSwitch extends ReactBaseWithTheme{
           {...(checked ? { checked: checked } : {})}
           {...(classString ? { className: classString } : {})}
           {...(disabled ? { disabled: disabled } : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}zz
           {...(label ? { label: label } : { label: '' })}
           {...(labelPlacement ? { labelPlacement: labelPlacement } : {})}
           {...(value ? { value: value } : {})}

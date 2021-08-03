@@ -20,7 +20,8 @@ export default class RPaperDialogTitleComponent extends BaseReactEmberComponent 
       classString: this.initializeAndMergeClassWithClassString() || '',
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactDialogTitle {...props}/>, element.parentElement);

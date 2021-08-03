@@ -28,6 +28,7 @@ export class ReactToolbar extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           {...(this.props.disableGutters ? {disableGutters: this.props.disableGutters} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
           {...(variant ? {variant: variant} : {})}
           ref={this.componentRef}

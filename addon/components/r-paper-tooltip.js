@@ -44,7 +44,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
       enterNextDelay: this.args.enterNextDelay || null,
       enterTouchDelay: this.args.enterTouchDelay || null,
       followCursor: this.args.followCursor || null,
-      id: this.args.id || null,
+      id: this.findElementId(),
       leaveDelay: this.args.leaveDelay || null,
       leaveTouchDelay: this.args.leaveTouchDelay || null,
       onClose: this.args.onClose || null,

@@ -49,6 +49,7 @@ export class ReactButton extends ReactBaseWithTheme{
           disableRipple={disableRipple}
           fullWidth={fullWidth}
           href={href}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(size ? {size: size} : {})}
           {...(sx ? {sx: sx} : {})}
           {...(variant ? {variant: variant} : {})}

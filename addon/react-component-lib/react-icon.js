@@ -34,6 +34,7 @@ export class ReactIcon extends ReactBaseWithTheme{
             {...(color ? { color: color } : {})}
             {...(this.props.component ? { component: this.props.component } : {})}
             {...(this.props.fontSize ? { fontSize: this.props.fontSize } : {})}
+            {...(this.props.id ? {id: this.props.id} : {})}
             {...(sx ? { sx: sx } : {})}
             ref={this.componentRef}
           >
@@ -51,6 +52,7 @@ export class ReactIcon extends ReactBaseWithTheme{
               {...(color ? { color: color } : {})}
               {...(this.props.component ? { component: this.props.component } : {})}
               {...(this.props.fontSize ? { fontSize: this.props.fontSize } : {})}
+              {...(this.props.id ? {id: this.props.id} : {})}
               {...(sx ? { sx: sx } : {})}
               ref={this.componentRef}
             />
@@ -66,6 +68,7 @@ export class ReactIcon extends ReactBaseWithTheme{
               {...(color ? { color: color } : {})}
               {...(this.props.component ? { component: this.props.component } : {})}
               {...(this.props.fontSize ? { fontSize: this.props.fontSize } : {})}
+              {...(this.props.id ? {id: this.props.id} : {})}
               {...(sx ? { sx: sx } : {})}
               ref={this.componentRef}
             >

@@ -62,7 +62,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       getOptionLabel: this.args.getOptionLabel || null,
       groupBy: this.args.groupBy || null,
       handleHomeEndKeys: this.args.handleHomeEndKeys || null,
-      id: this.args.id || null,
+      id: this.findElementId(),
       includeInputInList: this.args.includeInputInList || null,
       inputValue: this.args.inputValue || null,
       isOptionEqualToValue: this.args.isOptionEqualToValue || null,

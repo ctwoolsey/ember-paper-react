@@ -35,6 +35,7 @@ export class ReactAvatar extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(this.props.children ? {children: this.props.children} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(imgProps ? {imgProps: imgProps} : {})}
           {...(sizes ? {sizes: sizes} : {})}
           {...(src ? {src: src} : {})}

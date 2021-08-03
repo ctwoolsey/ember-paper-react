@@ -133,6 +133,21 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     return this.mergeClassWithClassString();
   }
 
+  findElementId() {
+    let elementId = null;
+    if (this.args.id) {
+      elementId = this.args.id;
+    } else {
+      [...this.el.attributes].forEach(attr => {
+        if (attr.nodeName === 'id') {
+          elementId = attr.nodeValue;
+          this.el.removeAttribute('id');
+        }
+      });
+    }
+    return elementId;
+  }
+
   cloneAttributes(target, source) {
     [...source.attributes].forEach( attr => {
       if (attr.nodeName === 'style') {
@@ -144,7 +159,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
         });
       } else if (attr.nodeName === 'name' && this.handleName) {
         this.nameValue = attr.nodeValue;
-      } else if (attr.nodeName !== 'class') {
+      } else if (attr.nodeName !== 'class' && attr.nodeName !== 'id'){
         target.setAttribute(attr.nodeName, attr.nodeValue)
       }
     });

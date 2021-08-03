@@ -94,7 +94,8 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       variant: this.args.variant || null,
       ref: this.reactRef,
       inputRef: this.inputRef,
-      onChange: this.handleClickChange
+      onChange: this.handleClickChange,
+      id: this.findElementId()
     };
 
     //Currently when there is a select, only native mode is supported.

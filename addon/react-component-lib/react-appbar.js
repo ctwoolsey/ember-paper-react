@@ -30,6 +30,7 @@ export class ReactAppbar extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(color ? {color: color} : {})}
           {...(this.props.enableColorOnDark ? {enableColorOnDark: this.props.enableColorOnDark} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(position ? {position: position} : {})}
           {...(sx ? {sx: sx} : {})}
           ref={this.componentRef}

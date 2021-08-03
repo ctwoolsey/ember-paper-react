@@ -35,7 +35,8 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
       theme: this.themeManager.theme || null,
       value: this.args.value || '',
       ref: this.reactRef,
-      onChange: this.handleClickChange
+      onChange: this.handleClickChange,
+      id: this.findElementId()
     };
 
     let ControlComponent;

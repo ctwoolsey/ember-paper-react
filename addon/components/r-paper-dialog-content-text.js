@@ -21,7 +21,8 @@ export default class RPaperDialogContentTextComponent extends BaseReactEmberComp
       classString: this.initializeAndMergeClassWithClassString() || '',
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactDialogContentText {...props}/>, element.parentElement);

@@ -20,6 +20,7 @@ export class ReactDialogContent extends ReactDialogHelperBase{
         <DialogContent
                        {...(classString ? {className: classString} : {})}
                        {...(this.props.dividers ? {dividers: this.props.dividers} : {})}
+                       {...(this.props.id ? {id: this.props.id} : {})}
                        {...(sx ? {sx: sx} : {})}
                        ref={this.componentRef}
         />

@@ -98,6 +98,7 @@ export default class RPaperDrawerComponent extends BaseReactEmberComponent {
       reactRenderCallback: this.reactRender,
       saveChildrenCallback: this.saveChildren,
       swipeable: this.args.swipeable || false,
+      id: this.findElementId()
     };
 
     const reactPortal = ReactDOM.createPortal(<ReactDrawer {...props}/>, element.parentElement);

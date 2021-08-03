@@ -41,7 +41,8 @@ export default class RPaperButton extends BaseReactEmberComponent {
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
       variant: this.args.variant || null,
-      ref: this.reactRef
+      ref: this.reactRef,
+      id: this.findElementId()
     }
     /*
       React attaches events to the parent container, so by creating a portal and then rendering,
@@ -51,9 +52,7 @@ export default class RPaperButton extends BaseReactEmberComponent {
 
      */
     const reactPortal = ReactDOM.createPortal(<ReactButton {...props}/>, element.parentElement);
-
     ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 
 }

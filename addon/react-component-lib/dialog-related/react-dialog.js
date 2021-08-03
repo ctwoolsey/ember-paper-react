@@ -48,6 +48,7 @@ export class ReactDialog extends ReactDialogHelperBase{
           {...(this.props.disableEscapeKeyDown ? {disableEscapeKeyDown: this.props.disableEscapeKeyDown} : {})}
           {...(fullScreen ? {fullScreen: fullScreen} : {})}
           {...(fullWidth ? {fullWidth: fullWidth} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(maxWidth ? {maxWidth: maxWidth} : {})}
           {...(this.props.onBackdropClick ? {onBackdropClick: this.props.onBackdropClick} : {})}
           {...(this.props.onClose ? {onClose: this.props.onClose} : {})}

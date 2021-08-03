@@ -20,6 +20,7 @@ export class ReactDialogActions extends ReactDialogHelperBase{
         <DialogActions
           {...(classString ? {className: classString} : {})}
           {...(this.props.disableSpacing ? {disableSpacing: this.props.disableSpacing} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
           ref={this.componentRef}
         >

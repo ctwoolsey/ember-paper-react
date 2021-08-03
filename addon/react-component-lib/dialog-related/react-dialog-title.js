@@ -19,6 +19,7 @@ export class ReactDialogTitle extends ReactDialogHelperBase{
       <ReactConditionalThemeProvider theme={theme}>
         <DialogTitle
           {...(classString ? {className: classString} : {})}
+          {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
           ref={this.componentRef}
         />
