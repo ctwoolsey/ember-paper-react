@@ -16,6 +16,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setSx = this.setSx.bind(this);
 
     //general methods
+    this.setAction = this.setAction.bind(this);
     this.setAvatar = this.setAvatar.bind(this);
     this.setBaseClassName = this.setBaseClassName.bind(this);
     this.setChipProps = this.setChipProps.bind(this);
@@ -37,6 +38,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setDisableRipple = this.setDisableRipple.bind(this);
     this.setDisableTouchRipple = this.setDisableTouchRipple.bind(this);
     this.setDisabledItemsFocusable = this.setDisabledItemsFocusable.bind(this);
+    this.setElevation = this.setElevation.bind(this);
     this.setEdge = this.setEdge.bind(this);
     this.setError = this.setError.bind(this);
     this.setFilterOptions = this.setFilterOptions.bind(this);
@@ -50,6 +52,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setHref = this.setHref.bind(this);
     this.setIcon = this.setIcon.bind(this);
     this.setIconName = this.setIconName.bind(this);
+    this.setImage = this.setImage.bind(this);
     this.setImgProps = this.setImgProps.bind(this);
     this.setIndeterminate = this.setIndeterminate.bind(this);
     this.setInputValue = this.setInputValue.bind(this);
@@ -71,16 +74,25 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setPosition = this.setPosition.bind(this);
     this.setPlaceholder = this.setPlaceholder.bind(this);
     this.setPlacement = this.setPlacement.bind(this);
+    this.setRaised = this.setRaised.bind(this);
     this.setReactIcon = this.setReactIcon.bind(this);
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setSizes = this.setSizes.bind(this);
+    this.setSubheader = this.setSubheader.bind(this);
+    this.setSubheaderTypographyProps = this.setSubheader.bind(this);
+    this.setSquare = this.setSquare.bind(this);
     this.setSrc = this.setSrc.bind(this);
     this.setSrcSet = this.setSrcSet.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setVariant = this.setVariant.bind(this);
     this.setTitle = this.setTitle.bind(this);
+    this.setTitleTypographyProps = this.setTitleTypographyProps.bind(this);
+  }
+
+  setAction(action) {
+    this.setState( {action: action});
   }
 
   setAvatar(avatar) {
@@ -175,6 +187,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState({ disabledItemsFocusable: disabledItemsFocusable });
   }
 
+  setElevation(elevation) {
+    this.setState({ elevation: elevation });
+  }
+
   setEdge(edge) {
     this.setState( {edge: edge});
   }
@@ -225,6 +241,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setIconName(iconName) {
     this.setState( {iconName: iconName});
+  }
+
+  setImage(image) {
+    this.setState( {image: image});
   }
 
   setImgProps(imgProps) {
@@ -311,6 +331,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {placement: placement});
   }
 
+  setRaised(raised) {
+    this.setState( {raised: raised});
+  }
+
   setReactIcon(reactIcon) {
     this.setState( {reactIcon: reactIcon});
   }
@@ -331,6 +355,18 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {sizes: sizes});
   }
 
+  setSubheader(subheader) {
+    this.setState( {subheader: subheader});
+  }
+
+  setSubheaderTypographyProps(subheaderTypographyProps) {
+    this.setState( {subheaderTypographyProps: subheaderTypographyProps});
+  }
+
+  setSquare(square) {
+    this.setState( {square: square});
+  }
+
   setSrc(src) {
     this.setState( {src: src});
   }
@@ -341,6 +377,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setTitle(title) {
     this.setState({title: title})
+  }
+
+  setTitleTypographyProps(titleTypographyProps) {
+    this.setState({titleTypographyProps: titleTypographyProps})
   }
 
   setValue(value) {

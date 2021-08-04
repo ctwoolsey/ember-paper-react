@@ -424,6 +424,26 @@ To make the components useful, all options are supported, including these additi
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
 
+<i>Card</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```angular2html
+<RPaperCard>
+  <RPaperCardHeader @title="This is the header" @subheader="Some subheader."/>
+  <RPaperCardContent>This is my card content</RPaperCardContent>
+  <RPaperCardActionArea>Card Action Area</RPaperCardActionArea>
+  <RPaperCardMedia @sx={{this.mediaSX}} @image={{this.imagePath}} @title="Picture Title"/>
+  <RPaperCardActions>
+    <RPaperButton>Action Button</RPaperButton>
+  </RPaperCardActions>
+</RPaperCard>
+```
+
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 
 ==============================================================================
 

@@ -48,6 +48,13 @@ export default class BaseReactEmberActionsComponent extends Component {
 
   //Combined Actions that some components use
   @action
+  action() {
+    if (this.reactRef) {
+      this.reactRef.current.setAction(this.args.action || null);
+    }
+  }
+
+  @action
   avatar() {
     if (this.reactRef) {
       this.reactRef.current.setAvatar(this.args.avatar || null);
@@ -195,6 +202,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  elevation() {
+    if (this.reactRef) {
+      this.reactRef.current.setElevation(this.args.elevation || false);
+    }
+  }
+
+  @action
   error() {
     if (this.reactRef) {
       this.reactRef.current.setError(this.args.error || null);
@@ -268,6 +282,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   iconName() {
     if (this.reactRef) {
       this.reactRef.current.setIconName(this.args.iconName || null);
+    }
+  }
+
+  @action
+  image() {
+    if (this.reactRef) {
+      this.reactRef.current.setImage(this.args.image || null);
     }
   }
 
@@ -405,6 +426,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  raised() {
+    if (this.reactRef) {
+      this.reactRef.current.setRaised(this.args.raised || null);
+    }
+  }
+
+  @action
   reactIcon() {
     if (this.reactRef) {
       this.reactRef.current.setReactIcon(this.args.reactIcon || null);
@@ -440,6 +468,27 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  subheader() {
+    if (this.reactRef) {
+      this.reactRef.current.setSubheader(this.args.subheader || null);
+    }
+  }
+
+  @action
+  subheaderTypographyProps() {
+    if (this.reactRef) {
+      this.reactRef.current.setSubheaderTypographyProps(this.args.subheaderTypographyProps || null);
+    }
+  }
+
+  @action
+  square() {
+    if (this.reactRef) {
+      this.reactRef.current.setSquare(this.args.square || null);
+    }
+  }
+
+  @action
   src() {
     if (this.reactRef) {
       this.reactRef.current.setSrc(this.args.src || null);
@@ -457,6 +506,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   title() {
     if (this.reactRef) {
       this.reactRef.current.setTitle(this.args.title || null);
+    }
+  }
+
+  @action
+  titleTypographyProps() {
+    if (this.reactRef) {
+      this.reactRef.current.setTitleTypographyProps(this.args.titleTypographyProps || null);
     }
   }
 
