@@ -30,6 +30,13 @@ const COMPONENT_TYPES = {
   NOT_SET: 'ember-paper-react-notSet'
 };
 
+const REACT_ATTRIBUTE_COMPONENTS = {
+  CLASS_NAME: 'react-component',
+  AVATAR: 'avatar',
+  ACTION: 'action'
+}
+
 export {
-  COMPONENT_TYPES
+  COMPONENT_TYPES,
+  REACT_ATTRIBUTE_COMPONENTS
 }

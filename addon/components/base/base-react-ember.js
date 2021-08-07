@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../../react-component-lib/constants/constants";
 import React from "react";
 import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
@@ -27,6 +27,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.handleName = false;
     this.nameValue = null;
     this.childrenFragment = null;
+    this.reactComponentFragments = null;
     this.lastChildClassName = uuidv4();
     this.fixedClassString = '';
 
@@ -51,16 +52,29 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }
   }
 
+  //this probably needs to be made recursive to search for children of children.
   doesComponentHaveReactChildren() {
     let result = false;
+    //result = this.isElementAnEmberPaperReactComponent(this.el);
+    result = this.doesElementHaveDirectReactChildren(this.el);
     let child = this.el.nextElementSibling;
     while (child && !this.isEndElement(child) && !result) {
       let currentElement = child;
       child = child.nextElementSibling;
       result = this.isElementAnEmberPaperReactComponent(currentElement);
     }
-
     return result;
+  }
+
+  doesElementHaveDirectReactChildren(element) {
+    for(let i = 0; i < element.children.length; i++) {
+      let child = element.children[i];
+      let result = this.isElementAnEmberPaperReactComponent(child);
+      if (result) {
+        return true;
+      }
+    }
+    return false;
   }
 
   isElementAnEmberPaperReactComponent(element) {
@@ -72,7 +86,8 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
           return true;
         }
       }
-      return false;
+      return this.doesElementHaveDirectReactChildren(element);
+      //return false;
     }
   }
 
@@ -86,7 +101,13 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     while (child && !this.isEndElement(child)) {
       let currentElement = child;
       child = child.nextSibling;
-      this.childrenFragment.appendChild(currentElement);
+      if (currentElement.className === REACT_ATTRIBUTE_COMPONENTS.CLASS_NAME) {
+        let reactFragment = document.createDocumentFragment();
+        reactFragment.appendChild(currentElement)
+        this.reactComponentFragments[currentElement.id] = reactFragment;
+      } else {
+        this.childrenFragment.appendChild(currentElement);
+      }
     }
     child.remove();
   }
@@ -115,6 +136,9 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }else {
       this.renderChildren();
     }
+
+    this.renderReactAttributeComponents && this.renderReactAttributeComponents();
+
     this.el.remove();
 
     this.renderStack.renderNext();
