@@ -145,6 +145,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   }
 
   renderElement() {
+    console.log('rendering '+this.componentType);
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
@@ -218,15 +219,19 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     });
   }
 
+  checkIfCanRender() {
+    if (this.renderStack.canStartRendering(this)) {
+      this.renderStack.renderNext();
+    }
+  }
+
   @action
   inserted(element) {
+    console.log('inserted ' + this.componentType);
     this.el = element;
     this.reactRef = React.createRef();
-    if (this.doesComponentHaveReactChildren()) {
-      this.renderStack.addRenderCallback(this.renderElement, this);
-    } else {
-      scheduleOnce('render', this, this.renderElement);
-    }
+    this.renderStack.addRenderCallback(this.renderElement, this);
+    scheduleOnce('render', this, this.checkIfCanRender);
   }
 
   willDestroy() {
