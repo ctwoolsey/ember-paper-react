@@ -2,7 +2,7 @@ import { ReactCardHeader } from "../react-component-lib/card-related/react-card-
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
 
 export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
@@ -10,20 +10,15 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
-    this.reactComponentFragments = {
-      avatar: null,
-      action: null,
-      subheader: null,
-      title: null
-    }
+    this.reactComponentFragments = {}
     this.renderReactAttributeComponents = this.renderReactAttributeComponents.bind(this);
   }
 
   renderReactAttributeComponents() {
-    this.renderReactAttributeComponent('avatar', 'MuiCardHeader-avatar');
-    this.renderReactAttributeComponent('action', 'MuiCardHeader-action');
-    this.renderReactAttributeComponent('subheader', 'MuiCardHeader-subheader');
-    this.renderReactAttributeComponent('title', 'MuiCardHeader-title');
+    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.AVATAR, 'MuiCardHeader-avatar');
+    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.ACTION, 'MuiCardHeader-action');
+    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.SUBHEADER, 'MuiCardHeader-subheader');
+    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.TITLE, 'MuiCardHeader-title');
   }
 
   renderChildren() {
