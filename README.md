@@ -429,7 +429,10 @@ To make the components useful, all options are supported, including these additi
 The most basic usage is:
 ```angular2html
 <RPaperCard>
-  <RPaperCardHeader @title="This is the header" @subheader="Some subheader."/>
+  <RPaperCardHeader @title="This is the header" @subheader="Some subheader.">
+    <:avatar><RPaperAvatar>Y</RPaperAvatar></:avatar>
+    <:action><RPaperButton>Menu</RPaperButton></:action>
+  </RPaperCardHeader>
   <RPaperCardContent>This is my card content</RPaperCardContent>
   <RPaperCardActionArea>Card Action Area</RPaperCardActionArea>
   <RPaperCardMedia @sx={{this.mediaSX}} @image={{this.imagePath}} @title="Picture Title"/>
@@ -437,6 +440,26 @@ The most basic usage is:
     <RPaperButton>Action Button</RPaperButton>
   </RPaperCardActions>
 </RPaperCard>
+```
+
+In the ```RPaperCardHeader``` the following attributes can be written as children like so:
+
+```
+@title -> <:title>My Title</:title>
+@subheader -> <:subheader>My Sub-header</:subheader>
+@avatar -> <:avatar>Place an avatar here</:avatar>
+@action -> <:action>Place some action Icon here</:action>
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
+<i>Paper</i>
+------------------------------------------------------------------------------
+The most basic usage is:
+```angular2html
+<RPaper @elevation={{24}} @square={{false}}>Here is My Paper</RPaper>
 ```
 
 To make the components useful, all options are supported, including these additional options:

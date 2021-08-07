@@ -22,6 +22,7 @@ const COMPONENT_TYPES = {
   ICON: 'ember-paper-react-icon',
   MENU: 'ember-paper-react-menu',
   MENU_ITEM: 'ember-paper-react-menu-item',
+  PAPER: 'ember-paper-react-paper',
   RADIO: 'ember-paper-react-radio',
   SWITCH: 'ember-paper-react-switch',
   TEXTFIELD: 'ember-paper-react-textfield',
