@@ -11,6 +11,6 @@
   {{did-update this.title @title}}
   {{did-update this.titleTypographyProps @titleTypographyProps}}
 ></span>
-<span id="avatar" class="react-component">{{yield to="avatar"}}</span>
-{{yield to="action"}}
+<span id="avatar" class="react-component"></span>{{yield to="avatar"}}<span id="end_avatar"></span>
+<span id="action" class="react-component"></span>{{yield to="action"}}<span id="end_action"></span>
 <div class={{this.lastChildClassName}}></div>

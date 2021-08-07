@@ -3,6 +3,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import { ReactBaseWithTheme } from "../base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 export class ReactCardHeader extends ReactBaseWithTheme{
   constructor(props) {
@@ -18,13 +19,6 @@ export class ReactCardHeader extends ReactBaseWithTheme{
       });
   }
 
-  componentDidMount() {
-    console.log('header mounted');
-    this.props.renderAttributeComponents();
-  }
-
-  //need to figure out how to use the action  it is another React Element like a Button and avatar
-  //maybe mark up a yield area where the component will just be placed?
   render() {
     const {
       action,
@@ -42,8 +36,8 @@ export class ReactCardHeader extends ReactBaseWithTheme{
       <ReactConditionalThemeProvider theme={theme}>
         <CardHeader
           onClick={this.props.onClick}
-          {...(action ? {action: action} : {})}
-          avatar={<Avatar>Dummy</Avatar>}
+          {...(action ? {action: action} : {action: <Button>Dummy</Button>})}
+          {...(avatar ? {avatar: avatar} : {avatar: <Avatar>Dummy</Avatar>})}
           {...(classString ? {className: classString} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           {...(this.props.disableTypography ? {disableTypography: this.props.disableTypography} : {})}

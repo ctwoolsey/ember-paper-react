@@ -52,10 +52,8 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }
   }
 
-  //this probably needs to be made recursive to search for children of children.
   doesComponentHaveReactChildren() {
     let result = false;
-    //result = this.isElementAnEmberPaperReactComponent(this.el);
     result = this.doesElementHaveDirectReactChildren(this.el);
     let child = this.el.nextElementSibling;
     while (child && !this.isEndElement(child) && !result) {
@@ -87,7 +85,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
         }
       }
       return this.doesElementHaveDirectReactChildren(element);
-      //return false;
     }
   }
 
@@ -102,14 +99,39 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
       let currentElement = child;
       child = child.nextSibling;
       if (currentElement.className === REACT_ATTRIBUTE_COMPONENTS.CLASS_NAME) {
-        let reactFragment = document.createDocumentFragment();
-        reactFragment.appendChild(currentElement)
-        this.reactComponentFragments[currentElement.id] = reactFragment;
+        child = this.findEndReactAttributeElement(currentElement).nextSibling;
+        this.setReactAttributeChildrenFragment(currentElement);
       } else {
         this.childrenFragment.appendChild(currentElement);
       }
     }
     child.remove();
+  }
+
+  findEndReactAttributeElement(attributeElement) {
+    let endElement = attributeElement.nextElementSibling;
+    while (endElement.id !== 'end_'+attributeElement.id) {
+      endElement = endElement.nextElementSibling;
+    }
+
+    return endElement;
+  }
+
+  setReactAttributeChildrenFragment(attributeElement) {
+    let reactFragment = document.createDocumentFragment();
+    let reactAttribute = attributeElement.id;
+    let sibling = attributeElement.nextSibling;
+    while (sibling.id !== 'end_'+reactAttribute) {
+      let currentElement = sibling;
+      sibling = sibling.nextSibling;
+      reactFragment.appendChild(currentElement);
+    }
+
+    if (reactFragment.childNodes.length) {
+      this.reactComponentFragments[attributeElement.id] = reactFragment;
+    }
+    attributeElement.remove();
+    sibling.remove();
   }
 
   handleClickChange(event) {

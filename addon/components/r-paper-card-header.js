@@ -20,6 +20,13 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
   renderReactAttributeComponents() {
     if (this.reactComponentFragments.avatar) {
       this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-avatar')[0].replaceChildren(this.reactComponentFragments.avatar);
+    } else {
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-avatar')[0].remove();
+    }
+    if (this.reactComponentFragments.action) {
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-action')[0].replaceChildren(this.reactComponentFragments.action);
+    } else {
+      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-action')[0].remove();
     }
   }
 
