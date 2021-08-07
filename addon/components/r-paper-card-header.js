@@ -12,26 +12,22 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
     this.reactComponentFragments = {
       avatar: null,
-      action: null
+      action: null,
+      subheader: null,
+      title: null
     }
     this.renderReactAttributeComponents = this.renderReactAttributeComponents.bind(this);
   }
 
   renderReactAttributeComponents() {
-    if (this.reactComponentFragments.avatar) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-avatar')[0].replaceChildren(this.reactComponentFragments.avatar);
-    } else {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-avatar')[0].remove();
-    }
-    if (this.reactComponentFragments.action) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-action')[0].replaceChildren(this.reactComponentFragments.action);
-    } else {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiCardHeader-action')[0].remove();
-    }
+    this.renderReactAttributeComponent('avatar', 'MuiCardHeader-avatar');
+    this.renderReactAttributeComponent('action', 'MuiCardHeader-action');
+    this.renderReactAttributeComponent('subheader', 'MuiCardHeader-subheader');
+    this.renderReactAttributeComponent('title', 'MuiCardHeader-title');
   }
 
   renderChildren() {
-
+      //intentionally empty
   }
 
   @action

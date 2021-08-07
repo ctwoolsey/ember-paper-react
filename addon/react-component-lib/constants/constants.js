@@ -33,7 +33,9 @@ const COMPONENT_TYPES = {
 const REACT_ATTRIBUTE_COMPONENTS = {
   CLASS_NAME: 'react-component',
   AVATAR: 'avatar',
-  ACTION: 'action'
+  ACTION: 'action',
+  SUBHEADER: 'subheader',
+  TITLE: 'title'
 }
 
 export {

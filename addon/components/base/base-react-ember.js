@@ -52,42 +52,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }
   }
 
-  doesComponentHaveReactChildren() {
-    let result = false;
-    result = this.doesElementHaveDirectReactChildren(this.el);
-    let child = this.el.nextElementSibling;
-    while (child && !this.isEndElement(child) && !result) {
-      let currentElement = child;
-      child = child.nextElementSibling;
-      result = this.isElementAnEmberPaperReactComponent(currentElement);
-    }
-    return result;
-  }
-
-  doesElementHaveDirectReactChildren(element) {
-    for(let i = 0; i < element.children.length; i++) {
-      let child = element.children[i];
-      let result = this.isElementAnEmberPaperReactComponent(child);
-      if (result) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isElementAnEmberPaperReactComponent(element) {
-    if (!element.classList) {
-      return false;
-    } else {
-      for (let componentTypeKey in COMPONENT_TYPES) {
-        if (element.classList.contains(COMPONENT_TYPES[componentTypeKey])) {
-          return true;
-        }
-      }
-      return this.doesElementHaveDirectReactChildren(element);
-    }
-  }
-
   setChildrenFragment() {
     let child = this.el.nextSibling;
     if (this.reactRef.current.componentRef.current) {
@@ -115,6 +79,17 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }
 
     return endElement;
+  }
+
+  renderReactAttributeComponent(attributeName, className) {
+    const reactComp = this.reactRef.current.componentRef.current;
+    if (this.reactComponentFragments[attributeName]) {
+      reactComp.getElementsByClassName(className)[0].replaceChildren(this.reactComponentFragments[attributeName]);
+    } else {
+      if (!this.args[attributeName]) {
+        reactComp.getElementsByClassName(className)[0].remove();
+      }
+    }
   }
 
   setReactAttributeChildrenFragment(attributeElement) {
@@ -145,7 +120,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   }
 
   renderElement() {
-    console.log('rendering '+this.componentType);
     this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
     this.initializeDynamicStyles();
@@ -227,7 +201,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
 
   @action
   inserted(element) {
-    console.log('inserted ' + this.componentType);
     this.el = element;
     this.reactRef = React.createRef();
     this.renderStack.addRenderCallback(this.renderElement, this);

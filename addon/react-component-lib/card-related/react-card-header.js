@@ -41,11 +41,11 @@ export class ReactCardHeader extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           {...(this.props.disableTypography ? {disableTypography: this.props.disableTypography} : {})}
-          {...(subheader ? {subheader: subheader} : {})}
+          {...(subheader ? {subheader: subheader} : {subheader: "Dummy"})}
           {...(subheaderTypographyProps ? {subheaderTypographyProps: subheaderTypographyProps} : {})}
           {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
-          {...(title ? {title: title} : {})}
+          {...(title ? {title: title} : {title: "Dummy"})}
           {...(titleTypographyProps ? {titleTypographyProps: titleTypographyProps} : {})}
           ref={this.componentRef}
         />
