@@ -63,6 +63,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setLoading = this.setLoading.bind(this);
     this.setLoadingText = this.setLoadingText.bind(this);
     this.setMargin = this.setMargin.bind(this);
+    this.setMax = this.setMax.bind(this);
     this.setMaxRows = this.setMaxRows.bind(this);
     this.setMaxWidth = this.setMaxWidth.bind(this);
     this.setMinRows = this.setMinRows.bind(this);
@@ -80,6 +81,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setRows = this.setRows.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setSizes = this.setSizes.bind(this);
+    this.setSpacing = this.setSpacing.bind(this);
     this.setSubheader = this.setSubheader.bind(this);
     this.setSubheaderTypographyProps = this.setSubheader.bind(this);
     this.setSquare = this.setSquare.bind(this);
@@ -287,6 +289,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {margin: margin});
   }
 
+  setMax(max) {
+    this.setState( {max: max});
+  }
+
   setMaxRows(maxRows) {
     this.setState( {maxRows: maxRows});
   }
@@ -353,6 +359,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setSizes(sizes) {
     this.setState( {sizes: sizes});
+  }
+
+  setSpacing(spacing) {
+    this.setState( {spacing: spacing});
   }
 
   setSubheader(subheader) {

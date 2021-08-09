@@ -356,6 +356,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  max() {
+    if (this.reactRef) {
+      this.reactRef.current.setMax(this.args.max || null);
+    }
+  }
+
+  @action
   maxRows() {
     if (this.reactRef) {
       this.reactRef.current.setMaxRows(this.args.maxRows || null);
@@ -464,6 +471,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   sizes() {
     if (this.reactRef) {
       this.reactRef.current.setSizes(this.args.sizes || null);
+    }
+  }
+
+  @action
+  spacing() {
+    if (this.reactRef) {
+      this.reactRef.current.setSpacing(this.args.spacing || null);
     }
   }
 

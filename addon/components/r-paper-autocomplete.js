@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
@@ -12,7 +11,6 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = this.handleChange.bind(this);
-
   }
 
   handleChange(event, value, reason, details) {
@@ -41,6 +39,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       blurOnSelect: this.args.blurOnSelect || null,
       chipProps: this.args.chipProps || null,
       classString: this.initializeAndMergeClassWithClassString() || '',
+      clearIcon: this.createIcon(this.args.clearIcon, this.args.clearIconProps),
       clearOnBlur: this.args.clearOnBlur || null,
       clearOnEscape: this.args.clearOnEscape || null,
       clearText: this.args.clearText || null,
@@ -78,6 +77,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       openText: this.args.openText ||  null,
       paperComponent: this.args.paperComponent ||  null,
       popperComponent: this.args.popperComponent ||  null,
+      popupIcon: this.createIcon(this.args.popupIcon, this.args.popupIconProps),
       renderGroup: this.args.renderGroup ||  null,
       renderInput: this.args.renderInput ||  null,
       renderOption: this.args.renderOption ||  null,

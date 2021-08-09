@@ -200,10 +200,15 @@ The most basic usage is:
 ```angular2html
 <RPaperAutoComplete @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
 ```
-To make the components useful, all options are supported, except for ```clearIcon``` and ```popupIcon```.  In addition to the standard options, the following options have been added:
+To make the components useful, all options are supported.  In addition to the standard options, the following options have been added:
 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```<i>*</i>
+
+Use the ```@clearIcon and/or  @clearIconProps```  ```@popupIcono and/or @popupIconProps``` attributes to change default icons.
+```angular2html
+<RPaperAutocomplete  @clearIcon={{this.clearIcon}} @clearIconProps={{this.clearIconProps}} @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
+```
 
 <i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
@@ -267,9 +272,10 @@ To make the components useful, all options are supported, including these additi
 ------------------------------------------------------------------------------
 This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
 
-The most basic usages is:
+The most basic usages are:
 ```angular2html
-<RPaperChip>H</RPaperChip>
+<RPaperAvatar>H</RPaperAvatar>
+<RPaperAvatar><RPaperIcon @reactIcon={{this.chipIcon}}/></RPaperAvatar>
 ```
 To make the components useful, all options are supported, including these additional options:
 

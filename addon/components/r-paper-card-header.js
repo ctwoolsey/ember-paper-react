@@ -10,11 +10,10 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
-    this.reactComponentFragments = {}
-    this.renderReactAttributeComponents = this.renderReactAttributeComponents.bind(this);
+    this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
   }
 
-  renderReactAttributeComponents() {
+  renderAdditionalItems() {
     this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.AVATAR, 'MuiCardHeader-avatar');
     this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.ACTION, 'MuiCardHeader-action');
     this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.SUBHEADER, 'MuiCardHeader-subheader');
@@ -44,7 +43,7 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
       title: this.args.title || null,
       titleTypographyProps: this.args.titleTypographyProps || null,
       ref: this.reactRef,
-      renderAttributeComponents: this.renderReactAttributeComponents
+      renderAttributeComponents: this.renderAdditionalItems
     }
 
     const reactPortal = ReactDOM.createPortal(<ReactCardHeader {...props}/>, element.parentElement);

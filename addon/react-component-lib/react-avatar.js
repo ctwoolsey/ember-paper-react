@@ -31,6 +31,7 @@ export class ReactAvatar extends ReactBaseWithTheme{
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <Avatar
+          onClick={this.props.onClick}
           {...(this.props.alt ? {alt: this.props.alt} : {})}
           {...(classString ? {className: classString} : {})}
           {...(this.props.children ? {children: this.props.children} : {})}

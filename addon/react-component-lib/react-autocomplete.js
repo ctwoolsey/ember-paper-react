@@ -109,7 +109,7 @@ export class ReactAutocomplete extends ReactBaseWithTheme{
       <ReactConditionalThemeProvider theme={theme}>
         <Autocomplete
           ref={this.componentRef}
-          {...(options ? {options: options} : {})}
+          {...(options ? {options: options} : {options: []})}
           onChange={this.props.onChange}
           {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
           {...(this.props.onHighlightChange ? {onHighlightChange: this.props.onHighlightChange} : {})}
@@ -121,6 +121,7 @@ export class ReactAutocomplete extends ReactBaseWithTheme{
           {...(this.props.blurOnSelect ? {blurOnSelect: this.props.blurOnSelect} : {})}
           {...(chipProps ? {ChipProps: chipProps} : {})}
           {...(classString ? {className: classString} : {})}
+          {...(this.props.clearIcon ? {clearIcon: this.props.clearIcon} : {})}
           {...(this.props.clearOnBlur ? {clearOnBlur: this.props.clearOnBlur} : {})}
           {...(this.props.clearOnEscape ? {clearOnEscape: this.props.clearOnEscape} : {})}
           {...(clearText ? {clearText: clearText} : {})}
@@ -158,6 +159,7 @@ export class ReactAutocomplete extends ReactBaseWithTheme{
           {...(openText ? {openText: openText} : {})}
           {...(this.props.paperComponent ? {PaperComponent: this.props.paperComponent} : {})}
           {...(this.props.popperComponent ? {PopperComponent: this.props.popperComponent} : {})}
+          {...(this.props.popupIcon ? {popupIcon: this.props.popupIcon} : {})}
           {...(this.props.renderGroup ? {renderGroup: this.props.renderGroup} : {})}
           {...(this.props.renderOption ? {renderOption: this.props.renderOption} : {})}
           {...(this.props.renderTags ? {renderTags: this.props.renderTags} : {})}

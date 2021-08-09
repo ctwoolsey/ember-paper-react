@@ -2,6 +2,7 @@ const COMPONENT_TYPES = {
   APPBAR: 'ember-paper-react-appbar',
   AUTOCOMPLETE: 'ember-paper-react-autocomplete',
   AVATAR: 'ember-paper-react-avatar',
+  AVATAR_GROUP: 'ember-paper-react-avatar-group',
   BACKDROP: 'ember-paper-backdrop',
   BUTTON: 'ember-paper-react-button',
   CARD: 'ember-paper-react-card',
@@ -31,6 +32,10 @@ const COMPONENT_TYPES = {
   NOT_SET: 'ember-paper-react-notSet'
 };
 
+const AVATAR_GROUP = {
+  DEFAULT_MAX_AVATARS: 5
+}
+
 const REACT_ATTRIBUTE_COMPONENTS = {
   CLASS_NAME: 'react-component',
   AVATAR: 'avatar',
@@ -41,5 +46,6 @@ const REACT_ATTRIBUTE_COMPONENTS = {
 
 export {
   COMPONENT_TYPES,
-  REACT_ATTRIBUTE_COMPONENTS
+  REACT_ATTRIBUTE_COMPONENTS,
+  AVATAR_GROUP
 }
