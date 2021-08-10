@@ -1,8 +1,8 @@
-<div id={{this.insertId}}></div>
+<div id={{this.insertId}} {{did-insert this.onOuterInserted }}></div>
 {{#if this.renderOut }}
   {{#in-element this.destinationElement insertBefore=null}}
     <span class={{this.componentType}} ...attributes
-      {{did-insert this.onMovedInsertion }}
+
       {{did-update this.class @class}}
       {{did-update this.style @style}}
       {{did-update this.globalThemeChanged this.themeManager.theme}}
@@ -15,7 +15,5 @@
     ></span>{{yield}}<div id={{this.lastChildId}}></div>
   {{/in-element}}
 {{else}}
-  <span class={{this.componentType}} ...attributes
-    {{did-insert this.onInitiallyInserted }}
-  >{{yield}}</span>
+  <span class={{this.componentType}} ...attributes>{{yield}}</span>
 {{/if}}

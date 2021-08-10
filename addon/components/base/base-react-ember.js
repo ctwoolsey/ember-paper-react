@@ -128,6 +128,18 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
 
   afterMovedRender() {
     console.log('Rendering (after move): ' + this.componentType);
+    const reactElement = this.reactRef.current.componentRef.current;
+    const insertReactElement = document.getElementById(this.insertId);
+    document.getElementById(this.insertId).insertAdjacentElement('afterend', reactElement);
+    insertReactElement.remove();
+    if (!this.renderChildren) {
+      this.removeChildren(reactElement);
+      this.destinationElement = reactElement;
+      this.renderOut = true;
+    }else {
+      this.renderChildren();
+    }
+
     this.renderAdditionalItems && this.renderAdditionalItems();
 
     this.el.remove();
@@ -141,6 +153,16 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   }
 
   renderElement() {
+    console.log('Rendering (initial): ' + this.componentType);
+    this.destinationElement = document.getElementById('put-here');
+    this.renderOut = true;
+  }
+
+  outerRender() {
+    console.log('---Outer render: ' + this.componentType);
+  }
+
+  /*renderElement() {
     console.log('Rendering (initial): ' + this.componentType);
     const reactElement = this.reactRef.current.componentRef.current;
     const insertReactElement = document.getElementById(this.insertId);
@@ -157,13 +179,13 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
       this.removeChildren(reactElement);
       this.destinationElement = reactElement;
       this.renderOut = true;
-      /*if (this.childrenFragment.childNodes.length > 0) {
+      /!*if (this.childrenFragment.childNodes.length > 0) {
         this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }*/
+      }*!/
     }else {
       this.renderChildren();
     }
-  }
+  }*/
 
   removeChildren(element) {
     while (element.firstChild) {
@@ -280,6 +302,13 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     console.log('Inserted (moved): ' + this.componentType);
     this.el = element;
     scheduleOnce('render', this, this.afterMovedRender);
+  }
+
+  @action
+  onOuterInserted(element) {
+    console.log('****Outer inserted: ' + this.componentType);
+    this.renderStack.addRenderCallback(this.outerRender, this);
+    scheduleOnce('render', this, this.checkIfCanRender);
   }
 
   willDestroy() {

@@ -92,12 +92,6 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
   @action
   onMovedInsertion(element) {
     super.onMovedInsertion(element);
-  }
-
-  @action
-  onInitiallyInserted(element) {
-    super.onInitiallyInserted(element);
-
     let props = {
       children: this.args.children || null,
       classString: this.initializeAndMergeClassWithClassString() || '',
@@ -112,6 +106,11 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
 
     const reactPortal = ReactDOM.createPortal(<ReactAvatarGroup {...props}/>, element.parentElement);
     ReactDOM.render(reactPortal, document.createElement('div'));
+  }
+
+  @action
+  onInitiallyInserted(element) {
+    super.onInitiallyInserted(element);
   }
 
 }
