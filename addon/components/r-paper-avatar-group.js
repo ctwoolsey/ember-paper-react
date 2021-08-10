@@ -90,8 +90,13 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
   }
 
   @action
-  inserted(element) {
-    super.inserted(element);
+  onMovedInsertion(element) {
+    super.onMovedInsertion(element);
+  }
+
+  @action
+  onInitiallyInserted(element) {
+    super.onInitiallyInserted(element);
 
     let props = {
       children: this.args.children || null,
