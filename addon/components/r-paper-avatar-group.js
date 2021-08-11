@@ -34,16 +34,9 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
     this.applyGroupAttributesToAvatars();
     const childrenHolder = document.getElementById(this.childrenSpanId);
     const config = { attributes: false, childList: true, subtree: false };
-    /*let self = this;
-    const callback = function() {
-      self.renderStack.renderNext();
-      self.applyGroupAttributesToAvatars();
-    }
 
-    // Create an observer instance linked to the callback function
-    this.observer = new MutationObserver(callback);*/
     this.observer = new MutationObserver(() => {
-      this.renderStack.renderNext();
+      this.renderStack.renderLast();
       this.applyGroupAttributesToAvatars();
     });
 
@@ -183,11 +176,6 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
 
     const reactPortal = ReactDOM.createPortal(<ReactAvatarGroup {...props}/>, element.parentElement);
     ReactDOM.render(reactPortal, document.createElement('div'));
-  }
-
-  @action
-  onInitiallyInserted(element) {
-    super.onInitiallyInserted(element);
   }
 
   willDestroy() {

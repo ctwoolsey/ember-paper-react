@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../../react-component-lib/constants/constants";
@@ -7,14 +6,11 @@ import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
 import BaseReactEmberActionsComponent from "./base-react-ember-actions";
 import Icon from '@material-ui/core/Icon';
-import { tracked } from '@glimmer/tracking';
 
 
 export default class BaseReactEmberComponent extends BaseReactEmberActionsComponent {
   @service themeManager;
   @service renderStack;
-  @tracked renderOut = false;
-  @tracked destinationElement = null;
 
   constructor() {
     super(...arguments);
@@ -31,9 +27,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.nameValue = null;
     this.childrenFragment = null;
     this.reactComponentFragments = null;
-    //this.lastChildClassName = uuidv4();
     this.lastChildId= uuidv4();
-    /*this.insertId = uuidv4();*/
     this.childrenSpanId = uuidv4();
     this.fixedClassString = '';
     this.reactComponentFragments = {};
@@ -53,11 +47,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
 
   isEndElement(child) {
     return child.id === this.lastChildId;
-    /*if (!child.classList) {
-      return false;
-    } else {
-      return child.classList.contains(this.lastChildClassName);
-    }*/
   }
 
   setChildrenFragment() {
@@ -127,32 +116,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     }
   }
 
-  afterMovedRender() {
-    console.log('Rendering (after move): ' + this.componentType);
-    const reactElement = this.reactRef.current.componentRef.current;
-    const insertReactElement = document.getElementById(this.insertId);
-    document.getElementById(this.insertId).insertAdjacentElement('afterend', reactElement);
-    insertReactElement.remove();
-    if (!this.renderChildren) {
-      this.removeChildren(reactElement);
-      this.destinationElement = reactElement;
-      this.renderOut = true;
-    }else {
-      this.renderChildren();
-    }
-
-    this.renderAdditionalItems && this.renderAdditionalItems();
-
-    this.el.remove();
-    document.getElementById(this.lastChildId).remove();  //Do I need to implement this way still?
-
-    if (this.doneRendering) {
-      scheduleOnce('afterRender', this, this.doneRendering);
-    }
-
-    this.renderStack.renderNext();
-  }
-
   renderElement() {
     console.log('Rendering: ' + this.componentType);
     const reactElement = this.reactRef.current.componentRef.current;
@@ -182,69 +145,11 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.renderStack.renderNext();
   }
 
-  outerRender() {
-    console.log('---Outer render: ' + this.componentType);
-
-  }
-
-  /*renderElement() {
-    console.log('Rendering (initial): ' + this.componentType);
-    const reactElement = this.reactRef.current.componentRef.current;
-    const insertReactElement = document.getElementById(this.insertId);
-    document.getElementById(this.insertId).insertAdjacentElement('afterend', reactElement);
-    insertReactElement.remove();
-    //this.el.parentNode.insertBefore(reactElement, this.el.nextSibling);
-    //this.el.parentElement.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    //this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    //this.initializeDynamicStyles();
-
-
-    //this.setChildrenFragment();
-    if (!this.renderChildren) {
-      this.removeChildren(reactElement);
-      this.destinationElement = reactElement;
-      this.renderOut = true;
-      /!*if (this.childrenFragment.childNodes.length > 0) {
-        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }*!/
-    }else {
-      this.renderChildren();
-    }
-  }*/
-
   removeChildren(element) {
     while (element.firstChild) {
       element.firstChild.remove();
     }
   }
-
-  /*renderElement() {
-    console.log('Rendering: ' + this.componentType);
-    this.destinationElement =
-    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
-    this.cloneAttributes(this.reactRef.current.componentRef.current, this.el);
-    this.initializeDynamicStyles();
-
-
-    this.setChildrenFragment();
-    if (!this.renderChildren) {
-      if (this.childrenFragment.childNodes.length > 0) {
-        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }
-    }else {
-      this.renderChildren();
-    }
-
-    this.renderAdditionalItems && this.renderAdditionalItems();
-
-    this.el.remove();
-
-    if (this.doneRendering) {
-      scheduleOnce('afterRender', this, this.doneRendering);
-    }
-
-    this.renderStack.renderNext();
-  }*/
 
   mergeClassWithClassString() {
     return this.args.class ? this.fixedClassString + ' ' + this.args.class : this.fixedClassString;
@@ -313,34 +218,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     scheduleOnce('render', this, this.checkIfCanRender);
   }
 
-  @action
-  onInitiallyInserted(element) {
-    console.log('Inserted (initial): ' + this.componentType);
-    this.el = element;
-    this.reactRef = React.createRef();
-    this.renderStack.addRenderCallback(this.renderElement, this);
-    scheduleOnce('render', this, this.checkIfCanRender);
-  }
-
-  @action
-  onMovedInsertion(element) {
-    console.log('Inserted (moved): ' + this.componentType);
-    this.el = element;
-    scheduleOnce('render', this, this.afterMovedRender);
-  }
-
-  @action
-  onOuterInserted(element) {
-    console.log('****Outer inserted: ' + this.componentType);
-    this.el = element;
-    this.reactRef = React.createRef();
-    this.renderStack.addRenderCallback(this.outerRender, this);
-    scheduleOnce('render', this, this.checkIfCanRender);
-  }
-
   willDestroy() {
-    console.log('Will destroy: ' + this.componentType);
-    //ReactDOM.unmountComponentAtNode(this.reactRef.current.parentNode);
     super.willDestroy();
   }
 
