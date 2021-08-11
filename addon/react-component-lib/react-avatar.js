@@ -16,6 +16,10 @@ export class ReactAvatar extends ReactBaseWithTheme{
       });
   }
 
+  componentWillUnmount() {
+    console.log('Avatar Unmounting');
+  }
+
   render() {
     const {
       classString,

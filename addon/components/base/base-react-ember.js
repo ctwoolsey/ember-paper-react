@@ -33,7 +33,8 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     this.reactComponentFragments = null;
     //this.lastChildClassName = uuidv4();
     this.lastChildId= uuidv4();
-    this.insertId = uuidv4();
+    /*this.insertId = uuidv4();*/
+    this.childrenSpanId = uuidv4();
     this.fixedClassString = '';
     this.reactComponentFragments = {};
 
@@ -153,13 +154,37 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   }
 
   renderElement() {
-    console.log('Rendering (initial): ' + this.componentType);
-    this.destinationElement = document.getElementById('put-here');
-    this.renderOut = true;
+    console.log('Rendering: ' + this.componentType);
+    const reactElement = this.reactRef.current.componentRef.current;
+    this.el.insertAdjacentElement('afterend', reactElement);
+    this.cloneAttributes(reactElement, this.el);
+    this.initializeDynamicStyles();
+
+    if (!this.renderChildren) {
+      this.setChildrenFragment();
+      if (this.childrenFragment.childNodes.length > 0) {
+        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
+      }
+    } else {
+      this.renderChildren();
+    }
+
+    this.renderAdditionalItems && this.renderAdditionalItems();
+
+    this.el.remove();
+
+    if (this.doneRendering) {
+      scheduleOnce('afterRender', this, this.doneRendering);
+    }
+
+    const childEndMarker = document.getElementById(this.lastChildId);
+    childEndMarker && childEndMarker.remove();
+    this.renderStack.renderNext();
   }
 
   outerRender() {
     console.log('---Outer render: ' + this.componentType);
+
   }
 
   /*renderElement() {
@@ -307,13 +332,15 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   @action
   onOuterInserted(element) {
     console.log('****Outer inserted: ' + this.componentType);
+    this.el = element;
+    this.reactRef = React.createRef();
     this.renderStack.addRenderCallback(this.outerRender, this);
     scheduleOnce('render', this, this.checkIfCanRender);
   }
 
   willDestroy() {
     console.log('Will destroy: ' + this.componentType);
-    //ReactDOM.unmountComponentAtNode(this.reactRef);
+    //ReactDOM.unmountComponentAtNode(this.reactRef.current.parentNode);
     super.willDestroy();
   }
 

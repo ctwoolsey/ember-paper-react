@@ -13,9 +13,15 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
     this.componentType = COMPONENT_TYPES.AVATAR_GROUP;
     this.doneRendering = this.doneRendering.bind(this);
     this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
+    this.applyGroupAttributesToAvatars = this.applyGroupAttributesToAvatars.bind(this);
     this.styleSheetRemoved = false;
     this.avatarCountMarkerFragment = null;
     this.avatarCountMarkerIndex = null;
+    this.observer = null;
+  }
+
+  renderChildren() {
+    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
   }
 
   renderAdditionalItems() {
@@ -25,6 +31,28 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
 
   doneRendering() {
     console.log('done rendering Avater Group');
+    this.applyGroupAttributesToAvatars();
+    const childrenHolder = document.getElementById(this.childrenSpanId);
+    const config = { attributes: false, childList: true, subtree: false };
+    /*let self = this;
+    const callback = function() {
+      self.renderStack.renderNext();
+      self.applyGroupAttributesToAvatars();
+    }
+
+    // Create an observer instance linked to the callback function
+    this.observer = new MutationObserver(callback);*/
+    this.observer = new MutationObserver(() => {
+      this.renderStack.renderNext();
+      this.applyGroupAttributesToAvatars();
+    });
+
+    // Start observing the target node for configured mutations
+    this.observer.observe(childrenHolder, config);
+
+  }
+
+  applyGroupAttributesToAvatars() {
     const avatarElements = this.reactRef.current.componentRef.current.getElementsByClassName(COMPONENT_TYPES.AVATAR);
     const avatarChildrenCount = avatarElements.length;
     let maxAvatars = AVATAR_GROUP.DEFAULT_MAX_AVATARS;
@@ -32,8 +60,47 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
       maxAvatars = this.args.max <= 1 ? 2 : this.args.max;
     }
 
+    let marginLeft = null;
+    if (this.args.spacing) {
+      switch (this.args.spacing) {
+        case 'small':
+          marginLeft = '-8px';
+          break;
+        case 'large':
+          marginLeft = '-16px';
+          break;
+        default:
+          if (!isNaN(this.args.spacing)) {
+            if (this.args.spacing !== 0) {
+              marginLeft = -this.args.spacing;
+            }
+            marginLeft = marginLeft + 'px';
+          }
+      }
+    }
+
+    let variantClass = 'MuiAvatar-circular';
+    if (this.args.variant) {
+      variantClass = 'MuiAvatar-'+this.args.variant;
+    }
+
+
     for(let i = 0; i < avatarElements.length; i++) {
       let avatar = avatarElements[i];
+      if (marginLeft) {
+        avatar.style.marginLeft = marginLeft;
+      } else {
+        avatar.style.removeProperty('margin-left');
+      }
+
+      avatar.classList.remove('MuiAvatar-circular');
+      avatar.classList.remove('MuiAvatar-rounded');
+      avatar.classList.remove('MuiAvatar-square');
+      avatar.classList.add(variantClass);
+
+
+      let zIndex = avatarElements.length - i;
+      avatar.style.zIndex = zIndex;
       avatar.classList.remove('hide-avatar');
       if (this.avatarCountMarkerIndex && this.avatarCountMarkerIndex === i) {
         avatar.replaceChildren(this.avatarCountMarkerFragment);
@@ -86,16 +153,26 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
 
   @action
   max() {
-    this.doneRendering();
+    this.applyGroupAttributesToAvatars();
   }
 
   @action
-  onMovedInsertion(element) {
-    super.onMovedInsertion(element);
+  spacing() {
+    this.applyGroupAttributesToAvatars();
+  }
+
+  @action
+  variant() {
+    this.applyGroupAttributesToAvatars();
+  }
+
+  @action
+  inserted(element) {
+    super.inserted(element);
+
     let props = {
       children: this.args.children || null,
       classString: this.initializeAndMergeClassWithClassString() || '',
-      spacing: this.args.spacing || false,
       onClick: this.handleClickChange,
       sx: this.args.sx || null,
       theme: this.themeManager.theme || null,
@@ -113,5 +190,11 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
     super.onInitiallyInserted(element);
   }
 
+  willDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    super.willDestroy();
+  }
 }
 

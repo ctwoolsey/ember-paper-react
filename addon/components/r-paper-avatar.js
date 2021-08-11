@@ -38,9 +38,9 @@ export default class RPaperAvatarComponent extends BaseReactEmberComponent {
 
   }
 
-  @action
-  onMovedInsertion(element) {
-    super.onMovedInsertion(element);
+  /*@action
+  inserted(element) {
+    super.inserted(element);
     let props = {
       children: this.args.children || null,
       classString: this.initializeAndMergeClassWithClassString() || '',
@@ -60,7 +60,7 @@ export default class RPaperAvatarComponent extends BaseReactEmberComponent {
 
     const reactPortal = ReactDOM.createPortal(<ReactAvatar {...props}/>, element.parentElement);
     ReactDOM.render(reactPortal, document.createElement('div'));
-  }
+  }*/
 
   @action
   onInitiallyInserted(element) {

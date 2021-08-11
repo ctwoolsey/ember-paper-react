@@ -24,7 +24,22 @@ export default class RenderStackService extends Service {
     return callbackObj && (callbackObj.thisPtr === emberComponent);
   }
 
+  //this renders like a traditional stack
+  /*renderNext() {
+    let callbackObj = this.renderStack.popObject();
+    if (callbackObj) {
+      callbackObj.callbackFn.apply(callbackObj.thisPtr);
+    }
+  }*/
+
   renderNext() {
+    let callbackObj = this.renderStack.shiftObject();
+    if (callbackObj) {
+      callbackObj.callbackFn.apply(callbackObj.thisPtr);
+    }
+  }
+
+  renderLast() {
     let callbackObj = this.renderStack.popObject();
     if (callbackObj) {
       callbackObj.callbackFn.apply(callbackObj.thisPtr);
