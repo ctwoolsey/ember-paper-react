@@ -1,0 +1,18 @@
+.ember-paper-react-chip .MuiAvatar-root {
+  margin-left: .4em;
+  font-size: 1em;
+}
+
+.ember-paper-react-avatar-group {
+  .ember-paper-react-avatar.hide-avatar {
+    display: none;
+  }
+
+  span {
+    display: flex;
+
+    .MuiAvatar-circular { border-radius: 50%; }
+    .MuiAvatar-rounded { border-radius: 4px; }
+    .MuiAvatar-square { border-radius: 0; }
+  }
+}

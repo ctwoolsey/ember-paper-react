@@ -28,7 +28,6 @@ module.exports = {
       production: require.resolve('react-dom/umd/react-dom.production.min.js')
     });
 
-    app.import('vendor/ember-paper-react.css');
   },
 
   /*  ///////////////////////////////
