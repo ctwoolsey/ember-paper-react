@@ -210,6 +210,8 @@ The following options will not work unless a react Node is returned from the fun
 
 While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
 By using ```<:groupHeaders>``` or ```<:options>``` those sections may be customized.  Each customization must be wrapped within a ```<li>``` element.
+
+<u><b>Note:</b>This is currently a work in progress and will not work except for static lists.  Autocomplete filters the results and they will not match the custom display.</u>
 ```angular2html
 <RPaperAutocomplete @options={{this.filmOptions}} @label="Films" @value={{this.selectedFilm}}
 @onChange={{this.onChangeHandler}} @getOptionLabel={{this.movieOptionLabel}} @groupBy={{this.movieGrouping}}>

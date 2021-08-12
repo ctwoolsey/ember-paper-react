@@ -13,8 +13,10 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = this.handleChange.bind(this);
     this.onOpen = this.onOpen.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
     this.checkDropDownOpened = this.checkDropDownOpened.bind(this);
     this.dropDownOpened = this.dropDownOpened.bind(this);
+    this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
     this.hasCustomDisplay = false;
     this.existingPoppers = A();
   }
@@ -27,8 +29,8 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     }
   }
 
-  renderChildren() {
-    this.setChildrenFragment();
+  renderAdditionalItems() {
+    this.findAndLoadReactAttributeChildren();
     const optionsFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS];
     const headersFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS];
     if (optionsFragment || headersFragment){
@@ -36,14 +38,25 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     } else {
       this.hasCustomDisplay = false;
     }
+
+    if (this.args.open) {
+      this.handleOpen();
+    }
+  }
+  renderChildren() {
+    //intentionally empty
   }
 
-  onOpen(event) {
+  handleOpen() {
     this.setExistingPoppers();
     this.args.onOpen && this.args.onOpen(event);
     if (this.hasCustomDisplay) {
       setTimeout(this.checkDropDownOpened, 25);
     }
+  }
+
+  onOpen() {
+    this.handleOpen();
   }
 
   setExistingPoppers() {
@@ -121,6 +134,11 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     dropDown.classList.remove('ember-paper-react-hide');
   }
 
+  onInputChange(event, value, reason) {
+
+    this.args.onInputChange && this.args.onInputChange(event, value, reason);
+  }
+
   @action
   inserted(element) {
     super.inserted(element);
@@ -130,7 +148,7 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
       options: this.args.options || null,
       onClose: this.args.onClose || null,
       onHighlightChange: this.args.onHighlightChange || null,
-      onInputChange: this.args.onInputChange || null,
+      onInputChange: this.onInputChange,
       onOpen: this.onOpen,
       autoComplete: this.args.autoComplete || null,
       autoHighlight: this.args.autoHighlight || null,

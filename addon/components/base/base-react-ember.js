@@ -63,11 +63,22 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     while (child && !this.isEndElement(child)) {
       let currentElement = child;
       child = child.nextSibling;
+      this.childrenFragment.appendChild(currentElement);
+    }
+  }
+
+  findAndLoadReactAttributeChildren() {
+    let child = this.el.nextSibling;
+    if (this.reactRef.current.componentRef.current) {
+      child = this.reactRef.current.componentRef.current.nextSibling;
+    }
+
+    while (child && !this.isEndElement(child)) {
+      let currentElement = child;
+      child = child.nextSibling;
       if (currentElement.className === REACT_ATTRIBUTE_COMPONENTS.CLASS_NAME) {
         child = this.findEndReactAttributeElement(currentElement).nextSibling;
         this.setReactAttributeChildrenFragment(currentElement);
-      } else {
-        this.childrenFragment.appendChild(currentElement);
       }
     }
   }
@@ -147,6 +158,8 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     childEndMarker && childEndMarker.remove();
     this.renderStack.renderNext();
   }
+
+
 
   removeChildren(element) {
     while (element.firstChild) {
