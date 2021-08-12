@@ -1,5 +1,4 @@
 import {ReactAvatarGroup} from "../react-component-lib/react-avatar-group"
-import {ReactAvatar} from "../react-component-lib/react-avatar"
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { action } from "@ember/object";

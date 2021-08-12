@@ -12,6 +12,9 @@ export default class RPaperToolbarComponent extends BaseReactEmberComponent {
     this.componentType = COMPONENT_TYPES.TOOLBAR;
   }
 
+  renderChildren() {
+    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+  }
 
   @action
   inserted(element) {

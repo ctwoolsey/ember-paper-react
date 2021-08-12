@@ -34,4 +34,7 @@
   {{did-update this.label @label}}
   {{did-update this.required @required}}
   {{did-update this.variant @variant}}
-></span>{{yield}}<div class={{this.lastChildClassName}}></div>
+></span>
+<span id="groupHeaders" class="react-component"></span>{{yield to="groupHeaders"}}<span id="end_groupHeaders"></span>
+<span id="options" class="react-component"></span>{{yield to="options"}}<span id="end_options"></span>
+<div id={{this.lastChildId}}></div>

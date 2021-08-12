@@ -200,17 +200,45 @@ The most basic usage is:
 ```angular2html
 <RPaperAutoComplete @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
 ```
-To make the components useful, all options are supported.  In addition to the standard options, the following options have been added:
+
+The following options will not work unless a react Node is returned from the function:
+* ```@renderGroup```
+* ```@renderOption```
+* ```@renderTags```
+
+```@renderInput``` is fixed internally to use a ```TextField``` and cannot be changed. The options for the ```TextField``` are listed below.
+
+While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
+By using ```<:groupHeaders>``` or ```<:options>``` those sections may be customized.  Each customization must be wrapped within a ```<li>``` element.
+```angular2html
+<RPaperAutocomplete @options={{this.filmOptions}} @label="Films" @value={{this.selectedFilm}}
+@onChange={{this.onChangeHandler}} @getOptionLabel={{this.movieOptionLabel}} @groupBy={{this.movieGrouping}}>
+  <:groupHeaders>
+    {{#each this.groupHeaders as |groupHeader|}}
+      <li>
+        Group: {{groupHeader}}
+      </li>
+    {{/each}}
+  </:groupHeaders>
+  <:options>
+    {{#each this.filmOptions as |film|}}
+      <li><u>{{film.title}} ({{film.year}})</u></li>
+    {{/each}}
+  </:options>
+</RPaperAutocomplete>
+```
+
+To make the components useful, these additional options are available:
 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```<i>*</i>
-
-Use the ```@clearIcon and/or  @clearIconProps```  ```@popupIcono and/or @popupIconProps``` attributes to change default icons.
+  
+<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
+  
+Use the ```@clearIcon and/or  @clearIconProps```  ```@popupIcon and/or @popupIconProps``` attributes to change default icons.
 ```angular2html
 <RPaperAutocomplete  @clearIcon={{this.clearIcon}} @clearIconProps={{this.clearIconProps}} @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
 ```
-
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
 
 Also, a few additional options are provided to handle the TextField portion of the component:
 
@@ -270,8 +298,7 @@ To make the components useful, all options are supported, including these additi
 
 <i>Avatar</i>
 ------------------------------------------------------------------------------
-This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
-
+This component does not use theme in React.
 The most basic usages are:
 ```angular2html
 <RPaperAvatar>H</RPaperAvatar>
@@ -281,6 +308,23 @@ To make the components useful, all options are supported, including these additi
 
 * ```@class={{this.class}}```
 * ```@style={{this.style}}```
+
+<i>Avatar Group</i>
+------------------------------------------------------------------------------
+The most basic usages are:
+```angular2html
+<RPaperAvatarGroup>
+  <RPaperAvatar>A</RPaperAvatar>
+  <RPaperAvatar>B</RPaperAvatar>
+  <RPaperAvatar>C</RPaperAvatar>
+</RPaperAvatarGroup>
+
+```
+To make the components useful, all options are supported, including these additional options:
+
+* ```@class={{this.class}}```
+* ```@style={{this.style}}```
+
 
 <i>Chip</i>
 ------------------------------------------------------------------------------

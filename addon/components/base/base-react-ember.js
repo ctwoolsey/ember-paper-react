@@ -50,6 +50,10 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   }
 
   setChildrenFragment() {
+    /*
+        Do not use this method to move children if the element children will be manipulated by Ember later.
+        For example Any children that would be dynamic.  Through {{#if}} or {{#each}}
+     */
     let child = this.el.nextSibling;
     if (this.reactRef.current.componentRef.current) {
       child = this.reactRef.current.componentRef.current.nextSibling;
@@ -66,7 +70,6 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
         this.childrenFragment.appendChild(currentElement);
       }
     }
-    child.remove();
   }
 
   findEndReactAttributeElement(attributeElement) {

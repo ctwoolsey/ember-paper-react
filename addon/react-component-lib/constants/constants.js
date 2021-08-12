@@ -41,7 +41,9 @@ const REACT_ATTRIBUTE_COMPONENTS = {
   AVATAR: 'avatar',
   ACTION: 'action',
   SUBHEADER: 'subheader',
-  TITLE: 'title'
+  TITLE: 'title',
+  GROUP_HEADERS: 'groupHeaders',
+  OPTIONS: 'options'
 }
 
 export {

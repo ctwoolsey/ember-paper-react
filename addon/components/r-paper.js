@@ -13,6 +13,10 @@ export default class RPaperComponent extends BaseReactEmberComponent {
     this.handleClickChange = null;
   }
 
+  renderChildren() {
+    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+  }
+
   @action
   inserted(element) {
     super.inserted(element);

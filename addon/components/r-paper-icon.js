@@ -24,6 +24,7 @@ export default class RPaperIconComponent extends BaseReactEmberComponent {
           svgPath = svgChildNodes[i];
         }
       }
+      this.setChildrenFragment();
       for(let i = 0; i < this.childrenFragment.childNodes.length; i++) {
         if (this.childrenFragment.childNodes[i].nodeName .toUpperCase() === 'PATH') {
           svgPath.setAttribute('d', this.childrenFragment.childNodes[i].getAttribute('d'));

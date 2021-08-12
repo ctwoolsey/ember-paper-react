@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactAutocomplete } from "../react-component-lib/react-autocomplete";
+import { A } from '@ember/array';
 
 export default class RPaperAutocompleteComponent extends BaseReactEmberComponent {
 
@@ -11,6 +12,11 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
     this.handleClickChange = this.handleChange.bind(this);
+    this.onOpen = this.onOpen.bind(this);
+    this.checkDropDownOpened = this.checkDropDownOpened.bind(this);
+    this.dropDownOpened = this.dropDownOpened.bind(this);
+    this.hasCustomDisplay = false;
+    this.existingPoppers = A();
   }
 
   handleChange(event, value, reason, details) {
@@ -21,18 +27,111 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     }
   }
 
+  renderChildren() {
+    this.setChildrenFragment();
+    const optionsFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS];
+    const headersFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS];
+    if (optionsFragment || headersFragment){
+      this.hasCustomDisplay = true;
+    } else {
+      this.hasCustomDisplay = false;
+    }
+  }
+
+  onOpen(event) {
+    this.setExistingPoppers();
+    this.args.onOpen && this.args.onOpen(event);
+    if (this.hasCustomDisplay) {
+      setTimeout(this.checkDropDownOpened, 25);
+    }
+  }
+
+  setExistingPoppers() {
+    const poppers = document.getElementsByClassName('MuiAutocomplete-popper');
+    this.existingPoppers.clear();
+    for(let i = 0; i < poppers.length; i++) {
+      this.existingPoppers.pushObject(poppers[i]);
+    }
+  }
+
+  checkDropDownOpened() {
+    //There may be other autocompletes that have their dropdown open, so find the one that just opened.
+    const poppers = document.getElementsByClassName('MuiAutocomplete-popper');
+    let dropDownFound = null;
+    for(let i = 0; i < poppers.length; i++) {
+      let dropDown = poppers[i];
+      if (!this.existingPoppers.includes(dropDown)) {
+        dropDown.classList.add('ember-paper-react-hide');
+        dropDownFound = dropDown;
+        break;
+      }
+    }
+    if (dropDownFound) {
+      this.dropDownOpened(dropDownFound);
+    } else {
+      setTimeout(this.checkDropDownOpened, 25);
+    }
+  }
+
+  dropDownOpened(dropDown) {
+    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS] && this.args.groupBy) {
+      const headers = dropDown.getElementsByClassName('MuiAutocomplete-groupLabel');
+      const customHeaders = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS].children;
+      for(let i = 0; i < headers.length; i++) {
+        const clonedCustomHeader = customHeaders[i].cloneNode(true);
+        const customFragment = document.createDocumentFragment();
+        while ( clonedCustomHeader.firstChild ) {
+          customFragment.appendChild(clonedCustomHeader.firstChild);
+        }
+        headers[i].replaceChildren(customFragment);
+      }
+    }
+
+    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS]) {
+      const customDropDownListItems = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS].children;
+      if (this.args.groupBy) {
+        let optionCounter = 0;
+        const optionGroups = dropDown.getElementsByClassName('MuiAutocomplete-groupUl');
+        for(let ogIndex = 0; ogIndex < optionGroups.length; ogIndex++) {
+          const dropDownListItems = optionGroups[ogIndex].children;
+          for(let i = 0; i < dropDownListItems.length; i++) {
+            const clonedCustomDropDownListItem = customDropDownListItems[optionCounter].cloneNode(true);
+            const customFragment = document.createDocumentFragment();
+            while ( clonedCustomDropDownListItem.firstChild ) {
+              customFragment.appendChild(clonedCustomDropDownListItem.firstChild);
+            }
+            dropDownListItems[i].replaceChildren(customFragment);
+            optionCounter++;
+          }
+        }
+      } else {
+        //Since no grouping the dropdown structure is organized differently for only option display
+        const dropDownListItems = dropDown.getElementsByTagName("LI");
+        for(let i = 0; i < dropDownListItems.length; i++) {
+          const clonedCustomDropDownListItem = customDropDownListItems[i].cloneNode(true);
+          const customFragment = document.createDocumentFragment();
+          while ( clonedCustomDropDownListItem.firstChild ) {
+            customFragment.appendChild(clonedCustomDropDownListItem.firstChild);
+          }
+          dropDownListItems[i].replaceChildren(customFragment);
+        }
+      }
+    }
+
+    dropDown.classList.remove('ember-paper-react-hide');
+  }
+
   @action
   inserted(element) {
     super.inserted(element);
 
     //currently does not implement inputRef
-
     let props = {
       options: this.args.options || null,
       onClose: this.args.onClose || null,
       onHighlightChange: this.args.onHighlightChange || null,
       onInputChange: this.args.onInputChange || null,
-      onOpen: this.args.onOpen || null,
+      onOpen: this.onOpen,
       autoComplete: this.args.autoComplete || null,
       autoHighlight: this.args.autoHighlight || null,
       autoSelect: this.args.autoSelect || null,

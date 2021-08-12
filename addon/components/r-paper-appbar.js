@@ -12,6 +12,9 @@ export default class RPaperAppbarComponent extends BaseReactEmberComponent {
     this.componentType = COMPONENT_TYPES.APPBAR;
   }
 
+  renderChildren() {
+    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+  }
 
   @action
   inserted(element) {
