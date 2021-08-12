@@ -1,3 +1,9 @@
+@import 'layout-attributes';
+@import 'mixins';
+@import 'layout1';
+@import 'layout2';
+@import 'variables';
+
 .ember-paper-react-hide {
   display: none;
 }
