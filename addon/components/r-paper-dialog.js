@@ -17,10 +17,17 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
   }
 
   renderElement() {
-    this.setChildrenFragment();
-    this.el.remove();
-
+    this.renderStack.addRenderLaterCallback(this.renderLater, this);
     this.renderStack.renderNext();
+  }
+
+  renderLater() {
+    this.childrenFragment = document.createDocumentFragment();
+    this.childrenFragment.appendChild(document.getElementById(this.childrenSpanId));
+    this.el.remove();
+    const childEndMarker = document.getElementById(this.lastChildId);
+    childEndMarker && childEndMarker.remove();
+    this.renderStack.renderLater();
   }
 
   reactRender(insertElement) {
@@ -48,8 +55,9 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
       disableEscapeKeyDown: this.args.disableEscapeKeyDown || null,
       fullScreen: this.args.fullScreen || null,
       fullWidth: this.args.fullWidth || null,
+      keepOpenOnClickOutside: this.args.keepOpenOnClickOutside || false,
       maxWidth: this.args.maxWidth || false,
-      onBackdropClick: this.args.onBackdropClick || null,
+      onBackdropClick: this.args.onBackdropClick,
       onClose: this.args.onClose || null,
       paperComponent: this.args.paperComponent || null,
       paperProps: this.args.paperProps || null,
@@ -66,7 +74,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     };
 
     const reactPortal = ReactDOM.createPortal(<ReactDialog {...props}/>, element.parentElement);
-
     ReactDOM.render(reactPortal, document.createElement('div'));
 
   }

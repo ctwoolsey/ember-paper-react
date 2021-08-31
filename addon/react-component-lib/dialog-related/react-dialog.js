@@ -20,7 +20,45 @@ export class ReactDialog extends ReactDialogHelperBase{
     };
 
     this.componentRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.backgroundClicked = false;
 
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+    const dialogArea = document.getElementsByClassName('MuiDialog-paper')
+    dialogArea.length && dialogArea[0].addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+    const dialogArea = document.getElementsByClassName('MuiDialog-paper')
+    dialogArea.length && dialogArea[0].removeEventListener('keydown', this.onKeyDown);
+  }
+
+  handleClickOutside(event) {
+    const dialogArea = document.getElementsByClassName('MuiDialog-paper');
+    if (dialogArea.length && !dialogArea[0].contains(event.target)) {
+      this.backgroundClicked = true;
+      //this.props.onBackdropClick && this.props.onBackdropClick(event);
+    }
+  }
+
+  onKeyDown() {
+    //having this somehow enables the underlying react functionality.  Without this, esc doesn't work.
+  }
+
+  onClose(event, reason) {
+    if (this.props.keepOpenOnClickOutside && this.backgroundClicked) {
+      this.setOpen(true);
+      this.backgroundClicked = false;
+    } else {
+      this.props.onClose(event, reason);
+      this.setOpen(false);
+    }
   }
 
 
@@ -51,7 +89,7 @@ export class ReactDialog extends ReactDialogHelperBase{
           {...(this.props.id ? {id: this.props.id} : {})}
           {...(maxWidth ? {maxWidth: maxWidth} : {})}
           {...(this.props.onBackdropClick ? {onBackdropClick: this.props.onBackdropClick} : {})}
-          {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
+          onClose={this.onClose}
           {...(this.props.paperComponent ? {PaperComponent: this.props.paperComponent} : {})}
           {...(this.props.paperProps ? {PaperProps: this.props.paperProps} : {})}
           {...(this.props.scroll ? {scroll: this.props.scroll} : {})}

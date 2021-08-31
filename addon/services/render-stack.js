@@ -6,6 +6,7 @@ export default class RenderStackService extends Service {
   constructor() {
     super();
     this.renderStack = A();
+    this.renderLaterStack = A();
   }
 
   _makeCallbackObj(callbackFn, thisPtr) {
@@ -19,6 +20,11 @@ export default class RenderStackService extends Service {
     this.renderStack.pushObject(this._makeCallbackObj(callbackFn, thisPtr));
   }
 
+  //a stack for items that need their children rendered first.
+  addRenderLaterCallback(callbackFn, thisPtr) {
+    this.renderLaterStack.pushObject(this._makeCallbackObj(callbackFn, thisPtr));
+  }
+
   canStartRendering(emberComponent) {
     let callbackObj = this.renderStack.lastObject;
     return callbackObj && (callbackObj.thisPtr === emberComponent);
@@ -29,6 +35,8 @@ export default class RenderStackService extends Service {
     let callbackObj = this.renderStack.shiftObject();
     if (callbackObj) {
       callbackObj.callbackFn.apply(callbackObj.thisPtr);
+    } else {
+      this.renderLater();
     }
   }
 
@@ -39,4 +47,8 @@ export default class RenderStackService extends Service {
     }
   }
 
+  renderLater() {
+    const callbackObj = this.renderLaterStack.popObject();
+    callbackObj && callbackObj.callbackFn.apply(callbackObj.thisPtr);
+  }
 }
