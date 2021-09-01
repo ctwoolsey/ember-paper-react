@@ -14,35 +14,33 @@ export default class RPaperDrawerComponent extends BaseReactEmberComponent {
     this.reactRender = this.reactRender.bind(this);
     this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-
-    //IF the component is told to keepMounted then a different sort of rendering is needed.
-    if ((this.args.modalProps && !this.args.modalProps.keepMounted) ||
-      (!this.args.modalProps && this.args.variant !== 'permanent' && this.args.variant !== 'persistent'))  {
-      this.renderElement = this.renderDrawerElement.bind(this);
-    }
   }
 
-  renderDrawerElement() {
-    this.setChildrenFragment();
-    this.el.remove();
-
+  renderElement() {
+    this.renderStack.addRenderLaterCallback(this.renderLater, this);
     this.renderStack.renderNext();
   }
 
-  //used if modalProps.keepMounted is set.
-  renderChildren() {
-    if (this.childrenFragment.childNodes.length > 0) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiDrawer-paper')[0].replaceChildren(this.childrenFragment);
+  renderLater() {
+    this.childrenFragment = document.createDocumentFragment();
+    this.childrenFragment.appendChild(document.getElementById(this.childrenSpanId));
+
+    if (this.args.variant === 'persistent' ||
+      this.args.variant === 'permanent' ||
+      (this.args.modalProps && this.args.modalProps.keepMounted)) {
+      if (this.childrenFragment.childNodes.length > 0) {
+        this.reactRef.current.componentRef.current.getElementsByClassName('MuiDrawer-paper')[0].replaceChildren(this.childrenFragment);
+      }
     }
+
+    this.el.remove();
+    const childEndMarker = document.getElementById(this.lastChildId);
+    childEndMarker && childEndMarker.remove();
+    this.renderStack.renderNext();
   }
 
   reactRender(insertElement) {
     insertElement.replaceChildren(this.childrenFragment);
-    let drawer = document.getElementsByClassName(this.componentType)[0];
-    //handling the keydown event listening for escape also activates the clicking outside of
-    //the drawer for closing the window.
-    drawer.addEventListener('keydown', this.onKeyDown);
   }
 
   saveChildren(childrenContainer) {
@@ -50,23 +48,7 @@ export default class RPaperDrawerComponent extends BaseReactEmberComponent {
     while (childrenContainer.hasChildNodes()) {
       this.childrenFragment.appendChild(childrenContainer.firstChild);
     }
-    let drawer = document.getElementsByClassName(this.componentType)[0];
-    drawer.removeEventListener('keydown', this.onKeyDown);
   }
-
-  onKeyDown(evt) {
-    let isEscape = false;
-    if ("key" in evt) {
-      isEscape = (evt.key === "Escape" || evt.key === "Esc");
-    } else {
-      isEscape = (evt.keyCode === 27);
-    }
-
-    if (isEscape) {
-      this.args.onClose && this.args.onClose();
-    }
-  }
-
 
   @action
   inserted(element) {

@@ -18,10 +18,31 @@ export class ReactDrawer extends ReactBaseWithTheme{
       variant: props.variant
     };
 
+    this.addEventListeners = this.addEventListeners.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.componentRef = React.createRef();
 
   }
 
+  componentDidMount() {
+    setTimeout(this.addEventListeners, 500);
+  }
+
+  componentWillUnmount() {
+    this.componentRef && this.componentRef.current && this.componentRef.current.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  addEventListeners() {
+    if (this.componentRef && this.componentRef.current) {
+      this.componentRef.current.addEventListener('keydown', this.onKeyDown);
+    } else {
+      setTimeout(this.addEventListeners, 500);
+    }
+  }
+
+  onKeyDown() {
+    //having this somehow enables the underlying react functionality.  Without this, esc and clicking to close doesn't work.
+  }
 
   render() {
 
@@ -33,6 +54,8 @@ export class ReactDrawer extends ReactBaseWithTheme{
       variant
     } = this.state;
 
+    //need children holder to handle mounting and unmounting callbacks when
+    //variant is 'temporary' which is the default and keepMounted cannot be set.
     this.useReactChildrenHolder = (this.props.modalProps && !this.props.modalProps.keepMounted) ||
                                   (!this.props.modalProps && variant !== 'permanent' && variant !== 'persistent');
 
