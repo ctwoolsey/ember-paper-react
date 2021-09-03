@@ -91,6 +91,11 @@ export default class RPaperMenuComponent extends BaseReactEmberComponent {
     ReactDOM.render(reactPortal, document.createElement('div'));
 
   }
+
+  willDestroy() {
+    this.hiddenChildren.remove();
+    super.willDestroy();
+  }
 }
 
 
