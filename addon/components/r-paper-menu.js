@@ -18,10 +18,16 @@ export default class RPaperMenuComponent extends BaseReactEmberComponent {
   }
 
   renderElement() {
-    this.setChildrenFragment();
+    super.renderElement();
+    /*this.setChildrenFragment();
     this.el.remove();
+    const childEndMarker = document.getElementById(this.lastChildId);
+    childEndMarker && childEndMarker.remove();
+    this.renderStack.renderNext();*/
+  }
 
-    this.renderStack.renderNext();
+  renderChildren() {
+    this.setChildrenFragment();
   }
 
   reactRender(insertElement) {

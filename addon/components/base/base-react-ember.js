@@ -133,7 +133,7 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
   renderElement() {
     console.log('Rendering: ' + this.componentType);
     const reactElement = this.reactRef.current.componentRef.current;
-    this.el.insertAdjacentElement('afterend', reactElement);
+    reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
     this.cloneAttributes(reactElement, this.el);
     this.initializeDynamicStyles();
 
