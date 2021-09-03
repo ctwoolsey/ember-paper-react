@@ -29,7 +29,7 @@ export default class BaseLabeledCheckRadioSwitchComponent extends BaseReactEmber
       indeterminate: this.args.indeterminate || false, //used by checkbox
       label: this.args.label || null,
       labelPlacement: this.args.labelPlacement || 'end',
-      name: this.args.radioName || this.nameValue,  //used by radio
+      name: this.args.radioName || this.nameValue || this.args.name,  //used by radio
       size: this.args.size || null,
       sx: this.args.size || null,
       theme: this.themeManager.theme || null,
