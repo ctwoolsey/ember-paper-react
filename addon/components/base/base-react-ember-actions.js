@@ -391,6 +391,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   }
 
   @action
+  name() {
+    if (this.reactRef) {
+      this.reactRef.current.setName(this.args.name || null);
+    }
+  }
+
+  @action
   noOptionsText() {
     if (this.loadingText) {
       this.reactRef.current.setNoOptionsText(this.args.noOptionsText || null);
@@ -450,6 +457,13 @@ export default class BaseReactEmberActionsComponent extends Component {
   required() {
     if (this.reactRef) {
       this.reactRef.current.setRequired(this.args.required || null);
+    }
+  }
+
+  @action
+  row() {
+    if (this.reactRef) {
+      this.reactRef.current.setRow(this.args.row || null);
     }
   }
 

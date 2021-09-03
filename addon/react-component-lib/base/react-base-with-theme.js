@@ -68,6 +68,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setMaxWidth = this.setMaxWidth.bind(this);
     this.setMinRows = this.setMinRows.bind(this);
     this.setMultiline = this.setMultiline.bind(this);
+    this.setName = this.setName.bind(this);
     this.setNoOptionsText = this.setNoOptionsText.bind(this);
     this.setOpen = this.setOpen.bind(this);
     this.setOpenText = this.setOpenText.bind(this);
@@ -79,6 +80,7 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setReactIcon = this.setReactIcon.bind(this);
     this.setRequired = this.setRequired.bind(this);
     this.setRows = this.setRows.bind(this);
+    this.setRow = this.setRow.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setSizes = this.setSizes.bind(this);
     this.setSpacing = this.setSpacing.bind(this);
@@ -309,6 +311,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
     this.setState( {multiline: multiline});
   }
 
+  setName(name) {
+    this.setState( {name: name});
+  }
+
   setNoOptionsText(noOptionsText) {
     this.setState( {noOptionsText: noOptionsText});
   }
@@ -351,6 +357,10 @@ export class ReactBaseWithTheme extends ReactThemeBase{
 
   setRows(rows) {
     this.setState( {rows: rows});
+  }
+
+  setRow(row) {
+    this.setState( {row: row});
   }
 
   setSize(size) {

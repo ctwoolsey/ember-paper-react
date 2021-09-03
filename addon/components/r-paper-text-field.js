@@ -1,13 +1,15 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { scheduleOnce } from "@ember/runloop";
+import { once, scheduleOnce } from "@ember/runloop";
 import { action } from "@ember/object";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactTextField } from "../react-component-lib/react-text-field";
 import Inputmask from "inputmask";
+import { tracked } from '@glimmer/tracking';
 
 export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
+  @tracked canRenderChildren = false;
 
   constructor() {
     super(...arguments);
@@ -29,14 +31,12 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
         Inputmask.extendAliases(this.args.maskAliases);
       }
     }
+    this.moveChildren = this.moveChildren.bind(this);
 
   }
 
   renderChildren() {
-    this.setChildrenFragment();
-    if (this.args.select && this.childrenFragment.childNodes.length > 0) {
-      this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.childrenFragment);
-    }
+    //leave blank as children are handled in the local render element
   }
 
   renderElement() {
@@ -44,7 +44,20 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
       this.inputmask = Inputmask(this.args.mask).mask(this.inputRef.current);
     }
 
+    if (this.args.select) {
+      this.dropDownLocation = this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0];
+      once(this, this.moveChildren);
+    }
+
+    scheduleOnce('afterRender', this, this.continueRendering);
+  }
+
+  continueRendering() {
     super.renderElement();
+  }
+
+  moveChildren() {
+    this.canRenderChildren = true;
   }
 
   handleChange(event) {
