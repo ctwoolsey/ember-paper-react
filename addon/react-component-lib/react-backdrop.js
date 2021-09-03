@@ -41,6 +41,24 @@ export class ReactBackdrop extends ReactBaseWithTheme{
           {...(open ? {open: open} : {open: false})}
           {...(sx ? {sx: sx} : {})}
           {...(this.props.transitionDuration ? {transitionDuration: this.props.transitionDuration} : {})}
+
+          {...(this.props.appear ? {appear: this.props.appear} : {})}
+          {...(this.props.easing ? {easing: this.props.easing} : {})}
+          {...(this.props.in ? {in: this.props.in} : {})}
+          {...(this.props.timeout ? {timeout: this.props.timeout} : {})}
+
+          {...(this.props.nodeRef ? {nodeRef: this.props.nodeRef} : {})}
+          {...(this.props.mountOnEnter ? {mountOnEnter: this.props.mountOnEnter} : {})}
+          {...(this.props.unmountOnExit ? {unmountOnExit: this.props.unmountOnExit} : {})}
+          {...(this.props.enter ? {enter: this.props.enter} : {})}
+          {...(this.props.exit ? {exit: this.props.exit} : {})}
+          {...(this.props.addEndListener ? {addEndListener: this.props.addEndListener} : {})}
+          {...(this.props.onEnter ? {onEnter: this.props.onEnter} : {})}
+          {...(this.props.onEntering ? {onEntering: this.props.onEntering} : {})}
+          {...(this.props.onEntered ? {onEntered: this.props.onEntered} : {})}
+          {...(this.props.onExit ? {onExit: this.props.onExit} : {})}
+          {...(this.props.onExiting ? {onExiting: this.props.onExiting} : {})}
+          {...(this.props.onExited ? {onExited: this.props.onExited} : {})}
         >
         </Backdrop>
       </ReactConditionalThemeProvider>

@@ -33,6 +33,7 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
   }
 
   renderChildren() {
+    this.setChildrenFragment();
     if (this.args.select && this.childrenFragment.childNodes.length > 0) {
       this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0].replaceChildren(this.childrenFragment);
     }

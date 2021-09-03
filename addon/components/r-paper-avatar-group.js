@@ -41,7 +41,6 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
 
     // Start observing the target node for configured mutations
     this.observer.observe(childrenHolder, config);
-
   }
 
   applyGroupAttributesToAvatars() {
