@@ -36,6 +36,7 @@ Rendering Default:
 * call an after Render method (??Need to explain this??)
 * remove child end marker
 * render next item in renderStack (queue)
+* some children need to handle {{each}} loops so we use inline #in-element to move the children, Can I refactor and remove the other children methods?
 
 ##Understanding Rendering
 The issue to overcome is that React wants its children to be react children.

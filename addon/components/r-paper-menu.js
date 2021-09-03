@@ -1,15 +1,22 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { action } from "@ember/object";
+import { once, scheduleOnce } from "@ember/runloop";
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
 import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactMenu } from "../react-component-lib/react-menu";
+import { v4 as uuidv4 } from "uuid";
+import { tracked } from '@glimmer/tracking';
 
 export default class RPaperMenuComponent extends BaseReactEmberComponent {
+  @tracked menuLocation;
+  @tracked canRenderChildren = false;
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.MENU;
+    this.hiddenChildrenId = uuidv4();
+    this.hiddenChildren = null;
     this.handleClickChange = null;
     this.reactRender = this.reactRender.bind(this);
     this.renderElement = this.renderElement.bind(this);
@@ -18,27 +25,31 @@ export default class RPaperMenuComponent extends BaseReactEmberComponent {
   }
 
   renderElement() {
+    this.hiddenChildren = document.getElementById(this.hiddenChildrenId);
+    document.body.appendChild(this.hiddenChildren);
+    once(this, this.initialMoveChildren);
+    scheduleOnce('afterRender', this, this.continueRendering);
+  }
+
+  initialMoveChildren() {
+    this.menuLocation = this.hiddenChildren;
+    this.canRenderChildren = true;
+  }
+
+  continueRendering() {
     super.renderElement();
-    /*this.setChildrenFragment();
-    this.el.remove();
-    const childEndMarker = document.getElementById(this.lastChildId);
-    childEndMarker && childEndMarker.remove();
-    this.renderStack.renderNext();*/
   }
 
   renderChildren() {
-    this.setChildrenFragment();
+    //This is intentionally blank.
   }
 
   reactRender(insertElement) {
-    insertElement.replaceChildren(this.childrenFragment);
+    this.menuLocation = insertElement;
   }
 
-  saveChildren(childrenContainer) {
-    this.childrenFragment = document.createDocumentFragment();
-    while (childrenContainer.hasChildNodes()) {
-      this.childrenFragment.appendChild(childrenContainer.firstChild);
-    }
+  saveChildren() {
+    this.menuLocation = this.hiddenChildren;
   }
 
   findAnchorEl() {

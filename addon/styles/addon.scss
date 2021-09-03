@@ -4,7 +4,8 @@
 @import 'layout2';
 @import 'variables';
 
-.ember-paper-react-hide {
+.ember-paper-react-hide,
+.ember-paper-react-hidden-children {
   display: none;
 }
 
