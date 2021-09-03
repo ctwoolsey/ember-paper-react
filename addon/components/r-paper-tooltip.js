@@ -16,6 +16,7 @@ export default class RPaperTooltipComponent extends BaseReactEmberComponent {
   }
 
   renderChildren() {
+    this.setChildrenFragment();
     if (this.childrenFragment.childNodes.length > 0) {
       if (!this.useButton) {
         this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);

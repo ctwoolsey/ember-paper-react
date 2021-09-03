@@ -344,6 +344,7 @@ To make the components useful, all options are supported, including these additi
 To use an avatar in the chip:
 
 To use an icon in the chip:
+****explain what chip Icon Props is
 
 <i>Icons</i>
 ------------------------------------------------------------------------------
