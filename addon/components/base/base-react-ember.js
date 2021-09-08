@@ -212,6 +212,20 @@ export default class BaseReactEmberComponent extends BaseReactEmberActionsCompon
     });
   }
 
+  initializeProps(props) {
+    for (let propName in props) {
+      props[propName] = this.args[propName] || props[propName];
+    }
+  }
+
+  initializeCommonProps(props) {
+    props.classString = this.initializeAndMergeClassWithClassString() || '';
+    props.id = this.findElementId();
+    props.sx = this.args.sx || null;
+    props.theme = this.themeManager.theme || null;
+    props.ref = this.reactRef;
+  }
+
   initializeDynamicStyles() {
     this.addedStyles.forEach(styleItem => {
       let stylePieces = styleItem.split(':');

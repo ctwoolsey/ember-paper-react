@@ -1,26 +1,32 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
+import { ReactBase } from "./base/react-base";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 
-export class ReactPaper extends ReactBaseWithTheme{
+export class ReactPaper extends ReactBase{
   constructor(props) {
     super(props);
     this.addedEmberChildren = false;
-    this.state = {
-      classString: props.classString,
-      elevation: props.elevation,
-      square: props.square,
-      sx: props.sx,
-      theme: props.theme,
-      variant: props.variant
-    };
-
-    this.componentRef = React.createRef();
-
   }
 
   render() {
+    const {
+      theme
+    } = this.state;
+
+    return (
+      <ReactConditionalThemeProvider theme={theme}>
+        <Paper
+          ref={this.componentRef}
+          {...(this.placeProps())}
+          {...(this.placeStateProps())}
+        >
+        </Paper>
+      </ReactConditionalThemeProvider>
+    );
+  }
+
+  /*render() {
     const {
       classString,
       elevation,
@@ -46,5 +52,5 @@ export class ReactPaper extends ReactBaseWithTheme{
         </Paper>
       </ReactConditionalThemeProvider>
     );
-  }
+  }*/
 }
