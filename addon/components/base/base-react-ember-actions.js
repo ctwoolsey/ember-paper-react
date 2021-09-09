@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { action } from "@ember/object";
 
 export default class BaseReactEmberActionsComponent extends Component {
-//Will need to only keep style() && setReactState()
   constructor() {
     super(...arguments);
   }
@@ -11,16 +10,6 @@ export default class BaseReactEmberActionsComponent extends Component {
   class() {
     if (this.reactRef) {
       this.reactRef.current.setClass(this.mergeClassWithClassString());
-    }
-  }
-
-  @action
-  setReactState(stateName, value) {
-    if (this.reactRef) {
-      if (stateName === 'classString') {
-        value = this.mergeClassWithClassString();
-      }
-      this.reactRef.current.setStateProp(stateName, value || null);
     }
   }
 

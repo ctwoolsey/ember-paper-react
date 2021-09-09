@@ -1,17 +1,18 @@
 import React from "react";
-import { PaperStateProps } from "../utility/props/paper-props";
+
 
 export class ReactBase extends React.Component{
   constructor(props) {
     super(props);
     this.componentRef = React.createRef();
     this.setStateProp = this.setStateProp.bind(this);
-    /*this.placeProps = this.placeProps.bind(this);
-    this.placeStateProps = this.placeStateProps.bind(this);*/
+  }
+
+  initializeState(stateProperties) {
     this.state = {};
-    let stateProps = Object.assign({}, PaperStateProps);
+    let stateProps = Object.assign({}, stateProperties);
     this.staticProps = {};
-    for (let propName in props) {
+    for (let propName in this.props) {
       if (Object.prototype.hasOwnProperty.call(stateProps,propName)) {
         stateProps[propName] = this.props[propName];
       } else {

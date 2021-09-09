@@ -57,3 +57,8 @@ A base ```render``` method is called which covers the most common render cases. 
 
 A special use case occurs in component which move in and off of the DOM like a ```dialog``` component.  The dialog does not initially present any insertion points when it is created.  Therefore, special callbacks must be used to insert the children when the component is displayed and then also pull the children into a ```DOMFragment``` before the component will disappear.  The cycle continues when the react component re-mounts and the children must be re-added.
 These callbacks can be seen by examining the ```react-dialog.js``` code.
+
+React attaches events to the parent container, so by creating a portal and then rendering,
+the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
+For inspiration:
+https://stackoverflow.com/questions/30686796/react-render-replace-container-instead-of-inserting-into/58385910#58385910
