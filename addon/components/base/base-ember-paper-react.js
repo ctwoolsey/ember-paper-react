@@ -6,9 +6,7 @@ import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
 import Icon from '@material-ui/core/Icon';
 import Component from "@glimmer/component";
-import { PaperProps } from "../../react-component-lib/utility/props/paper-props";
 import ReactDOM from "react-dom";
-import { ReactPaper } from "../../react-component-lib/react-paper";
 
 
 export default class BaseEmberPaperReact extends Component {
@@ -20,12 +18,8 @@ export default class BaseEmberPaperReact extends Component {
     this.reactElement = null;
     this.reactRef = null;
     this.el = null;
-    this.handleClickChange = this.handleClickChange.bind(this);
 
-    this.addedStyles = [];
-    if (this.args.style) {
-      this.addedStyles = this.args.style.split(';');
-    }
+
     this.componentType = COMPONENT_TYPES.NOT_SET;
     this.handleName = false;
     this.nameValue = null;
@@ -39,30 +33,12 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   @action
-  setReactState(stateName, value) {
+  changeReactState(stateName, value) {
     if (this.reactRef) {
-      if (stateName === 'classString') {
+      if (stateName === 'class') {
         value = this.mergeClassWithClassString();
       }
       this.reactRef.current.setStateProp(stateName, value || null);
-    }
-  }
-
-  @action
-  style() {
-    if (this.reactRef) {
-      //remove old style names
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style.removeProperty(stylePieces[0]);
-      });
-      //save new style list
-      this.addedStyles = this.args.style.split(';');
-      this.addedStyles.forEach(styleItem => {
-        let stylePieces = styleItem.split(':');
-        this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-      });
-
     }
   }
 
@@ -152,22 +128,11 @@ export default class BaseEmberPaperReact extends Component {
     sibling.remove();
   }
 
-  handleClickChange(event) {
-    if (this.args.onClick) {
-      return this.args.onClick();
-    } else if (this.args.onChange) {
-      return this.args.onChange(event.target.value);
-    } else {
-      return null;
-    }
-  }
-
   renderElement() {
     console.log('Rendering: ' + this.componentType);
     const reactElement = this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
     this.cloneAttributes(reactElement, this.el);
-    this.initializeDynamicStyles();
 
     if (!this.renderChildren) {
       this.setChildrenFragment();
@@ -247,8 +212,8 @@ export default class BaseEmberPaperReact extends Component {
   initializeProps(props) {
     for (let propName in props) {
       switch (propName) {
-        case 'classString':
-          props.classString = this.initializeAndMergeClassWithClassString() || '';
+        case 'class':
+          props.class = this.initializeAndMergeClassWithClassString() || '';
           break;
         case 'id':
           props.id = this.findElementId();
@@ -258,12 +223,6 @@ export default class BaseEmberPaperReact extends Component {
           break;
         case 'ref':
           props.ref = this.reactRef;
-          break;
-        case 'onClick':
-          props.onClick = this.handleClickChange;
-          break;
-        case 'onChange':
-          props.onChange = this.handleClickChange;
           break;
         default:
           props[propName] = this.args[propName] || props[propName];
@@ -278,13 +237,6 @@ export default class BaseEmberPaperReact extends Component {
     props.sx = this.args.sx || null;
     props.theme = this.themeManager.theme || null;
     props.ref = this.reactRef;
-  }
-
-  initializeDynamicStyles() {
-    this.addedStyles.forEach(styleItem => {
-      let stylePieces = styleItem.split(':');
-      this.reactRef.current.componentRef.current.style[stylePieces[0]] = stylePieces[1];
-    });
   }
 
   checkIfCanRender() {

@@ -40,12 +40,13 @@ export class ReactBase extends React.Component{
     let statePropObject = {};
     for (let propName in this.state) {
       switch (propName) {
-        case 'classString':
-          if (this.state[propName]) {
-            statePropObject['className'] = this.state[propName];
+        case 'class':
+          if (this.state['class']) {
+            statePropObject['className'] = this.state['class'];
           }
           break;
         case 'theme':
+          //filter out theme as it is only applied to the theme element
           break;
         default:
           if (this.state[propName]) {

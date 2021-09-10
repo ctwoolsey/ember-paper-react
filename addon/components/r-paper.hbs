@@ -1,12 +1,12 @@
 <span class={{this.componentType}} ...attributes
   {{did-insert this.inserted }}
-  {{did-update (fn this.setReactState 'classString' @class) @class}}
-  {{did-update this.style @style}}
-  {{did-update (fn this.setReactState 'elevation' @elevation) @elevation}}
-  {{did-update (fn this.setReactState 'square' @square) @square}}
-  {{did-update (fn this.setReactState 'sx' @sx) @sx}}
-  {{did-update (fn this.setReactState 'variant' @variant) @variant}}
-  {{did-update (fn this.setReactState 'theme' this.themeManager.theme) this.themeManager.theme}}
+  {{did-update (fn this.changeReactState 'class' @class) @class}}
+  {{did-update (fn this.changeReactState 'style' @style) @style}}
+  {{did-update (fn this.changeReactState 'elevation' @elevation) @elevation}}
+  {{did-update (fn this.changeReactState 'square' @square) @square}}
+  {{did-update (fn this.changeReactState 'sx' @sx) @sx}}
+  {{did-update (fn this.changeReactState 'theme' this.themeManager.theme) this.themeManager.theme}}
+  {{did-update (fn this.changeReactState 'variant' @variant) @variant}}
 ></span>
 <span id={{this.childrenSpanId}}>
   {{yield}}
