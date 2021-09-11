@@ -7,11 +7,13 @@ import { v4 as uuidv4 } from 'uuid';
 import Icon from '@material-ui/core/Icon';
 import Component from "@glimmer/component";
 import ReactDOM from "react-dom";
+import { tracked } from '@glimmer/tracking';
 
 
 export default class BaseEmberPaperReact extends Component {
   @service themeManager;
   @service renderStack;
+  @tracked statePropsArgs;
 
   constructor() {
     super(...arguments);
@@ -30,6 +32,10 @@ export default class BaseEmberPaperReact extends Component {
     this.fixedClassString = '';
     this.reactComponentFragments = {};
 
+  }
+
+  get argMonitor() {
+    return this.statePropsArgs(this.args);
   }
 
   @action
