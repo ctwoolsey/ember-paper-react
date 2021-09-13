@@ -38,24 +38,7 @@ const stateProps = {
   theme: null
 }
 
-const ButtonStatePropsArgs = (args) => {
-  return {
-    class: args.class,
-    color: args.color,
-    disabled: args.disabled,
-    disableElevation: args.disableElevation,
-    disableFocusRipple: args.disableFocusRipple,
-    disableRipple: args.disableRipple,
-    fullWidth: args.fullWidth,
-    href: args.href,
-    size: args.size,
-    sx: args.sx,
-    variant: args.variant,
-    theme: args.theme
-  }
-}
-
 const ButtonProps = Object.assign({}, props, ButtonBaseProps);
 const ButtonStateProps = Object.assign({}, stateProps, ButtonBaseStateProps);
 
-export { ButtonProps, ButtonStateProps, ButtonStatePropsArgs }
+export { ButtonProps, ButtonStateProps }

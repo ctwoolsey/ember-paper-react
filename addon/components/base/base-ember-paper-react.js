@@ -7,13 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 import Icon from '@material-ui/core/Icon';
 import Component from "@glimmer/component";
 import ReactDOM from "react-dom";
-import { tracked } from '@glimmer/tracking';
-
+import { PaperStateProps } from "../../react-component-lib/utility/props/paper-props";
 
 export default class BaseEmberPaperReact extends Component {
   @service themeManager;
   @service renderStack;
-  @tracked statePropsArgs;
 
   constructor() {
     super(...arguments);
@@ -31,11 +29,22 @@ export default class BaseEmberPaperReact extends Component {
     this.childrenSpanId = uuidv4();
     this.fixedClassString = '';
     this.reactComponentFragments = {};
+    this.stateProps = {};
 
   }
 
-  get argMonitor() {
-    return this.statePropsArgs(this.args);
+  get changeArgs() {
+    let changeObj = {};
+    for (let propName in this.stateProps) {
+      if (propName !== 'theme') {
+        if (Object.prototype.hasOwnProperty.call(this.stateProps, propName)) {
+          changeObj[propName] = this.args[propName];
+        }
+      } else {
+        changeObj[propName] = this.themeManager.theme;
+      }
+    }
+    return changeObj;
   }
 
   @action

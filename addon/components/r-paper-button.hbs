@@ -1,16 +1,3 @@
 <span class={{this.componentType}} ...attributes
-  {{did-insert this.inserted }}
-  {{did-update (fn this.changeReactState 'class' @class) @class}}
-  {{did-update (fn this.changeReactState 'style' @style) @style}}
-  {{did-update (fn this.changeReactState 'color' @color) @color}}
-  {{did-update (fn this.changeReactState 'disabled' @disabled) @disabled}}
-  {{did-update (fn this.changeReactState 'disableElevation' @disableElevation) @disableElevation}}
-  {{did-update (fn this.changeReactState 'disableFocusRipple' @disableFocusRipple) @disableFocusRipple}}
-  {{did-update (fn this.changeReactState 'disableRipple' @disableRipple) @disableRipple}}
-  {{did-update (fn this.changeReactState 'fullWidth' @fullWidth) @fullWidth}}
-  {{did-update (fn this.changeReactState 'href' @href) @href}}
-  {{did-update (fn this.changeReactState 'size' @size) @size}}
-  {{did-update (fn this.changeReactState 'sx' @sx) @sx}}
-  {{did-update (fn this.changeReactState 'variant' @variant) @variant}}
-  {{did-update (fn this.changeReactState 'theme' this.themeManager.theme) this.themeManager.theme}}
-  ></span>{{yield}}<div id={{this.lastChildId}}></div>
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+></span>{{yield}}<div id={{this.lastChildId}}></div>
