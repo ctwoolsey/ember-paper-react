@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -7,6 +7,7 @@ export class ReactBase extends React.Component{
     this.componentRef = React.createRef();
     this.setStateProp = this.setStateProp.bind(this);
     this.staticProps = {};  //properties that are not connected to state
+    this.DefaultComponentToRender = null;
   }
 
   initialize(stateProperties) {
@@ -67,8 +68,22 @@ export class ReactBase extends React.Component{
   }
 
 
-  //////
+  //Default themed render
   render() {
-    return {};
+    const {
+      theme
+    } = this.state;
+
+    const ComponentToRender = this.DefaultComponentToRender;
+
+    return (
+      <ReactConditionalThemeProvider theme={theme}>
+        <ComponentToRender
+          ref={this.componentRef}
+          {...(this.placeProps())}
+          {...(this.placeStateProps())}
+        />
+      </ReactConditionalThemeProvider>
+    );
   }
 }
