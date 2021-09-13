@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Icon from '@material-ui/core/Icon';
 import Component from "@glimmer/component";
 import ReactDOM from "react-dom";
-import { PaperStateProps } from "../../react-component-lib/utility/props/paper-props";
 
 export default class BaseEmberPaperReact extends Component {
   @service themeManager;
@@ -57,7 +56,27 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  createIcon(icon, iconProps) {
+  createIcon(iconObj) {
+    /*let icon = null;
+    if (Object.prototype.hasOwnProperty.call(iconObj, 'icon')) {
+      icon = iconObj.icon;
+    }
+    let iconProps = null;
+    if (Object.prototype.hasOwnProperty.call(iconObj, 'iconProps)) {
+      iconProps = iconObj.iconProps;
+    }*/
+
+    if (iconObj && iconObj.icon) {
+      let props = iconObj.iconProps ? iconObj.iconProps : {};
+      return React.createElement(iconObj.icon, props);
+    } else if (iconObj && iconObj.iconProps) { //used for native FontAwesome for example
+      return React.createElement(Icon, iconObj.iconProps);
+    } else {
+      return null;
+    }
+  }
+
+  /*createIcon(icon, iconProps) {
     if (icon) {
       let props = iconProps ? iconProps : {};
       return React.createElement(icon, props);
@@ -66,7 +85,7 @@ export default class BaseEmberPaperReact extends Component {
     } else {
       return null;
     }
-  }
+  }*/
 
   isEndElement(child) {
     return child.id === this.lastChildId;
@@ -238,6 +257,10 @@ export default class BaseEmberPaperReact extends Component {
           break;
         case 'ref':
           props.ref = this.reactRef;
+          break;
+        case 'endIcon':
+        case 'startIcon':
+          props[propName] = this.createIcon(this.args[propName]);
           break;
         default:
           props[propName] = this.args[propName] || props[propName];

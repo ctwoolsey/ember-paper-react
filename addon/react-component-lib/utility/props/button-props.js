@@ -17,8 +17,6 @@ const props = {
   startIcon: null,
   sx: null,
   variant: null,
-  onClick: null,
-  id: null,
   theme: null,
   ref: null
 };

@@ -12,4 +12,22 @@ export default class RPaperButton extends BaseEmberPaperReact {
     this.stateProps = ButtonStateProps;
     this.reactElement = ReactButton;
   }
+
+  renderChildren() {
+    this.setChildrenFragment();
+    if (this.childrenFragment.childNodes.length > 0) {
+      const reactElement = this.reactRef.current.componentRef.current;
+      if (this.args.startIcon || this.args.endIcon) {
+        if (this.args.startIcon) {
+          const startIconSpan = reactElement.getElementsByClassName('MuiButton-startIcon')[0];
+          startIconSpan.parentNode.insertBefore(this.childrenFragment, startIconSpan.nextSibling);
+        } else {
+          const endIconSpan = reactElement.getElementsByClassName('MuiButton-endIcon')[0];
+          endIconSpan.parentNode.insertBefore(this.childrenFragment, endIconSpan);
+        }
+      } else {
+        reactElement.replaceChildren(this.childrenFragment);
+      }
+    }
+  }
 }
