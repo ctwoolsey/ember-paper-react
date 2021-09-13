@@ -74,6 +74,7 @@ export default class ApplicationController extends Controller {
 }
 ```
 To change the global theme, this same pattern can be called from anywhere in the ember app.  To change a specific component, modify the appropriate css file.
+All components support the ```@style``` and ```@class``` arguments.
 
 <i>Button</i>
 ------------------------------------------------------------------------------
