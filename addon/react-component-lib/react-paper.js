@@ -6,7 +6,7 @@ export class ReactPaper extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = Paper;
-    this.initialize(PaperStateProps)
+    this.initialize(PaperStateProps())
     this.addedEmberChildren = false;
   }
 }

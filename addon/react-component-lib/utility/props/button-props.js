@@ -33,7 +33,7 @@ const stateProps = {
   variant: null
 }
 
-const ButtonProps = Object.assign({}, ThemeProps, ButtonBaseProps, props);
-const ButtonStateProps = Object.assign({}, ThemeStateProps, ButtonBaseStateProps, stateProps);
+const ButtonProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props)};
+const ButtonStateProps = () => { return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps)};
 
 export { ButtonProps, ButtonStateProps }

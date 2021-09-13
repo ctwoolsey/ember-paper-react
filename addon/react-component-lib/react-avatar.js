@@ -6,6 +6,6 @@ export class ReactAvatar extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = Avatar;
-    this.initialize(AvatarStateProps);
+    this.initialize(AvatarStateProps());
   }
 }

@@ -1,11 +1,8 @@
 import {ReactAvatarGroup} from "../react-component-lib/react-avatar-group"
-import ReactDOM from 'react-dom';
-import React from 'react';
 import { action } from "@ember/object";
 import { COMPONENT_TYPES, AVATAR_GROUP } from "../react-component-lib/constants/constants";
 import BaseEmberPaperReact from "./base/base-ember-paper-react";
 import { AvatarGroupProps, AvatarGroupStateProps } from "../react-component-lib/utility/props/avatar-group-props";
-import { ReactPaper } from "../react-component-lib/react-paper";
 
 export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
 
@@ -13,9 +10,9 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AVATAR_GROUP;
 
-    this.props = AvatarGroupProps;
-    this.stateProps = AvatarGroupStateProps;
-    this.reactElement = ReactPaper;
+    this.props = AvatarGroupProps();
+    this.stateProps = AvatarGroupStateProps();
+    this.reactElement = ReactAvatarGroup;
 
 
     this.doneRendering = this.doneRendering.bind(this);
@@ -86,7 +83,7 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
 
     for(let i = 0; i < avatarElements.length; i++) {
       let avatar = avatarElements[i];
-      if (marginLeft) {
+      if (marginLeft && i !== 0) {
         avatar.style.marginLeft = marginLeft;
       } else {
         avatar.style.removeProperty('margin-left');

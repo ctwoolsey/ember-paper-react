@@ -18,7 +18,7 @@ const stateProps = {
   //variant: null
 }
 
-const AvatarGroupProps = Object.assign({}, ThemeProps, DivNativeProps, props);
-const AvatarGroupStateProps = Object.assign({}, ThemeStateProps, DivNativeStateProps, stateProps);
+const AvatarGroupProps = () => {return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
+const AvatarGroupStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
 
 export { AvatarGroupProps, AvatarGroupStateProps }

@@ -7,8 +7,8 @@ export default class RPaperAvatarComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AVATAR;
-    this.props = AvatarProps;
-    this.stateProps = AvatarStateProps;
+    this.props = AvatarProps();
+    this.stateProps = AvatarStateProps();
     this.reactElement = ReactAvatar;
   }
 }

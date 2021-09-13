@@ -6,7 +6,7 @@ const stateProps = {
   theme: null
 }
 
-const ThemeProps = Object.assign({}, props);
-const ThemeStateProps = Object.assign({}, stateProps);
+const ThemeProps = () => {return Object.assign({}, props)};
+const ThemeStateProps = () => {return Object.assign({}, stateProps)};
 
 export { ThemeProps, ThemeStateProps }

@@ -6,6 +6,6 @@ export class ReactButton extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = Button;
-    this.initialize(ButtonStateProps);
+    this.initialize(ButtonStateProps());
   }
 }

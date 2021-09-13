@@ -8,8 +8,8 @@ export default class RPaperButton extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.BUTTON;
-    this.props = ButtonProps;
-    this.stateProps = ButtonStateProps;
+    this.props = ButtonProps();
+    this.stateProps = ButtonStateProps();
     this.reactElement = ReactButton;
   }
 

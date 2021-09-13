@@ -19,7 +19,7 @@ const stateProps = {
   variant: null
 }
 
-const PaperProps = Object.assign({}, ThemeProps, DivNativeProps, props);
-const PaperStateProps = Object.assign({}, ThemeStateProps, DivNativeStateProps, stateProps );
+const PaperProps = () => {return Object.assign({}, ThemeProps(), DivNativeProps(), props)};
+const PaperStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps)};
 
 export { PaperProps, PaperStateProps }

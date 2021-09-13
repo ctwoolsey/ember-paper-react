@@ -22,7 +22,7 @@ const props = {
 const stateProps = {
 }
 
-const ButtonBaseProps = Object.assign({}, props, ButtonNativeProps);
-const ButtonBaseStateProps = Object.assign({}, stateProps, ButtonNativeStateProps);
+const ButtonBaseProps = () => {return Object.assign({}, ButtonNativeProps(), props)};
+const ButtonBaseStateProps = () => {return Object.assign({}, ButtonNativeStateProps(), stateProps)};
 
 export { ButtonBaseProps, ButtonBaseStateProps }

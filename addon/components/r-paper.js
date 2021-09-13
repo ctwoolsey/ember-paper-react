@@ -8,8 +8,8 @@ export default class RPaperComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.PAPER;
-    this.props = PaperProps;
-    this.stateProps = PaperStateProps;
+    this.props = PaperProps();
+    this.stateProps = PaperStateProps();
     this.reactElement = ReactPaper;
 
   }

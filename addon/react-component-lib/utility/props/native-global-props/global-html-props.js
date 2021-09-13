@@ -99,7 +99,7 @@ const stateProps = {
   style: null
 }
 
-const GlobalHtmlProps = Object.assign({}, props);
-const GlobalHtmlStateProps = Object.assign({}, stateProps);
+const GlobalHtmlProps = () => {return Object.assign({}, props)};
+const GlobalHtmlStateProps = () => {return Object.assign({}, stateProps)};
 
 export { GlobalHtmlProps, GlobalHtmlStateProps }
