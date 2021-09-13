@@ -67,9 +67,7 @@ export class ReactBase extends React.Component{
     }
   }
 
-
-  //Default themed render
-  render() {
+  themedRender() {
     const {
       theme
     } = this.state;
@@ -85,5 +83,26 @@ export class ReactBase extends React.Component{
         />
       </ReactConditionalThemeProvider>
     );
+  }
+
+  basicRender() {
+    const ComponentToRender = this.DefaultComponentToRender;
+
+    return (
+      <ComponentToRender
+        ref={this.componentRef}
+        {...(this.placeProps())}
+        {...(this.placeStateProps())}
+      />
+    );
+  }
+
+  //Default themed render
+  render() {
+    if (Object.prototype.hasOwnProperty.call(this.state, 'theme')) {
+      return this.themedRender();
+    } else {
+      return this.basicRender();
+    }
   }
 }

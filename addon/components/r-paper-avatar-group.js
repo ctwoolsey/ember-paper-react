@@ -29,12 +29,10 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
   }
 
   renderAdditionalItems() {
-    console.log('rendering addtional items in avatar group');
     this.removeStyleSheetForLastAvatarChild();
   }
 
   doneRendering() {
-    console.log('done rendering Avater Group');
     this.applyGroupAttributesToAvatars();
     const childrenHolder = document.getElementById(this.childrenSpanId);
     const config = { attributes: false, childList: true, subtree: false };
