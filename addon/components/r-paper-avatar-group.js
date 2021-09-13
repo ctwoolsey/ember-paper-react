@@ -3,13 +3,21 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { action } from "@ember/object";
 import { COMPONENT_TYPES, AVATAR_GROUP } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
+import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import { AvatarGroupProps, AvatarGroupStateProps } from "../react-component-lib/utility/props/avatar-group-props";
+import { ReactPaper } from "../react-component-lib/react-paper";
 
-export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent {
+export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AVATAR_GROUP;
+
+    this.props = AvatarGroupProps;
+    this.stateProps = AvatarGroupStateProps;
+    this.reactElement = ReactPaper;
+
+
     this.doneRendering = this.doneRendering.bind(this);
     this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
     this.applyGroupAttributesToAvatars = this.applyGroupAttributesToAvatars.bind(this);
@@ -155,25 +163,6 @@ export default class RPaperAvatarGroupComponent extends BaseReactEmberComponent 
   @action
   variant() {
     this.applyGroupAttributesToAvatars();
-  }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      children: this.args.children || null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      onClick: this.handleClickChange,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      variant: this.args.variant || null,
-      ref: this.reactRef,
-      id: this.findElementId()
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactAvatarGroup {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
   }
 
   willDestroy() {

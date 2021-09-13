@@ -12,10 +12,10 @@ const props = {
 };
 
 const stateProps = {
-  max: null,
-  spacing: null,
+  //max: null,   Commented out values are still stateful, just handled locally
+  //spacing: null,
   sx: null,
-  variant: null
+  //variant: null
 }
 
 const AvatarGroupProps = Object.assign({}, ThemeProps, DivNativeProps, props);
