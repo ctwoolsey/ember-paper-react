@@ -7,7 +7,7 @@ import { ReactBase } from "./base/react-base";
 export class ReactButton extends ReactBase{
   constructor(props) {
     super(props);
-    this.initializeState(ButtonStateProps);
+    this.initialize(ButtonStateProps);
   }
 
   render() {

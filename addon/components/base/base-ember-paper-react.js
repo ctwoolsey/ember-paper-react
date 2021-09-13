@@ -57,15 +57,6 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   createIcon(iconObj) {
-    /*let icon = null;
-    if (Object.prototype.hasOwnProperty.call(iconObj, 'icon')) {
-      icon = iconObj.icon;
-    }
-    let iconProps = null;
-    if (Object.prototype.hasOwnProperty.call(iconObj, 'iconProps)) {
-      iconProps = iconObj.iconProps;
-    }*/
-
     if (iconObj && iconObj.icon) {
       let props = iconObj.iconProps ? iconObj.iconProps : {};
       return React.createElement(iconObj.icon, props);
@@ -75,17 +66,6 @@ export default class BaseEmberPaperReact extends Component {
       return null;
     }
   }
-
-  /*createIcon(icon, iconProps) {
-    if (icon) {
-      let props = iconProps ? iconProps : {};
-      return React.createElement(icon, props);
-    } else if (iconProps) { //used for native FontAwesome for example
-      return React.createElement(Icon, iconProps);
-    } else {
-      return null;
-    }
-  }*/
 
   isEndElement(child) {
     return child.id === this.lastChildId;
@@ -267,14 +247,6 @@ export default class BaseEmberPaperReact extends Component {
           break;
       }
     }
-  }
-
-  initializeCommonProps(props) {
-    props.classString = this.initializeAndMergeClassWithClassString() || '';
-    props.id = this.findElementId();
-    props.sx = this.args.sx || null;
-    props.theme = this.themeManager.theme || null;
-    props.ref = this.reactRef;
   }
 
   checkIfCanRender() {

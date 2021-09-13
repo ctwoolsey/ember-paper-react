@@ -7,7 +7,7 @@ import { PaperStateProps } from "./utility/props/paper-props";
 export class ReactPaper extends ReactBase{
   constructor(props) {
     super(props);
-    this.initializeState(PaperStateProps)
+    this.initialize(PaperStateProps)
     this.addedEmberChildren = false;
   }
 

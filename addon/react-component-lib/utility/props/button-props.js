@@ -1,9 +1,9 @@
-import { ButtonBaseProps } from "./button-base-props";
-import { ButtonBaseStateProps } from "./button-base-props";
+import { ThemeProps, ThemeStateProps } from "./native-global-props/theme-props";
+import { ButtonBaseProps, ButtonBaseStateProps } from "./button-base-props";
 
 const props = {
   children: null,
-  class: '',
+  class: null,
   color: null,
   component: null,
   disabled: null,
@@ -13,16 +13,15 @@ const props = {
   endIcon: null,
   fullWidth: null,
   href: null,
-  size: '',
+  size: null,
   startIcon: null,
   sx: null,
   variant: null,
-  theme: null,
   ref: null
 };
 
 const stateProps = {
-  class: '',
+  class: null,
   color: null,
   disabled: null,
   disableElevation: null,
@@ -32,11 +31,10 @@ const stateProps = {
   href: null,
   size: null,
   sx: null,
-  variant: null,
-  theme: null
+  variant: null
 }
 
-const ButtonProps = Object.assign({}, props, ButtonBaseProps);
-const ButtonStateProps = Object.assign({}, stateProps, ButtonBaseStateProps);
+const ButtonProps = Object.assign({}, props, ButtonBaseProps, ThemeProps);
+const ButtonStateProps = Object.assign({}, stateProps, ButtonBaseStateProps, ThemeStateProps);
 
 export { ButtonProps, ButtonStateProps }

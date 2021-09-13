@@ -6,12 +6,13 @@ export class ReactBase extends React.Component{
     super(props);
     this.componentRef = React.createRef();
     this.setStateProp = this.setStateProp.bind(this);
+    this.staticProps = {};  //properties that are not connected to state
   }
 
-  initializeState(stateProperties) {
+  initialize(stateProperties) {
     this.state = {};
     let stateProps = Object.assign({}, stateProperties);
-    this.staticProps = {};
+
     for (let propName in this.props) {
       if (Object.prototype.hasOwnProperty.call(stateProps,propName)) {
         stateProps[propName] = this.props[propName];
