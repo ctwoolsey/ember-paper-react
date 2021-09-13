@@ -19,7 +19,7 @@ const props = {
 const stateProps = {
 }
 
-const ButtonNativeProps = Object.assign({}, props, GlobalHtmlProps);
-const ButtonNativeStateProps = Object.assign({}, stateProps, GlobalHtmlStateProps);
+const ButtonNativeProps = Object.assign({}, GlobalHtmlProps, props);
+const ButtonNativeStateProps = Object.assign({}, GlobalHtmlStateProps, stateProps);
 
 export { ButtonNativeProps, ButtonNativeStateProps }

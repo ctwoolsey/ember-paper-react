@@ -3,7 +3,7 @@ import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-n
 
 const props = {
   children: null,
-  class: null,
+  classes: null,
   component: null,
   elevation: null,
   square: null,
@@ -13,14 +13,13 @@ const props = {
 };
 
 const stateProps = {
-  class: null,
   elevation: null,
   square: null,
   sx: null,
   variant: null
 }
 
-const PaperProps = Object.assign({}, props, DivNativeProps, ThemeProps);
-const PaperStateProps = Object.assign({}, stateProps, DivNativeStateProps, ThemeStateProps);
+const PaperProps = Object.assign({}, ThemeProps, DivNativeProps, props);
+const PaperStateProps = Object.assign({}, ThemeStateProps, DivNativeStateProps, stateProps );
 
 export { PaperProps, PaperStateProps }

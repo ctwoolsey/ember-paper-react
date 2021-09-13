@@ -3,7 +3,7 @@ import { ButtonBaseProps, ButtonBaseStateProps } from "./button-base-props";
 
 const props = {
   children: null,
-  class: null,
+  classes: null,
   color: null,
   component: null,
   disabled: null,
@@ -21,7 +21,6 @@ const props = {
 };
 
 const stateProps = {
-  class: null,
   color: null,
   disabled: null,
   disableElevation: null,
@@ -34,7 +33,7 @@ const stateProps = {
   variant: null
 }
 
-const ButtonProps = Object.assign({}, props, ButtonBaseProps, ThemeProps);
-const ButtonStateProps = Object.assign({}, stateProps, ButtonBaseStateProps, ThemeStateProps);
+const ButtonProps = Object.assign({}, ThemeProps, ButtonBaseProps, props);
+const ButtonStateProps = Object.assign({}, ThemeStateProps, ButtonBaseStateProps, stateProps);
 
 export { ButtonProps, ButtonStateProps }
