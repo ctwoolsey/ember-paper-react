@@ -1,4 +1,4 @@
-import { ThemeProps, ThemeStateProps } from "./native-global-props/theme-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
 import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
 
 const props = {
@@ -19,7 +19,11 @@ const stateProps = {
   variant: null
 }
 
+const statefulPropsNotForComponent = {
+}
+
 const PaperProps = () => {return Object.assign({}, ThemeProps(), DivNativeProps(), props)};
 const PaperStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps)};
+const PaperPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { PaperProps, PaperStateProps }
+export { PaperProps, PaperStateProps, PaperPropsNotForComponent }

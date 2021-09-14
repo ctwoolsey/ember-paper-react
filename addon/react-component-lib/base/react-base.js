@@ -10,22 +10,24 @@ export class ReactBase extends React.Component{
     this.DefaultComponentToRender = null;
   }
 
-  initialize(stateProperties) {
+  initialize(stateProperties, statePropertiesNotForComponent) {
     this.state = {};
-    let stateProps = Object.assign({}, stateProperties);
+    this.statePropsForComponent = Object.assign({}, stateProperties);
+    let statePropsNotForComponent = Object.assign({}, statePropertiesNotForComponent);
 
     for (let propName in this.props) {
-      if (Object.prototype.hasOwnProperty.call(stateProps,propName)) {
-        stateProps[propName] = this.props[propName];
+      if (Object.prototype.hasOwnProperty.call(this.statePropsForComponent,propName)) {
+        this.statePropsForComponent[propName] = this.props[propName];
       } else {
-        this.staticProps[propName] = this.props[propName];
+        if (Object.prototype.hasOwnProperty.call(statePropsNotForComponent,propName)) {
+          statePropsNotForComponent[propName] = this.props[propName];
+        } else {
+          this.staticProps[propName] = this.props[propName];
+        }
       }
     }
 
-    if (!Object.prototype.hasOwnProperty.call(stateProps,'theme')) {
-      stateProps.theme = null;
-    }
-    Object.assign(this.state, stateProps);
+    Object.assign(this.state, this.statePropsForComponent, statePropsNotForComponent);
   }
 
   placeProps() {
@@ -40,15 +42,12 @@ export class ReactBase extends React.Component{
 
   placeStateProps() {
     let statePropObject = {};
-    for (let propName in this.state) {
+    for (let propName in this.statePropsForComponent) {
       switch (propName) {
         case 'class':
           if (this.state['class']) {
             statePropObject['className'] = this.state['class'];
           }
-          break;
-        case 'theme':
-          //filter out theme as it is only applied to the theme element
           break;
         default:
           if (this.state[propName]) {
@@ -67,25 +66,7 @@ export class ReactBase extends React.Component{
     }
   }
 
-  themedRender() {
-    const {
-      theme
-    } = this.state;
-
-    const ComponentToRender = this.DefaultComponentToRender;
-
-    return (
-      <ReactConditionalThemeProvider theme={theme}>
-        <ComponentToRender
-          ref={this.componentRef}
-          {...(this.placeProps())}
-          {...(this.placeStateProps())}
-        />
-      </ReactConditionalThemeProvider>
-    );
-  }
-
-  basicRender() {
+  renderComponent() {
     const ComponentToRender = this.DefaultComponentToRender;
 
     return (
@@ -94,6 +75,18 @@ export class ReactBase extends React.Component{
         {...(this.placeProps())}
         {...(this.placeStateProps())}
       />
+    )
+  }
+
+  themedRender() {
+    const {
+      theme
+    } = this.state;
+
+    return (
+      <ReactConditionalThemeProvider theme={theme}>
+        {this.renderComponent()}
+      </ReactConditionalThemeProvider>
     );
   }
 
@@ -102,7 +95,7 @@ export class ReactBase extends React.Component{
     if (Object.prototype.hasOwnProperty.call(this.state, 'theme')) {
       return this.themedRender();
     } else {
-      return this.basicRender();
+      return this.renderComponent();
     }
   }
 }

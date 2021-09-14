@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps } from "./native-global-props/theme-props";
-import { ButtonBaseProps, ButtonBaseStateProps } from "./button-base-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
+import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent } from "./button-base-props";
 
 const props = {
   children: null,
@@ -33,7 +33,11 @@ const stateProps = {
   variant: null
 }
 
+const statefulPropsNotForComponent = {
+}
+
 const ButtonProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props)};
 const ButtonStateProps = () => { return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps)};
+const ButtonPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ButtonProps, ButtonStateProps }
+export { ButtonProps, ButtonStateProps, ButtonPropsNotForComponent }

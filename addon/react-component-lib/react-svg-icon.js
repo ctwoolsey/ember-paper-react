@@ -1,30 +1,28 @@
 import React from 'react';
-import Icon from '@mui/material/Icon';
+import SvgIcon from '@mui/material/SvgIcon'
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 import { ReactBase } from "./base/react-base";
-import { IconStateProps, IconPropsNotForComponent } from "./utility/props/icon-props";
+import { SvgIconStateProps, SvgIconPropsNotForComponent } from "./utility/props/svg-icon-props";
 
-export class ReactIcon extends ReactBase{
+export class ReactSvgIcon extends ReactBase{
   constructor(props) {
     super(props);
-    this.initialize(IconStateProps(), IconPropsNotForComponent());
+    this.initialize(SvgIconStateProps(), SvgIconPropsNotForComponent());
   }
 
   render() {
     const {
-      theme,
-      iconName
+      theme
     } = this.state;
-
     return (
       <ReactConditionalThemeProvider theme={theme}>
-        <Icon
+        <SvgIcon
           ref={this.componentRef}
           {...(this.placeProps())}
           {...(this.placeStateProps())}
         >
-          {iconName}
-        </Icon>
+          <path d="" />
+        </SvgIcon>
       </ReactConditionalThemeProvider>
     );
   }

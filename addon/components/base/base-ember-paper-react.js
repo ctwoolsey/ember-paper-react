@@ -4,7 +4,7 @@ import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../../react-compone
 import React from "react";
 import { scheduleOnce } from "@ember/runloop";
 import { v4 as uuidv4 } from 'uuid';
-import Icon from '@material-ui/core/Icon';
+import Icon from '@mui/material/Icon';
 import Component from "@glimmer/component";
 import ReactDOM from "react-dom";
 
@@ -34,9 +34,10 @@ export default class BaseEmberPaperReact extends Component {
 
   get changeArgs() {
     let changeObj = {};
-    for (let propName in this.stateProps) {
+    let statefulProps = Object.assign({}, this.stateProps, this.notForComponentProps)
+    for (let propName in statefulProps) {
       if (propName !== 'theme') {
-        if (Object.prototype.hasOwnProperty.call(this.stateProps, propName)) {
+        if (Object.prototype.hasOwnProperty.call(statefulProps, propName)) {
           changeObj[propName] = this.args[propName];
         }
       } else {
@@ -223,27 +224,28 @@ export default class BaseEmberPaperReact extends Component {
     });
   }
 
-  initializeProps(props) {
-    for (let propName in props) {
+  initializeProps() {
+    Object.assign(this.props, this.notForComponentProps);
+    for (let propName in this.props) {
       switch (propName) {
         case 'class':
-          props.class = this.initializeAndMergeClassWithClassString() || '';
+          this.props.class = this.initializeAndMergeClassWithClassString() || '';
           break;
         case 'id':
-          props.id = this.findElementId();
+          this.props.id = this.findElementId();
           break;
         case 'theme':
-          props.theme = this.themeManager.theme || null;
+          this.props.theme = this.themeManager.theme || null;
           break;
         case 'ref':
-          props.ref = this.reactRef;
+          this.props.ref = this.reactRef;
           break;
         case 'endIcon':
         case 'startIcon':
-          props[propName] = this.createIcon(this.args[propName]);
+          this.props[propName] = this.createIcon(this.args[propName]);
           break;
         default:
-          props[propName] = this.args[propName] || props[propName];
+          this.props[propName] = this.args[propName] || this.props[propName];
           break;
       }
     }
@@ -255,15 +257,19 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  @action
-  inserted(element) {
-    console.log('Inserted: ' + this.componentType);
+  insertedTasks(element) {
     this.el = element;
     this.reactRef = React.createRef();
     this.renderStack.addRenderCallback(this.renderElement, this);
     scheduleOnce('render', this, this.checkIfCanRender);
 
-    this.initializeProps(this.props);
+    this.initializeProps();
+  }
+
+  @action
+  inserted(element) {
+    console.log('Inserted: ' + this.componentType);
+    this.insertedTasks(element);
     let ReactComponent = this.reactElement;
 
     const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.props}/>, element.parentElement);

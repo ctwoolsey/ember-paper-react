@@ -1,4 +1,4 @@
-import { ThemeProps, ThemeStateProps } from "./native-global-props/theme-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
 import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
 
 const props = {
@@ -24,7 +24,11 @@ const stateProps = {
   variant: null
 }
 
+const statefulPropsNotForComponent = {
+}
+
 const AvatarProps = () => { return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
 const AvatarStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
+const AvatarPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { AvatarProps, AvatarStateProps }
+export { AvatarProps, AvatarStateProps, AvatarPropsNotForComponent }
