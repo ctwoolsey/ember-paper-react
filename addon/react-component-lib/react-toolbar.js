@@ -1,39 +1,11 @@
-import React from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
+import Toolbar from '@mui/material/Toolbar';
+import { ToolbarStateProps, ToolbarPropsNotForComponent } from "./utility/props/toolbar-props";
+import { ReactBase } from "./base/react-base";
 
-export class ReactToolbar extends ReactBaseWithTheme{
+export class ReactToolbar extends ReactBase{
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state,
-      {
-        variant: props.variant
-      });
-
-  }
-
-  render() {
-    const {
-      classString,
-      sx,
-      variant,
-      theme
-    } = this.state;
-
-    return (
-      <ReactConditionalThemeProvider theme={theme}>
-        <Toolbar
-          {...(this.props.children ? {children: this.props.children} : {})}
-          {...(classString ? {className: classString} : {})}
-          {...(this.props.component ? {component: this.props.component} : {})}
-          {...(this.props.disableGutters ? {disableGutters: this.props.disableGutters} : {})}
-          {...(this.props.id ? {id: this.props.id} : {})}
-          {...(sx ? {sx: sx} : {})}
-          {...(variant ? {variant: variant} : {})}
-          ref={this.componentRef}
-        />
-      </ReactConditionalThemeProvider>
-    );
+    this.DefaultComponentToRender = Toolbar;
+    this.initialize(ToolbarStateProps(), ToolbarPropsNotForComponent());
   }
 }
