@@ -12,6 +12,7 @@ import {
   TextFieldPropsNotForComponent
 } from "../react-component-lib/utility/props/text-field-props";
 import { once, scheduleOnce } from "@ember/runloop";
+import React from "react";
 
 export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
   @tracked canRenderChildren = false;
@@ -26,10 +27,8 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
 
     this.handleName = true;
     this.inputmask = null;
-    //this.onChangeHandler = this.onChangeHandler.bind(this);
-    /*if (this.args.mask) {
-      this.handleClickChange = this.handleChange.bind(this);
-    }*/
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.inputRef = React.createRef();
 
     if (this.args.mask) {
       if (this.args.maskDefaults) {
@@ -46,11 +45,14 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
 
   }
 
-  overrideProps() {
-    if (this.args.onChange && this.args.mask) {
-      this.props.onChange = (event) => {
-        return this.args.onChange(event, this.inputmask.unmaskedvalue());
-      }
+  initializeProps() {
+    super.initializeProps();
+    if (this.args.onChange) {
+      this.props.onChange = this.onChangeHandler;
+    }
+
+    if (this.args.value === '') {
+      this.props.value = '';
     }
 
     if (this.args.select) {
@@ -59,6 +61,8 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
       }
       this.props.SelectProps.native = true;
     }
+    this.props.inputRef = this.inputRef;
+
   }
 
   renderChildren() {
@@ -86,13 +90,17 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
     this.canRenderChildren = true;
   }
 
-  /*onChangeHandler(event) {
+  onChangeHandler(event) {
     if (this.args.onChange && this.args.mask) {
       return this.args.onChange(event, this.inputmask.unmaskedvalue());
     } else {
-      return null;
+      if (this.args.onChange) {
+        return this.args.onChange(event);
+      } else {
+        return null;
+      }
     }
-  }*/
+  }
 
  /* @action
   inserted(element) {

@@ -14,6 +14,12 @@ export default class RPaperButton extends BaseEmberPaperReact {
     this.reactElement = ReactButton;
   }
 
+  initializeProps() {
+    super.initializeProps();
+    this.props.endIcon = this.createIcon(this.args.endIcon);
+    this.props.startIcon = this.createIcon(this.args.startIcon);
+  }
+
   renderChildren() {
     this.setChildrenFragment();
     if (this.childrenFragment.childNodes.length > 0) {

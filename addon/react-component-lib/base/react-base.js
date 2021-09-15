@@ -33,7 +33,7 @@ export class ReactBase extends React.Component{
   placeProps() {
     let propObject = {};
     for (let propName in this.staticProps) {
-      if (this.staticProps[propName]) {
+      if (this.staticProps[propName] !== null && this.staticProps[propName] !== undefined) {
         propObject[propName] = this.staticProps[propName];
       }
     }
@@ -50,12 +50,11 @@ export class ReactBase extends React.Component{
           }
           break;
         default:
-          if (this.state[propName]) {
+          if (this.state[propName] !== null && this.state[propName] !== undefined) {
             statePropObject[propName] = this.state[propName];
           }
           break;
       }
-
     }
     return statePropObject;
   }
