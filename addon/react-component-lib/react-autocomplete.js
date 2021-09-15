@@ -1,45 +1,16 @@
 import React from 'react';
 import Autocomplete from '@material-ui/core/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
+import { ReactBase } from "./base/react-base";
+import Appbar from "@mui/material/AppBar";
+import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from "./utility/props/autocomplete-props";
 
-export class ReactAutocomplete extends ReactBaseWithTheme{
+export class ReactAutocomplete extends ReactBase{
   constructor(props) {
     super(props);
-
-    this.state = Object.assign(this.state, {
-      chipProps: props.chipProps,
-      clearText: props.clearText,
-      closeText: props.closeText,
-      componentsProps: props.componentsProps,
-      defaultValue: props.defaultValue,
-      disableClearable: props.disableClearable,
-      disabled: props.disabled,
-      disabledItemsFocusable: props.disabledItemsFocusable,
-      filterOptions: props.filterOptions,
-      filterSelectedOptions: props.filterSelectedOptions,
-      forcePopupIcon: props.forcePopupIcon,
-      getOptionDisabled: props.getOptionDisabled,
-      groupBy: props.groupBy,
-      inputValue: props.inputValue,
-      listboxProps: props.listboxProps,
-      loading: props.loading,
-      loadingText: props.loadingText,
-      noOptionsText: props.noOptionsText,
-      open: props.open,
-      openText: props.openText,
-      options: props.options,
-      size: props.size,
-      value: props.value,
-      //The following are used by TextField
-      color: props.color,
-      error: props.error,
-      helperText: props.helperText,
-      label: props.label,
-      required: props.required,
-      variant: props.variant
-    });
+    this.DefaultComponentToRender = Autocomplete;
+    this.initialize(AutocompleteStateProps(), AutocompletePropsNotForComponent());
 
     //methods
     this.renderTextField = this.renderTextField.bind(this);

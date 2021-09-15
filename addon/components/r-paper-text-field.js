@@ -1,24 +1,35 @@
-import ReactDOM from 'react-dom';
+/*import ReactDOM from 'react-dom';
 import React from 'react';
-import { once, scheduleOnce } from "@ember/runloop";
-import { action } from "@ember/object";
+import { action } from "@ember/object";*/
 import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactTextField } from "../react-component-lib/react-text-field";
 import Inputmask from "inputmask";
 import { tracked } from '@glimmer/tracking';
+import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import {
+  TextFieldProps,
+  TextFieldStateProps,
+  TextFieldPropsNotForComponent
+} from "../react-component-lib/utility/props/text-field-props";
+import { once, scheduleOnce } from "@ember/runloop";
 
-export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
+export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
   @tracked canRenderChildren = false;
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.TEXTFIELD;
+    this.props = TextFieldProps();
+    this.stateProps = TextFieldStateProps();
+    this.notForComponentProps = TextFieldPropsNotForComponent();
+    this.reactElement = ReactTextField;
+
     this.handleName = true;
     this.inputmask = null;
-    if (this.args.mask) {
+    //this.onChangeHandler = this.onChangeHandler.bind(this);
+    /*if (this.args.mask) {
       this.handleClickChange = this.handleChange.bind(this);
-    }
+    }*/
 
     if (this.args.mask) {
       if (this.args.maskDefaults) {
@@ -33,6 +44,21 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     }
     this.moveChildren = this.moveChildren.bind(this);
 
+  }
+
+  overrideProps() {
+    if (this.args.onChange && this.args.mask) {
+      this.props.onChange = (event) => {
+        return this.args.onChange(event, this.inputmask.unmaskedvalue());
+      }
+    }
+
+    if (this.args.select) {
+      if (!this.props.SelectProps) {
+        this.props.SelectProps = {};
+      }
+      this.props.SelectProps.native = true;
+    }
   }
 
   renderChildren() {
@@ -60,16 +86,15 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
     this.canRenderChildren = true;
   }
 
-  handleChange(event) {
+  /*onChangeHandler(event) {
     if (this.args.onChange && this.args.mask) {
-      //if there is a mask return the unmasked value first, and the masked value second.
-      return this.args.onChange(this.inputmask.unmaskedvalue(), event.target.value );
+      return this.args.onChange(event, this.inputmask.unmaskedvalue());
     } else {
       return null;
     }
-  }
+  }*/
 
-  @action
+ /* @action
   inserted(element) {
     super.inserted(element);
 
@@ -121,6 +146,6 @@ export default class RPaperTextFieldComponent extends BaseReactEmberComponent {
 
     ReactDOM.render(reactPortal, document.createElement('div'));
 
-  }
+  }*/
 }
 

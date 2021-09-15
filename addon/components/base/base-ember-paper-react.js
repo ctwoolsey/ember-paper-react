@@ -240,6 +240,10 @@ export default class BaseEmberPaperReact extends Component {
         case 'ref':
           this.props.ref = this.reactRef;
           break;
+        case 'inputRef':
+          this.inputRef = React.createRef();
+          this.props.inputRef = this.inputRef;
+          break;
         case 'endIcon':
         case 'startIcon':
           this.props[propName] = this.createIcon(this.args[propName]);
@@ -264,6 +268,7 @@ export default class BaseEmberPaperReact extends Component {
     scheduleOnce('render', this, this.checkIfCanRender);
 
     this.initializeProps();
+    this.overrideProps && this.overrideProps();
   }
 
   @action
