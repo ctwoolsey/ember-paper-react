@@ -1,15 +1,21 @@
 import { ReactCardHeader } from '../react-component-lib/card-related/react-card-header';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  CardHeaderProps,
+  CardHeaderStateProps,
+  CardHeaderPropsNotForComponent
+} from '../react-component-lib/utility/props/card-header-props';
 
-export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
+export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
+    this.props = CardHeaderProps();
+    this.stateProps = CardHeaderStateProps();
+    this.notForComponentProps = CardHeaderPropsNotForComponent();
+    this.reactElement = ReactCardHeader;
     this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
   }
 
@@ -23,32 +29,6 @@ export default class RPaperCardHeaderComponent extends BaseReactEmberComponent {
 
   renderChildren() {
       //intentionally empty
-  }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      action: this.args.action || null,
-      avatar: this.args.avatar || null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      component: this.args.component || null,
-      disableTypography: this.args.disableTypography || false,
-      subheader: this.args.subheader || false,
-      subheaderTypographyProps: this.args.subheaderTypographyProps || false,
-      id: this.findElementId(),
-      onClick: this.handleClickChange,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      title: this.args.title || null,
-      titleTypographyProps: this.args.titleTypographyProps || null,
-      ref: this.reactRef,
-      renderAttributeComponents: this.renderAdditionalItems
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactCardHeader {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
   }
 
 }
