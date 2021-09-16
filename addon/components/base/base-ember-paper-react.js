@@ -53,7 +53,8 @@ export default class BaseEmberPaperReact extends Component {
       if (stateName === 'class') {
         value = this.mergeClassWithClassString();
       }
-      this.reactRef.current.setStateProp(stateName, value || null);
+      value = (value === undefined) ? null : value;
+      this.reactRef.current.setStateProp(stateName, value);
     }
   }
 
@@ -241,7 +242,9 @@ export default class BaseEmberPaperReact extends Component {
           this.props.ref = this.reactRef;
           break;
         default:
-          this.props[propName] = this.args[propName] || this.props[propName];
+          if (this.args[propName] !== null && this.args[propName] !== undefined) {
+            this.props[propName] = this.args[propName];
+          }
           break;
       }
     }
