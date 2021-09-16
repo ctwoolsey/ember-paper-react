@@ -1,19 +1,30 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
 import { ReactDrawer } from '../react-component-lib/react-drawer';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  DrawerProps,
+  DrawerStateProps,
+  DrawerPropsNotForComponent
+} from '../react-component-lib/utility/props/drawer-props';
 
-export default class RPaperDrawerComponent extends BaseReactEmberComponent {
+export default class RPaperDrawerComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DRAWER;
-    this.handleClickChange = null;
+    this.props = DrawerProps();
+    this.stateProps = DrawerStateProps();
+    this.notForComponentProps = DrawerPropsNotForComponent();
+    this.reactElement = ReactDrawer;
+
     this.reactRender = this.reactRender.bind(this);
-    this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
+  }
+
+  initializeProps() {
+    super.initializeProps();
+    this.props.reactRenderCallback = this.reactRender;
+    this.props.saveChildrenCallback = this.saveChildren;
   }
 
   renderElement() {
@@ -27,7 +38,7 @@ export default class RPaperDrawerComponent extends BaseReactEmberComponent {
 
     if (this.args.variant === 'persistent' ||
       this.args.variant === 'permanent' ||
-      (this.args.modalProps && this.args.modalProps.keepMounted)) {
+      (this.args.ModalProps && this.args.ModalProps.keepMounted)) {
       if (this.childrenFragment.childNodes.length > 0) {
         this.reactRef.current.componentRef.current.getElementsByClassName('MuiDrawer-paper')[0].replaceChildren(this.childrenFragment);
       }
@@ -48,45 +59,6 @@ export default class RPaperDrawerComponent extends BaseReactEmberComponent {
     while (childrenContainer.hasChildNodes()) {
       this.childrenFragment.appendChild(childrenContainer.firstChild);
     }
-  }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      anchor: this.args.anchor || null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      elevation: this.args.elevation || null,
-      hideBackdrop: this.args.hideBackdrop || null,
-      modalProps: this.args.modalProps || null,
-      onClose: this.args.onClose || null,
-      open: this.args.open || false,
-      paperProps: this.args.paperProps || null,
-      slideProps: this.args.slideProps || null,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      transitionDuration: this.args.transitionDuration || null,
-      variant: this.args.variant || null,
-      onOpen: this.args.onOpen || null,
-      disableBackdropTransition: this.args.disableBackdropTransition || null,
-      disableDiscovery: this.args.disableDiscovery || null,
-      disableSwipeToOpen: this.args.disableSwipeToOpen || null,
-      hysteresis: this.args.hysteresis || null,
-      minFlingVelocity: this.args.minFlingVelocity || null,
-      swipeAreaProps: this.args.swipeAreaProps || null,
-      swipeAreaWidth: this.args.swipeAreaWidth || null,
-      ref: this.reactRef,
-      reactRenderCallback: this.reactRender,
-      saveChildrenCallback: this.saveChildren,
-      swipeable: this.args.swipeable || false,
-      id: this.findElementId()
-    };
-
-    const reactPortal = ReactDOM.createPortal(<ReactDrawer {...props}/>, element.parentElement);
-
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 }
 

@@ -1,27 +1,17 @@
 import React from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { ReactBaseWithTheme } from './base/react-base-with-theme';
-import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import { ReactChildrenHolder } from './utility/react-children-holder';
+import { ReactBase } from './base/react-base';
+import { DrawerStateProps, DrawerPropsNotForComponent } from './utility/props/drawer-props';
+import Drawer from '@mui/material/Drawer';
 
 
-export class ReactDrawer extends ReactBaseWithTheme{
+export class ReactDrawer extends ReactBase{
   constructor(props) {
     super(props);
-    this.addedEmberChildren = false;
-    this.state = {
-      classString: props.classString,
-      open: props.open,
-      sx: props.sx,
-      theme: props.theme,
-      variant: props.variant
-    };
-
     this.addEventListeners = this.addEventListeners.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.componentRef = React.createRef();
-
+    this.initialize(DrawerStateProps(), DrawerPropsNotForComponent());
   }
 
   componentDidMount() {
@@ -44,7 +34,27 @@ export class ReactDrawer extends ReactBaseWithTheme{
     //having this somehow enables the underlying react functionality.  Without this, esc and clicking to close doesn't work.
   }
 
-  render() {
+  renderComponent() {
+    this.useReactChildrenHolder = (this.props.ModalProps && !this.props.ModalProps.keepMounted) ||
+      (!this.props.ModalProps && this.statePropsForComponent.variant !== 'permanent' && this.statePropsForComponent.variant !== 'persistent');
+
+    return (
+      <Drawer
+        ref={this.componentRef}
+        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      >
+        {this.useReactChildrenHolder &&
+          <ReactChildrenHolder
+            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
+            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
+          />
+        }
+      </Drawer>
+    )
+  }
+
+  /*render() {
 
     const {
       classString,
@@ -96,5 +106,5 @@ export class ReactDrawer extends ReactBaseWithTheme{
         </ComponentToUse>
       </ReactConditionalThemeProvider>
     );
-  }
+  }*/
 }

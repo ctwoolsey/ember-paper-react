@@ -8,8 +8,6 @@ import { DialogStateProps, DialogPropsNotForComponent } from '../utility/props/d
 export class ReactDialog extends ReactBase{
   constructor(props) {
     super(props);
-    this.addedEmberChildren = false;
-
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);

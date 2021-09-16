@@ -7,7 +7,6 @@ import {
   DialogPropsNotForComponent
 } from '../react-component-lib/utility/props/dialog-props';
 
-
 export default class RPaperDialogComponent extends BaseEmberPaperReact {
 
   constructor() {
