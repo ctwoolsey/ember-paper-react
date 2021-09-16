@@ -13,8 +13,8 @@ export class ReactTextField extends ReactBase{
     return (
       <TextField
         ref={this.componentRef}
-        {...(this.placeProps())}
-        {...(this.placeStateProps())}
+        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
       >
         <option>Dummy Option</option>
       </TextField>

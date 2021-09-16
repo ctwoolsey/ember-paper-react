@@ -1,32 +1,40 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
 import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
 import { ReactAutocomplete } from "../react-component-lib/react-autocomplete";
 import { A } from '@ember/array';
+import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from "../react-component-lib/utility/props/autocomplete-props";
+import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from "../react-component-lib/utility/props/text-field-props";
 
-export default class RPaperAutocompleteComponent extends BaseReactEmberComponent {
+export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
-    this.handleClickChange = this.handleChange.bind(this);
-    this.onOpen = this.onOpen.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
+    this.props = Object.assign({}, TextFieldProps(), AutocompleteProps());
+    this.stateProps = Object.assign({}, TextFieldStateProps(), AutocompleteStateProps());
+    this.notForComponentProps = Object.assign({}, TextFieldPropsNotForComponent(), AutocompletePropsNotForComponent());
+    this.reactElement = ReactAutocomplete;
+
+    this.onOpenHandler = this.onOpenHandler.bind(this);
     this.checkDropDownOpened = this.checkDropDownOpened.bind(this);
     this.dropDownOpened = this.dropDownOpened.bind(this);
     this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
     this.hasCustomDisplay = false;
     this.existingPoppers = A();
+
+    this.inputRef = React.createRef();
   }
 
-  handleChange(event, value, reason, details) {
-    if (this.args.onChange) {
-      return this.args.onChange(event, value, reason, details);
-    } else {
-      return null;
+  initializeProps() {
+    super.initializeProps();
+    this.props.onOpen = this.onOpenHandler;
+    this.props.clearIcon = this.createIcon(this.args.clearIcon, this.args.clearIconProps);
+    this.props.popupIcon = this.createIcon(this.args.popupIcon, this.args.popupIconProps);
+    if (!this.props.options) {
+      this.props.options = [];
     }
+    this.props.inputRef = this.inputRef;
   }
 
   renderAdditionalItems() {
@@ -40,23 +48,19 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     }
 
     if (this.args.open) {
-      this.handleOpen();
+      this.onOpenHandler();
     }
   }
   renderChildren() {
     //intentionally empty
   }
 
-  handleOpen() {
+  onOpenHandler() {
     this.setExistingPoppers();
     this.args.onOpen && this.args.onOpen(event);
     if (this.hasCustomDisplay) {
       setTimeout(this.checkDropDownOpened, 25);
     }
-  }
-
-  onOpen() {
-    this.handleOpen();
   }
 
   setExistingPoppers() {
@@ -134,91 +138,6 @@ export default class RPaperAutocompleteComponent extends BaseReactEmberComponent
     dropDown.classList.remove('ember-paper-react-hide');
   }
 
-  onInputChange(event, value, reason) {
-
-    this.args.onInputChange && this.args.onInputChange(event, value, reason);
-  }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    //currently does not implement inputRef
-    let props = {
-      options: this.args.options || null,
-      onClose: this.args.onClose || null,
-      onHighlightChange: this.args.onHighlightChange || null,
-      onInputChange: this.onInputChange,
-      onOpen: this.onOpen,
-      autoComplete: this.args.autoComplete || null,
-      autoHighlight: this.args.autoHighlight || null,
-      autoSelect: this.args.autoSelect || null,
-      blurOnSelect: this.args.blurOnSelect || null,
-      chipProps: this.args.chipProps || null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      clearIcon: this.createIcon(this.args.clearIcon, this.args.clearIconProps),
-      clearOnBlur: this.args.clearOnBlur || null,
-      clearOnEscape: this.args.clearOnEscape || null,
-      clearText: this.args.clearText || null,
-      closeText: this.args.closeText || null,
-      componentsProps: this.args.componentsProps || null,
-      defaultValue: this.args.defaultValue || null,
-      disableClearable: this.args.disableClearable || null,
-      disableCloseOnSelect: this.args.disableCloseOnSelect || null,
-      disabled: this.args.disabled || null,
-      disabledItemsFocusable: this.args.disabledItemsFocusable || null,
-      disableListWrap: this.args.disableListWrap || null,
-      disablePortal: this.args.disablePortal || null,
-      filterOptions: this.args.filterOptions || null,
-      filterSelectedOptions: this.args.filterSelectedOptions || null,
-      forcePopupIcon: this.args.forcePopupIcon || null,
-      freeSolo: this.args.freeSolo || null,
-      getLimitTagsText: this.args.getLimitTagsText || null,
-      getOptionDisabled: this.args.getOptionDisabled || null,
-      getOptionLabel: this.args.getOptionLabel || null,
-      groupBy: this.args.groupBy || null,
-      handleHomeEndKeys: this.args.handleHomeEndKeys || null,
-      id: this.findElementId(),
-      includeInputInList: this.args.includeInputInList || null,
-      inputValue: this.args.inputValue || null,
-      isOptionEqualToValue: this.args.isOptionEqualToValue || null,
-      limitTags: this.args.limitTags || null,
-      listboxComponent: this.args.listboxComponent ||  null,
-      listboxProps: this.args.listboxProps ||  null,
-      loading: this.args.loading ||  null,
-      loadingText: this.args.loadingText ||  null,
-      multiple: this.args.multiple ||  null,
-      noOptionsText: this.args.noOptionsText ||  null,
-      open: this.args.open ||  null,
-      openOnFocus: this.args.openOnFocus ||  null,
-      openText: this.args.openText ||  null,
-      paperComponent: this.args.paperComponent ||  null,
-      popperComponent: this.args.popperComponent ||  null,
-      popupIcon: this.createIcon(this.args.popupIcon, this.args.popupIconProps),
-      renderGroup: this.args.renderGroup ||  null,
-      renderInput: this.args.renderInput ||  null,
-      renderOption: this.args.renderOption ||  null,
-      renderTags: this.args.renderTags ||  null,
-      selectOnFocus: this.args.selectOnFocus ||  null,
-      size: this.args.size || null,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      value: this.args.value || null,
-      ref: this.reactRef,
-      onChange: this.handleClickChange,
-      color: this.args.color || null,
-      error: this.args.error || null,
-      formHelperTextProps: this.args.formHelperTextProps || null,
-      helperText: this.args.helperText || null,
-      inputLabelProps: this.args.inputLabelProps || null,
-      label: this.args.label || null,
-      required: this.args.required || null,
-      variant: this.args.variant || null
-    };
-
-    const reactPortal = ReactDOM.createPortal(<ReactAutocomplete {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-  }
 }
 
 

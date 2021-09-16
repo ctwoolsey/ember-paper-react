@@ -30,19 +30,20 @@ export class ReactBase extends React.Component{
     Object.assign(this.state, this.statePropsForComponent, statePropsNotForComponent);
   }
 
-  placeProps() {
+  placeProps(staticProps) {
     let propObject = {};
-    for (let propName in this.staticProps) {
-      if (this.staticProps[propName] !== null && this.staticProps[propName] !== undefined) {
-        propObject[propName] = this.staticProps[propName];
+    for (let propName in staticProps) {
+      if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
+        propObject[propName] = staticProps[propName];
       }
     }
+
     return propObject;
   }
 
-  placeStateProps() {
+  placeStateProps(statePropsForComponent) {
     let statePropObject = {};
-    for (let propName in this.statePropsForComponent) {
+    for (let propName in statePropsForComponent) {
       switch (propName) {
         case 'class':
           if (this.state['class']) {
@@ -71,8 +72,8 @@ export class ReactBase extends React.Component{
     return (
       <ComponentToRender
         ref={this.componentRef}
-        {...(this.placeProps())}
-        {...(this.placeStateProps())}
+        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
       />
     )
   }

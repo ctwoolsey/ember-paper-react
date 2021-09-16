@@ -1,146 +1,103 @@
 import React from 'react';
-import Autocomplete from '@material-ui/core/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
 import { ReactBase } from "./base/react-base";
-import Appbar from "@mui/material/AppBar";
 import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from "./utility/props/autocomplete-props";
+import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from "./utility/props/text-field-props";
 
+
+//Theme does not appear to be effective on this component
 export class ReactAutocomplete extends ReactBase{
   constructor(props) {
     super(props);
-    this.DefaultComponentToRender = Autocomplete;
-    this.initialize(AutocompleteStateProps(), AutocompletePropsNotForComponent());
-
-    //methods
     this.renderTextField = this.renderTextField.bind(this);
-
+    this.initialize();
   }
 
+  initialize() {
+    this.state = {};
+    this.statePropsForAutocompleteComponent = {};
+    this.statePropsForTextFieldComponent = {};
+    this.statePropsNotForAutocompleteComponent = {};
+    this.statePropsNotForTextFieldComponent = {};
+    this.staticPropsForAutocompleteComponent = {};
+    this.staticPropsForTextFieldComponent = {};
 
-  renderTextField(params) {
-    const {
-      color,
-      error,
-      helperText,
-      label,
-      required,
-      variant
-    } = this.state;
+    let propsForAutocompleteComponent = Object.assign({}, AutocompleteProps());
+    let propsForTextFieldComponent = Object.assign({}, TextFieldProps());
+    let statePropsForAutocompleteComponent = Object.assign({}, AutocompleteStateProps());
+    let statePropsForTextFieldComponent = Object.assign({}, TextFieldStateProps());
+    let statePropsNotForAutocompleteComponent = Object.assign({}, AutocompletePropsNotForComponent);
+    let statePropsNotForTextFieldComponent = Object.assign({}, TextFieldPropsNotForComponent);
 
-    return (
-      <TextField
-        {...params}
-        {...(color ? {color: color} : {})}
-        {...(error ? {error: error} : {})}
-        {...(this.props.formHelperTextProps ? {FormHelperTextProps: this.props.formHelperTextProps} : {})}
-        {...(helperText ? {helperText: helperText} : {})}
-        {...(this.props.inputLabelProps ? {InputLabelProps: this.props.inputLabelProps} : {})}
-        {...(label ? {label: label} : {})}
-        {...(required ? {required: required} : {})}
-        {...(variant ? {variant: variant} : {})}
-      />
-    )
+    for (let propName in this.props) {
+      let isStateProperty = false;
+      if (Object.prototype.hasOwnProperty.call(statePropsForAutocompleteComponent,propName)) {
+        this.statePropsForAutocompleteComponent[propName] = this.props[propName];
+        isStateProperty = true;
+      }
+      if (Object.prototype.hasOwnProperty.call(statePropsForTextFieldComponent,propName)) {
+        this.statePropsForTextFieldComponent[propName] = this.props[propName];
+        isStateProperty = true;
+      }
+
+      let isStatePropertyNotForComponent = false;
+      if (!isStateProperty) {
+        if (Object.prototype.hasOwnProperty.call(statePropsNotForAutocompleteComponent,propName)) {
+          this.statePropsNotForAutocompleteComponent[propName] = this.props[propName];
+          isStatePropertyNotForComponent = true;
+        }
+        if (Object.prototype.hasOwnProperty.call(statePropsNotForTextFieldComponent,propName)) {
+          this.statePropsNotForTextFieldComponent[propName] = this.props[propName];
+          isStatePropertyNotForComponent = true;
+        }
+
+        if (!isStatePropertyNotForComponent) {
+          if (Object.prototype.hasOwnProperty.call(propsForAutocompleteComponent,propName)) {
+            this.staticPropsForAutocompleteComponent[propName] = this.props[propName];
+          }
+          if (Object.prototype.hasOwnProperty.call(propsForTextFieldComponent,propName)) {
+            this.staticPropsForTextFieldComponent[propName] = this.props[propName];
+          }
+        }
+      }
+    }
+
+    Object.assign(this.state,
+                  this.statePropsForAutocompleteComponent,
+                  this.statePropsForTextFieldComponent,
+                  this.statePropsNotForAutocompleteComponent,
+                  this.statePropsNotForTextFieldComponent);
+
+    this.staticPropsForAutocompleteComponent['renderInput'] = this.renderTextField;
+    delete this.staticPropsForTextFieldComponent.ref;
   }
+
 
   render() {
-
-    /* properties not currently implemented: clearIcon, popupIcon
-    */
     const {
-      chipProps,
-      classString,
-      clearText,
-      closeText,
-      componentsProps,
-      defaultValue,
-      disableClearable,
-      disabled,
-      disabledItemsFocusable,
-      filterOptions,
-      filterSelectedOptions,
-      forcePopupIcon,
-      getOptionDisabled,
-      groupBy,
-      inputValue,
-      listboxProps,
-      loading,
-      loadingText,
-      noOptionsText,
-      open,
-      openText,
-      options,
-      size,
-      sx,
-      theme,
-      value
+      theme
     } = this.state;
 
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <Autocomplete
           ref={this.componentRef}
-          {...(options ? {options: options} : {options: []})}
-          onChange={this.props.onChange}
-          {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
-          {...(this.props.onHighlightChange ? {onHighlightChange: this.props.onHighlightChange} : {})}
-          {...(this.props.onInputChange ? {onInputChange: this.props.onInputChange} : {})}
-          {...(this.props.onOpen ? {onOpen: this.props.onOpen} : {})}
-          {...(this.props.autoComplete ? {autoComplete: this.props.autoComplete} : {})}
-          {...(this.props.autoHighlight ? {autoHighlight: this.props.autoHighlight} : {})}
-          {...(this.props.autoSelect ? {autoSelect: this.props.autoSelect} : {})}
-          {...(this.props.blurOnSelect ? {blurOnSelect: this.props.blurOnSelect} : {})}
-          {...(chipProps ? {ChipProps: chipProps} : {})}
-          {...(classString ? {className: classString} : {})}
-          {...(this.props.clearIcon ? {clearIcon: this.props.clearIcon} : {})}
-          {...(this.props.clearOnBlur ? {clearOnBlur: this.props.clearOnBlur} : {})}
-          {...(this.props.clearOnEscape ? {clearOnEscape: this.props.clearOnEscape} : {})}
-          {...(clearText ? {clearText: clearText} : {})}
-          {...(closeText ? {closeText: closeText} : {})}
-          {...(componentsProps ? {componentsProps: componentsProps} : {})}
-          {...(defaultValue ? {defaultValue: defaultValue} : {})}
-          {...(disableClearable ? {disableClearable: disableClearable} : {})}
-          {...(this.props.disableCloseOnSelect ? {disableCloseOnSelect: this.props.disableCloseOnSelect} : {})}
-          disabled={disabled}
-          {...(disabledItemsFocusable ? {disabledItemsFocusable: disabledItemsFocusable} : {})}
-          {...(this.props.disableListWrap ? {disableListWrap: this.props.disableListWrap} : {})}
-          {...(this.props.disablePortal ? {disablePortal: this.props.disablePortal} : {})}
-          {...(filterOptions ? {filterOptions: filterOptions} : {})}
-          {...(filterSelectedOptions ? {filterSelectedOptions: filterSelectedOptions} : {})}
-          {...(forcePopupIcon ? {forcePopupIcon: forcePopupIcon} : {})}
-          {...(this.props.freeSolo ? {freeSolo: this.props.freeSolo} : {})}
-          {...(this.props.getLimitTagsText ? {getLimitTagsText: this.props.getLimitTagsText} : {})}
-          {...(getOptionDisabled ? {getOptionDisabled: getOptionDisabled} : {})}
-          {...(this.props.getOptionLabel ? {getOptionLabel: this.props.getOptionLabel} : {})}
-          {...(groupBy ? {groupBy: groupBy} : {})}
-          {...(this.props.handleHomeEndKeys ? {handleHomeEndKeys: this.props.handleHomeEndKeys} : {})}
-          {...(this.props.id ? {id: this.props.id} : {})}
-          {...(this.props.includeInputInList ? {includeInputInList: this.props.includeInputInList} : {})}
-          {...(inputValue ? {inputValue: inputValue} : {})}
-          {...(this.props.isOptionEqualToValue ? {isOptionEqualToValue: this.props.isOptionEqualToValue} : {})}
-          {...(this.props.limitTags ? {limitTags: this.props.limitTags} : {})}
-          {...(this.props.listboxComponent ? {ListboxComponent: this.props.listboxComponent} : {})}
-          {...(listboxProps ? {ListboxProps: listboxProps} : {})}
-          {...(loading ? {loading: loading} : {})}
-          {...(loadingText ? {loadingText: loadingText} : {})}
-          {...(this.props.multiple ? {multiple: this.props.multiple} : {})}
-          {...(noOptionsText ? {noOptionsText: noOptionsText} : {})}
-          {...(open ? {open: open} : {})}
-          {...(this.props.openOnFocus ? {openOnFocus: this.props.openOnFocus} : {})}
-          {...(openText ? {openText: openText} : {})}
-          {...(this.props.paperComponent ? {PaperComponent: this.props.paperComponent} : {})}
-          {...(this.props.popperComponent ? {PopperComponent: this.props.popperComponent} : {})}
-          {...(this.props.popupIcon ? {popupIcon: this.props.popupIcon} : {})}
-          {...(this.props.renderGroup ? {renderGroup: this.props.renderGroup} : {})}
-          {...(this.props.renderOption ? {renderOption: this.props.renderOption} : {})}
-          {...(this.props.renderTags ? {renderTags: this.props.renderTags} : {})}
-          {...(this.props.selectOnFocus ? {renderTags: this.props.selectOnFocus} : {})}
-          {...(size ? {size: size} : {})}
-          {...(sx ? {sx: sx} : {})}
-          {...(value ? {value: value} : {value: ''})}
-          renderInput={this.renderTextField}
+          {...(this.placeProps(this.staticPropsForAutocompleteComponent))}
+          {...(this.placeStateProps(this.statePropsForAutocompleteComponent))}
         />
       </ReactConditionalThemeProvider>
     );
+  }
+
+  renderTextField(params) {
+    return (
+      <TextField
+        {...params}
+        inputRef={this.staticPropsForTextFieldComponent.inputRef}
+        {...(this.placeStateProps(this.statePropsForTextFieldComponent))}
+      />
+    )
   }
 }
