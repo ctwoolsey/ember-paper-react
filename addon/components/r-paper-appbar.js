@@ -1,11 +1,11 @@
-import {ReactAppbar} from "../react-component-lib/react-appbar"
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import {ReactAppbar} from '../react-component-lib/react-appbar'
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   AppbarProps,
   AppbarStateProps,
   AppbarPropsNotForComponent
-} from "../react-component-lib/utility/props/appbar-props";
+} from '../react-component-lib/utility/props/appbar-props';
 
 export default class RPaperAppbarComponent extends BaseEmberPaperReact {
 

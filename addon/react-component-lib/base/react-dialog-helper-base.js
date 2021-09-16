@@ -1,4 +1,4 @@
-import { ReactBaseWithTheme } from "./react-base-with-theme";
+import { ReactBaseWithTheme } from './react-base-with-theme';
 
 export class ReactDialogHelperBase extends ReactBaseWithTheme{
   constructor(props) {

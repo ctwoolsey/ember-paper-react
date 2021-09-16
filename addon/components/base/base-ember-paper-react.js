@@ -1,12 +1,12 @@
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../../react-component-lib/constants/constants";
-import React from "react";
-import { scheduleOnce } from "@ember/runloop";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../../react-component-lib/constants/constants';
+import React from 'react';
+import { scheduleOnce } from '@ember/runloop';
 import { v4 as uuidv4 } from 'uuid';
 import Icon from '@mui/material/Icon';
-import Component from "@glimmer/component";
-import ReactDOM from "react-dom";
+import Component from '@glimmer/component';
+import ReactDOM from 'react-dom';
 
 export default class BaseEmberPaperReact extends Component {
   @service themeManager;

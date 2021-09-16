@@ -1,10 +1,10 @@
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../../react-component-lib/constants/constants";
-import React from "react";
-import { scheduleOnce } from "@ember/runloop";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../../react-component-lib/constants/constants';
+import React from 'react';
+import { scheduleOnce } from '@ember/runloop';
 import { v4 as uuidv4 } from 'uuid';
-import BaseReactEmberActionsComponent from "./base-react-ember-actions";
+import BaseReactEmberActionsComponent from './base-react-ember-actions';
 import Icon from '@material-ui/core/Icon';
 
 

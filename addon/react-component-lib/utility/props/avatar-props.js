@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
-import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
+import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
 
 const props = {
   alt: null,

@@ -1,15 +1,15 @@
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import { ReactTextField } from "../react-component-lib/react-text-field";
-import Inputmask from "inputmask";
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { ReactTextField } from '../react-component-lib/react-text-field';
+import Inputmask from 'inputmask';
 import { tracked } from '@glimmer/tracking';
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   TextFieldProps,
   TextFieldStateProps,
   TextFieldPropsNotForComponent
-} from "../react-component-lib/utility/props/text-field-props";
-import { once, scheduleOnce } from "@ember/runloop";
-import React from "react";
+} from '../react-component-lib/utility/props/text-field-props';
+import { once, scheduleOnce } from '@ember/runloop';
+import React from 'react';
 
 export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
   @tracked canRenderChildren = false;

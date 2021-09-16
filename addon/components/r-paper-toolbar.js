@@ -1,11 +1,11 @@
-import {ReactToolbar} from "../react-component-lib/react-toolbar"
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import {ReactToolbar} from '../react-component-lib/react-toolbar'
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   ToolbarProps,
   ToolbarStateProps,
   ToolbarPropsNotForComponent
-} from "../react-component-lib/utility/props/toolbar-props";
+} from '../react-component-lib/utility/props/toolbar-props';
 
 export default class RPaperToolbarComponent extends BaseEmberPaperReact {
 

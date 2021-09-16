@@ -1,8 +1,8 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon'
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
-import { ReactBase } from "./base/react-base";
-import { SvgIconStateProps, SvgIconPropsNotForComponent } from "./utility/props/svg-icon-props";
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import { ReactBase } from './base/react-base';
+import { SvgIconStateProps, SvgIconPropsNotForComponent } from './utility/props/svg-icon-props';
 
 export class ReactSvgIcon extends ReactBase{
   constructor(props) {
@@ -21,7 +21,7 @@ export class ReactSvgIcon extends ReactBase{
           {...(this.placeProps())}
           {...(this.placeStateProps())}
         >
-          <path d="" />
+          <path d='' />
         </SvgIcon>
       </ReactConditionalThemeProvider>
     );

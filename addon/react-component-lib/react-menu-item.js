@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
+import { ReactBaseWithTheme } from './base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 
 export class ReactMenuItem extends ReactBaseWithTheme{
   constructor(props) {

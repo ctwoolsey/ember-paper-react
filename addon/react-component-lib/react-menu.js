@@ -1,8 +1,8 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
-import { ReactChildrenHolder } from "./utility/react-children-holder";
+import { ReactBaseWithTheme } from './base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import { ReactChildrenHolder } from './utility/react-children-holder';
 
 
 export class ReactMenu extends ReactBaseWithTheme{

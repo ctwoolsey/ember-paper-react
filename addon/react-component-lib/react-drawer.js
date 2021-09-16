@@ -1,9 +1,9 @@
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
-import { ReactChildrenHolder } from "./utility/react-children-holder";
+import { ReactBaseWithTheme } from './base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import { ReactChildrenHolder } from './utility/react-children-holder';
 
 
 export class ReactDrawer extends ReactBaseWithTheme{

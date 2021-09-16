@@ -1,7 +1,7 @@
 import React from 'react';
 import CardHeader from '@material-ui/core/CardHeader';
-import { ReactBaseWithTheme } from "../base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
+import { ReactBaseWithTheme } from '../base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
@@ -41,11 +41,11 @@ export class ReactCardHeader extends ReactBaseWithTheme{
           {...(classString ? {className: classString} : {})}
           {...(this.props.component ? {component: this.props.component} : {})}
           {...(this.props.disableTypography ? {disableTypography: this.props.disableTypography} : {})}
-          {...(subheader ? {subheader: subheader} : {subheader: "Dummy"})}
+          {...(subheader ? {subheader: subheader} : {subheader: 'Dummy'})}
           {...(subheaderTypographyProps ? {subheaderTypographyProps: subheaderTypographyProps} : {})}
           {...(this.props.id ? {id: this.props.id} : {})}
           {...(sx ? {sx: sx} : {})}
-          {...(title ? {title: title} : {title: "Dummy"})}
+          {...(title ? {title: title} : {title: 'Dummy'})}
           {...(titleTypographyProps ? {titleTypographyProps: titleTypographyProps} : {})}
           ref={this.componentRef}
         />

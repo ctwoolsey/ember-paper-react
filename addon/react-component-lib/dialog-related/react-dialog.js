@@ -1,8 +1,8 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import { ReactDialogHelperBase } from "../base/react-dialog-helper-base";
-import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
-import { ReactChildrenHolder } from "../utility/react-children-holder";
+import { ReactDialogHelperBase } from '../base/react-dialog-helper-base';
+import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
+import { ReactChildrenHolder } from '../utility/react-children-holder';
 
 
 export class ReactDialog extends ReactDialogHelperBase{

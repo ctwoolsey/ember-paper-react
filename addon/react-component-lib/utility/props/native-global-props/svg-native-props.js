@@ -1,4 +1,4 @@
-import { GlobalSvgProps, GlobalSvgStateProps } from "./global-svg-props";
+import { GlobalSvgProps, GlobalSvgStateProps } from './global-svg-props';
 
 const props = {
   baseProfile: null,

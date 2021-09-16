@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent } from "./theme-props";
-import { SpanNativeProps, SpanNativeStateProps } from "./native-global-props/span-native-props";
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent } from './theme-props';
+import { SpanNativeProps, SpanNativeStateProps } from './native-global-props/span-native-props';
 
 const props = {
   baseClassName: null,

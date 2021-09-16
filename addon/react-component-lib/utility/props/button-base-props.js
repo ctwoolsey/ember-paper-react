@@ -1,5 +1,5 @@
-import { ButtonNativeProps, ButtonNativeStateProps } from "./native-global-props/button-native-props";
-import { ThemePropsNotForComponent } from "./theme-props";
+import { ButtonNativeProps, ButtonNativeStateProps } from './native-global-props/button-native-props';
+import { ThemePropsNotForComponent } from './theme-props';
 
 const props = {
   action: null,

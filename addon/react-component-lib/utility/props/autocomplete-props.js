@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
+import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
 
 const props = {
   options: null,

@@ -1,6 +1,6 @@
 import AvatarGroup from '@mui/material/AvatarGroup';
-import { ReactBase } from "./base/react-base";
-import { AvatarGroupStateProps, AvatarGroupNotForComponent } from "./utility/props/avatar-group-props";
+import { ReactBase } from './base/react-base';
+import { AvatarGroupStateProps, AvatarGroupNotForComponent } from './utility/props/avatar-group-props';
 
 export class ReactAvatarGroup extends ReactBase{
   constructor(props) {

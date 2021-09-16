@@ -1,5 +1,5 @@
-import { ReactThemeBase } from "./react-theme-base";
-import React from "react";
+import { ReactThemeBase } from './react-theme-base';
+import React from 'react';
 
 export class ReactBaseWithTheme extends ReactThemeBase{
   constructor(props) {

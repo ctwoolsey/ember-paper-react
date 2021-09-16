@@ -1,11 +1,11 @@
-import { ReactCheckbox } from "../../react-component-lib/react-checkbox";
-import { ReactRadio } from "../../react-component-lib/react-radio";
-import { ReactSwitch } from "../../react-component-lib/react-switch";
+import { ReactCheckbox } from '../../react-component-lib/react-checkbox';
+import { ReactRadio } from '../../react-component-lib/react-radio';
+import { ReactSwitch } from '../../react-component-lib/react-switch';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base-react-ember";
+import { action } from '@ember/object';
+import { COMPONENT_TYPES } from '../../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base-react-ember';
 
 
 /* Currently does not handle passing inputProps or use inputRef */

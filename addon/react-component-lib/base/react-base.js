@@ -1,5 +1,5 @@
-import React from "react";
-import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
+import React from 'react';
+import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 
 export class ReactBase extends React.Component{
   constructor(props) {

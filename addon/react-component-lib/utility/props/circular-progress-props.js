@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent } from "./svg-icon-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
+import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent } from './svg-icon-props';
 
 const props = {
   classes: null,

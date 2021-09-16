@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
-import { GlobalSvgProps, GlobalSvgStateProps } from "./native-global-props/global-svg-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
+import { GlobalSvgProps, GlobalSvgStateProps } from './native-global-props/global-svg-props';
 
 const props = {
   children: null,

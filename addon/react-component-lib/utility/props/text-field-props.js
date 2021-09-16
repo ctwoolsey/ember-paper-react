@@ -1,5 +1,5 @@
-import { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent } from "./form-control-props";
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent} from "./theme-props";
+import { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent } from './form-control-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent} from './theme-props';
 
 const props = {
   autoComplete: null,

@@ -1,9 +1,9 @@
-import { ReactCardActions } from "../react-component-lib/card-related/react-card-actions";
+import { ReactCardActions } from '../react-component-lib/card-related/react-card-actions';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
+import { action } from '@ember/object';
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base/base-react-ember';
 
 export default class RPaperCardActionsComponent extends BaseReactEmberComponent {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import CardActions from '@material-ui/core/CardActions';
-import { ReactBaseWithTheme } from "../base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
+import { ReactBaseWithTheme } from '../base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 
 export class ReactCardActions extends ReactBaseWithTheme{
   constructor(props) {

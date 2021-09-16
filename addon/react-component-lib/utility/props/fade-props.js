@@ -1,4 +1,4 @@
-import { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent } from "./transition-props"
+import { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent } from './transition-props'
 
 const props = {
   appear: null,

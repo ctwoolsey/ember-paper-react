@@ -24,7 +24,7 @@ export class ReactChildrenHolder extends React.Component{
 
   render() {
     return (
-      <span ref={this.spanRef} className="children-holder"></span>
+      <span ref={this.spanRef} className='children-holder'></span>
     );
   }
 }

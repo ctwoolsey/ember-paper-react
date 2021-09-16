@@ -1,8 +1,8 @@
 import React from 'react';
 import Icon from '@mui/material/Icon';
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
-import { ReactBase } from "./base/react-base";
-import { IconStateProps, IconPropsNotForComponent } from "./utility/props/icon-props";
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import { ReactBase } from './base/react-base';
+import { IconStateProps, IconPropsNotForComponent } from './utility/props/icon-props';
 
 export class ReactIcon extends ReactBase{
   constructor(props) {

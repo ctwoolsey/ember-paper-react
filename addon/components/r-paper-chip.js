@@ -1,10 +1,10 @@
-import {ReactChip} from "../react-component-lib/react-chip"
+import {ReactChip} from '../react-component-lib/react-chip'
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
-import { ReactAvatar } from "../react-component-lib/react-avatar";
+import { action } from '@ember/object';
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base/base-react-ember';
+import { ReactAvatar } from '../react-component-lib/react-avatar';
 
 export default class RPaperChip extends BaseReactEmberComponent {
 

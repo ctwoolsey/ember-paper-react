@@ -1,6 +1,6 @@
 import Toolbar from '@mui/material/Toolbar';
-import { ToolbarStateProps, ToolbarPropsNotForComponent } from "./utility/props/toolbar-props";
-import { ReactBase } from "./base/react-base";
+import { ToolbarStateProps, ToolbarPropsNotForComponent } from './utility/props/toolbar-props';
+import { ReactBase } from './base/react-base';
 
 export class ReactToolbar extends ReactBase{
   constructor(props) {

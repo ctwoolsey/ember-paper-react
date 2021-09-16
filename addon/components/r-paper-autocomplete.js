@@ -1,10 +1,10 @@
 import React from 'react';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from "../react-component-lib/constants/constants";
-import { ReactAutocomplete } from "../react-component-lib/react-autocomplete";
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-lib/constants/constants';
+import { ReactAutocomplete } from '../react-component-lib/react-autocomplete';
 import { A } from '@ember/array';
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
-import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from "../react-component-lib/utility/props/autocomplete-props";
-import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from "../react-component-lib/utility/props/text-field-props";
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from '../react-component-lib/utility/props/autocomplete-props';
+import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from '../react-component-lib/utility/props/text-field-props';
 
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
@@ -123,7 +123,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
         }
       } else {
         //Since no grouping the dropdown structure is organized differently for only option display
-        const dropDownListItems = dropDown.getElementsByTagName("LI");
+        const dropDownListItems = dropDown.getElementsByTagName('LI');
         for(let i = 0; i < dropDownListItems.length; i++) {
           const clonedCustomDropDownListItem = customDropDownListItems[i].cloneNode(true);
           const customFragment = document.createDocumentFragment();

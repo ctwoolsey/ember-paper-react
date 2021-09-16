@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { once, scheduleOnce } from "@ember/runloop";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
-import { ReactMenu } from "../react-component-lib/react-menu";
-import { v4 as uuidv4 } from "uuid";
+import { action } from '@ember/object';
+import { once, scheduleOnce } from '@ember/runloop';
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base/base-react-ember';
+import { ReactMenu } from '../react-component-lib/react-menu';
+import { v4 as uuidv4 } from 'uuid';
 import { tracked } from '@glimmer/tracking';
 
 export default class RPaperMenuComponent extends BaseReactEmberComponent {

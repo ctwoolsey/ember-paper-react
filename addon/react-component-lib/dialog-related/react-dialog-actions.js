@@ -1,7 +1,7 @@
 import React from 'react';
 import DialogActions from '@material-ui/core/DialogActions';
-import { ReactDialogHelperBase } from "../base/react-dialog-helper-base";
-import { ReactConditionalThemeProvider } from "../react-conditional-theme-provider";
+import { ReactDialogHelperBase } from '../base/react-dialog-helper-base';
+import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 
 export class ReactDialogActions extends ReactDialogHelperBase{
   constructor(props) {

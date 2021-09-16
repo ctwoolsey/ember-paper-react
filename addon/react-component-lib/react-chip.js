@@ -1,7 +1,7 @@
 import React from 'react';
 import Chip from '@material-ui/core/Chip';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
+import { ReactBaseWithTheme } from './base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 
 /* deleteIcon & Icon are not currently supported */
 export class ReactChip extends ReactBaseWithTheme{

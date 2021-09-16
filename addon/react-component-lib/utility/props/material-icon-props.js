@@ -1,4 +1,4 @@
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent} from "./svg-icon-props";
+import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent} from './svg-icon-props';
 
 const props = {
 };

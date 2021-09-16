@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from "./theme-props";
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent } from "./button-base-props";
+import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
+import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent } from './button-base-props';
 
 const props = {
   children: null,

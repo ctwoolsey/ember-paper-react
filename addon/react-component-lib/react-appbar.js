@@ -1,6 +1,6 @@
 import Appbar from '@mui/material/AppBar';
-import { ReactBase } from "./base/react-base";
-import { AppbarStateProps, AppbarPropsNotForComponent } from "./utility/props/appbar-props";
+import { ReactBase } from './base/react-base';
+import { AppbarStateProps, AppbarPropsNotForComponent } from './utility/props/appbar-props';
 
 export class ReactAppbar extends ReactBase{
   constructor(props) {

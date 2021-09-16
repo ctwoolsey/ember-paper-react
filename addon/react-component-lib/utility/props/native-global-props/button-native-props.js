@@ -1,5 +1,5 @@
-import { GlobalHtmlProps } from "./global-html-props";
-import { GlobalHtmlStateProps } from "./global-html-props";
+import { GlobalHtmlProps } from './global-html-props';
+import { GlobalHtmlStateProps } from './global-html-props';
 
 const props = {
   autoFocus: null,

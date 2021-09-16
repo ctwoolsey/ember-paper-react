@@ -1,5 +1,5 @@
-import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent} from "./theme-props";
+import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent} from './theme-props';
 
 const props = {
   children: null,

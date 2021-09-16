@@ -1,4 +1,4 @@
-import { ReactLabeledCheckRadioSwitch } from "./react-labeled-check-radio-switch";
+import { ReactLabeledCheckRadioSwitch } from './react-labeled-check-radio-switch';
 import Radio from '@material-ui/core/Radio';
 
 export class ReactRadio extends ReactLabeledCheckRadioSwitch {

@@ -1,5 +1,5 @@
-import { FadeProps, FadeStateProps, FadePropsNotForComponent } from "./fade-props";
-import { GlobalHtmlProps, GlobalHtmlStateProps } from "./native-global-props/global-html-props";
+import { FadeProps, FadeStateProps, FadePropsNotForComponent } from './fade-props';
+import { GlobalHtmlProps, GlobalHtmlStateProps } from './native-global-props/global-html-props';
 
 const props = {
   open: null,

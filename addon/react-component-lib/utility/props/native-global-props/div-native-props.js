@@ -1,4 +1,4 @@
-import { GlobalHtmlProps, GlobalHtmlStateProps } from "./global-html-props";
+import { GlobalHtmlProps, GlobalHtmlStateProps } from './global-html-props';
 
 const DivNativeProps = () => {return Object.assign({}, GlobalHtmlProps())};
 const DivNativeStateProps = () => {return Object.assign({}, GlobalHtmlStateProps())};

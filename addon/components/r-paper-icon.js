@@ -1,11 +1,11 @@
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import { ReactIcon } from "../react-component-lib/react-icon";
-import { ReactSvgIcon } from "../react-component-lib/react-svg-icon";
-import { ReactMaterialIcon } from "../react-component-lib/react-material-icon";
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
-import { IconProps, IconStateProps, IconPropsNotForComponent } from "../react-component-lib/utility/props/icon-props";
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent } from "../react-component-lib/utility/props/svg-icon-props";
-import { MaterialIconProps, MaterialIconStateProps, MaterialIconPropsNotForComponent } from "../react-component-lib/utility/props/material-icon-props";
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { ReactIcon } from '../react-component-lib/react-icon';
+import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
+import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import { IconProps, IconStateProps, IconPropsNotForComponent } from '../react-component-lib/utility/props/icon-props';
+import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent } from '../react-component-lib/utility/props/svg-icon-props';
+import { MaterialIconProps, MaterialIconStateProps, MaterialIconPropsNotForComponent } from '../react-component-lib/utility/props/material-icon-props';
 
 export default class RPaperIconComponent extends BaseEmberPaperReact {
 

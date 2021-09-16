@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactBaseWithTheme } from "./base/react-base-with-theme";
-import { ReactConditionalThemeProvider } from "./react-conditional-theme-provider";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { ReactBaseWithTheme } from './base/react-base-with-theme';
+import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 /* Does not currently implement:
     checkedIcon, icon, id, indeterminateIcon

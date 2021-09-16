@@ -1,4 +1,4 @@
-import { PaperProps, PaperStateProps, PaperPropsNotForComponent } from "./paper-props";
+import { PaperProps, PaperStateProps, PaperPropsNotForComponent } from './paper-props';
 
 const props = {
   children: null,

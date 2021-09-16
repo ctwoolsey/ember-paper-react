@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
-import { ReactDialog } from "../react-component-lib/dialog-related/react-dialog";
+import { action } from '@ember/object';
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base/base-react-ember';
+import { ReactDialog } from '../react-component-lib/dialog-related/react-dialog';
 
 export default class RPaperDialogComponent extends BaseReactEmberComponent {
 

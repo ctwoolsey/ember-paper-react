@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from "@ember/object";
-import { COMPONENT_TYPES } from "../react-component-lib/constants/constants";
-import BaseReactEmberComponent from "./base/base-react-ember";
-import { ReactTooltip } from "../react-component-lib/react-tooltip";
+import { action } from '@ember/object';
+import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import BaseReactEmberComponent from './base/base-react-ember';
+import { ReactTooltip } from '../react-component-lib/react-tooltip';
 
 export default class RPaperTooltipComponent extends BaseReactEmberComponent {
 
