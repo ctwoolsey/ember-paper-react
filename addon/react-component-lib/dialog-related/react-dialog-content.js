@@ -1,30 +1,11 @@
-import React from 'react';
-import DialogContent from '@material-ui/core/DialogContent';
-import { ReactDialogHelperBase } from '../base/react-dialog-helper-base';
-import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
+import DialogContent from '@mui/material/DialogContent';
+import { ReactBase } from '../base/react-base';
+import { DialogContentStateProps, DialogContentPropsNotForComponent } from '../utility/props/dialog-content-props';
 
-export class ReactDialogContent extends ReactDialogHelperBase{
+export class ReactDialogContent extends ReactBase{
   constructor(props) {
     super(props);
-  }
-
-  render() {
-    const {
-      sx,
-      theme,
-      classString
-    } = this.state;
-
-    return (
-      <ReactConditionalThemeProvider theme={theme}>
-        <DialogContent
-                       {...(classString ? {className: classString} : {})}
-                       {...(this.props.dividers ? {dividers: this.props.dividers} : {})}
-                       {...(this.props.id ? {id: this.props.id} : {})}
-                       {...(sx ? {sx: sx} : {})}
-                       ref={this.componentRef}
-        />
-      </ReactConditionalThemeProvider>
-    );
+    this.DefaultComponentToRender = DialogContent;
+    this.initialize(DialogContentStateProps(), DialogContentPropsNotForComponent());
   }
 }

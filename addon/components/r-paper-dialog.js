@@ -1,19 +1,31 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
 import { ReactDialog } from '../react-component-lib/dialog-related/react-dialog';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  DialogProps,
+  DialogStateProps,
+  DialogPropsNotForComponent
+} from '../react-component-lib/utility/props/dialog-props';
 
-export default class RPaperDialogComponent extends BaseReactEmberComponent {
+
+export default class RPaperDialogComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG;
-    this.handleClickChange = null;
+    this.props = DialogProps();
+    this.stateProps = DialogStateProps();
+    this.notForComponentProps = DialogPropsNotForComponent();
+    this.reactElement = ReactDialog;
+
     this.reactRender = this.reactRender.bind(this);
-    this.renderElement = this.renderElement.bind(this);
     this.saveChildren = this.saveChildren.bind(this);
+  }
+
+  initializeProps() {
+    super.initializeProps();
+    this.props.reactRenderCallback = this.reactRender;
+    this.props.saveChildrenCallback = this.saveChildren;
   }
 
   renderElement() {
@@ -39,43 +51,6 @@ export default class RPaperDialogComponent extends BaseReactEmberComponent {
     while (childrenContainer.hasChildNodes()) {
       this.childrenFragment.appendChild(childrenContainer.firstChild);
     }
-  }
-
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      open: this.args.open || false,
-      ariaDescribedBy: this.args.ariaDescribedBy || '',
-      ariaLabelledBy: this.args.ariaLabelledBy || '',
-      backdropComponent: this.args.backdropComponent || null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      disableEscapeKeyDown: this.args.disableEscapeKeyDown || null,
-      fullScreen: this.args.fullScreen || null,
-      fullWidth: this.args.fullWidth || null,
-      keepOpenOnClickOutside: this.args.keepOpenOnClickOutside || false,
-      maxWidth: this.args.maxWidth || false,
-      onBackdropClick: this.args.onBackdropClick,
-      onClose: this.args.onClose || null,
-      paperComponent: this.args.paperComponent || null,
-      paperProps: this.args.paperProps || null,
-      scroll: this.args.scroll || null,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      transitionComponent: this.args.transitionComponent || null,
-      transitionDuration: this.args.transitionDuration || null,
-      transitionProps: this.args.transitionProps || null,
-      ref: this.reactRef,
-      id: this.findElementId(),
-      reactRenderCallback: this.reactRender,
-      saveChildrenCallback: this.saveChildren
-    };
-
-    const reactPortal = ReactDOM.createPortal(<ReactDialog {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
   }
 }
 

@@ -1,29 +1,11 @@
-import React from 'react';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { ReactDialogHelperBase } from '../base/react-dialog-helper-base';
-import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
+import DialogTitle from '@mui/material/DialogTitle';
+import { ReactBase } from '../base/react-base';
+import { DialogTitleStateProps, DialogTitlePropsNotForComponent } from '../utility/props/dialog-title-props';
 
-export class ReactDialogTitle extends ReactDialogHelperBase{
+export class ReactDialogTitle extends ReactBase{
   constructor(props) {
     super(props);
-  }
-
-  render() {
-    const {
-      sx,
-      theme,
-      classString
-    } = this.state;
-
-    return (
-      <ReactConditionalThemeProvider theme={theme}>
-        <DialogTitle
-          {...(classString ? {className: classString} : {})}
-          {...(this.props.id ? {id: this.props.id} : {})}
-          {...(sx ? {sx: sx} : {})}
-          ref={this.componentRef}
-        />
-      </ReactConditionalThemeProvider>
-    );
+    this.DefaultComponentToRender = DialogTitle;
+    this.initialize(DialogTitleStateProps(), DialogTitlePropsNotForComponent());
   }
 }

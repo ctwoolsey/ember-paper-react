@@ -1,34 +1,21 @@
 import { ReactDialogTitle } from '../react-component-lib/dialog-related/react-dialog-title';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  DialogTitleProps,
+  DialogTitleStateProps,
+  DialogTitlePropsNotForComponent
+} from '../react-component-lib/utility/props/dialog-title-props';
 
-export default class RPaperDialogTitleComponent extends BaseReactEmberComponent {
+export default class RPaperDialogTitleComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG_TITLE;
-    this.renderElement = this.renderElement.bind(this);
+    this.props = DialogTitleProps();
+    this.stateProps = DialogTitleStateProps();
+    this.notForComponentProps = DialogTitlePropsNotForComponent();
+    this.reactElement = ReactDialogTitle;
   }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      ref: this.reactRef,
-      id: this.findElementId()
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactDialogTitle {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
-  }
-
 }
 
 

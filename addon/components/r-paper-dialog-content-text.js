@@ -1,35 +1,22 @@
 import { ReactDialogContentText } from '../react-component-lib/dialog-related/react-dialog-content-text';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  DialogContentTextProps,
+  DialogContentTextStateProps,
+  DialogContentTextPropsNotForComponent
+} from '../react-component-lib/utility/props/dialog-content-text-props';
 
 
-export default class RPaperDialogContentTextComponent extends BaseReactEmberComponent {
+export default class RPaperDialogContentTextComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG_CONTENT_TEXT;
-    this.renderElement = this.renderElement.bind(this);
+    this.props = DialogContentTextProps();
+    this.stateProps = DialogContentTextStateProps();
+    this.notForComponentProps = DialogContentTextPropsNotForComponent();
+    this.reactElement = ReactDialogContentText;
   }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      ref: this.reactRef,
-      id: this.findElementId()
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactDialogContentText {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
-  }
-
 }
 
 

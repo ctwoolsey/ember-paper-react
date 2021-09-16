@@ -1,34 +1,20 @@
 import { ReactDialogActions } from '../react-component-lib/dialog-related/react-dialog-actions';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
+import BaseEmberPaperReact from './base/base-ember-paper-react';
+import {
+  DialogActionsProps,
+  DialogActionsStateProps,
+  DialogActionsPropsNotForComponent
+} from '../react-component-lib/utility/props/dialog-actions-props';
 
-export default class RPaperDialogActionsComponent extends BaseReactEmberComponent {
+export default class RPaperDialogActionsComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG_ACTIONS;
-    this.renderElement = this.renderElement.bind(this);
+    this.props = DialogActionsProps();
+    this.stateProps = DialogActionsStateProps();
+    this.notForComponentProps = DialogActionsPropsNotForComponent();
+    this.reactElement = ReactDialogActions;
   }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      disableSpacing: this.args.disableSpacing || null,
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      ref: this.reactRef,
-      id: this.findElementId()
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactDialogActions {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
-  }
-
 }
 
