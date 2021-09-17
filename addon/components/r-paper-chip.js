@@ -1,51 +1,31 @@
 import {ReactChip} from '../react-component-lib/react-chip'
-import ReactDOM from 'react-dom';
 import React from 'react';
-import { action } from '@ember/object';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseReactEmberComponent from './base/base-react-ember';
 import { ReactAvatar } from '../react-component-lib/react-avatar';
+import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import {
+  ChipProps,
+  ChipStateProps,
+  ChipPropsNotForComponent,
+  ChipStatePropsNotForComponent
+} from "../react-component-lib/utility/props/chip-props";
 
-export default class RPaperChip extends BaseReactEmberComponent {
+export default class RPaperChip extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CHIP;
+    this.props = ChipProps();
+    this.stateProps = ChipStateProps();
+    this.notForComponentProps = ChipPropsNotForComponent();
+    this.notForComponentStateProps = ChipStatePropsNotForComponent();
+    this.reactElement = ReactChip;
   }
 
-  @action
-  iconChanged() {
-    if (this.reactRef) {
-      this.reactRef.current.setIcon(this.createIcon(this.args.icon, this.args.iconProps) || null);
-    }
+  initializeProps() {
+    super.initializeProps();
+    this.props.icon = this.createIcon(this.args.icon);
+    this.props.avatar = this.args.avatar ? <ReactAvatar {...this.args.avatar}/> : null;
+    this.props.deleteIcon = this.createIcon(this.args.deleteIcon);
   }
-
-  @action
-  inserted(element) {
-    super.inserted(element);
-
-    let props = {
-      avatar: this.args.avatar ? <ReactAvatar {...this.args.avatar}/> : null,
-      classString: this.initializeAndMergeClassWithClassString() || '',
-      clickable: this.args.clickable || null,
-      color: this.args.color || null,
-      component: this.args.component || null,
-      disabled: this.args.disabled || false,
-      icon: this.createIcon(this.args.icon, this.args.iconProps),
-      label: this.args.label || null,
-      onClick: this.handleClickChange,
-      onDelete: this.args.onDelete || null,
-      size: this.args.size || '',
-      sx: this.args.sx || null,
-      theme: this.themeManager.theme || null,
-      variant: this.args.variant || null,
-      ref: this.reactRef,
-      id: this.findElementId()
-    }
-
-    const reactPortal = ReactDOM.createPortal(<ReactChip {...props}/>, element.parentElement);
-    ReactDOM.render(reactPortal, document.createElement('div'));
-
-  }
-
 }
