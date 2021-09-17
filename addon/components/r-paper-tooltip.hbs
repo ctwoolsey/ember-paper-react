@@ -1,15 +1,3 @@
 <span class={{this.componentType}} ...attributes
-  {{did-insert this.inserted }}
-  {{did-update this.class @class}}
-  {{did-update this.style @style}}
-  {{did-update this.title @title}}
-  {{did-update this.disabled @disabled}}
-  {{did-update this.disableFocusListener @disableFocusListener}}
-  {{did-update this.disableHoverListener @disableHoverListener}}
-  {{did-update this.disableInteractive @disableInteractive}}
-  {{did-update this.disableTouchListener @disableTouchListener}}
-  {{did-update this.open @open}}
-  {{did-update this.placement @placement}}
-  {{did-update this.sx @sx}}
-  {{did-update this.globalThemeChanged this.themeManager.theme}}
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
 ></span>{{yield}}<div id={{this.lastChildId}}></div>

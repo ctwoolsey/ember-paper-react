@@ -1,75 +1,34 @@
 import React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import { ReactBaseWithTheme } from './base/react-base-with-theme';
-import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
+import Tooltip from '@mui/material/Tooltip';
+import Button from '@mui/material/Button';
+import { ReactBase } from "./base/react-base";
+import {
+  TooltipPropsNotForComponent,
+  TooltipStateProps,
+  TooltipStatePropsNotForComponent
+} from "./utility/props/tooltip-props";
 
-export class ReactTooltip extends ReactBaseWithTheme{
+export class ReactTooltip extends ReactBase{
   constructor(props) {
     super(props);
-
-    this.state = Object.assign(this.state, {
-      title: props.title,
-      disabled: props.disabled,
-      disableFocusListener: props.disableFocusListener,
-      disableHoverListener: props.disableHoverListener,
-      disableInteractive: props.disableInteractive,
-      disableTouchListener: props.disableTouchListener,
-      open: props.open,
-      placement: props.placement
-    });
-
+    this.initialize(TooltipStateProps(), TooltipPropsNotForComponent(), TooltipStatePropsNotForComponent());
   }
 
-  render() {
+  renderComponent() {
     const {
-      title,
-      classString,
-      disabled,
-      disableFocusListener,
-      disableHoverListener,
-      disableInteractive,
-      disableTouchListener,
-      open,
-      placement,
-      sx,
-      theme
+      disabled
     } = this.state;
 
     return (
-      <ReactConditionalThemeProvider theme={theme}>
-        <Tooltip
-          ref={this.componentRef}
-          {...(title ? {title: title} : {title: ''})}
-          {...(this.props.arrow ? {arrow: this.props.arrow} : {})}
-          {...(classString ? {className: classString} : {})}
-          {...(this.props.describeChild ? {describeChild: this.props.describeChild} : {})}
-          {...(disableFocusListener ? {disableFocusListener: disableFocusListener} : {})}
-          {...(disableHoverListener ? {disableHoverListener: disableHoverListener} : {})}
-          {...(disableInteractive ? {disableInteractive: disableInteractive} : {})}
-          {...(disableTouchListener ? {disableTouchListener: disableTouchListener} : {})}
-          {...(this.props.enterDelay ? {enterDelay: this.props.enterDelay} : {})}
-          {...(this.props.enterNextDelay ? {enterNextDelay: this.props.enterNextDelay} : {})}
-          {...(this.props.enterTouchDelay ? {enterTouchDelay: this.props.enterTouchDelay} : {})}
-          {...(this.props.followCursor ? {followCursor: this.props.followCursor} : {})}
-          {...(this.props.id ? {id: this.props.id} : {})}
-          {...(this.props.leaveDelay ? {leaveDelay: this.props.leaveDelay} : {})}
-          {...(this.props.leaveTouchDelay ? {leaveTouchDelay: this.props.leaveTouchDelay} : {})}
-          {...(this.props.onClose ? {onClose: this.props.onClose} : {})}
-          {...(this.props.onOpen ? {onOpen: this.props.onOpen} : {})}
-          {...(open ? {open: open} : {})}
-          {...(placement ? {placement: placement} : {})}
-          {...(this.props.popperComponent ? {PopperComponent: this.props.popperComponent} : {})}
-          {...(this.props.popperProps ? {PopperProps: this.props.popperProps} : {})}
-          {...(sx ? {sx: sx} : {})}
-          {...(this.props.transitionComponent ? {TransitionComponent: this.props.transitionComponent} : {})}
-          {...(this.props.transitionProps ? {TransitionProps: this.props.transitionProps} : {})}
-        >
-          <span>
-            <Button {...(disabled ? { disabled: disabled} : {})}>Dummy Tooltip Child</Button>
-          </span>
-        </Tooltip>
-      </ReactConditionalThemeProvider>
-    );
+      <Tooltip
+        ref={this.componentRef}
+        {...(this.placeStaticProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      >
+        <span>
+          <Button {...(disabled ? { disabled: disabled} : {})}>Dummy Tooltip Child</Button>
+        </span>
+      </Tooltip>
+    )
   }
 }
