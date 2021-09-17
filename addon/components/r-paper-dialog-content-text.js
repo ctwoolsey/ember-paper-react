@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   DialogContentTextProps,
   DialogContentTextStateProps,
-  DialogContentTextPropsNotForComponent
+  DialogContentTextPropsNotForComponent,
+  DialogContentTextStatePropsNotForComponent
 } from '../react-component-lib/utility/props/dialog-content-text-props';
 
 
@@ -15,6 +16,7 @@ export default class RPaperDialogContentTextComponent extends BaseEmberPaperReac
     this.props = DialogContentTextProps();
     this.stateProps = DialogContentTextStateProps();
     this.notForComponentProps = DialogContentTextPropsNotForComponent();
+    this.notForComponentStateProps = DialogContentTextStatePropsNotForComponent();
     this.reactElement = ReactDialogContentText;
   }
 }

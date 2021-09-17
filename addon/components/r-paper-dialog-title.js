@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   DialogTitleProps,
   DialogTitleStateProps,
-  DialogTitlePropsNotForComponent
+  DialogTitlePropsNotForComponent,
+  DialogTitleStatePropsNotForComponent
 } from '../react-component-lib/utility/props/dialog-title-props';
 
 export default class RPaperDialogTitleComponent extends BaseEmberPaperReact {
@@ -14,6 +15,7 @@ export default class RPaperDialogTitleComponent extends BaseEmberPaperReact {
     this.props = DialogTitleProps();
     this.stateProps = DialogTitleStateProps();
     this.notForComponentProps = DialogTitlePropsNotForComponent();
+    this.notForComponentStateProps = DialogTitleStatePropsNotForComponent();
     this.reactElement = ReactDialogTitle;
   }
 }

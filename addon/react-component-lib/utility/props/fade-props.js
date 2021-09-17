@@ -1,4 +1,4 @@
-import { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent } from './transition-props'
+import { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent, TransitionStatePropsNotForComponent } from './transition-props'
 
 const props = {
   appear: null,
@@ -9,6 +9,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
 }
 
@@ -17,6 +20,7 @@ const statefulPropsNotForComponent = {
 
 const FadeProps = () => { return Object.assign({}, TransitionProps(), props)};
 const FadeStateProps = () => { return Object.assign({}, TransitionStateProps(), stateProps)};
-const FadePropsNotForComponent = () => {return Object.assign({}, TransitionPropsNotForComponent(), statefulPropsNotForComponent)};
+const FadePropsNotForComponent = () => {return Object.assign({}, TransitionPropsNotForComponent(), propsNotForComponent)};
+const FadeStatePropsNotForComponent = () => {return Object.assign({}, TransitionStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { FadeProps, FadeStateProps, FadePropsNotForComponent }
+export { FadeProps, FadeStateProps, FadePropsNotForComponent, FadeStatePropsNotForComponent }

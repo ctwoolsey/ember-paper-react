@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   AppbarProps,
   AppbarStateProps,
-  AppbarPropsNotForComponent
+  AppbarPropsNotForComponent,
+  AppbarStatePropsNotForComponent
 } from '../react-component-lib/utility/props/appbar-props';
 
 export default class RPaperAppbarComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperAppbarComponent extends BaseEmberPaperReact {
     this.props = AppbarProps();
     this.stateProps = AppbarStateProps();
     this.notForComponentProps = AppbarPropsNotForComponent();
+    this.notForComponentStateProps = AppbarStatePropsNotForComponent();
     this.reactElement = ReactAppbar;
   }
 

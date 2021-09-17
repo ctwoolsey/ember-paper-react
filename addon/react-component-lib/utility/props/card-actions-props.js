@@ -7,6 +7,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   sx: null
 }
@@ -16,6 +19,7 @@ const statefulPropsNotForComponent = {
 
 const CardActionProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const CardActionStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardActionPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const CardActionPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const CardActionStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { CardActionProps, CardActionStateProps, CardActionPropsNotForComponent }
+export { CardActionProps, CardActionStateProps, CardActionPropsNotForComponent, CardActionStatePropsNotForComponent }

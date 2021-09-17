@@ -8,6 +8,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   sx: null
 }
@@ -17,6 +20,7 @@ const statefulPropsNotForComponent = {
 
 const DialogActionsProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const DialogActionsStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const DialogActionsPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const DialogActionsPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const DialogActionsStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { DialogActionsProps, DialogActionsStateProps, DialogActionsPropsNotForComponent }
+export { DialogActionsProps, DialogActionsStateProps, DialogActionsPropsNotForComponent, DialogActionsStatePropsNotForComponent }

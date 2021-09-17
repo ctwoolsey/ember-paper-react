@@ -1,4 +1,4 @@
-import { FadeProps, FadeStateProps, FadePropsNotForComponent } from './fade-props';
+import { FadeProps, FadeStateProps, FadePropsNotForComponent, FadeStatePropsNotForComponent } from './fade-props';
 import { GlobalHtmlProps, GlobalHtmlStateProps } from './native-global-props/global-html-props';
 
 const props = {
@@ -13,6 +13,9 @@ const props = {
   transitionDuration: null,
   ref: null
 };
+
+const propsNotForComponent = {
+}
 
 const stateProps = {
   open: null,
@@ -31,6 +34,7 @@ const statefulPropsNotForComponent = {
 
 const BackdropProps = () => { return Object.assign({}, GlobalHtmlProps(), FadeProps(), props)};
 const BackdropStateProps = () => { return Object.assign({}, GlobalHtmlStateProps(), FadeStateProps(), stateProps)};
-const BackdropPropsNotForComponent = () => {return Object.assign({}, FadePropsNotForComponent(), statefulPropsNotForComponent)};
+const BackdropPropsNotForComponent = () => {return Object.assign({}, FadePropsNotForComponent(), propsNotForComponent)};
+const BackdropStatePropsNotForComponent = () => {return Object.assign({}, FadeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { BackdropProps, BackdropStateProps, BackdropPropsNotForComponent }
+export { BackdropProps, BackdropStateProps, BackdropPropsNotForComponent, BackdropStatePropsNotForComponent }

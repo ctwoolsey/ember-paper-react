@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   ToolbarProps,
   ToolbarStateProps,
-  ToolbarPropsNotForComponent
+  ToolbarPropsNotForComponent,
+  ToolbarStatePropsNotForComponent
 } from '../react-component-lib/utility/props/toolbar-props';
 
 export default class RPaperToolbarComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperToolbarComponent extends BaseEmberPaperReact {
     this.props = ToolbarProps();
     this.stateProps = ToolbarStateProps();
     this.notForComponentProps = ToolbarPropsNotForComponent();
+    this.notForComponentStateProps = ToolbarStatePropsNotForComponent();
     this.reactElement = ReactToolbar;
   }
 

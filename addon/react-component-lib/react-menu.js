@@ -2,19 +2,19 @@ import React from 'react';
 import Menu from '@mui/material/Menu';
 import { ReactChildrenHolder } from './utility/react-children-holder';
 import { ReactBase } from './base/react-base';
-import { DialogPropsNotForComponent, DialogStateProps } from './utility/props/dialog-props';
+import { DialogPropsNotForComponent, DialogStateProps, DialogStatePropsNotForComponent } from './utility/props/dialog-props';
 
 export class ReactMenu extends ReactBase{
   constructor(props) {
     super(props);
-    this.initialize(DialogStateProps(), DialogPropsNotForComponent());
+    this.initialize(DialogStateProps(), DialogPropsNotForComponent(), DialogStatePropsNotForComponent());
   }
 
   renderComponent() {
     return (
       <Menu
         ref={this.componentRef}
-        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStaticProps(this.staticProps))}
         {...(this.placeStateProps(this.statePropsForComponent))}
       >
         <ReactChildrenHolder

@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   CardMediaProps,
   CardMediaStateProps,
-  CardMediaPropsNotForComponent
+  CardMediaPropsNotForComponent,
+  CardMediaStatePropsNotForComponent
 } from '../react-component-lib/utility/props/card-media-props';
 
 export default class RPaperCardMediaComponent extends BaseEmberPaperReact {
@@ -14,6 +15,7 @@ export default class RPaperCardMediaComponent extends BaseEmberPaperReact {
     this.props = CardMediaProps();
     this.stateProps = CardMediaStateProps();
     this.notForComponentProps = CardMediaPropsNotForComponent();
+    this.notForComponentStateProps = CardMediaStatePropsNotForComponent();
     this.reactElement = ReactCardMedia;
   }
 }

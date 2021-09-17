@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   DialogActionsProps,
   DialogActionsStateProps,
-  DialogActionsPropsNotForComponent
+  DialogActionsPropsNotForComponent,
+  DialogActionsStatePropsNotForComponent
 } from '../react-component-lib/utility/props/dialog-actions-props';
 
 export default class RPaperDialogActionsComponent extends BaseEmberPaperReact {
@@ -14,6 +15,7 @@ export default class RPaperDialogActionsComponent extends BaseEmberPaperReact {
     this.props = DialogActionsProps();
     this.stateProps = DialogActionsStateProps();
     this.notForComponentProps = DialogActionsPropsNotForComponent();
+    this.notForComponentStateProps = DialogActionsStatePropsNotForComponent();
     this.reactElement = ReactDialogActions;
   }
 }

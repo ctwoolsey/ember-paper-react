@@ -10,6 +10,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   sx: null,
   variant: null
@@ -20,6 +23,7 @@ const statefulPropsNotForComponent = {
 
 const ToolbarProps = () => {return Object.assign({}, DivNativeProps(), props)};
 const ToolbarStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps)};
-const ToolbarPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const ToolbarPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const ToolbarStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { ToolbarProps, ToolbarStateProps, ToolbarPropsNotForComponent }
+export { ToolbarProps, ToolbarStateProps, ToolbarPropsNotForComponent, ToolbarStatePropsNotForComponent }

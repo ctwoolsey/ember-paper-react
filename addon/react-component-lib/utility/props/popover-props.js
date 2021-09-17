@@ -1,4 +1,4 @@
-import { ModalProps, ModalStateProps, ModalPropsNotForComponent } from './modal-props';
+import { ModalProps, ModalStateProps, ModalPropsNotForComponent, ModalStatePropsNotForComponent } from './modal-props';
 
 const props = {
   open: null,
@@ -22,6 +22,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   open: null,
   anchorOrigin: null,
@@ -38,6 +41,7 @@ const statefulPropsNotForComponent = {
 
 const PopoverProps = () => { return Object.assign({}, ModalProps(), props) };
 const PopoverStateProps = () => {return Object.assign({}, ModalStateProps(), stateProps) };
-const PopoverPropsNotForComponent = () => {return Object.assign({}, ModalPropsNotForComponent(), statefulPropsNotForComponent)};
+const PopoverPropsNotForComponent = () => {return Object.assign({}, ModalPropsNotForComponent(), propsNotForComponent)};
+const PopoverStatePropsNotForComponent = () => {return Object.assign({}, ModalStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { PopoverProps, PopoverStateProps, PopoverPropsNotForComponent }
+export { PopoverProps, PopoverStateProps, PopoverPropsNotForComponent, PopoverStatePropsNotForComponent }

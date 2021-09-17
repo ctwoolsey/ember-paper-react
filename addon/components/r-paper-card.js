@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   CardProps,
   CardStateProps,
-  CardPropsNotForComponent
+  CardPropsNotForComponent,
+  CardStatePropsNotForComponent
 } from '../react-component-lib/utility/props/card-props';
 
 export default class RPaperCardComponent extends BaseEmberPaperReact {
@@ -14,6 +15,7 @@ export default class RPaperCardComponent extends BaseEmberPaperReact {
     this.props = CardProps();
     this.stateProps = CardStateProps();
     this.notForComponentProps = CardPropsNotForComponent();
+    this.notForComponentStateProps = CardStatePropsNotForComponent();
     this.reactElement = ReactCard;
   }
 }

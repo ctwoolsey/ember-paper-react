@@ -1,5 +1,5 @@
-import { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent } from './form-control-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent} from './theme-props';
+import { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent, FormControlStatePropsNotForComponent } from './form-control-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
 
 const props = {
   autoComplete: null,
@@ -37,6 +37,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   color: null,
   defaultValue: null,
@@ -63,6 +66,7 @@ const statefulPropsNotForComponent = {
 
 const TextFieldProps = () => { return Object.assign({}, ThemeProps(), FormControlProps(), props) };
 const TextFieldStateProps = () => {return Object.assign({}, ThemeStateProps(), FormControlStateProps(), stateProps) };
-const TextFieldPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), FormControlPropsNotForComponent(), statefulPropsNotForComponent)};
+const TextFieldPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), FormControlPropsNotForComponent(), propsNotForComponent)};
+const TextFieldStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), FormControlStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent }
+export { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent, TextFieldStatePropsNotForComponent }

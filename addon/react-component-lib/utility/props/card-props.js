@@ -1,4 +1,4 @@
-import { PaperProps, PaperStateProps, PaperPropsNotForComponent } from './paper-props';
+import { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent } from './paper-props';
 
 const props = {
   children: null,
@@ -7,6 +7,9 @@ const props = {
   sx: null,
   ref: null
 };
+
+const propsNotForComponent = {
+}
 
 const stateProps = {
   raised: null,
@@ -18,6 +21,7 @@ const statefulPropsNotForComponent = {
 
 const CardProps = () => { return Object.assign({}, PaperProps(), props) };
 const CardStateProps = () => {return Object.assign({}, PaperStateProps(), stateProps) };
-const CardPropsNotForComponent = () => {return Object.assign({}, PaperPropsNotForComponent(), statefulPropsNotForComponent)};
+const CardPropsNotForComponent = () => {return Object.assign({}, PaperPropsNotForComponent(), propsNotForComponent)};
+const CardStatePropsNotForComponent = () => {return Object.assign({}, PaperStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CardProps, CardStateProps, CardPropsNotForComponent }
+export { CardProps, CardStateProps, CardPropsNotForComponent, CardStatePropsNotForComponent }

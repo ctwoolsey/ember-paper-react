@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   BackdropProps,
   BackdropStateProps,
-  BackdropPropsNotForComponent
+  BackdropPropsNotForComponent,
+  BackdropStatePropsNotForComponent
 } from '../react-component-lib/utility/props/backdrop-props';
 
 export default class RPaperBackdropComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperBackdropComponent extends BaseEmberPaperReact {
     this.props = BackdropProps();
     this.stateProps = BackdropStateProps();
     this.notForComponentProps = BackdropPropsNotForComponent();
+    this.notForComponentStateProps = BackdropStatePropsNotForComponent();
     this.reactElement = ReactBackdrop;
   }
 }

@@ -1,5 +1,5 @@
-import { ModalProps, ModalStateProps, ModalPropsNotForComponent } from './modal-props';
-import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent } from './native-global-props/children-holder-props';
+import { ModalProps, ModalStateProps, ModalPropsNotForComponent, ModalStatePropsNotForComponent } from './modal-props';
+import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent } from './native-global-props/children-holder-props';
 
 const props = {
   open: null,
@@ -24,6 +24,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   open: null,
   fullScreen: null,
@@ -37,6 +40,7 @@ const statefulPropsNotForComponent = {
 
 const DialogProps = () => { return Object.assign({}, ChildrenHolderProps(), ModalProps(), props) };
 const DialogStateProps = () => {return Object.assign({}, ChildrenHolderStateProps(), ModalStateProps(), stateProps) };
-const DialogPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), ModalPropsNotForComponent(), statefulPropsNotForComponent)};
+const DialogPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), ModalPropsNotForComponent(), propsNotForComponent)};
+const DialogStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), ModalStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { DialogProps, DialogStateProps, DialogPropsNotForComponent }
+export { DialogProps, DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForComponent }

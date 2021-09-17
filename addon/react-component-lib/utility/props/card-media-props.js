@@ -10,6 +10,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   image: null,
   src: null,
@@ -21,6 +24,7 @@ const statefulPropsNotForComponent = {
 
 const CardMediaProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const CardMediaStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardMediaPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const CardMediaPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const CardMediaStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { CardMediaProps, CardMediaStateProps, CardMediaPropsNotForComponent }
+export { CardMediaProps, CardMediaStateProps, CardMediaPropsNotForComponent, CardMediaStatePropsNotForComponent }

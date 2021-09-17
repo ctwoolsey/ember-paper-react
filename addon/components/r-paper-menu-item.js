@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   MenuItemProps,
   MenuItemStateProps,
-  MenuItemPropsNotForComponent
+  MenuItemPropsNotForComponent,
+  MenuItemStatePropsNotForComponent
 } from '../react-component-lib/utility/props/menu-item-props';
 
 export default class RPaperMenuItemComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperMenuItemComponent extends BaseEmberPaperReact {
     this.props = MenuItemProps();
     this.stateProps = MenuItemStateProps();
     this.notForComponentProps = MenuItemPropsNotForComponent();
+    this.notForComponentStateProps = MenuItemStatePropsNotForComponent();
     this.reactElement = ReactMenuItem;
   }
 }

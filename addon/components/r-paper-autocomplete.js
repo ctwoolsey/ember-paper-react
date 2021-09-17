@@ -3,8 +3,8 @@ import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-
 import { ReactAutocomplete } from '../react-component-lib/react-autocomplete';
 import { A } from '@ember/array';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from '../react-component-lib/utility/props/autocomplete-props';
-import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from '../react-component-lib/utility/props/text-field-props';
+import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent, AutocompleteStatePropsNotForComponent } from '../react-component-lib/utility/props/autocomplete-props';
+import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent, TextFieldStatePropsNotForComponent } from '../react-component-lib/utility/props/text-field-props';
 
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
@@ -14,6 +14,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.props = Object.assign({}, TextFieldProps(), AutocompleteProps());
     this.stateProps = Object.assign({}, TextFieldStateProps(), AutocompleteStateProps());
     this.notForComponentProps = Object.assign({}, TextFieldPropsNotForComponent(), AutocompletePropsNotForComponent());
+    this.notForComponentStateProps = Object.assign({}, TextFieldStatePropsNotForComponent(), AutocompleteStatePropsNotForComponent());
     this.reactElement = ReactAutocomplete;
 
     this.onOpenHandler = this.onOpenHandler.bind(this);

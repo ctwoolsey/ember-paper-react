@@ -1,6 +1,5 @@
 import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
-import { ReactChildrenHolder } from '../utility/react-children-holder';
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -11,10 +10,12 @@ export class ReactBase extends React.Component{
     this.DefaultComponentToRender = null;
   }
 
-  initialize(stateProperties, statePropertiesNotForComponent) {
-    this.state = {};
+  initialize(stateProperties, propertiesNotForComponent, statePropertiesNotForComponent) {
+    /* filter this.props into this.staticProps since it will have properties that should be
+       stateful and even properties not meant for the react component */
     this.statePropsForComponent = Object.assign({}, stateProperties);
     let statePropsNotForComponent = Object.assign({}, statePropertiesNotForComponent);
+    let propsNotForComponent = Object.assign({}, propertiesNotForComponent);
 
     for (let propName in this.props) {
       if (Object.prototype.hasOwnProperty.call(this.statePropsForComponent,propName)) {
@@ -23,15 +24,19 @@ export class ReactBase extends React.Component{
         if (Object.prototype.hasOwnProperty.call(statePropsNotForComponent,propName)) {
           statePropsNotForComponent[propName] = this.props[propName];
         } else {
-          this.staticProps[propName] = this.props[propName];
+          if (Object.prototype.hasOwnProperty.call(propsNotForComponent,propName)) {
+            propsNotForComponent[propName] = this.props[propName];
+          } else {
+            this.staticProps[propName] = this.props[propName];
+          }
         }
       }
     }
 
-    Object.assign(this.state, this.statePropsForComponent, statePropsNotForComponent);
+    this.state = Object.assign({}, this.statePropsForComponent, statePropsNotForComponent);
   }
 
-  placeProps(staticProps) {
+  placeStaticProps(staticProps) {
     let propObject = {};
     for (let propName in staticProps) {
       if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
@@ -73,7 +78,7 @@ export class ReactBase extends React.Component{
     return (
       <ComponentToRender
         ref={this.componentRef}
-        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStaticProps(this.staticProps))}
         {...(this.placeStateProps(this.statePropsForComponent))}
       />
     )

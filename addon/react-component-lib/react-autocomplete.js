@@ -3,8 +3,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import { ReactBase } from './base/react-base';
-import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent } from './utility/props/autocomplete-props';
-import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent } from './utility/props/text-field-props';
+import { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent, AutocompleteStatePropsNotForComponent } from './utility/props/autocomplete-props';
+import { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent, TextFieldStatePropsNotForComponent } from './utility/props/text-field-props';
 
 
 //Theme does not appear to be effective on this component
@@ -17,10 +17,14 @@ export class ReactAutocomplete extends ReactBase{
 
   initialize() {
     this.state = {};
+    this.autocompleteProps = {};
+    this.textFieldProps = {};
     this.statePropsForAutocompleteComponent = {};
     this.statePropsForTextFieldComponent = {};
     this.statePropsNotForAutocompleteComponent = {};
     this.statePropsNotForTextFieldComponent = {};
+    this.propsNotForAutocompleteComponent = {};
+    this.propsNotForTextFieldComponent = {};
     this.staticPropsForAutocompleteComponent = {};
     this.staticPropsForTextFieldComponent = {};
 
@@ -28,8 +32,10 @@ export class ReactAutocomplete extends ReactBase{
     let propsForTextFieldComponent = Object.assign({}, TextFieldProps());
     let statePropsForAutocompleteComponent = Object.assign({}, AutocompleteStateProps());
     let statePropsForTextFieldComponent = Object.assign({}, TextFieldStateProps());
-    let statePropsNotForAutocompleteComponent = Object.assign({}, AutocompletePropsNotForComponent);
-    let statePropsNotForTextFieldComponent = Object.assign({}, TextFieldPropsNotForComponent);
+    let propsNotForAutocompleteComponent = Object.assign({}, AutocompletePropsNotForComponent);
+    let propsNotForTextFieldComponent = Object.assign({}, TextFieldPropsNotForComponent);
+    let statePropsNotForAutocompleteComponent = Object.assign({}, AutocompleteStatePropsNotForComponent);
+    let statePropsNotForTextFieldComponent = Object.assign({}, TextFieldStatePropsNotForComponent);
 
     for (let propName in this.props) {
       let isStateProperty = false;
@@ -43,6 +49,7 @@ export class ReactAutocomplete extends ReactBase{
       }
 
       let isStatePropertyNotForComponent = false;
+      let isPropertyNotForComponent = false;
       if (!isStateProperty) {
         if (Object.prototype.hasOwnProperty.call(statePropsNotForAutocompleteComponent,propName)) {
           this.statePropsNotForAutocompleteComponent[propName] = this.props[propName];
@@ -52,8 +59,16 @@ export class ReactAutocomplete extends ReactBase{
           this.statePropsNotForTextFieldComponent[propName] = this.props[propName];
           isStatePropertyNotForComponent = true;
         }
+        if (Object.prototype.hasOwnProperty.call(propsNotForAutocompleteComponent,propName)) {
+          this.propsNotForAutocompleteComponent[propName] = this.props[propName];
+          isPropertyNotForComponent = true;
+        }
+        if (Object.prototype.hasOwnProperty.call(propsNotForTextFieldComponent,propName)) {
+          this.propsNotForTextFieldComponent[propName] = this.props[propName];
+          isPropertyNotForComponent = true;
+        }
 
-        if (!isStatePropertyNotForComponent) {
+        if (!isStatePropertyNotForComponent && !isPropertyNotForComponent) {
           if (Object.prototype.hasOwnProperty.call(propsForAutocompleteComponent,propName)) {
             this.staticPropsForAutocompleteComponent[propName] = this.props[propName];
           }
@@ -64,14 +79,20 @@ export class ReactAutocomplete extends ReactBase{
       }
     }
 
+    this.staticPropsForAutocompleteComponent['renderInput'] = this.renderTextField;
+    delete this.staticPropsForTextFieldComponent.ref;
+
     Object.assign(this.state,
                   this.statePropsForAutocompleteComponent,
                   this.statePropsForTextFieldComponent,
                   this.statePropsNotForAutocompleteComponent,
                   this.statePropsNotForTextFieldComponent);
-
-    this.staticPropsForAutocompleteComponent['renderInput'] = this.renderTextField;
-    delete this.staticPropsForTextFieldComponent.ref;
+    Object.assign(this.autocompleteProps,
+                  this.propsNotForAutocompleteComponent,
+                  this.staticPropsForAutocompleteComponent);
+    Object.assign(this.textFieldProps,
+      this.propsNotForTextFieldComponent,
+      this.staticPropsForTextFieldComponent);
   }
 
 
@@ -84,7 +105,7 @@ export class ReactAutocomplete extends ReactBase{
       <ReactConditionalThemeProvider theme={theme}>
         <Autocomplete
           ref={this.componentRef}
-          {...(this.placeProps(this.staticPropsForAutocompleteComponent))}
+          {...(this.placeStaticProps(this.autocompleteProps))}
           {...(this.placeStateProps(this.statePropsForAutocompleteComponent))}
         />
       </ReactConditionalThemeProvider>

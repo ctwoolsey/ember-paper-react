@@ -6,7 +6,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   TextFieldProps,
   TextFieldStateProps,
-  TextFieldPropsNotForComponent
+  TextFieldPropsNotForComponent,
+  TextFieldStatePropsNotForComponent
 } from '../react-component-lib/utility/props/text-field-props';
 import { once, scheduleOnce } from '@ember/runloop';
 import React from 'react';
@@ -20,6 +21,7 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
     this.props = TextFieldProps();
     this.stateProps = TextFieldStateProps();
     this.notForComponentProps = TextFieldPropsNotForComponent();
+    this.notForComponentStateProps = TextFieldStatePropsNotForComponent();
     this.reactElement = ReactTextField;
 
     this.handleName = true;

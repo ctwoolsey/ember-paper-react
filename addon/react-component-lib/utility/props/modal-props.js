@@ -25,6 +25,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   open: null,
   sx: null
@@ -35,6 +38,7 @@ const statefulPropsNotForComponent = {
 
 const ModalProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const ModalStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const ModalPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const ModalPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const ModalStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { ModalProps, ModalStateProps, ModalPropsNotForComponent }
+export { ModalProps, ModalStateProps, ModalPropsNotForComponent, ModalStatePropsNotForComponent }

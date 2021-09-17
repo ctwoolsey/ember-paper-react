@@ -14,6 +14,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   action: null,
   avatar: null,
@@ -30,6 +33,7 @@ const statefulPropsNotForComponent = {
 
 const CardHeaderProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const CardHeaderStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardHeaderPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const CardHeaderPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const CardHeaderStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { CardHeaderProps, CardHeaderStateProps, CardHeaderPropsNotForComponent }
+export { CardHeaderProps, CardHeaderStateProps, CardHeaderPropsNotForComponent, CardHeaderStatePropsNotForComponent }

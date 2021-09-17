@@ -1,4 +1,5 @@
 import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { PaperPropsNotForComponent } from "./paper-props";
 
 const props = {
   options: null,
@@ -64,6 +65,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   options: null,
   ChipProps: null,
@@ -96,6 +100,7 @@ const statefulPropsNotForComponent = {
 
 const AutocompleteProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const AutocompleteStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const AutocompletePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const AutocompletePropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const AutocompleteStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent }
+export { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent, AutocompleteStatePropsNotForComponent }

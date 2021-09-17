@@ -17,6 +17,9 @@ const props = {
   onExited: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
 }
 
@@ -25,6 +28,7 @@ const statefulPropsNotForComponent = {
 
 const TransitionProps = () => { return Object.assign({}, props)};
 const TransitionStateProps = () => { return Object.assign({}, stateProps)};
-const TransitionPropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const TransitionPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const TransitionStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent }
+export { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent, TransitionStatePropsNotForComponent }

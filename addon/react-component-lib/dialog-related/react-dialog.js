@@ -2,7 +2,7 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import { ReactChildrenHolder } from '../utility/react-children-holder';
 import { ReactBase } from '../base/react-base';
-import { DialogStateProps, DialogPropsNotForComponent } from '../utility/props/dialog-props';
+import { DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForComponent } from '../utility/props/dialog-props';
 
 
 export class ReactDialog extends ReactBase{
@@ -14,7 +14,7 @@ export class ReactDialog extends ReactBase{
     this.backgroundClicked = false;
 
     this.staticProps.onClose = this.onClose;
-    this.initialize(DialogStateProps(), DialogPropsNotForComponent());
+    this.initialize(DialogStateProps(), DialogPropsNotForComponent(), DialogStatePropsNotForComponent());
 
   }
 
@@ -55,7 +55,7 @@ export class ReactDialog extends ReactBase{
     return (
       <Dialog
         ref={this.componentRef}
-        {...(this.placeProps(this.staticProps))}
+        {...(this.placeStaticProps(this.staticProps))}
         {...(this.placeStateProps(this.statePropsForComponent))}
       >
         <ReactChildrenHolder

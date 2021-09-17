@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent } from './svg-icon-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent, SvgIconStatePropsNotForComponent } from './svg-icon-props';
 
 const props = {
   classes: null,
@@ -12,6 +12,9 @@ const props = {
   variant: null,
   ref: null
 };
+
+const propsNotForComponent = {
+}
 
 const stateProps = {
   color: null,
@@ -27,6 +30,7 @@ const statefulPropsNotForComponent = {
 
 const CircularProgressProps = () => { return Object.assign({}, ThemeProps(), SvgIconProps(), props)};
 const CircularProgressStateProps = () => { return Object.assign({}, ThemeStateProps(), SvgIconStateProps(), stateProps)};
-const CircularProgressPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), SvgIconPropsNotForComponent(), statefulPropsNotForComponent)};
+const CircularProgressPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), SvgIconPropsNotForComponent(), propsNotForComponent)};
+const CircularProgressStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), SvgIconStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CircularProgressProps, CircularProgressStateProps, CircularProgressPropsNotForComponent }
+export { CircularProgressProps, CircularProgressStateProps, CircularProgressPropsNotForComponent, CircularProgressStatePropsNotForComponent }

@@ -1,5 +1,5 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import { PaperProps, PaperStateProps, PaperPropsNotForComponent } from '../react-component-lib/utility/props/paper-props';
+import { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent } from '../react-component-lib/utility/props/paper-props';
 import { ReactPaper } from '../react-component-lib/react-paper';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 
@@ -11,6 +11,7 @@ export default class RPaperComponent extends BaseEmberPaperReact {
     this.props = PaperProps();
     this.stateProps = PaperStateProps();
     this.notForComponentProps = PaperPropsNotForComponent();
+    this.notForComponentStateProps = PaperStatePropsNotForComponent();
     this.reactElement = ReactPaper;
 
   }

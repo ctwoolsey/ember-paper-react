@@ -1,5 +1,5 @@
-import { PopoverProps, PopoverStateProps, PopoverPropsNotForComponent } from './popover-props';
-import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent } from './native-global-props/children-holder-props';
+import { PopoverProps, PopoverStateProps, PopoverPropsNotForComponent, PopoverStatePropsNotForComponent } from './popover-props';
+import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent } from './native-global-props/children-holder-props';
 
 const props = {
   open: null,
@@ -18,6 +18,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   open: null,
   sx: null,
@@ -29,6 +32,7 @@ const statefulPropsNotForComponent = {
 
 const MenuPropsProps = () => { return Object.assign({}, ChildrenHolderProps(), PopoverProps(), props) };
 const MenuPropsStateProps = () => {return Object.assign({}, ChildrenHolderStateProps(), PopoverStateProps(), stateProps) };
-const MenuPropsPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), PopoverPropsNotForComponent(), statefulPropsNotForComponent)};
+const MenuPropsPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), PopoverPropsNotForComponent(), propsNotForComponent)};
+const MenuPropsStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), PopoverStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { MenuPropsProps, MenuPropsStateProps, MenuPropsPropsNotForComponent }
+export { MenuPropsProps, MenuPropsStateProps, MenuPropsPropsNotForComponent, MenuPropsStatePropsNotForComponent }

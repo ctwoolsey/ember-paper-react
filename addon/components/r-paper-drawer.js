@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   DrawerProps,
   DrawerStateProps,
-  DrawerPropsNotForComponent
+  DrawerPropsNotForComponent,
+  DrawerStatePropsNotForComponent
 } from '../react-component-lib/utility/props/drawer-props';
 
 export default class RPaperDrawerComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperDrawerComponent extends BaseEmberPaperReact {
     this.props = DrawerProps();
     this.stateProps = DrawerStateProps();
     this.notForComponentProps = DrawerPropsNotForComponent();
+    this.notForComponentStateProps = DrawerStatePropsNotForComponent();
     this.reactElement = ReactDrawer;
 
     this.reactRender = this.reactRender.bind(this);

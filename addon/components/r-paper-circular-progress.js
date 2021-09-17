@@ -4,7 +4,8 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   CircularProgressProps,
   CircularProgressStateProps,
-  CircularProgressPropsNotForComponent
+  CircularProgressPropsNotForComponent,
+  CircularProgressStatePropsNotForComponent
 } from '../react-component-lib/utility/props/circular-progress-props';
 
 export default class RPaperCircularProgressComponent extends BaseEmberPaperReact {
@@ -15,6 +16,7 @@ export default class RPaperCircularProgressComponent extends BaseEmberPaperReact
     this.props = CircularProgressProps();
     this.stateProps = CircularProgressStateProps();
     this.notForComponentProps = CircularProgressPropsNotForComponent();
+    this.notForComponentStateProps = CircularProgressStatePropsNotForComponent();
     this.reactElement = ReactCircularProgress;
   }
 }

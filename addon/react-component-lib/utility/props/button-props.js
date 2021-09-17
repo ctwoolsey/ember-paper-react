@@ -1,5 +1,5 @@
-import { ThemeProps, ThemePropsNotForComponent, ThemeStateProps } from './theme-props';
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent } from './button-base-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
 
 const props = {
   children: null,
@@ -20,6 +20,9 @@ const props = {
   ref: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   color: null,
   disabled: null,
@@ -38,6 +41,7 @@ const statefulPropsNotForComponent = {
 
 const ButtonProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props)};
 const ButtonStateProps = () => { return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps)};
-const ButtonPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), statefulPropsNotForComponent)};
+const ButtonPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), propsNotForComponent)};
+const ButtonStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ButtonProps, ButtonStateProps, ButtonPropsNotForComponent }
+export { ButtonProps, ButtonStateProps, ButtonPropsNotForComponent, ButtonStatePropsNotForComponent }

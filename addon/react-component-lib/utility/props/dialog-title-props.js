@@ -11,11 +11,15 @@ const stateProps = {
   sx: null
 }
 
+const propsNotForComponent = {
+}
+
 const statefulPropsNotForComponent = {
 }
 
 const DialogTitleProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const DialogTitleStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const DialogTitlePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const DialogTitlePropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const DialogTitleStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { DialogTitleProps, DialogTitleStateProps, DialogTitlePropsNotForComponent }
+export { DialogTitleProps, DialogTitleStateProps, DialogTitlePropsNotForComponent, DialogTitleStatePropsNotForComponent }

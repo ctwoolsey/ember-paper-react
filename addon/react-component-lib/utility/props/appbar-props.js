@@ -1,4 +1,4 @@
-import { PaperProps, PaperStateProps, PaperPropsNotForComponent } from './paper-props';
+import { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent } from './paper-props';
 
 const props = {
   children: null,
@@ -9,6 +9,9 @@ const props = {
   sx: null,
   ref: null
 };
+
+const propsNotForComponent = {
+}
 
 const stateProps = {
   color: null,
@@ -22,6 +25,7 @@ const statefulPropsNotForComponent = {
 
 const AppbarProps = () => { return Object.assign({}, PaperProps(), props) };
 const AppbarStateProps = () => {return Object.assign({}, PaperStateProps(), stateProps) };
-const AppbarPropsNotForComponent = () => {return Object.assign({}, PaperPropsNotForComponent(), statefulPropsNotForComponent)};
+const AppbarPropsNotForComponent = () => {return Object.assign({}, PaperPropsNotForComponent(), propsNotForComponent)};
+const AppbarStatePropsNotForComponent = () => {return Object.assign({}, PaperStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { AppbarProps, AppbarStateProps, AppbarPropsNotForComponent }
+export { AppbarProps, AppbarStateProps, AppbarPropsNotForComponent, AppbarStatePropsNotForComponent }

@@ -62,3 +62,21 @@ React attaches events to the parent container, so by creating a portal and then 
 the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
 For inspiration:
 https://stackoverflow.com/questions/30686796/react-render-replace-container-instead-of-inserting-into/58385910#58385910
+
+#Creating Prop File
+There are four objects:
+* props - these are the props as defined by the material-ui specification
+* propsNotForComponent - user defined props has added and may be used in the react component file but will not
+  be added to the actual material react component.
+* stateProps - properties from the material-ui component that the user would like to be stateful (i.e. react to changes from ember)
+* statefulPropsNotForComponent - user defined props that the user would like to react to changes from ember
+
+This is done so that `props` in the prop file will stay pure to what was defined in the specification.
+`stateProps` will duplicate what is in the `props` section as it just calls out what should be stateful. 
+`propsNotForComponent` should generally be unique as should `statefulPropsNotForComponent`.  There are exceptions for 
+example when there is a prop and you want to react to changes on it but not at the react component level.  Look at the `avatarGroup`
+for an example.  Because children are added to the avatarGroup in a non react way, the `avatarGroup` component is unable to control
+the children, so ember needs to intercept these components.  
+
+the method `initializeProps` combines `propsNotForComponent` and `statefulPropsNotForComponent` into `this.props` for sending to the React Component.
+

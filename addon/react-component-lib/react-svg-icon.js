@@ -2,12 +2,12 @@ import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon'
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import { ReactBase } from './base/react-base';
-import { SvgIconStateProps, SvgIconPropsNotForComponent } from './utility/props/svg-icon-props';
+import { SvgIconStateProps, SvgIconPropsNotForComponent, SvgIconStatePropsNotForComponent } from './utility/props/svg-icon-props';
 
 export class ReactSvgIcon extends ReactBase{
   constructor(props) {
     super(props);
-    this.initialize(SvgIconStateProps(), SvgIconPropsNotForComponent());
+    this.initialize(SvgIconStateProps(), SvgIconPropsNotForComponent(), SvgIconStatePropsNotForComponent());
   }
 
   render() {
@@ -18,8 +18,8 @@ export class ReactSvgIcon extends ReactBase{
       <ReactConditionalThemeProvider theme={theme}>
         <SvgIcon
           ref={this.componentRef}
-          {...(this.placeProps())}
-          {...(this.placeStateProps())}
+          {...(this.placeStaticProps(this.staticProps))}
+          {...(this.placeStateProps(this.statePropsForComponent))}
         >
           <path d='' />
         </SvgIcon>
