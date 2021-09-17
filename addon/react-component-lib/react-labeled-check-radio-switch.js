@@ -1,78 +1,83 @@
 import React from 'react';
-import { ReactBaseWithTheme } from './base/react-base-with-theme';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-/* Does not currently implement:
-    checkedIcon, icon, id, indeterminateIcon
-*/
-export class ReactLabeledCheckRadioSwitch extends ReactBaseWithTheme{
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { ReactBase } from './base/react-base';
+import {
+  FormControlLabelProps, FormControlLabelStateProps, FormControlLabelPropsNotForComponent, FormControlLabelStatePropsNotForComponent
+} from '../react-component-lib/utility/props/form-control-label-props';
+export class ReactLabeledCheckRadioSwitch extends ReactBase{
   constructor(props) {
     super(props);
+  }
 
-    this.state = Object.assign(this.state, {
-      checked: props.checked,
-      classString: props.classString,
-      color: props.color,
-      disabled: props.disabled,
-      disableRipple: props.disableRipple,
-      edge: props.edge, //unique to switch
-      indeterminate: props.indeterminate, //unique to checkbox
-      label: props.label,
-      labelPlacement: props.labelPlacement,
-      required: props.required,
-      size: props.size,
-      value: props.value
-    });
+  initialize(controlProps, controlPropsNotForComponent, controlStateProps, controlStatePropsNotForComponent) {
+    let formLabelProps = FormControlLabelProps();
+    let formLabelPropsNotForComponent = FormControlLabelPropsNotForComponent();
+    let formLabelStateProps = FormControlLabelStateProps();
+    let formStatePropsNotForComponent = FormControlLabelStatePropsNotForComponent();
 
-    //methods
+    this.staticFormLabelProps = {};
+    this.statePropsForFormLabelComponent = {};
+    let statePropsFormLabelNotForComponent = {};
+    this.staticControlProps = {};
+    this.statePropsForControlComponent = {};
+    let statePropsControlNotForComponent = {};
 
+    for (let propName in this.props) {
+      //load FormLabel
+      if (Object.prototype.hasOwnProperty.call(formLabelProps,propName)) {
+        if (Object.prototype.hasOwnProperty.call(formLabelStateProps,propName)) {
+          this.statePropsForFormLabelComponent[propName] = this.props[propName];
+        } else {
+          if (Object.prototype.hasOwnProperty.call(formStatePropsNotForComponent,propName)) {
+            statePropsFormLabelNotForComponent[propName] = this.props[propName];
+          } else {
+            if (!Object.prototype.hasOwnProperty.call(formLabelPropsNotForComponent,propName)) {
+              this.staticFormLabelProps[propName] = this.props[propName];
+            }
+          }
+        }
+      }
 
+      //load Control
+      if (Object.prototype.hasOwnProperty.call(controlProps,propName)) {
+        if (Object.prototype.hasOwnProperty.call(controlStateProps,propName)) {
+          this.statePropsForControlComponent[propName] = this.props[propName];
+        } else {
+          if (Object.prototype.hasOwnProperty.call(controlStatePropsNotForComponent,propName)) {
+            statePropsControlNotForComponent[propName] = this.props[propName];
+          } else {
+            if (!Object.prototype.hasOwnProperty.call(controlPropsNotForComponent,propName)) {
+              this.staticControlProps[propName] = this.props[propName];
+            }
+          }
+        }
+      }
+    } //end for propName
+
+    this.state = Object.assign({},
+                               this.statePropsForFormLabelComponent,
+                               statePropsFormLabelNotForComponent,
+                               this.statePropsForControlComponent,
+                               statePropsControlNotForComponent);
   }
 
   render() {
     const {
-      checked,
-      classString,
-      color,
-      disabled,
-      disableRipple,
-      edge,
-      indeterminate,
-      label,
-      labelPlacement,
-      required,
-      size,
-      sx,
       theme,
-      value
     } = this.state;
 
-    const ControlTagName = this.controlType;
+    const ControlTagName = this.DefaultComponentToRender;
 
     return (
       <ReactConditionalThemeProvider theme={theme}>
         <FormControlLabel
           ref={this.componentRef}
-          {...(checked ? { checked: checked } : {})}
-          {...(classString ? { className: classString } : {})}
-          {...(disabled ? { disabled: disabled } : {})}
-          {...(this.props.id ? {id: this.props.id} : {})}
-          {...(label ? { label: label } : { label: '' })}
-          {...(labelPlacement ? { labelPlacement: labelPlacement } : {})}
-          {...(value ? { value: value } : {})}
-          {...(this.props.inputRef ? { inputRef: this.props.inputRef } : {})}
-          {...(this.props.onChange ? { onChange: this.props.onChange } : { onChange: function() {} })}
+          {...(this.placeStaticProps(this.staticFormLabelProps))}
+          {...(this.placeStateProps(this.statePropsForFormLabelComponent))}
           control={<ControlTagName
-            {...(color ? { color: color } : {})}
-            {...(disableRipple ? { disableRipple: disableRipple } : {})}
-            {...(edge ? { edge: edge } : {})} //used by switch
-            {...(indeterminate ? { indeterminate: indeterminate } : {})} //used by checkbox
-            {...(this.props.inputProps ? { inputProps: this.props.inputProps } : {})}
-            {...(this.props.name ? { name: this.props.name } : {})}  //used by Radio
-            {...(required ? { required: required } : {})}
-            {...(size ? { size: size } : {})}
-            {...(sx ? { sx: sx } : {})}
+            {...(this.placeStaticProps(this.staticControlProps))}
+            {...(this.placeStateProps(this.statePropsForControlComponent))}
           />}
         />
       </ReactConditionalThemeProvider>

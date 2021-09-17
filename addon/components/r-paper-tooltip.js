@@ -1,12 +1,12 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactTooltip } from '../react-component-lib/react-tooltip';
-import BaseEmberPaperReact from "./base/base-ember-paper-react";
+import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   TooltipProps,
   TooltipStateProps,
   TooltipPropsNotForComponent,
   TooltipStatePropsNotForComponent
-} from "../react-component-lib/utility/props/tooltip-props";
+} from '../react-component-lib/utility/props/tooltip-props';
 
 export default class RPaperTooltipComponent extends BaseEmberPaperReact {
 

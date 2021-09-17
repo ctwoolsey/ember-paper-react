@@ -241,6 +241,9 @@ export default class BaseEmberPaperReact extends Component {
         case 'ref':
           this.props.ref = this.reactRef;
           break;
+        case 'label':
+          this.props.label = this.args.label || '';
+          break;
         default:
           if (this.args[propName] !== null && this.args[propName] !== undefined) {
             this.props[propName] = this.args[propName];

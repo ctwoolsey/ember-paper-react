@@ -1,5 +1,5 @@
-import { DivNativeProps, DivNativeStateProps } from "./native-global-props/div-native-props";
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from "./theme-props";
+import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
 
 const props = {
   avatar: null,

@@ -44,6 +44,7 @@ export class ReactBase extends React.Component{
       }
     }
 
+    delete propObject.ref; //added separately
     return propObject;
   }
 
@@ -68,6 +69,9 @@ export class ReactBase extends React.Component{
 
   setStateProp(propName, value) {
     if (Object.prototype.hasOwnProperty.call(this.state, propName)) {
+      if (this.state.propName === 'label') {  //TODO make this generic that if a propName is null it defaults to the props.js defined value
+        this.setState({label: ''});
+      }
       this.setState({ [propName]: value })
     }
   }

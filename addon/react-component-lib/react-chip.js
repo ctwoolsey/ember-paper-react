@@ -1,10 +1,10 @@
 import Chip from '@mui/material/Chip';
-import { ReactBase } from "./base/react-base";
+import { ReactBase } from './base/react-base';
 import {
   ChipStateProps,
   ChipPropsNotForComponent,
   ChipStatePropsNotForComponent
-} from "./utility/props/chip-props";
+} from './utility/props/chip-props';
 
 export class ReactChip extends ReactBase{
   constructor(props) {

@@ -1,5 +1,5 @@
 import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
-import { PaperPropsNotForComponent } from "./paper-props";
+import { PaperPropsNotForComponent } from './paper-props';
 
 const props = {
   options: null,
