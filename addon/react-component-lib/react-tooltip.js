@@ -14,9 +14,18 @@ export class ReactTooltip extends ReactBase{
     this.initialize(TooltipStateProps(), TooltipPropsNotForComponent(), TooltipStatePropsNotForComponent());
   }
 
+  createTitleMarkup() {
+    const {
+      title
+    } = this.state;
+
+    return {__html: title};
+  }
+
   renderComponent() {
     const {
-      disabled
+      disabled,
+      onClick
     } = this.state;
 
     return (
@@ -24,9 +33,17 @@ export class ReactTooltip extends ReactBase{
         ref={this.componentRef}
         {...(this.placeStaticProps(this.staticProps))}
         {...(this.placeStateProps(this.statePropsForComponent))}
+        title={
+          <React.Fragment>
+            <span dangerouslySetInnerHTML={this.createTitleMarkup()}></span>
+          </React.Fragment>
+        }
       >
         <span>
-          <Button {...(disabled ? { disabled: disabled} : {})}>Dummy Tooltip Child</Button>
+          <Button
+            {...(disabled ? { disabled: disabled} : {})}
+            {...(onClick ? { onClick: onClick} : {})}
+          >Dummy Tooltip Child</Button>
         </span>
       </Tooltip>
     )
