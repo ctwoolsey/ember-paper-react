@@ -18,21 +18,36 @@ export default class RPaperTooltipComponent extends BaseEmberPaperReact {
     this.notForComponentProps = TooltipPropsNotForComponent();
     this.notForComponentStateProps = TooltipStatePropsNotForComponent();
     this.reactElement = ReactTooltip;
-
     this.useButton = (this.args.useButton !== false);
 
   }
 
-  renderChildren() {
+  initializeProps() {
+    super.initializeProps();
+    if (this.args.useButton === false) {
+      this.props.class += ' tooltip-no-button';
+    }
+  }
+
+  /*renderChildren() {
     this.setChildrenFragment();
     if (this.childrenFragment.childNodes.length > 0) {
-      if (!this.useButton) {
+      if (this.args.useButton === false) {
         this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
       } else {
         this.reactRef.current.componentRef.current.childNodes[0].childNodes[0].remove();
         this.reactRef.current.componentRef.current.childNodes[0].prepend(this.childrenFragment);
       }
     }
+  }*/
+
+  renderChildren() {
+      if (this.args.useButton === false) {
+        this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+      } else {
+        this.reactRef.current.componentRef.current.childNodes[0].childNodes[0].remove();
+        this.reactRef.current.componentRef.current.childNodes[0].prepend(document.getElementById(this.childrenSpanId));
+      }
   }
 }
 

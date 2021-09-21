@@ -27,3 +27,9 @@
     .MuiAvatar-square { border-radius: 0; }
   }
 }
+
+.ember-paper-react-tooltip.tooltip-no-button {
+  &:hover {
+    cursor: pointer;
+  }
+}
