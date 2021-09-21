@@ -1,5 +1,5 @@
 import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { SpanNativeProps, SpanNativeStateProps } from './native-global-props/span-native-props';
+import { SpanNativeProps, SpanNativeStateProps, SpanNativeNotForComponent, SpanNativeStatePropsNotForComponent } from './native-global-props/span-native-props';
 
 const props = {
   baseClassName: null,
@@ -28,7 +28,7 @@ const statefulPropsNotForComponent = {
 
 const IconProps = () => {return Object.assign({}, ThemeProps(), SpanNativeProps(), props)};
 const IconStateProps = () => {return Object.assign({}, ThemeStateProps(), SpanNativeStateProps(), stateProps)};
-const IconPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), propsNotForComponent)};
-const IconStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const IconPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), SpanNativeNotForComponent(), propsNotForComponent)};
+const IconStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), SpanNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { IconProps, IconStateProps, IconPropsNotForComponent, IconStatePropsNotForComponent }

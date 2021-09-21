@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -48,7 +48,7 @@ const statefulPropsNotForComponent = {
 
 const TooltipProps = () => {return Object.assign({}, DivNativeProps(), props)};
 const TooltipStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps)};
-const TooltipPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
-const TooltipStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const TooltipPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
+const TooltipStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { TooltipProps, TooltipStateProps, TooltipPropsNotForComponent, TooltipStatePropsNotForComponent }

@@ -1,4 +1,4 @@
-import { LabelNativeProps, LabelNativeStateProps } from './native-global-props/label-native-props';
+import { LabelNativeProps, LabelNativeStateProps, LabelNativeNotForComponent, LabelNativeStatePropsNotForComponent } from './native-global-props/label-native-props';
 
 const props = {
   control: null,
@@ -35,7 +35,7 @@ const statefulPropsNotForComponent = {
 
 const FormControlLabelProps = () => { return Object.assign({}, LabelNativeProps(), props) };
 const FormControlLabelStateProps = () => {return Object.assign({}, LabelNativeStateProps(), stateProps) };
-const FormControlLabelPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
-const FormControlLabelStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const FormControlLabelPropsNotForComponent = () => {return Object.assign({}, LabelNativeNotForComponent(), propsNotForComponent)};
+const FormControlLabelStatePropsNotForComponent = () => {return Object.assign({}, LabelNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { FormControlLabelProps, FormControlLabelStateProps, FormControlLabelPropsNotForComponent, FormControlLabelStatePropsNotForComponent }

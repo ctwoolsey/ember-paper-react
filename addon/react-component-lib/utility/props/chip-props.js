@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
 
 const props = {
@@ -41,7 +41,7 @@ const statefulPropsNotForComponent = {
 
 const ChipProps = () => { return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
 const ChipStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
-const ChipPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), propsNotForComponent)};
-const ChipStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ChipPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
+const ChipStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { ChipProps, ChipStateProps, ChipPropsNotForComponent, ChipStatePropsNotForComponent }

@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
 
 const props = {
@@ -39,7 +39,7 @@ const statefulPropsNotForComponent = {
 
 const FormControlProps = () => { return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
 const FormControlStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
-const FormControlPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), propsNotForComponent)};
-const FormControlStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const FormControlPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
+const FormControlStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent, FormControlStatePropsNotForComponent }

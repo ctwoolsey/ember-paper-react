@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent } from './native-global-props/children-holder-props';
 
 const props = {
@@ -32,7 +32,7 @@ const statefulPropsNotForComponent = {
 
 const DrawerProps = () => { return Object.assign({}, ChildrenHolderProps(), DivNativeProps(), props) };
 const DrawerStateProps = () => {return Object.assign({}, ChildrenHolderStateProps(), DivNativeStateProps(), stateProps) };
-const DrawerPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), propsNotForComponent)};
-const DrawerStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const DrawerPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
+const DrawerStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { DrawerProps, DrawerStateProps, DrawerPropsNotForComponent, DrawerStatePropsNotForComponent }

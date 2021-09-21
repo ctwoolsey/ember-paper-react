@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -19,7 +19,7 @@ const statefulPropsNotForComponent = {
 
 const CardActionProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const CardActionStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardActionPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
-const CardActionStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const CardActionPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
+const CardActionStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { CardActionProps, CardActionStateProps, CardActionPropsNotForComponent, CardActionStatePropsNotForComponent }
