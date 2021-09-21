@@ -23,11 +23,6 @@ export class ReactTooltip extends ReactBase{
   }
 
   renderComponent() {
-    const {
-      disabled,
-      onClick
-    } = this.state;
-
     return (
       <Tooltip
         ref={this.componentRef}
@@ -39,12 +34,7 @@ export class ReactTooltip extends ReactBase{
           </React.Fragment>
         }
       >
-        <span>
-          <Button
-            {...(disabled ? { disabled: disabled} : {})}
-            {...(onClick ? { onClick: onClick} : {})}
-          >Dummy Tooltip Child</Button>
-        </span>
+        <span></span>
       </Tooltip>
     )
   }

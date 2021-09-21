@@ -26,7 +26,13 @@ export default class RPaperTooltipComponent extends BaseEmberPaperReact {
   }
 
   renderChildren() {
-    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+    /* a wrapper is needed if the children contents are react components,
+       for example the child was <RPaperButton>
+     */
+    const childrenSpan = document.getElementById(this.childrenSpanId);
+    childrenSpan.className = 'ember-paper-react-tooltip-content-wrapper';
+    childrenSpan.removeAttribute('id');
+    this.reactRef.current.componentRef.current.replaceChildren(childrenSpan);
   }
 }
 
