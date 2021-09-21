@@ -1,4 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg
+
 const props = {
   //Core Attributes
   id: null,
@@ -196,12 +197,20 @@ const props = {
   role: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
-  class: null,
+  class: null
+}
+
+const statefulPropsNotForComponent = {
   style: null
 }
 
 const GlobalSvgProps = () => {return Object.assign({}, props)};
 const GlobalSvgStateProps = () => {return Object.assign({}, stateProps)};
+const GlobalSvgNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const GlobalSvgStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { GlobalSvgProps, GlobalSvgStateProps }
+export { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent }

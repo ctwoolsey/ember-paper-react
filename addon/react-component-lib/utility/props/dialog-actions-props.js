@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -20,7 +20,7 @@ const statefulPropsNotForComponent = {
 
 const DialogActionsProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const DialogActionsStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const DialogActionsPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
-const DialogActionsStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const DialogActionsPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
+const DialogActionsStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { DialogActionsProps, DialogActionsStateProps, DialogActionsPropsNotForComponent, DialogActionsStatePropsNotForComponent }

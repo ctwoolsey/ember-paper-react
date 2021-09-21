@@ -1,4 +1,4 @@
-import { GlobalSvgProps, GlobalSvgStateProps } from './global-svg-props';
+import { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent } from './global-svg-props';
 
 const props = {
   baseProfile: null,
@@ -13,6 +13,9 @@ const props = {
   y: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   height: null,
   preserveAspectRatio: null,
@@ -22,7 +25,12 @@ const stateProps = {
   y: null
 }
 
+const statefulPropsNotForComponent = {
+}
+
 const SvgNativeProps = () => {return Object.assign({}, GlobalSvgProps(), props)};
 const SvgNativeStateProps = () => {return Object.assign({}, GlobalSvgStateProps(), stateProps)};
+const SvgNativeNotForComponent = () => {return Object.assign({}, GlobalSvgNotForComponent(), propsNotForComponent)};
+const SvgNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalSvgStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { SvgNativeProps, SvgNativeStateProps }
+export { SvgNativeProps, SvgNativeStateProps, SvgNativeNotForComponent, SvgNativeStatePropsNotForComponent }

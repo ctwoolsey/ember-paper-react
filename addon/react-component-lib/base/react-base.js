@@ -19,7 +19,11 @@ export class ReactBase extends React.Component{
 
     for (let propName in this.props) {
       if (Object.prototype.hasOwnProperty.call(this.statePropsForComponent,propName)) {
-        this.statePropsForComponent[propName] = this.props[propName];
+        if (propName === 'style') {
+          statePropsNotForComponent[propName] = this.formatStyle(this.props[propName]);
+        }  else {
+          this.statePropsForComponent[propName] = this.props[propName];
+        }
       } else {
         if (Object.prototype.hasOwnProperty.call(statePropsNotForComponent,propName)) {
           statePropsNotForComponent[propName] = this.props[propName];
@@ -67,11 +71,32 @@ export class ReactBase extends React.Component{
     return statePropObject;
   }
 
+  formatStyle(styleValue) {
+    let styleObj = {};
+
+    if (styleValue) {
+      if (typeof styleValue === 'string') {
+        const styleArr = styleValue.split(';');
+        styleArr.forEach(style => {
+          const stylePieces = style.split(':');
+          styleObj[stylePieces[0].replace(/\s/g,'')] = stylePieces[1].replace(/\s/g,'');
+        });
+      } else {
+        styleObj = styleValue;
+      }
+    }
+    return styleObj;
+  }
+
   setStateProp(propName, value) {
     if (Object.prototype.hasOwnProperty.call(this.state, propName)) {
       if (this.state.propName === 'label') {  //TODO make this generic that if a propName is null it defaults to the props.js defined value
         this.setState({label: ''});
       }
+      if (propName === 'style') {
+        value = this.formatStyle(value);
+      }
+
       this.setState({ [propName]: value })
     }
   }

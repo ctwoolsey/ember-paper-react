@@ -94,12 +94,20 @@ const props = {
   onToggle: null
 };
 
+const propsNotForComponent = {
+}
+
 const stateProps = {
   class: null,
   style: null
 }
 
+const statefulPropsNotForComponent = {
+}
+
 const GlobalHtmlProps = () => {return Object.assign({}, props)};
 const GlobalHtmlStateProps = () => {return Object.assign({}, stateProps)};
+const GlobalHtmlNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const GlobalHtmlStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { GlobalHtmlProps, GlobalHtmlStateProps }
+export { GlobalHtmlProps, GlobalHtmlStateProps, GlobalHtmlNotForComponent, GlobalHtmlStatePropsNotForComponent }

@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps } from './native-global-props/div-native-props';
+import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
 
 const props = {
   action: null,
@@ -33,7 +33,7 @@ const statefulPropsNotForComponent = {
 
 const CardHeaderProps = () => { return Object.assign({}, DivNativeProps(), props) };
 const CardHeaderStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardHeaderPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
-const CardHeaderStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
+const CardHeaderPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
+const CardHeaderStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
 
 export { CardHeaderProps, CardHeaderStateProps, CardHeaderPropsNotForComponent, CardHeaderStatePropsNotForComponent }
