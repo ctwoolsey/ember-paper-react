@@ -148,7 +148,6 @@ export default class BaseEmberPaperReact extends Component {
     console.log('Rendering: ' + this.componentType);
     const reactElement = this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
-    //this.cloneAttributes(reactElement, this.el);
 
     if (!this.renderChildren) {
       this.setChildrenFragment();
@@ -207,23 +206,6 @@ export default class BaseEmberPaperReact extends Component {
     }
     return elementId;
   }
-
-  /*cloneAttributes(target, source) {
-    [...source.attributes].forEach( attr => {
-      if (attr.nodeName === 'style') {
-        let styleArr = attr.nodeValue.split(';');
-        styleArr.forEach(style => {
-          let stylePieces = style.split(':');
-          target.style[stylePieces[0]] = stylePieces[1];
-
-        });
-      } else if (attr.nodeName === 'name' && this.handleName) {
-        this.nameValue = attr.nodeValue;
-      } else if (attr.nodeName !== 'class' && attr.nodeName !== 'id'){
-        target.setAttribute(attr.nodeName, attr.nodeValue)
-      }
-    });
-  }*/
 
   initializeProps() {
     Object.assign(this.props, this.notForComponentProps, this.notForComponentStateProps);
