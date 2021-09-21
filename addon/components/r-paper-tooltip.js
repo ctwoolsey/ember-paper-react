@@ -18,15 +18,11 @@ export default class RPaperTooltipComponent extends BaseEmberPaperReact {
     this.notForComponentProps = TooltipPropsNotForComponent();
     this.notForComponentStateProps = TooltipStatePropsNotForComponent();
     this.reactElement = ReactTooltip;
-    this.useButton = (this.args.useButton !== false);
-
   }
 
   initializeProps() {
     super.initializeProps();
-    if (this.args.useButton === false) {
-      this.props.class += ' tooltip-cursor-pointer-enabled';
-    }
+    this.props.class += ' tooltip-cursor-pointer-enabled';
   }
 
   renderChildren() {
