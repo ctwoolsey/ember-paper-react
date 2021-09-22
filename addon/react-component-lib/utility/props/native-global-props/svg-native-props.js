@@ -1,4 +1,5 @@
-import { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent } from './global-svg-props';
+/*import { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent } from './global-svg-props';*/
+import { GlobalSvgPropObj } from "./global-svg-props";
 
 const props = {
   baseProfile: null,
@@ -28,9 +29,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const SvgNativeProps = () => {return Object.assign({}, GlobalSvgProps(), props)};
-const SvgNativeStateProps = () => {return Object.assign({}, GlobalSvgStateProps(), stateProps)};
-const SvgNativeNotForComponent = () => {return Object.assign({}, GlobalSvgNotForComponent(), propsNotForComponent)};
-const SvgNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalSvgStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const SvgNativeProps = () => {return Object.assign({}, GlobalSvgPropObj.props(), props)};
+const SvgNativeStateProps = () => {return Object.assign({}, GlobalSvgPropObj.stateProps(), stateProps)};
+const SvgNativePropsNotForComponent = () => {return Object.assign({}, GlobalSvgPropObj.propsNotForComponent(), propsNotForComponent)};
+const SvgNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalSvgPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { SvgNativeProps, SvgNativeStateProps, SvgNativeNotForComponent, SvgNativeStatePropsNotForComponent }
+const SvgNativePropObj = {
+  props: SvgNativeProps,
+  stateProps: SvgNativeStateProps,
+  propsNotForComponent: SvgNativePropsNotForComponent,
+  statefulPropsNotForComponent: SvgNativeStatePropsNotForComponent
+}
+
+export { SvgNativePropObj }

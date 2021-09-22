@@ -1,5 +1,5 @@
-import { FadeProps, FadeStateProps, FadePropsNotForComponent, FadeStatePropsNotForComponent } from './fade-props';
-import { GlobalHtmlProps, GlobalHtmlStateProps, GlobalHtmlNotForComponent, GlobalHtmlStatePropsNotForComponent } from './native-global-props/global-html-props';
+import { FadePropObj } from './fade-props';
+import { GlobalHtmlPropObj } from './native-global-props/global-html-props';
 
 const props = {
   open: null,
@@ -32,9 +32,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const BackdropProps = () => { return Object.assign({}, GlobalHtmlProps(), FadeProps(), props)};
-const BackdropStateProps = () => { return Object.assign({}, GlobalHtmlStateProps(), FadeStateProps(), stateProps)};
-const BackdropPropsNotForComponent = () => {return Object.assign({}, GlobalHtmlNotForComponent(), FadePropsNotForComponent(), propsNotForComponent)};
-const BackdropStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlStatePropsNotForComponent(), FadeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const BackdropProps = () => { return Object.assign({}, GlobalHtmlPropObj.props(), FadePropObj.props(), props)};
+const BackdropStateProps = () => { return Object.assign({}, GlobalHtmlPropObj.stateProps(), FadePropObj.stateProps(), stateProps)};
+const BackdropPropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.propsNotForComponent(), FadePropObj.propsNotForComponent(), propsNotForComponent)};
+const BackdropStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.statefulPropsNotForComponent(), FadePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { BackdropProps, BackdropStateProps, BackdropPropsNotForComponent, BackdropStatePropsNotForComponent }
+const BackdropPropObj = {
+  props: BackdropProps,
+  stateProps: BackdropStateProps,
+  propsNotForComponent: BackdropPropsNotForComponent,
+  statefulPropsNotForComponent: BackdropStatePropsNotForComponent
+}
+
+export { BackdropPropObj }

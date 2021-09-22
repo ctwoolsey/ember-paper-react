@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -36,9 +36,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const ModalProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const ModalStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const ModalPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const ModalStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ModalProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const ModalStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const ModalPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const ModalStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ModalProps, ModalStateProps, ModalPropsNotForComponent, ModalStatePropsNotForComponent }
+const ModalPropObj = {
+  props: ModalProps,
+  stateProps: ModalStateProps,
+  propsNotForComponent: ModalPropsNotForComponent,
+  statefulPropsNotForComponent: ModalStatePropsNotForComponent
+}
+
+export { ModalPropObj }

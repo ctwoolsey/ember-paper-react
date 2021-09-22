@@ -1,5 +1,5 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
+import { ThemePropObj } from './theme-props';
 
 const props = {
   children: null,
@@ -37,9 +37,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const FormControlProps = () => { return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
-const FormControlStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
-const FormControlPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
-const FormControlStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const FormControlProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };
+const FormControlStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), DivNativePropObj.stateProps(), stateProps) };
+const FormControlPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const FormControlStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent, FormControlStatePropsNotForComponent }
+const FormControlPropObj = {
+  props: FormControlProps,
+  stateProps: FormControlStateProps,
+  propsNotForComponent: FormControlPropsNotForComponent,
+  statefulPropsNotForComponent: FormControlStatePropsNotForComponent
+}
+
+export { FormControlPropObj }

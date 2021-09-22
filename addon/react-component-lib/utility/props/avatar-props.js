@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { ThemePropObj } from './theme-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   alt: null,
@@ -30,9 +30,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const AvatarProps = () => { return Object.assign({}, ThemeProps(), DivNativeProps(), props) };
-const AvatarStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps) };
-const AvatarPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
-const AvatarStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const AvatarProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };
+const AvatarStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), DivNativePropObj.stateProps(), stateProps) };
+const AvatarPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const AvatarStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { AvatarProps, AvatarStateProps, AvatarPropsNotForComponent, AvatarStatePropsNotForComponent }
+const AvatarPropObj = {
+  props: AvatarProps,
+  stateProps: AvatarStateProps,
+  propsNotForComponent: AvatarPropsNotForComponent,
+  statefulPropsNotForComponent: AvatarStatePropsNotForComponent
+}
+
+export { AvatarPropObj }

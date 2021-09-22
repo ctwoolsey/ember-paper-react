@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { SvgNativeProps, SvgNativeStateProps, SvgNativeNotForComponent, SvgNativeStatePropsNotForComponent} from "./native-global-props/svg-native-props";
+import { ThemePropObj } from './theme-props';
+import { SvgNativePropObj} from "./native-global-props/svg-native-props";
 
 const props = {
   children: null,
@@ -29,9 +29,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const SvgIconProps = () => { return Object.assign({}, ThemeProps(), SvgNativeProps(), props) };
-const SvgIconStateProps = () => {return Object.assign({}, ThemeStateProps(), SvgNativeStateProps(), stateProps)};
-const SvgIconPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), SvgNativeNotForComponent(), propsNotForComponent)};
-const SvgIconStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), SvgNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const SvgIconProps = () => { return Object.assign({}, ThemePropObj.props(), SvgNativePropObj.props(), props) };
+const SvgIconStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), SvgNativePropObj.stateProps(), stateProps)};
+const SvgIconPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), SvgNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const SvgIconStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), SvgNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent, SvgIconStatePropsNotForComponent }
+const SvgIconPropObj = {
+  props: SvgIconProps,
+  stateProps: SvgIconStateProps,
+  propsNotForComponent: SvgIconPropsNotForComponent,
+  statefulPropsNotForComponent: SvgIconStatePropsNotForComponent
+}
+
+export { SvgIconPropObj }

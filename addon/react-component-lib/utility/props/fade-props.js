@@ -1,4 +1,4 @@
-import { TransitionProps, TransitionStateProps, TransitionPropsNotForComponent, TransitionStatePropsNotForComponent } from './transition-props'
+import { TransitionPropObj } from './transition-props'
 
 const props = {
   appear: null,
@@ -18,9 +18,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const FadeProps = () => { return Object.assign({}, TransitionProps(), props)};
-const FadeStateProps = () => { return Object.assign({}, TransitionStateProps(), stateProps)};
-const FadePropsNotForComponent = () => {return Object.assign({}, TransitionPropsNotForComponent(), propsNotForComponent)};
-const FadeStatePropsNotForComponent = () => {return Object.assign({}, TransitionStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const FadeProps = () => { return Object.assign({}, TransitionPropObj.props(), props)};
+const FadeStateProps = () => { return Object.assign({}, TransitionPropObj.stateProps(), stateProps)};
+const FadePropsNotForComponent = () => {return Object.assign({}, TransitionPropObj.propsNotForComponent(), propsNotForComponent)};
+const FadeStatePropsNotForComponent = () => {return Object.assign({}, TransitionPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { FadeProps, FadeStateProps, FadePropsNotForComponent, FadeStatePropsNotForComponent }
+const FadePropObj = {
+  props: FadeProps,
+  stateProps: FadeStateProps,
+  propsNotForComponent: FadePropsNotForComponent,
+  statefulPropsNotForComponent: FadeStatePropsNotForComponent
+}
+
+export { FadePropObj }

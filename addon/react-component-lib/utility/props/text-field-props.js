@@ -1,5 +1,5 @@
-import { FormControlProps, FormControlStateProps, FormControlPropsNotForComponent, FormControlStatePropsNotForComponent } from './form-control-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { FormControlPropObj } from './form-control-props';
+import { ThemePropObj } from './theme-props';
 
 const props = {
   autoComplete: null,
@@ -64,9 +64,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const TextFieldProps = () => { return Object.assign({}, ThemeProps(), FormControlProps(), props) };
-const TextFieldStateProps = () => {return Object.assign({}, ThemeStateProps(), FormControlStateProps(), stateProps) };
-const TextFieldPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), FormControlPropsNotForComponent(), propsNotForComponent)};
-const TextFieldStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), FormControlStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const TextFieldProps = () => { return Object.assign({}, ThemePropObj.props(), FormControlPropObj.props(), props) };
+const TextFieldStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), FormControlPropObj.stateProps(), stateProps) };
+const TextFieldPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), FormControlPropObj.propsNotForComponent(), propsNotForComponent)};
+const TextFieldStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), FormControlPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { TextFieldProps, TextFieldStateProps, TextFieldPropsNotForComponent, TextFieldStatePropsNotForComponent }
+const TextFieldPropObj = {
+  props: TextFieldProps,
+  stateProps: TextFieldStateProps,
+  propsNotForComponent: TextFieldPropsNotForComponent,
+  statefulPropsNotForComponent: TextFieldStatePropsNotForComponent
+}
+
+export { TextFieldPropObj }

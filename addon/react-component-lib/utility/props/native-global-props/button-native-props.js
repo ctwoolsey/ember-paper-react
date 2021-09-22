@@ -1,4 +1,4 @@
-import { GlobalHtmlProps, GlobalHtmlStateProps, GlobalHtmlNotForComponent, GlobalHtmlStatePropsNotForComponent } from './global-html-props';
+import { GlobalHtmlPropObj } from './global-html-props';
 
 const props = {
   autoFocus: null,
@@ -24,9 +24,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const ButtonNativeProps = () => {return Object.assign({}, GlobalHtmlProps(), props)};
-const ButtonNativeStateProps = () => {return Object.assign({}, GlobalHtmlStateProps(), stateProps)};
-const ButtonNativeNotForComponent = () => {return Object.assign({}, GlobalHtmlNotForComponent(), propsNotForComponent)};
-const ButtonNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ButtonNativeProps = () => {return Object.assign({}, GlobalHtmlPropObj.props(), props)};
+const ButtonNativeStateProps = () => {return Object.assign({}, GlobalHtmlPropObj.stateProps(), stateProps)};
+const ButtonNativePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.propsNotForComponent(), propsNotForComponent)};
+const ButtonNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ButtonNativeProps, ButtonNativeStateProps, ButtonNativeNotForComponent, ButtonNativeStatePropsNotForComponent }
+const ButtonNativePropObj = {
+  props: ButtonNativeProps,
+  stateProps: ButtonNativeStateProps,
+  propsNotForComponent: ButtonNativePropsNotForComponent,
+  statefulPropsNotForComponent: ButtonNativeStatePropsNotForComponent
+}
+
+export { ButtonNativePropObj }

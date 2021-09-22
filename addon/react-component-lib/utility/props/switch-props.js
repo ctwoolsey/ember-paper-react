@@ -1,5 +1,5 @@
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { ButtonBasePropObj } from './button-base-props';
+import { ThemePropObj } from './theme-props';
 
 const props = {
   checked: null,
@@ -40,9 +40,16 @@ const statefulPropsNotForComponent = {
   theme: null
 }
 
-const SwitchProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props) };
-const SwitchStateProps = () => {return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps) };
-const SwitchPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const SwitchStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const SwitchProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props) };
+const SwitchStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), ButtonBasePropObj.stateProps(), stateProps) };
+const SwitchPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const SwitchStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { SwitchProps, SwitchStateProps, SwitchPropsNotForComponent, SwitchStatePropsNotForComponent }
+const SwitchPropObj = {
+  props: SwitchProps,
+  stateProps: SwitchStateProps,
+  propsNotForComponent: SwitchPropsNotForComponent,
+  statefulPropsNotForComponent: SwitchStatePropsNotForComponent
+}
+
+export { SwitchPropObj }

@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent, SvgIconStatePropsNotForComponent } from './svg-icon-props';
+import { ThemePropObj } from './theme-props';
+import { SvgIconPropObj } from './svg-icon-props';
 
 const props = {
   classes: null,
@@ -28,9 +28,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const CircularProgressProps = () => { return Object.assign({}, ThemeProps(), SvgIconProps(), props)};
-const CircularProgressStateProps = () => { return Object.assign({}, ThemeStateProps(), SvgIconStateProps(), stateProps)};
-const CircularProgressPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), SvgIconPropsNotForComponent(), propsNotForComponent)};
-const CircularProgressStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), SvgIconStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CircularProgressProps = () => { return Object.assign({}, ThemePropObj.props(), SvgIconPropObj.props(), props)};
+const CircularProgressStateProps = () => { return Object.assign({}, ThemePropObj.stateProps(), SvgIconPropObj.stateProps(), stateProps)};
+const CircularProgressPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), SvgIconPropObj.propsNotForComponent(), propsNotForComponent)};
+const CircularProgressStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), SvgIconPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CircularProgressProps, CircularProgressStateProps, CircularProgressPropsNotForComponent, CircularProgressStatePropsNotForComponent }
+const CircularProgressPropObj = {
+  props: CircularProgressProps,
+  stateProps: CircularProgressStateProps,
+  propsNotForComponent: CircularProgressPropsNotForComponent,
+  statefulPropsNotForComponent: CircularProgressStatePropsNotForComponent
+}
+
+export { CircularProgressPropObj }

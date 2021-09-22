@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -18,9 +18,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const DialogActionsProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const DialogActionsStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const DialogActionsPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const DialogActionsStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const DialogActionsProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const DialogActionsStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const DialogActionsPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const DialogActionsStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { DialogActionsProps, DialogActionsStateProps, DialogActionsPropsNotForComponent, DialogActionsStatePropsNotForComponent }
+const DialogActionsPropObj = {
+  props: DialogActionsProps,
+  stateProps: DialogActionsStateProps,
+  propsNotForComponent: DialogActionsPropsNotForComponent,
+  statefulPropsNotForComponent: DialogActionsStatePropsNotForComponent
+}
+
+export { DialogActionsPropObj }

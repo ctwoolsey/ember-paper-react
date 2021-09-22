@@ -107,7 +107,14 @@ const statefulPropsNotForComponent = {
 
 const GlobalHtmlProps = () => {return Object.assign({}, props)};
 const GlobalHtmlStateProps = () => {return Object.assign({}, stateProps)};
-const GlobalHtmlNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const GlobalHtmlPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
 const GlobalHtmlStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { GlobalHtmlProps, GlobalHtmlStateProps, GlobalHtmlNotForComponent, GlobalHtmlStatePropsNotForComponent }
+const GlobalHtmlPropObj = {
+  props: GlobalHtmlProps,
+  stateProps: GlobalHtmlStateProps,
+  propsNotForComponent: GlobalHtmlPropsNotForComponent,
+  statefulPropsNotForComponent: GlobalHtmlStatePropsNotForComponent
+}
+
+export { GlobalHtmlPropObj }

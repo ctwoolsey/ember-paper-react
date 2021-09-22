@@ -1,4 +1,4 @@
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
+import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
   children: null,
@@ -17,9 +17,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const CardActionAreaProps = () => { return Object.assign({}, ButtonBaseProps(), props) };
-const CardActionAreaStateProps = () => {return Object.assign({}, ButtonBaseStateProps(), stateProps) };
-const CardActionAreaPropsNotForComponent = () => {return Object.assign({}, ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const CardActionAreaStatePropsNotForComponent = () => {return Object.assign({}, ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CardActionAreaProps = () => { return Object.assign({}, ButtonBasePropObj.props(), props) };
+const CardActionAreaStateProps = () => {return Object.assign({}, ButtonBasePropObj.stateProps(), stateProps) };
+const CardActionAreaPropsNotForComponent = () => {return Object.assign({}, ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const CardActionAreaStatePropsNotForComponent = () => {return Object.assign({}, ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CardActionAreaProps, CardActionAreaStateProps, CardActionAreaPropsNotForComponent, CardActionAreaStatePropsNotForComponent }
+const CardActionAreaPropObj = {
+  props: CardActionAreaProps,
+  stateProps: CardActionAreaStateProps,
+  propsNotForComponent: CardActionAreaPropsNotForComponent,
+  statefulPropsNotForComponent: CardActionAreaStatePropsNotForComponent
+}
+
+export { CardActionAreaPropObj }

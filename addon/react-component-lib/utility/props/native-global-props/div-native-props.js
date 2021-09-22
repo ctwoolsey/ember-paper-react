@@ -1,13 +1,15 @@
-import {
-  GlobalHtmlNotForComponent,
-  GlobalHtmlProps,
-  GlobalHtmlStateProps,
-  GlobalHtmlStatePropsNotForComponent
-} from "./global-html-props";
+import { GlobalHtmlPropObj } from "./global-html-props";
 
-const DivNativeProps = () => {return Object.assign({}, GlobalHtmlProps())};
-const DivNativeStateProps = () => {return Object.assign({}, GlobalHtmlStateProps())};
-const DivNativeNotForComponent = () => {return Object.assign({}, GlobalHtmlNotForComponent())};
-const DivNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlStatePropsNotForComponent())};
+const DivNativeProps = () => {return Object.assign({}, GlobalHtmlPropObj.props())};
+const DivNativeStateProps = () => {return Object.assign({}, GlobalHtmlPropObj.stateProps())};
+const DivNativePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.propsNotForComponent())};
+const DivNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.statefulPropsNotForComponent())};
 
-export { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent }
+const DivNativePropObj = {
+  props: DivNativeProps,
+  stateProps: DivNativeStateProps,
+  propsNotForComponent: DivNativePropsNotForComponent,
+  statefulPropsNotForComponent: DivNativeStatePropsNotForComponent
+}
+
+export { DivNativePropObj }

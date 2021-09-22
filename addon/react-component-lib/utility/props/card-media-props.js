@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -22,9 +22,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const CardMediaProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const CardMediaStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardMediaPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const CardMediaStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CardMediaProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const CardMediaStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const CardMediaPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const CardMediaStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CardMediaProps, CardMediaStateProps, CardMediaPropsNotForComponent, CardMediaStatePropsNotForComponent }
+const CardMediaPropObj = {
+  props: CardMediaProps,
+  stateProps: CardMediaStateProps,
+  propsNotForComponent: CardMediaPropsNotForComponent,
+  statefulPropsNotForComponent: CardMediaStatePropsNotForComponent
+}
+
+export { CardMediaPropObj }

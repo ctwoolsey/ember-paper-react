@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { ThemePropObj } from './theme-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -25,9 +25,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const PaperProps = () => {return Object.assign({}, ThemeProps(), DivNativeProps(), props)};
-const PaperStateProps = () => {return Object.assign({}, ThemeStateProps(), DivNativeStateProps(), stateProps)};
-const PaperPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), DivNativeNotForComponent(), propsNotForComponent)};
-const PaperStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const PaperProps = () => {return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props)};
+const PaperStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), DivNativePropObj.stateProps(), stateProps)};
+const PaperPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const PaperStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent }
+const PaperPropObj = {
+  props: PaperProps,
+  stateProps: PaperStateProps,
+  propsNotForComponent: PaperPropsNotForComponent,
+  statefulPropsNotForComponent: PaperStatePropsNotForComponent
+}
+
+export { PaperPropObj }

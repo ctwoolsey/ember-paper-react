@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -21,9 +21,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const ToolbarProps = () => {return Object.assign({}, DivNativeProps(), props)};
-const ToolbarStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps)};
-const ToolbarPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const ToolbarStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ToolbarProps = () => {return Object.assign({}, DivNativePropObj.props(), props)};
+const ToolbarStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps)};
+const ToolbarPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const ToolbarStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ToolbarProps, ToolbarStateProps, ToolbarPropsNotForComponent, ToolbarStatePropsNotForComponent }
+const ToolbarPropObj = {
+  props: ToolbarProps,
+  stateProps: ToolbarStateProps,
+  propsNotForComponent: ToolbarPropsNotForComponent,
+  statefulPropsNotForComponent: ToolbarStatePropsNotForComponent
+}
+
+export { ToolbarPropObj }

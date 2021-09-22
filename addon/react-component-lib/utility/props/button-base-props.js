@@ -1,4 +1,4 @@
-import { ButtonNativeProps, ButtonNativeStateProps, ButtonNativeNotForComponent, ButtonNativeStatePropsNotForComponent } from './native-global-props/button-native-props';
+import { ButtonNativePropObj } from './native-global-props/button-native-props';
 
 const props = {
   action: null,
@@ -27,9 +27,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const ButtonBaseProps = () => {return Object.assign({}, ButtonNativeProps(), props)};
-const ButtonBaseStateProps = () => {return Object.assign({}, ButtonNativeStateProps(), stateProps)};
-const ButtonBasePropsNotForComponent = () => {return Object.assign({}, ButtonNativeNotForComponent(), propsNotForComponent)};
-const ButtonBaseStatePropsNotForComponent = () => {return Object.assign({}, ButtonNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ButtonBaseProps = () => {return Object.assign({}, ButtonNativePropObj.props(), props)};
+const ButtonBaseStateProps = () => {return Object.assign({}, ButtonNativePropObj.stateProps(), stateProps)};
+const ButtonBasePropsNotForComponent = () => {return Object.assign({}, ButtonNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const ButtonBaseStatePropsNotForComponent = () => {return Object.assign({}, ButtonNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent }
+const ButtonBasePropObj = {
+  props: ButtonBaseProps,
+  stateProps: ButtonBaseStateProps,
+  propsNotForComponent: ButtonBasePropsNotForComponent,
+  statefulPropsNotForComponent: ButtonBaseStatePropsNotForComponent
+}
+
+export { ButtonBasePropObj }

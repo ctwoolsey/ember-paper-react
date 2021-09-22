@@ -1,5 +1,5 @@
-import { ModalProps, ModalStateProps, ModalPropsNotForComponent, ModalStatePropsNotForComponent } from './modal-props';
-import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent } from './native-global-props/children-holder-props';
+import { ModalPropObj } from './modal-props';
+import { ChildrenHolderPropObj } from './native-global-props/children-holder-props';
 
 const props = {
   open: null,
@@ -38,9 +38,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const DialogProps = () => { return Object.assign({}, ChildrenHolderProps(), ModalProps(), props) };
-const DialogStateProps = () => {return Object.assign({}, ChildrenHolderStateProps(), ModalStateProps(), stateProps) };
-const DialogPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), ModalPropsNotForComponent(), propsNotForComponent)};
-const DialogStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), ModalStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const DialogProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), ModalPropObj.props(), props) };
+const DialogStateProps = () => {return Object.assign({}, ChildrenHolderPropObj.stateProps(), ModalPropObj.stateProps(), stateProps) };
+const DialogPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropObj.propsNotForComponent(), ModalPropObj.propsNotForComponent(), propsNotForComponent)};
+const DialogStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropObj.statefulPropsNotForComponent(), ModalPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { DialogProps, DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForComponent }
+const DialogPropObj = {
+  props: DialogProps,
+  stateProps: DialogStateProps,
+  propsNotForComponent: DialogPropsNotForComponent,
+  statefulPropsNotForComponent: DialogStatePropsNotForComponent
+}
+
+export { DialogPropObj }

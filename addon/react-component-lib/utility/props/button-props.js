@@ -1,5 +1,5 @@
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
+import { ThemePropObj } from './theme-props';
+import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
   children: null,
@@ -39,9 +39,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const ButtonProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props)};
-const ButtonStateProps = () => { return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps)};
-const ButtonPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const ButtonStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const ButtonProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props)};
+const ButtonStateProps = () => { return Object.assign({}, ThemePropObj.stateProps(), ButtonBasePropObj.stateProps(), stateProps)};
+const ButtonPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const ButtonStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { ButtonProps, ButtonStateProps, ButtonPropsNotForComponent, ButtonStatePropsNotForComponent }
+const ButtonPropObj = {
+  props: ButtonProps,
+  stateProps: ButtonStateProps,
+  propsNotForComponent: ButtonPropsNotForComponent,
+  statefulPropsNotForComponent: ButtonStatePropsNotForComponent
+}
+
+export { ButtonPropObj }

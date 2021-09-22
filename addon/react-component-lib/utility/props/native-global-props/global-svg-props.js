@@ -201,16 +201,24 @@ const propsNotForComponent = {
 }
 
 const stateProps = {
-  class: null
+  class: null,
+  style: null
 }
 
 const statefulPropsNotForComponent = {
-  style: null
+
 }
 
 const GlobalSvgProps = () => {return Object.assign({}, props)};
 const GlobalSvgStateProps = () => {return Object.assign({}, stateProps)};
-const GlobalSvgNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
+const GlobalSvgPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
 const GlobalSvgStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent }
+const GlobalSvgPropObj = {
+  props: GlobalSvgProps,
+  stateProps: GlobalSvgStateProps,
+  propsNotForComponent: GlobalSvgPropsNotForComponent,
+  statefulPropsNotForComponent: GlobalSvgStatePropsNotForComponent
+}
+
+export { GlobalSvgPropObj }

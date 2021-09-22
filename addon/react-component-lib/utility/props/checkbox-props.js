@@ -1,5 +1,5 @@
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { ButtonBasePropObj } from './button-base-props';
+import { ThemePropObj } from './theme-props';
 
 const props = {
   checked: null,
@@ -42,9 +42,16 @@ const statefulPropsNotForComponent = {
   theme: null
 }
 
-const CheckboxProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props) };
-const CheckboxStateProps = () => {return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps) };
-const CheckboxPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const CheckboxStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CheckboxProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props) };
+const CheckboxStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), ButtonBasePropObj.stateProps(), stateProps) };
+const CheckboxPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const CheckboxStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CheckboxProps, CheckboxStateProps, CheckboxPropsNotForComponent, CheckboxStatePropsNotForComponent }
+const CheckboxPropObj = {
+  props: CheckboxProps,
+  stateProps: CheckboxStateProps,
+  propsNotForComponent: CheckboxPropsNotForComponent,
+  statefulPropsNotForComponent: CheckboxStatePropsNotForComponent
+}
+
+export { CheckboxPropObj }

@@ -1,4 +1,4 @@
-import { SvgIconProps, SvgIconStateProps, SvgIconPropsNotForComponent, SvgIconStatePropsNotForComponent } from './svg-icon-props';
+import { SvgIconPropObj } from './svg-icon-props';
 
 const props = {
 };
@@ -13,9 +13,16 @@ const statefulPropsNotForComponent = {
   reactIcon: null
 }
 
-const MaterialIconProps = () => { return Object.assign({}, SvgIconProps(), props) };
-const MaterialIconStateProps = () => {return Object.assign({}, SvgIconStateProps(), stateProps)};
-const MaterialIconPropsNotForComponent = () => {return Object.assign({}, SvgIconPropsNotForComponent(), propsNotForComponent)};
-const MaterialIconStatePropsNotForComponent = () => {return Object.assign({}, SvgIconStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const MaterialIconProps = () => { return Object.assign({}, SvgIconPropObj.props(), props) };
+const MaterialIconStateProps = () => {return Object.assign({}, SvgIconPropObj.stateProps(), stateProps)};
+const MaterialIconPropsNotForComponent = () => {return Object.assign({}, SvgIconPropObj.propsNotForComponent(), propsNotForComponent)};
+const MaterialIconStatePropsNotForComponent = () => {return Object.assign({}, SvgIconPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { MaterialIconProps, MaterialIconStateProps, MaterialIconPropsNotForComponent, MaterialIconStatePropsNotForComponent }
+const MaterialIconPropObj = {
+  props: MaterialIconProps,
+  stateProps: MaterialIconStateProps,
+  propsNotForComponent: MaterialIconPropsNotForComponent,
+  statefulPropsNotForComponent: MaterialIconStatePropsNotForComponent
+}
+
+export { MaterialIconPropObj }

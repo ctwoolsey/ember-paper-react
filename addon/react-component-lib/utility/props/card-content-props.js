@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -18,9 +18,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const CardContentProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const CardContentStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const CardContentPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const CardContentStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CardContentProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const CardContentStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const CardContentPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const CardContentStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CardContentProps, CardContentStateProps, CardContentPropsNotForComponent, CardContentStatePropsNotForComponent }
+const CardContentPropObj = {
+  props: CardContentProps,
+  stateProps: CardContentStateProps,
+  propsNotForComponent: CardContentPropsNotForComponent,
+  statefulPropsNotForComponent: CardContentStatePropsNotForComponent
+}
+
+export { CardContentPropObj }

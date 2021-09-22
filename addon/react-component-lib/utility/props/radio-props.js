@@ -1,5 +1,5 @@
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
-import { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent } from './theme-props';
+import { ButtonBasePropObj } from './button-base-props';
+import { ThemePropObj } from './theme-props';
 
 const props = {
   checked: null,
@@ -39,9 +39,16 @@ const statefulPropsNotForComponent = {
   theme: null
 }
 
-const RadioProps = () => { return Object.assign({}, ThemeProps(), ButtonBaseProps(), props) };
-const RadioStateProps = () => {return Object.assign({}, ThemeStateProps(), ButtonBaseStateProps(), stateProps) };
-const RadioPropsNotForComponent = () => {return Object.assign({}, ThemePropsNotForComponent(), ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const RadioStatePropsNotForComponent = () => {return Object.assign({}, ThemeStatePropsNotForComponent(), ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const RadioProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props) };
+const RadioStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), ButtonBasePropObj.stateProps(), stateProps) };
+const RadioPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const RadioStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { RadioProps, RadioStateProps, RadioPropsNotForComponent, RadioStatePropsNotForComponent }
+const RadioPropObj = {
+  props: RadioProps,
+  stateProps: RadioStateProps,
+  propsNotForComponent: RadioPropsNotForComponent,
+  statefulPropsNotForComponent: RadioStatePropsNotForComponent
+}
+
+export { RadioPropObj }

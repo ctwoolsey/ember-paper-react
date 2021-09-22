@@ -1,4 +1,4 @@
-import { ButtonBaseProps, ButtonBaseStateProps, ButtonBasePropsNotForComponent, ButtonBaseStatePropsNotForComponent } from './button-base-props';
+import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
   autoFocus: null,
@@ -23,9 +23,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const MenuItemProps = () => { return Object.assign({}, ButtonBaseProps(), props) };
-const MenuItemStateProps = () => {return Object.assign({}, ButtonBaseStateProps(), stateProps) };
-const MenuItemPropsNotForComponent = () => {return Object.assign({}, ButtonBasePropsNotForComponent(), propsNotForComponent)};
-const MenuItemStatePropsNotForComponent = () => {return Object.assign({}, ButtonBaseStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const MenuItemProps = () => { return Object.assign({}, ButtonBasePropObj.props(), props) };
+const MenuItemStateProps = () => {return Object.assign({}, ButtonBasePropObj.stateProps(), stateProps) };
+const MenuItemPropsNotForComponent = () => {return Object.assign({}, ButtonBasePropObj.propsNotForComponent(), propsNotForComponent)};
+const MenuItemStatePropsNotForComponent = () => {return Object.assign({}, ButtonBasePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { MenuItemProps, MenuItemStateProps, MenuItemPropsNotForComponent, MenuItemStatePropsNotForComponent }
+const MenuItemPropObj = {
+  props: MenuItemProps,
+  stateProps: MenuItemStateProps,
+  propsNotForComponent: MenuItemPropsNotForComponent,
+  statefulPropsNotForComponent: MenuItemStatePropsNotForComponent
+}
+
+export { MenuItemPropObj }

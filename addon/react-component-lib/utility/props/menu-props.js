@@ -1,5 +1,5 @@
-import { PopoverProps, PopoverStateProps, PopoverPropsNotForComponent, PopoverStatePropsNotForComponent } from './popover-props';
-import { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent } from './native-global-props/children-holder-props';
+import { PopoverPropObj } from './popover-props';
+import { ChildrenHolderPropObj } from './native-global-props/children-holder-props';
 
 const props = {
   open: null,
@@ -30,9 +30,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const MenuPropsProps = () => { return Object.assign({}, ChildrenHolderProps(), PopoverProps(), props) };
-const MenuPropsStateProps = () => {return Object.assign({}, ChildrenHolderStateProps(), PopoverStateProps(), stateProps) };
-const MenuPropsPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropsNotForComponent(), PopoverPropsNotForComponent(), propsNotForComponent)};
-const MenuPropsStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderStatePropsNotForComponent(), PopoverStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const MenuProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), PopoverPropObj.props(), props) };
+const MenuStateProps = () => {return Object.assign({}, ChildrenHolderPropObj.stateProps(), PopoverPropObj.stateProps(), stateProps) };
+const MenuPropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropObj.propsNotForComponent(), PopoverPropObj.propsNotForComponent(), propsNotForComponent)};
+const MenuStatePropsNotForComponent = () => {return Object.assign({}, ChildrenHolderPropObj.statefulPropsNotForComponent(), PopoverPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { MenuPropsProps, MenuPropsStateProps, MenuPropsPropsNotForComponent, MenuPropsStatePropsNotForComponent }
+const MenuPropObj = {
+  props: MenuProps,
+  stateProps: MenuStateProps,
+  propsNotForComponent: MenuPropsNotForComponent,
+  statefulPropsNotForComponent: MenuStatePropsNotForComponent
+}
+
+export { MenuPropObj }

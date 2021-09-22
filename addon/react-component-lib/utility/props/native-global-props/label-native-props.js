@@ -1,9 +1,4 @@
-import {
-  GlobalHtmlNotForComponent,
-  GlobalHtmlProps,
-  GlobalHtmlStateProps,
-  GlobalHtmlStatePropsNotForComponent
-} from "./global-html-props";
+import { GlobalHtmlPropObj } from "./global-html-props";
 
 const props = {
   for: null
@@ -18,9 +13,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const LabelNativeProps = () => {return Object.assign({}, GlobalHtmlProps(), props)};
-const LabelNativeStateProps = () => {return Object.assign({}, GlobalHtmlStateProps(), stateProps)};
-const LabelNativeNotForComponent = () => {return Object.assign({}, GlobalHtmlNotForComponent(), propsNotForComponent)};
-const LabelNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const LabelNativeProps = () => {return Object.assign({}, GlobalHtmlPropObj.props(), props)};
+const LabelNativeStateProps = () => {return Object.assign({}, GlobalHtmlPropObj.stateProps(), stateProps)};
+const LabelNativePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.propsNotForComponent(), propsNotForComponent)};
+const LabelNativeStatePropsNotForComponent = () => {return Object.assign({}, GlobalHtmlPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { LabelNativeProps, LabelNativeStateProps, LabelNativeNotForComponent, LabelNativeStatePropsNotForComponent }
+const LabelNativePropObj = {
+  props: LabelNativeProps,
+  stateProps: LabelNativeStateProps,
+  propsNotForComponent: LabelNativePropsNotForComponent,
+  statefulPropsNotForComponent: LabelNativeStatePropsNotForComponent
+}
+
+export { LabelNativePropObj }

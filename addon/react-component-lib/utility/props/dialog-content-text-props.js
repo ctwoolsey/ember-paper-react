@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   children: null,
@@ -17,9 +17,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const DialogContentTextProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const DialogContentTextStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const DialogContentTextPropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const DialogContentTextStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const DialogContentTextProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const DialogContentTextStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const DialogContentTextPropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const DialogContentTextStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { DialogContentTextProps, DialogContentTextStateProps, DialogContentTextPropsNotForComponent, DialogContentTextStatePropsNotForComponent }
+const DialogContentTextPropObj = {
+  props: DialogContentTextProps,
+  stateProps: DialogContentTextStateProps,
+  propsNotForComponent: DialogContentTextPropsNotForComponent,
+  statefulPropsNotForComponent: DialogContentTextStatePropsNotForComponent
+}
+
+export { DialogContentTextPropObj }

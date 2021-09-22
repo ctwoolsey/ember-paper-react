@@ -1,4 +1,4 @@
-import { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent } from './paper-props';
+import { PaperPropObj } from './paper-props';
 
 const props = {
   children: null,
@@ -19,9 +19,16 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const CardProps = () => { return Object.assign({}, PaperProps(), props) };
-const CardStateProps = () => {return Object.assign({}, PaperStateProps(), stateProps) };
-const CardPropsNotForComponent = () => {return Object.assign({}, PaperPropsNotForComponent(), propsNotForComponent)};
-const CardStatePropsNotForComponent = () => {return Object.assign({}, PaperStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const CardProps = () => { return Object.assign({}, PaperPropObj.props(), props) };
+const CardStateProps = () => {return Object.assign({}, PaperPropObj.stateProps(), stateProps) };
+const CardPropsNotForComponent = () => {return Object.assign({}, PaperPropObj.propsNotForComponent(), propsNotForComponent)};
+const CardStatePropsNotForComponent = () => {return Object.assign({}, PaperPropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { CardProps, CardStateProps, CardPropsNotForComponent, CardStatePropsNotForComponent }
+const CardPropObj = {
+  props: CardProps,
+  stateProps: CardStateProps,
+  propsNotForComponent: CardPropsNotForComponent,
+  statefulPropsNotForComponent: CardStatePropsNotForComponent
+}
+
+export { CardPropObj }

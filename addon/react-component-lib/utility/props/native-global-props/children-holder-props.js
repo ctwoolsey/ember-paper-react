@@ -17,4 +17,11 @@ const ChildrenHolderStateProps = () => {return Object.assign({}, stateProps) };
 const ChildrenHolderPropsNotForComponent = () => {return Object.assign({}, propsNotForComponent)};
 const ChildrenHolderStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
-export { ChildrenHolderProps, ChildrenHolderStateProps, ChildrenHolderPropsNotForComponent, ChildrenHolderStatePropsNotForComponent }
+const ChildrenHolderPropObj = {
+  props: ChildrenHolderProps,
+  stateProps: ChildrenHolderStateProps,
+  propsNotForComponent: ChildrenHolderPropsNotForComponent,
+  statefulPropsNotForComponent: ChildrenHolderStatePropsNotForComponent
+}
+
+export { ChildrenHolderPropObj }

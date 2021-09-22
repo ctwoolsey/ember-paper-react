@@ -1,4 +1,4 @@
-import { DivNativeProps, DivNativeStateProps, DivNativeNotForComponent, DivNativeStatePropsNotForComponent } from './native-global-props/div-native-props';
+import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
   options: null,
@@ -97,9 +97,17 @@ const stateProps = {
 const statefulPropsNotForComponent = {
 }
 
-const AutocompleteProps = () => { return Object.assign({}, DivNativeProps(), props) };
-const AutocompleteStateProps = () => {return Object.assign({}, DivNativeStateProps(), stateProps) };
-const AutocompletePropsNotForComponent = () => {return Object.assign({}, DivNativeNotForComponent(), propsNotForComponent)};
-const AutocompleteStatePropsNotForComponent = () => {return Object.assign({}, DivNativeStatePropsNotForComponent(), statefulPropsNotForComponent)};
+const AutocompleteProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
+const AutocompleteStateProps = () => {return Object.assign({}, DivNativePropObj.stateProps(), stateProps) };
+const AutocompletePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.propsNotForComponent(), propsNotForComponent)};
+const AutocompleteStatePropsNotForComponent = () => {return Object.assign({}, DivNativePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-export { AutocompleteProps, AutocompleteStateProps, AutocompletePropsNotForComponent, AutocompleteStatePropsNotForComponent }
+const AutocompletePropObj = {
+  props: AutocompleteProps,
+  stateProps: AutocompleteStateProps,
+  propsNotForComponent: AutocompletePropsNotForComponent,
+  statefulPropsNotForComponent: AutocompleteStatePropsNotForComponent
+}
+
+export { AutocompletePropObj }
+

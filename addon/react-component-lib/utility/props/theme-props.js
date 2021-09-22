@@ -17,4 +17,11 @@ const ThemePropsNotForComponent = () => {return Object.assign({}, propsNotForCom
 const ThemeStatePropsNotForComponent = () => {return Object.assign({}, statefulPropsNotForComponent)};
 
 
-export { ThemeProps, ThemeStateProps, ThemePropsNotForComponent, ThemeStatePropsNotForComponent }
+const ThemePropObj = {
+  props: ThemeProps,
+  stateProps: ThemeStateProps,
+  propsNotForComponent: ThemePropsNotForComponent,
+  statefulPropsNotForComponent: ThemeStatePropsNotForComponent
+}
+
+export { ThemePropObj }
