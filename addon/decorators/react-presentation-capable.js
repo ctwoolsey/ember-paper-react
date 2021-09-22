@@ -8,16 +8,24 @@ function reactPresentationCapable(c){
 
     initializeProps() {
       super.initializeProps();
-      this.props.reactRenderCallback = this.reactRender;
-      this.props.saveChildrenCallback = this.saveChildren;
+      this.propsToPass.reactRenderCallback = this.reactRender;
+      this.propsToPass.saveChildrenCallback = this.saveChildren;
     }
 
     reactRender(insertElement) {
-      this.moveLocation = insertElement;
+      if (super.reactRender) {
+        super.reactRender(insertElement);
+      } else {
+        this.moveLocation = insertElement;
+      }
     }
 
     saveChildren() {
-      this.moveLocation = this.childrenFragment;
+      if (super.saveChildren) {
+        super.saveChildren();
+      } else {
+        this.moveLocation = this.childrenFragment;
+      }
     }
   }
 }

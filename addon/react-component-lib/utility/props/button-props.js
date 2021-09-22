@@ -29,9 +29,11 @@ const stateProps = {
   disableElevation: null,
   disableFocusRipple: null,
   disableRipple: null,
+  endIcon: null,
   fullWidth: null,
   href: null,
   size: null,
+  startIcon: null,
   sx: null,
   variant: null
 }

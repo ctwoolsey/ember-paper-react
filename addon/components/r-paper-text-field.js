@@ -1,8 +1,6 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactTextField } from '../react-component-lib/react-text-field';
-import Inputmask from 'inputmask';
 import { TextFieldPropObj } from '../react-component-lib/utility/props/text-field-props';
-import React from 'react';
 import BaseInElementRender from "./base/base-in-element-render";
 import { useInputMask }  from '../decorators/use-input-mask'
 

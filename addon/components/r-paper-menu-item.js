@@ -4,7 +4,6 @@ import { MenuItemPropObj } from '../react-component-lib/utility/props/menu-item-
 import BaseInElementRender from "./base/base-in-element-render";
 
 export default class RPaperMenuItemComponent extends BaseInElementRender {
-
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.MENU_ITEM;

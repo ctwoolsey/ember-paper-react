@@ -25,9 +25,9 @@ function useInputMask(c){
     initializeProps() {
       super.initializeProps();
       if (this.args.onChange) {
-        this.props.onChange = this.onChangeHandler;
+        this.propsToPass.onChange = this.onChangeHandler;
       }
-      this.props.inputRef = this.inputRef;
+      this.propsToPass.inputRef = this.inputRef;
     }
 
     renderElement() {
