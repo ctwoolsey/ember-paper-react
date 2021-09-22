@@ -38,12 +38,10 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
     }
   }
 
-  renderElement() {
+  renderChildren() {
     if (this.args.select) {
       this.moveLocation = this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0];
     }
-
-    super.renderElement();
   }
 
 }

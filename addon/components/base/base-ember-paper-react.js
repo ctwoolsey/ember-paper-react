@@ -148,10 +148,11 @@ export default class BaseEmberPaperReact extends Component {
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
     if (!this.renderChildren) {
-      this.setChildrenFragment();
+      /*this.setChildrenFragment();
       if (this.childrenFragment.childNodes.length > 0) {
         this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }
+      }*/
+      this.moveLocation = this.reactRef.current.componentRef.current;
     } else {
       this.renderChildren();
     }

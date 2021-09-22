@@ -1,14 +1,14 @@
 import {ReactMenuItem} from '../react-component-lib/react-menu-item'
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
   MenuItemProps,
   MenuItemStateProps,
   MenuItemPropsNotForComponent,
   MenuItemStatePropsNotForComponent
 } from '../react-component-lib/utility/props/menu-item-props';
+import BaseInElementRender from "./base/base-in-element-render";
 
-export default class RPaperMenuItemComponent extends BaseEmberPaperReact {
+export default class RPaperMenuItemComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);

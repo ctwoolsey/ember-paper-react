@@ -1,9 +1,9 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { PaperProps, PaperStateProps, PaperPropsNotForComponent, PaperStatePropsNotForComponent } from '../react-component-lib/utility/props/paper-props';
 import { ReactPaper } from '../react-component-lib/react-paper';
-import BaseEmberPaperReact from './base/base-ember-paper-react';
+import BaseInElementRender from "./base/base-in-element-render";
 
-export default class RPaperComponent extends BaseEmberPaperReact {
+export default class RPaperComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
@@ -17,6 +17,6 @@ export default class RPaperComponent extends BaseEmberPaperReact {
   }
 
   renderChildren() {
-    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
+    this.moveLocation = this.reactRef.current.componentRef.current;
   }
 }

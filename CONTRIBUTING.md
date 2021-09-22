@@ -87,27 +87,25 @@ the method `initializeProps` combines `propsNotForComponent` and `statefulPropsN
  uses:
 1. Allows no wrapping of component children
 2. Allows children to support dynamic ember code like `{{each}}`
-3. Use when the react component will create a portal to display component information.
+3. Use when the react component will create a portal to display component information. (*See `reactPresentationCapable` decorator info below)
 > * extend from: BaseInElementRender  
 > * place rendering code in component file 
 > ```angular2html
 > renderElement() {
 >   ~your code here~
->   set this.moveLocation = <some HTML element>
+>   set this.moveLocation = <some HTML element> if component displays immediately
 >   super.renderElement();
 > }
 > ```
 > * follow this form in template
 > ```angular2html
-> {{#if this.canRenderChildren}}
->    {{#in-element this.moveLocation}}
->      {{yield}}
->    {{/in-element}}
-> {{/if}}
+>  {{#in-element this.moveLocation}}
+>    {{yield}}
+>  {{/in-element}}
 > ```
 >> Examples: r-paper-menu & r-paper-text-field  
 
-To save the components children when the react component creates a portal set the `reactPresentationCapable` decorator on the class.  
+To save the components children when the react component creates a presentation portal set the `reactPresentationCapable` decorator on the class. The rendering via `this.moveLocation` is handled automatically.  
 ```angular2html
 @reactPresentationCapable
 export default class RPaperMenuComponent extends BaseInElementRender {}
