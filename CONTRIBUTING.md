@@ -111,8 +111,24 @@ To save the components children when the react component creates a portal set th
 ```angular2html
 @reactPresentationCapable
 export default class RPaperMenuComponent extends BaseInElementRender {}
-```
+```  
 
+## Input Masking  
+***
+If a class has a react component that has an `inputRef` property and that input should have the capability of masking,
+the class decorator `@useInputMask` should be used.
+```angular2html
+@useInputMask
+export default class RPaperTextFieldComponent extends BaseInElementRender {}
+```  
+This will utilize the mask arguments of:
+* mask
+* maskDefaults
+* maskDefinitions
+* maskAliases
+
+This will also automatically update the change handler so that the method will return the `event` and `unmasked value`.
+If no mask is defined, the change handler will only return the `event`.
 
  
 
