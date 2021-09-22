@@ -80,3 +80,31 @@ the children, so ember needs to intercept these components.
 
 the method `initializeProps` combines `propsNotForComponent` and `statefulPropsNotForComponent` into `this.props` for sending to the React Component.
 
+## Render Types
+***
+
+### in-element  
+ uses:
+1. Allows no wrapping of component children
+2. Allows children to support dynamic ember code like `{{each}}`
+> * extend from: BaseInElementRender  
+> * place rendering code in component file 
+> ```angular2html
+> renderElement() {
+>   ~your code here~
+>   set this.moveLocation = <some HTML element>
+>   super.renderElement();
+> }
+> ```
+> * follow this form in template
+> ```angular2html
+> {{#if this.canRenderChildren}}
+>    {{#in-element this.moveLocation}}
+>      {{yield}}
+>    {{/in-element}}
+> {{/if}}
+> ```
+>> Examples: r-paper-menu & r-paper-text-field
+ 
+
+
