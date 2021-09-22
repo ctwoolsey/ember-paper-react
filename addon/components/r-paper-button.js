@@ -1,7 +1,7 @@
 import {ReactButton} from '../react-component-lib/react-button'
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { ButtonProps, ButtonStateProps, ButtonPropsNotForComponent, ButtonStatePropsNotForComponent } from '../react-component-lib/utility/props/button-props';
+import { ButtonPropObj } from '../react-component-lib/utility/props/button-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 export default class RPaperButton extends BaseInElementRender {
@@ -9,10 +9,7 @@ export default class RPaperButton extends BaseInElementRender {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.BUTTON;
-    this.props = ButtonProps();
-    this.stateProps = ButtonStateProps();
-    this.notForComponentProps = ButtonPropsNotForComponent();
-    this.notForComponentStateProps = ButtonStatePropsNotForComponent();
+    this.loadPropObject(ButtonPropObj);
     this.reactElement = ReactButton;
   }
 

@@ -1,12 +1,7 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactTextField } from '../react-component-lib/react-text-field';
 import Inputmask from 'inputmask';
-import {
-  TextFieldProps,
-  TextFieldStateProps,
-  TextFieldPropsNotForComponent,
-  TextFieldStatePropsNotForComponent
-} from '../react-component-lib/utility/props/text-field-props';
+import { TextFieldPropObj } from '../react-component-lib/utility/props/text-field-props';
 import React from 'react';
 import BaseInElementRender from "./base/base-in-element-render";
 import { useInputMask }  from '../decorators/use-input-mask'
@@ -16,10 +11,7 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.TEXTFIELD;
-    this.props = TextFieldProps();
-    this.stateProps = TextFieldStateProps();
-    this.notForComponentProps = TextFieldPropsNotForComponent();
-    this.notForComponentStateProps = TextFieldStatePropsNotForComponent();
+    this.loadPropObject(TextFieldPropObj);
     this.reactElement = ReactTextField;
   }
 

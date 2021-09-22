@@ -27,10 +27,16 @@ export default class BaseEmberPaperReact extends Component {
     this.fixedClassString = '';
     this.reactComponentFragments = {};
     this.stateProps = {};
-
   }
 
-    get changeArgs() {
+  loadPropObject(propObj) {
+    this.props = propObj.props();
+    this.stateProps = propObj.stateProps();
+    this.notForComponentProps = propObj.notForComponentProps();
+    this.notForComponentStateProps = propObj.notForComponentStateProps();
+  }
+
+  get changeArgs() {
     let changeObj = {};
     let statefulProps = Object.assign({}, this.stateProps, this.notForComponentStateProps)
     for (let propName in statefulProps) {

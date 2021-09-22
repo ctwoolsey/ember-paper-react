@@ -1,10 +1,10 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import {
-  CheckboxProps, CheckboxStateProps, CheckboxPropsNotForComponent, CheckboxStatePropsNotForComponent
+  CheckboxPropObj
 } from '../react-component-lib/utility/props/checkbox-props';
 import {
-  FormControlLabelProps, FormControlLabelStateProps, FormControlLabelPropsNotForComponent, FormControlLabelStatePropsNotForComponent
+  FormControlLabelPropObj
 } from '../react-component-lib/utility/props/form-control-label-props';
 import { ReactCheckbox } from '../react-component-lib/react-checkbox';
 
@@ -12,10 +12,10 @@ export default class RPaperCheckbox extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CHECKBOX;
-    this.props = Object.assign({}, CheckboxProps(), FormControlLabelProps());
-    this.stateProps = Object.assign({}, CheckboxStateProps(), FormControlLabelStateProps());
-    this.notForComponentProps = Object.assign({}, CheckboxPropsNotForComponent(), FormControlLabelPropsNotForComponent());
-    this.notForComponentStateProps = Object.assign({}, CheckboxStatePropsNotForComponent(), FormControlLabelStatePropsNotForComponent());
+    this.props = Object.assign({}, CheckboxPropObj.props(), FormControlLabelPropObj.props());
+    this.stateProps = Object.assign({}, CheckboxPropObj.stateProps(), FormControlLabelPropObj.stateProps());
+    this.notForComponentProps = Object.assign({}, CheckboxPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
+    this.notForComponentStateProps = Object.assign({}, CheckboxPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
     this.reactElement = ReactCheckbox;
   }
 

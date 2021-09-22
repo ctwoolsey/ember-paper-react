@@ -1,22 +1,14 @@
 import { ReactCardHeader } from '../react-component-lib/card-related/react-card-header';
 import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import {
-  CardHeaderProps,
-  CardHeaderStateProps,
-  CardHeaderPropsNotForComponent,
-  CardHeaderStatePropsNotForComponent
-} from '../react-component-lib/utility/props/card-header-props';
+import { CardHeaderPropObj } from '../react-component-lib/utility/props/card-header-props';
 
 export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
-    this.props = CardHeaderProps();
-    this.stateProps = CardHeaderStateProps();
-    this.notForComponentProps = CardHeaderPropsNotForComponent();
-    this.notForComponentStateProps = CardHeaderStatePropsNotForComponent();
+    this.loadPropObject(CardHeaderPropObj);
     this.reactElement = ReactCardHeader;
     this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
   }

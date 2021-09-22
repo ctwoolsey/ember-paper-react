@@ -1,22 +1,14 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactDialog } from '../react-component-lib/dialog-related/react-dialog';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import {
-  DialogProps,
-  DialogStateProps,
-  DialogPropsNotForComponent,
-  DialogStatePropsNotForComponent
-} from '../react-component-lib/utility/props/dialog-props';
+import { DialogPropObj } from '../react-component-lib/utility/props/dialog-props';
 
 export default class RPaperDialogComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.DIALOG;
-    this.props = DialogProps();
-    this.stateProps = DialogStateProps();
-    this.notForComponentProps = DialogPropsNotForComponent();
-    this.notForComponentStateProps = DialogStatePropsNotForComponent();
+    this.loadPropObject(DialogPropObj);
     this.reactElement = ReactDialog;
 
     this.reactRender = this.reactRender.bind(this);

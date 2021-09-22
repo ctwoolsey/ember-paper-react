@@ -2,18 +2,14 @@ import {ReactAvatarGroup} from '../react-component-lib/react-avatar-group'
 import { action } from '@ember/object';
 import { COMPONENT_TYPES, AVATAR_GROUP } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { AvatarGroupProps, AvatarGroupStateProps, AvatarGroupPropsNotForComponent, AvatarGroupStatePropsNotForComponent } from '../react-component-lib/utility/props/avatar-group-props';
+import { AvatarGroupPropObj } from '../react-component-lib/utility/props/avatar-group-props';
 
 export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AVATAR_GROUP;
-
-    this.props = AvatarGroupProps();
-    this.stateProps = AvatarGroupStateProps();
-    this.notForComponentProps = AvatarGroupPropsNotForComponent();
-    this.notForComponentStateProps = AvatarGroupStatePropsNotForComponent();
+    this.loadPropObject(AvatarGroupPropObj);
     this.reactElement = ReactAvatarGroup;
 
 
