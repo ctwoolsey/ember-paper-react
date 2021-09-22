@@ -1,7 +1,6 @@
 import React from 'react';
-import { ReactChildrenHolder } from './utility/react-children-holder';
 import { ReactBase } from './base/react-base';
-import { DrawerStateProps, DrawerPropsNotForComponent, DrawerStatePropsNotForComponent } from './utility/props/drawer-props';
+import { DrawerPropObj } from './utility/props/drawer-props';
 import Drawer from '@mui/material/Drawer';
 
 
@@ -12,7 +11,7 @@ export class ReactDrawer extends ReactBase{
     this.addEventListeners = this.addEventListeners.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.componentRef = React.createRef();
-    this.initialize(DrawerStateProps(), DrawerPropsNotForComponent(), DrawerStatePropsNotForComponent());
+    this.initialize(DrawerPropObj);
   }
 
   componentDidMount() {

@@ -2,16 +2,12 @@ import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import { ReactBase } from './base/react-base';
-import {
-  TooltipPropsNotForComponent,
-  TooltipStateProps,
-  TooltipStatePropsNotForComponent
-} from './utility/props/tooltip-props';
+import {TooltipPropObj} from './utility/props/tooltip-props';
 
 export class ReactTooltip extends ReactBase{
   constructor(props) {
     super(props);
-    this.initialize(TooltipStateProps(), TooltipPropsNotForComponent(), TooltipStatePropsNotForComponent());
+    this.initialize(TooltipPropObj);
   }
 
   createTitleMarkup() {

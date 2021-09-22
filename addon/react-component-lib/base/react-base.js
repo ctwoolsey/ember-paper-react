@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 import { ReactChildrenHolder } from "../utility/react-children-holder";
+import { reactPropSifter } from "../utility/react-prop-sifter";
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -8,37 +9,16 @@ export class ReactBase extends React.Component{
     this.componentRef = React.createRef();
     this.setStateProp = this.setStateProp.bind(this);
     this.staticProps = {};  //properties that are not connected to state
+    this.statePropsForComponent = {};
     this.DefaultComponentToRender = null;
   }
 
-  initialize(stateProperties, propertiesNotForComponent, statePropertiesNotForComponent) {
-    /* filter this.props into this.staticProps since it will have properties that should be
-       stateful and even properties not meant for the react component */
-    this.statePropsForComponent = Object.assign({}, stateProperties);
-    let statePropsNotForComponent = Object.assign({}, statePropertiesNotForComponent);
-    let propsNotForComponent = Object.assign({}, propertiesNotForComponent);
+  initialize(propsObj) {
+    const propsSifted = reactPropSifter(this.props, propsObj);
+    this.state = Object.assign({}, propsSifted.stateProps, propsSifted.statefulPropsNotForComponent);
+    this.staticProps = propsSifted.staticProps;
+    this.statePropsForComponent = propsSifted.stateProps;
 
-    for (let propName in this.props) {
-      if (Object.prototype.hasOwnProperty.call(this.statePropsForComponent,propName)) {
-        if (propName === 'style') {
-          statePropsNotForComponent[propName] = this.formatStyle(this.props[propName]);
-        }  else {
-          this.statePropsForComponent[propName] = this.props[propName];
-        }
-      } else {
-        if (Object.prototype.hasOwnProperty.call(statePropsNotForComponent,propName)) {
-          statePropsNotForComponent[propName] = this.props[propName];
-        } else {
-          if (Object.prototype.hasOwnProperty.call(propsNotForComponent,propName)) {
-            propsNotForComponent[propName] = this.props[propName];
-          } else {
-            this.staticProps[propName] = this.props[propName];
-          }
-        }
-      }
-    }
-
-    this.state = Object.assign({}, this.statePropsForComponent, statePropsNotForComponent);
   }
 
   placeStaticProps(staticProps) {

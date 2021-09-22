@@ -2,64 +2,28 @@ import React from 'react';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { ReactBase } from './base/react-base';
-import {
-  FormControlLabelProps, FormControlLabelStateProps, FormControlLabelPropsNotForComponent, FormControlLabelStatePropsNotForComponent
-} from '../react-component-lib/utility/props/form-control-label-props';
+import { FormControlLabelPropObj } from '../react-component-lib/utility/props/form-control-label-props';
+import { reactPropSifter } from "./utility/react-prop-sifter";
+
 export class ReactLabeledCheckRadioSwitch extends ReactBase{
   constructor(props) {
     super(props);
   }
 
-  initialize(controlProps, controlPropsNotForComponent, controlStateProps, controlStatePropsNotForComponent) {
-    let formLabelProps = FormControlLabelProps();
-    let formLabelPropsNotForComponent = FormControlLabelPropsNotForComponent();
-    let formLabelStateProps = FormControlLabelStateProps();
-    let formStatePropsNotForComponent = FormControlLabelStatePropsNotForComponent();
-
-    this.staticFormLabelProps = {};
-    this.statePropsForFormLabelComponent = {};
-    let statePropsFormLabelNotForComponent = {};
-    this.staticControlProps = {};
-    this.statePropsForControlComponent = {};
-    let statePropsControlNotForComponent = {};
-
-    for (let propName in this.props) {
-      //load FormLabel
-      if (Object.prototype.hasOwnProperty.call(formLabelProps,propName)) {
-        if (Object.prototype.hasOwnProperty.call(formLabelStateProps,propName)) {
-          this.statePropsForFormLabelComponent[propName] = this.props[propName];
-        } else {
-          if (Object.prototype.hasOwnProperty.call(formStatePropsNotForComponent,propName)) {
-            statePropsFormLabelNotForComponent[propName] = this.props[propName];
-          } else {
-            if (!Object.prototype.hasOwnProperty.call(formLabelPropsNotForComponent,propName)) {
-              this.staticFormLabelProps[propName] = this.props[propName];
-            }
-          }
-        }
-      }
-
-      //load Control
-      if (Object.prototype.hasOwnProperty.call(controlProps,propName)) {
-        if (Object.prototype.hasOwnProperty.call(controlStateProps,propName)) {
-          this.statePropsForControlComponent[propName] = this.props[propName];
-        } else {
-          if (Object.prototype.hasOwnProperty.call(controlStatePropsNotForComponent,propName)) {
-            statePropsControlNotForComponent[propName] = this.props[propName];
-          } else {
-            if (!Object.prototype.hasOwnProperty.call(controlPropsNotForComponent,propName)) {
-              this.staticControlProps[propName] = this.props[propName];
-            }
-          }
-        }
-      }
-    } //end for propName
-
+  initialize(controlPropObj) {
+    const formControlLabelSifted = reactPropSifter(this.props, FormControlLabelPropObj);
+    const controlPropSifted = reactPropSifter(this.props, controlPropObj);
     this.state = Object.assign({},
-                               this.statePropsForFormLabelComponent,
-                               statePropsFormLabelNotForComponent,
-                               this.statePropsForControlComponent,
-                               statePropsControlNotForComponent);
+      formControlLabelSifted.stateProps,
+      formControlLabelSifted.statefulPropsNotForComponent,
+      controlPropSifted.stateProps,
+      controlPropSifted.statefulPropsNotForComponent);
+
+    this.staticFormLabelProps = formControlLabelSifted.staticProps;
+    this.statePropsForFormLabelComponent = formControlLabelSifted.stateProps;
+    this.staticControlProps = controlPropSifted.staticProps;
+    this.statePropsForControlComponent = controlPropSifted.stateProps;
+
   }
 
   render() {

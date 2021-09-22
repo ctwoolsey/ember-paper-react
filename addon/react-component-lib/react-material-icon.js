@@ -1,4 +1,4 @@
-import { MaterialIconStateProps, MaterialIconPropsNotForComponent, MaterialIconStatePropsNotForComponent } from './utility/props/material-icon-props';
+import { MaterialIconPropObj } from './utility/props/material-icon-props';
 import { ReactBase } from './base/react-base';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 export class ReactMaterialIcon extends ReactBase{
   constructor(props) {
     super(props);
-    this.initialize(MaterialIconStateProps(), MaterialIconPropsNotForComponent(), MaterialIconStatePropsNotForComponent());
+    this.initialize(MaterialIconPropObj);
   }
 
   render() {

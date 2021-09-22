@@ -1,16 +1,11 @@
 import { ReactLabeledCheckRadioSwitch } from './react-labeled-check-radio-switch';
 import Radio from '@mui/material/Radio';
-import {
-  RadioProps,
-  RadioStateProps,
-  RadioPropsNotForComponent,
-  RadioStatePropsNotForComponent
-} from './utility/props/radio-props';
+import {RadioPropObj} from './utility/props/radio-props';
 
 export class ReactRadio extends ReactLabeledCheckRadioSwitch {
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = Radio;
-    this.initialize(RadioProps(), RadioPropsNotForComponent(), RadioStateProps(), RadioStatePropsNotForComponent());
+    this.initialize(RadioPropObj);
   }
 }
