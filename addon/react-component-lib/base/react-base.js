@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
+import { ReactChildrenHolder } from "../utility/react-children-holder";
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -109,7 +110,14 @@ export class ReactBase extends React.Component{
         ref={this.componentRef}
         {...(this.placeStaticProps(this.staticProps))}
         {...(this.placeStateProps(this.statePropsForComponent))}
-      />
+      >
+        {this.props.reactRenderCallback && this.props.saveChildrenCallback &&
+          <ReactChildrenHolder
+            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
+            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
+          />
+        }
+      </ComponentToRender>
     )
   }
 

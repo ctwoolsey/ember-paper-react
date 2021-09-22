@@ -4,17 +4,19 @@ export class ReactChildrenHolder extends React.Component{
   constructor(props) {
     super(props);
     this.spanRef = React.createRef();
+    this.parent = null;
   }
 
   componentDidMount() {
     if (this.spanRef.current && this.props.reactRenderCallback) {
-      this.props.reactRenderCallback(this.spanRef.current)
+      this.parent = this.spanRef.current.parentElement;
+      this.props.reactRenderCallback(this.parent);
     }
   }
 
   componentWillUnmount() {
     if (this.spanRef.current && this.props.saveChildrenCallback) {
-      this.props.saveChildrenCallback(this.spanRef.current)
+      this.props.saveChildrenCallback(this.parent);
     }
   }
 

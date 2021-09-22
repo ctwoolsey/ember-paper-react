@@ -1,6 +1,4 @@
-import React from 'react';
 import Dialog from '@mui/material/Dialog';
-import { ReactChildrenHolder } from '../utility/react-children-holder';
 import { ReactBase } from '../base/react-base';
 import { DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForComponent } from '../utility/props/dialog-props';
 
@@ -8,6 +6,7 @@ import { DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForCom
 export class ReactDialog extends ReactBase{
   constructor(props) {
     super(props);
+    this.DefaultComponentToRender = Dialog;
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -49,20 +48,5 @@ export class ReactDialog extends ReactBase{
       this.props.onClose(event, reason);
       this.setOpen(false);
     }
-  }
-
-  renderComponent() {
-    return (
-      <Dialog
-        ref={this.componentRef}
-        {...(this.placeStaticProps(this.staticProps))}
-        {...(this.placeStateProps(this.statePropsForComponent))}
-      >
-        <ReactChildrenHolder
-          {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
-          {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
-        />
-      </Dialog>
-    )
   }
 }
