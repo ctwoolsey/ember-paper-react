@@ -1,6 +1,6 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactMenu } from '../react-component-lib/react-menu';
-import { reactPresentationCapable } from "./decorators/react-presentation-capable";
+import { reactPresentationCapable } from "../decorators/react-presentation-capable";
 import {
   MenuPropsProps,
   MenuPropsStateProps,
