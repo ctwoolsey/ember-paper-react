@@ -24,7 +24,6 @@ export default class RPaperTextFieldComponent extends BaseEmberPaperReact {
     this.notForComponentStateProps = TextFieldStatePropsNotForComponent();
     this.reactElement = ReactTextField;
 
-    this.handleName = true;
     this.inputmask = null;
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.inputRef = React.createRef();

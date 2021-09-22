@@ -18,9 +18,7 @@ export default class BaseEmberPaperReact extends Component {
     this.reactRef = null;
     this.el = null;
 
-
     this.componentType = COMPONENT_TYPES.NOT_SET;
-    this.handleName = false;
     this.nameValue = null;
     this.childrenFragment = null;
     this.reactComponentFragments = null;
