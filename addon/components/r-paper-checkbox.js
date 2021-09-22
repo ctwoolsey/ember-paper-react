@@ -14,8 +14,8 @@ export default class RPaperCheckbox extends BaseEmberPaperReact {
     this.componentType = COMPONENT_TYPES.CHECKBOX;
     this.props = Object.assign({}, CheckboxPropObj.props(), FormControlLabelPropObj.props());
     this.stateProps = Object.assign({}, CheckboxPropObj.stateProps(), FormControlLabelPropObj.stateProps());
-    this.notForComponentProps = Object.assign({}, CheckboxPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
-    this.notForComponentStateProps = Object.assign({}, CheckboxPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
+    this.propsNotForComponent = Object.assign({}, CheckboxPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
+    this.statefulPropsNotForComponent = Object.assign({}, CheckboxPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
     this.reactElement = ReactCheckbox;
   }
 

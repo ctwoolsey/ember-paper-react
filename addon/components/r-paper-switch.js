@@ -12,8 +12,8 @@ export default class RPaperSwitchComponent extends BaseEmberPaperReact {
     this.componentType = COMPONENT_TYPES.SWITCH;
     this.props = Object.assign({}, SwitchPropObj.props(), FormControlLabelPropObj.props());
     this.stateProps = Object.assign({}, SwitchPropObj.stateProps(), FormControlLabelPropObj.stateProps());
-    this.notForComponentProps = Object.assign({}, SwitchPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
-    this.notForComponentStateProps = Object.assign({}, SwitchPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
+    this.propsNotForComponent = Object.assign({}, SwitchPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
+    this.statefulPropsNotForComponent = Object.assign({}, SwitchPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
     this.reactElement = ReactSwitch;
   }
 

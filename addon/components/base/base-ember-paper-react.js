@@ -32,13 +32,13 @@ export default class BaseEmberPaperReact extends Component {
   loadPropObject(propObj) {
     this.props = propObj.props();
     this.stateProps = propObj.stateProps();
-    this.notForComponentProps = propObj.notForComponentProps();
-    this.notForComponentStateProps = propObj.notForComponentStateProps();
+    this.propsNotForComponent = propObj.propsNotForComponent();
+    this.statefulPropsNotForComponent = propObj.statefulPropsNotForComponent();
   }
 
   get changeArgs() {
     let changeObj = {};
-    let statefulProps = Object.assign({}, this.stateProps, this.notForComponentStateProps)
+    let statefulProps = Object.assign({}, this.stateProps, this.statefulPropsNotForComponent)
     for (let propName in statefulProps) {
       if (propName !== 'theme') {
         if (Object.prototype.hasOwnProperty.call(statefulProps, propName)) {
@@ -213,7 +213,7 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   initializeProps() {
-    Object.assign(this.props, this.notForComponentProps, this.notForComponentStateProps);
+    Object.assign(this.props, this.propsNotForComponent, this.statefulPropsNotForComponent);
     for (let propName in this.props) {
       switch (propName) {
         case 'class':
