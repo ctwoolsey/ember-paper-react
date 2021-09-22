@@ -19,14 +19,14 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
     super.initializeProps();
 
     if (this.args.value === '') {
-      this.props.value = '';
+      this.propsToPass.value = '';
     }
 
     if (this.args.select) {
-      if (!this.props.SelectProps) {
-        this.props.SelectProps = {};
+      if (!this.propsToPass.SelectProps) {
+        this.propsToPass.SelectProps = {};
       }
-      this.props.SelectProps.native = true;
+      this.propsToPass.SelectProps.native = true;
     }
   }
 

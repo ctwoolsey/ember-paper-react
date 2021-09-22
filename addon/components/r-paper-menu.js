@@ -19,7 +19,7 @@ export default class RPaperMenuComponent extends BaseInElementRender {
   }
 
   setAnchorElByTriggerId() {
-    this.props.anchorEl = document.getElementById(this.args.triggerId);
+    this.propsToPass.anchorEl = document.getElementById(this.args.triggerId);
   }
 
   renderChildren() {

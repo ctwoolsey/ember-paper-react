@@ -29,13 +29,13 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.onOpen = this.onOpenHandler;
-    this.props.clearIcon = this.createIcon(this.args.clearIcon);
-    this.props.popupIcon = this.createIcon(this.args.popupIcon);
-    if (!this.props.options) {
-      this.props.options = [];
+    this.propsToPass.onOpen = this.onOpenHandler;
+    this.propsToPass.clearIcon = this.createIcon(this.args.clearIcon);
+    this.propsToPass.popupIcon = this.createIcon(this.args.popupIcon);
+    if (!this.propsToPass.options) {
+      this.propsToPass.options = [];
     }
-    this.props.inputRef = this.inputRef;
+    this.propsToPass.inputRef = this.inputRef;
   }
 
   renderAdditionalItems() {

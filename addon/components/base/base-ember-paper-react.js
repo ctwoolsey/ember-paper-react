@@ -27,6 +27,7 @@ export default class BaseEmberPaperReact extends Component {
     this.fixedClassString = '';
     this.reactComponentFragments = {};
     this.stateProps = {};
+    this.propsToPass = {};
   }
 
   loadPropObject(propObj) {
@@ -213,27 +214,27 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   initializeProps() {
-    Object.assign(this.props, this.propsNotForComponent, this.statefulPropsNotForComponent);
-    for (let propName in this.props) {
+    Object.assign(this.propsToPass, this.props, this.stateProps, this.propsNotForComponent, this.statefulPropsNotForComponent);
+    for (let propName in this.propsToPass) {
       switch (propName) {
         case 'class':
-          this.props.class = this.initializeAndMergeClassWithClassString() || '';
+          this.propsToPass.class = this.initializeAndMergeClassWithClassString() || '';
           break;
         case 'id':
-          this.props.id = this.findElementId();
+          this.propsToPass.id = this.findElementId();
           break;
         case 'theme':
-          this.props.theme = this.themeManager.theme || null;
+          this.propsToPass.theme = this.themeManager.theme || null;
           break;
         case 'ref':
-          this.props.ref = this.reactRef;
+          this.propsToPass.ref = this.reactRef;
           break;
         case 'label':
-          this.props.label = this.args.label || '';
+          this.propsToPass.label = this.args.label || '';
           break;
         default:
           if (this.args[propName] !== null && this.args[propName] !== undefined) {
-            this.props[propName] = this.args[propName];
+            this.propsToPass[propName] = this.args[propName];
           }
           break;
       }
@@ -260,8 +261,7 @@ export default class BaseEmberPaperReact extends Component {
     console.log('Inserted: ' + this.componentType);
     this.insertedTasks(element);
     let ReactComponent = this.reactElement;
-
-    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.props}/>, document.body);
+    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, element.parentNode);
     ReactDOM.render(reactPortal, document.createElement('div'));
   }
 

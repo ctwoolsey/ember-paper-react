@@ -14,7 +14,7 @@ export default class RPaperTooltipComponent extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.class += ' tooltip-cursor-pointer-enabled';
+    this.propsToPass.class += ' tooltip-cursor-pointer-enabled';
   }
 
   renderChildren() {

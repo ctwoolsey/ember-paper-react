@@ -17,8 +17,8 @@ export default class RPaperDialogComponent extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.reactRenderCallback = this.reactRender;
-    this.props.saveChildrenCallback = this.saveChildren;
+    this.propsToPass.reactRenderCallback = this.reactRender;
+    this.propsToPass.saveChildrenCallback = this.saveChildren;
   }
 
   renderElement() {

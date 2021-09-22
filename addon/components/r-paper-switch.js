@@ -19,7 +19,7 @@ export default class RPaperSwitchComponent extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.checkedIcon = this.createIcon(this.args.checkedIcon);
-    this.props.icon = this.createIcon(this.args.icon);
+    this.propsToPass.checkedIcon = this.createIcon(this.args.checkedIcon);
+    this.propsToPass.icon = this.createIcon(this.args.icon);
   }
 }

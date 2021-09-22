@@ -15,8 +15,8 @@ export default class RPaperButton extends BaseInElementRender {
 
   initializeProps() {
     super.initializeProps();
-    this.props.endIcon = this.createIcon(this.args.endIcon);
-    this.props.startIcon = this.createIcon(this.args.startIcon);
+    this.propsToPass.endIcon = this.createIcon(this.args.endIcon);
+    this.propsToPass.startIcon = this.createIcon(this.args.startIcon);
   }
 
   renderChildren() {

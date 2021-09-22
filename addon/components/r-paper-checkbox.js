@@ -21,7 +21,7 @@ export default class RPaperCheckbox extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.checkedIcon = this.createIcon(this.args.checkedIcon);
-    this.props.indeterminateIcon = this.createIcon(this.args.indeterminateIcon);
+    this.propsToPass.checkedIcon = this.createIcon(this.args.checkedIcon);
+    this.propsToPass.indeterminateIcon = this.createIcon(this.args.indeterminateIcon);
   }
 }

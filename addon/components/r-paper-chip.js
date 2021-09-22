@@ -16,8 +16,8 @@ export default class RPaperChip extends BaseEmberPaperReact {
 
   initializeProps() {
     super.initializeProps();
-    this.props.icon = this.createIcon(this.args.icon);
-    this.props.avatar = this.args.avatar ? <ReactAvatar {...this.args.avatar}/> : null;
-    this.props.deleteIcon = this.createIcon(this.args.deleteIcon);
+    this.propsToPass.icon = this.createIcon(this.args.icon);
+    this.propsToPass.avatar = this.args.avatar ? <ReactAvatar {...this.args.avatar}/> : null;
+    this.propsToPass.deleteIcon = this.createIcon(this.args.deleteIcon);
   }
 }
