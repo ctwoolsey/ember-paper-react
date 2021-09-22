@@ -44,11 +44,12 @@ This addon uses React's ```material-ui``` components but layout styling is done 
 
 [See ember-paper layout docs »](https://miguelcobain.github.io/ember-paper/#/layout/introduction) 
 
-<i>Theming</i>
-------------------------------------------------------------------------------
+## Theming  
+***
+
 If you wish to theme the material-ui components using predefined colors from material-ui, you will need to install "@material-ui/core".
 
-```$ npm install --save --dev @material-ui/core```
+```$ npm install --save --dev @mui/material @emotion/react @emotion/styled```
 
 To use the material-ui theme palette globally, inject the service 'themeManager'.  This should be done within application.js.
 
@@ -74,7 +75,15 @@ export default class ApplicationController extends Controller {
 }
 ```
 To change the global theme, this same pattern can be called from anywhere in the ember app.  To change a specific component, modify the appropriate css file.
-All components support the ```@style``` and ```@class``` arguments.
+All components support the `@style` and `@class` arguments as well as `@sx`.
+
+Using `@style` can inline or a passed object:  
+> <MyComponent @style="backgroundColor:blue; width:100px" /> 
+ 
+or
+ 
+> <MyComponent @style={{this.myStyle}} />   
+> this.myStyle = { backgroundColor: 'blue', width: '500px' };
 
 <i>Button</i>
 ------------------------------------------------------------------------------
