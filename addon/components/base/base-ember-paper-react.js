@@ -254,7 +254,7 @@ export default class BaseEmberPaperReact extends Component {
     this.insertedTasks(element);
     let ReactComponent = this.reactElement;
 
-    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.props}/>, element.parentElement);
+    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.props}/>, document.body);
     ReactDOM.render(reactPortal, document.createElement('div'));
   }
 
