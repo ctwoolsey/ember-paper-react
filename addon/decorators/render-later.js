@@ -8,6 +8,10 @@ function renderLater(c){
 
     renderLater() {
       super.renderLater && super.renderLater();
+      this.el.remove();
+      const childEndMarker = document.getElementById(this.lastChildId);
+      childEndMarker && childEndMarker.remove();
+      this.renderStack.renderNext();
     }
 
   }

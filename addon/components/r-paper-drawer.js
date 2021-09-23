@@ -17,7 +17,6 @@ export default class RPaperDrawerComponent extends BaseInElementRender {
   }
 
   renderLater() {
-    console.log('drawer render later');
     if (this.args.variant === 'persistent' ||
       this.args.variant === 'permanent' ||
       (this.args.ModalProps && this.args.ModalProps.keepMounted)) {
@@ -25,11 +24,6 @@ export default class RPaperDrawerComponent extends BaseInElementRender {
         this.moveLocation = this.reactRef.current.componentRef.current.getElementsByClassName('MuiDrawer-paper')[0];
       }
     }
-
-    this.el.remove();
-    const childEndMarker = document.getElementById(this.lastChildId);
-    childEndMarker && childEndMarker.remove();
-    this.renderStack.renderNext();
   }
 }
 
