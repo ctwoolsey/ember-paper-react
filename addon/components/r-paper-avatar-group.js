@@ -1,10 +1,10 @@
 import {ReactAvatarGroup} from '../react-component-lib/react-avatar-group'
 import { action } from '@ember/object';
 import { COMPONENT_TYPES, AVATAR_GROUP } from '../react-component-lib/constants/constants';
-import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { AvatarGroupPropObj } from '../react-component-lib/utility/props/avatar-group-props';
+import BaseInElementRender from "./base/base-in-element-render";
 
-export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
+export default class RPaperAvatarGroupComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
@@ -22,17 +22,12 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
     this.observer = null;
   }
 
-  renderChildren() {
-    this.reactRef.current.componentRef.current.replaceChildren(document.getElementById(this.childrenSpanId));
-  }
-
   renderAdditionalItems() {
     this.removeStyleSheetForLastAvatarChild();
   }
 
   doneRendering() {
     this.applyGroupAttributesToAvatars();
-    const childrenHolder = document.getElementById(this.childrenSpanId);
     const config = { attributes: false, childList: true, subtree: false };
 
     this.observer = new MutationObserver(() => {
@@ -41,7 +36,7 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
     });
 
     // Start observing the target node for configured mutations
-    this.observer.observe(childrenHolder, config);
+    this.observer.observe(this.moveLocation, config);
   }
 
   applyGroupAttributesToAvatars() {
@@ -109,7 +104,9 @@ export default class RPaperAvatarGroupComponent extends BaseEmberPaperReact {
           const extraAvatarsToIndicate = '+'+extraAvatars;
           this.avatarCountMarkerIndex = i;
           this.avatarCountMarkerFragment = document.createDocumentFragment();
-          this.avatarCountMarkerFragment.appendChild(avatarElements[i].firstChild);
+          while(avatarElements[i].firstChild){
+            this.avatarCountMarkerFragment.appendChild(avatarElements[i].firstChild);
+          }
           avatarElements[i].replaceChildren(document.createTextNode(extraAvatarsToIndicate));
         } else {
           avatarElements[i].classList.add('hide-avatar');

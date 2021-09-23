@@ -4,7 +4,7 @@
   {{did-update this.spacing @spacing}}
   {{did-update this.variant @variant}}
 ></span>
-<span id={{this.childrenSpanId}}>
+{{#in-element this.moveLocation}}
   {{yield}}
-</span>
+{{/in-element}}
 <div id={{this.lastChildId}}></div>
