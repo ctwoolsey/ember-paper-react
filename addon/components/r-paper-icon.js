@@ -3,11 +3,12 @@ import { ReactIcon } from '../react-component-lib/react-icon';
 import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
 import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
+import BaseChildSpanRender from "./base/base-child-span-render";
 import { IconPropObj } from '../react-component-lib/utility/props/icon-props';
 import { SvgIconPropObj } from '../react-component-lib/utility/props/svg-icon-props';
 import { MaterialIconPropObj } from '../react-component-lib/utility/props/material-icon-props';
 
-export default class RPaperIconComponent extends BaseEmberPaperReact {
+export default class RPaperIconComponent extends BaseChildSpanRender {
 
   constructor() {
     super(...arguments);
@@ -26,6 +27,8 @@ export default class RPaperIconComponent extends BaseEmberPaperReact {
       }
     }
   }
+
+
 
   renderPathChildren() {
     const svgChildNodes = this.reactRef.current.componentRef.current.childNodes;

@@ -1,9 +1,9 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactTooltip } from '../react-component-lib/react-tooltip';
-import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { TooltipPropObj } from '../react-component-lib/utility/props/tooltip-props';
+import BaseInElementRender from "./base/base-in-element-render";
 
-export default class RPaperTooltipComponent extends BaseEmberPaperReact {
+export default class RPaperTooltipComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
@@ -17,15 +17,6 @@ export default class RPaperTooltipComponent extends BaseEmberPaperReact {
     this.propsToPass.class += ' tooltip-cursor-pointer-enabled';
   }
 
-  renderChildren() {
-    /* a wrapper is needed if the children contents are react components,
-       for example the child was <RPaperButton>
-     */
-    const childrenSpan = document.getElementById(this.childrenSpanId);
-    childrenSpan.className = 'ember-paper-react-tooltip-content-wrapper';
-    childrenSpan.removeAttribute('id');
-    this.reactRef.current.componentRef.current.replaceChildren(childrenSpan);
-  }
 }
 
 

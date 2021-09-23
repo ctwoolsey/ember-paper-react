@@ -12,8 +12,4 @@ export default class RPaperComponent extends BaseInElementRender {
     this.reactElement = ReactPaper;
 
   }
-
-  renderChildren() {
-    this.moveLocation = this.reactRef.current.componentRef.current;
-  }
 }

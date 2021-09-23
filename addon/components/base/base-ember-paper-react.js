@@ -23,7 +23,6 @@ export default class BaseEmberPaperReact extends Component {
     this.childrenFragment = null;
     this.reactComponentFragments = null;
     this.lastChildId= uuidv4();
-    this.childrenSpanId = uuidv4();
     this.fixedClassString = '';
     this.reactComponentFragments = {};
     this.stateProps = {};
@@ -154,15 +153,16 @@ export default class BaseEmberPaperReact extends Component {
     const reactElement = this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
-    if (!this.renderChildren) {
-      /*this.setChildrenFragment();
+    this.renderChildren && this.renderChildren();
+    /*if (!this.renderChildren) {
+      /!*this.setChildrenFragment();
       if (this.childrenFragment.childNodes.length > 0) {
         this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }*/
-      this.moveLocation = this.reactRef.current.componentRef.current;
+      }*!/
+      //this.moveLocation = this.reactRef.current.componentRef.current;
     } else {
       this.renderChildren();
-    }
+    }*/
 
     this.renderAdditionalItems && this.renderAdditionalItems();
 

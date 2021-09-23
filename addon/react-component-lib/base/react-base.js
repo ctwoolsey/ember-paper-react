@@ -82,7 +82,64 @@ export class ReactBase extends React.Component{
     }
   }
 
+  renderChildrenHolder(){
+    return (
+      <ReactChildrenHolder
+        {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
+        {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
+      />
+    );
+  }
+
+  childrenToRender() {
+    return null;
+  }
+
+  renderChildren() {
+    if (this.props.reactRenderCallback && this.props.saveChildrenCallback) {
+      return this.renderChildrenHolder();
+    } else {
+      return this.childrenToRender();
+    }
+  }
+
   renderComponent() {
+    const ComponentToRender = this.DefaultComponentToRender;
+
+    return (
+      <ComponentToRender
+        ref={this.componentRef}
+        {...(this.placeStaticProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      >
+        {this.renderChildren()}
+      </ComponentToRender>
+    )
+  }
+
+
+  /*renderComponent() {
+    const ComponentToRender = this.DefaultComponentToRender;
+    const ChildrenRender = this.renderChildren();
+
+    return (
+      <ComponentToRender
+        ref={this.componentRef}
+        {...(this.placeStaticProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      >
+        {this.props.reactRenderCallback && this.props.saveChildrenCallback
+         ? <ReactChildrenHolder
+            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
+            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
+           />
+         : <ChildrenRender/>
+        }
+      </ComponentToRender>
+    )
+  }*/
+
+  /*renderComponent() {
     const ComponentToRender = this.DefaultComponentToRender;
 
     return (
@@ -99,7 +156,7 @@ export class ReactBase extends React.Component{
         }
       </ComponentToRender>
     )
-  }
+  }*/
 
   themedRender() {
     const {
