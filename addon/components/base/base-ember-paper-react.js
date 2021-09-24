@@ -21,10 +21,10 @@ export default class BaseEmberPaperReact extends Component {
     this.componentType = COMPONENT_TYPES.NOT_SET;
     this.nameValue = null;
     this.childrenFragment = null;
-    this.reactComponentFragments = null;
+    //this.reactComponentFragments = null;
     this.lastChildId= uuidv4();
     this.fixedClassString = '';
-    this.reactComponentFragments = {};
+    //this.reactComponentFragments = {};
     this.stateProps = {};
     this.propsToPass = {};
   }
@@ -102,7 +102,7 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  findAndLoadReactAttributeChildren() {
+  /*findAndLoadReactAttributeChildren() {
     let child = this.el.nextSibling;
     if (this.reactRef.current.componentRef.current) {
       child = this.reactRef.current.componentRef.current.nextSibling;
@@ -116,18 +116,18 @@ export default class BaseEmberPaperReact extends Component {
         this.setReactAttributeChildrenFragment(currentElement);
       }
     }
-  }
+  }*/
 
-  findEndReactAttributeElement(attributeElement) {
+  /*findEndReactAttributeElement(attributeElement) {
     let endElement = attributeElement.nextElementSibling;
     while (endElement.id !== 'end_'+attributeElement.id) {
       endElement = endElement.nextElementSibling;
     }
 
     return endElement;
-  }
+  }*/
 
-  renderReactAttributeComponent(attributeName, className) {
+  /*renderReactAttributeComponent(attributeName, className) {
     const reactComp = this.reactRef.current.componentRef.current;
     if (this.reactComponentFragments[attributeName]) {
       reactComp.getElementsByClassName(className)[0].replaceChildren(this.reactComponentFragments[attributeName]);
@@ -136,9 +136,9 @@ export default class BaseEmberPaperReact extends Component {
         reactComp.getElementsByClassName(className)[0].remove();
       }
     }
-  }
+  }*/
 
-  setReactAttributeChildrenFragment(attributeElement) {
+  /*setReactAttributeChildrenFragment(attributeElement) {
     let reactFragment = document.createDocumentFragment();
     let reactAttribute = attributeElement.id;
     let sibling = attributeElement.nextSibling;
@@ -153,7 +153,7 @@ export default class BaseEmberPaperReact extends Component {
     }
     attributeElement.remove();
     sibling.remove();
-  }
+  }*/
 
   renderElement() {
     console.log('Rendering: ' + this.componentType);
