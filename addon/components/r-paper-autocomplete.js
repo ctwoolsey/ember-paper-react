@@ -11,10 +11,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
-    this.props = Object.assign({}, TextFieldPropObj.props(), AutocompletePropObj.props());
-    this.stateProps = Object.assign({}, TextFieldPropObj.stateProps(), AutocompletePropObj.stateProps());
-    this.propsNotForComponent = Object.assign({}, TextFieldPropObj.propsNotForComponent(), AutocompletePropObj.propsNotForComponent());
-    this.statefulPropsNotForComponent = Object.assign({}, TextFieldPropObj.statefulPropsNotForComponent(), AutocompletePropObj.statefulPropsNotForComponent());
+    this.loadPropObject(TextFieldPropObj, AutocompletePropObj);
     this.reactElement = ReactAutocomplete;
 
     this.onOpenHandler = this.onOpenHandler.bind(this);
@@ -52,9 +49,9 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
       this.onOpenHandler();
     }
   }
-  renderChildren() {
+  /*renderChildren() {
     //intentionally empty
-  }
+  }*/
 
   onOpenHandler() {
     this.setExistingPoppers();
