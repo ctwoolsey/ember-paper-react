@@ -1,6 +1,6 @@
 import Dialog from '@mui/material/Dialog';
 import { ReactBase } from '../base/react-base';
-import { DialogStateProps, DialogPropsNotForComponent, DialogStatePropsNotForComponent } from '../utility/props/dialog-props';
+import { DialogPropObj } from '../utility/props/dialog-props';
 
 
 export class ReactDialog extends ReactBase{
@@ -13,7 +13,7 @@ export class ReactDialog extends ReactBase{
     this.backgroundClicked = false;
 
     this.staticProps.onClose = this.onClose;
-    this.initialize(DialogStateProps(), DialogPropsNotForComponent(), DialogStatePropsNotForComponent());
+    this.initialize(DialogPropObj);
 
   }
 

@@ -2,13 +2,13 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { ReactBase } from '../base/react-base';
-import { CardHeaderStateProps, CardHeaderPropsNotForComponent, CardHeaderStatePropsNotForComponent } from '../utility/props/card-header-props';
+import { CardHeaderPropObj } from '../utility/props/card-header-props';
 
 export class ReactCardHeader extends ReactBase {
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = CardHeader;
-    this.initialize(CardHeaderStateProps(), CardHeaderPropsNotForComponent(), CardHeaderStatePropsNotForComponent());
+    this.initialize(CardHeaderPropObj);
   }
 
   placeStateProps(statePropsForComponent) {
