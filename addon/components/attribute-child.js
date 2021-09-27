@@ -18,8 +18,7 @@ export default class AttributeChild extends Component {
 
   @action
   inserted(element) {
-    const fragment = this.moveLocation; //just for clarity in what is being passed
-    this.args.loadAttributeInfo && this.args.loadAttributeInfo(this.args.attribute, fragment, this.moveFragment);
+    this.args.loadAttributeInfo && this.args.loadAttributeInfo(this.args.attribute, this.childrenFragment, this.moveFragment);
     element.remove();
   }
 }

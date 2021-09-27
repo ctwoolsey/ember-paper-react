@@ -1,9 +1,9 @@
 <span class={{this.componentType}} ...attributes
   {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
-></span>
-{{#in-element this.moveLocation}}
-  <span class="ember-paper-react-tooltip-content-wrapper">
-    {{yield}}
-  </span>
-{{/in-element}}
-<div id={{this.lastChildId}}></div>
+>
+  {{#in-element this.moveLocation}}
+    <span class="ember-paper-react-tooltip-content-wrapper">
+      {{yield}}
+    </span>
+  {{/in-element}}
+</span>

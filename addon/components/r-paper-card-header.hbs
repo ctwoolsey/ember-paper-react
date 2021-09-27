@@ -1,8 +1,8 @@
 <span class={{this.componentType}} ...attributes
   {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
-></span>
-<AttributeChild class="react=component avatar" @attribute="avatar" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeChild>
-<AttributeChild class="react=component action" @attribute="action" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='action'}}</AttributeChild>
-<AttributeChild class="react=component subheader" @attribute="subheader" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='subheader'}}</AttributeChild>
-<AttributeChild class="react=component title" @attribute="title" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='title'}}</AttributeChild>
-<div id={{this.lastChildId}}></div>
+>
+  <AttributeChild class="react=component avatar" @attribute="avatar" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeChild>
+  <AttributeChild class="react=component action" @attribute="action" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='action'}}</AttributeChild>
+  <AttributeChild class="react=component subheader" @attribute="subheader" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='subheader'}}</AttributeChild>
+  <AttributeChild class="react=component title" @attribute="title" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='title'}}</AttributeChild>
+</span>

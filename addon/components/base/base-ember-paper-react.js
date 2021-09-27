@@ -1,9 +1,8 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../../react-component-lib/constants/constants';
 import React from 'react';
 import { scheduleOnce } from '@ember/runloop';
-import { v4 as uuidv4 } from 'uuid';
 import Icon from '@mui/material/Icon';
 import Component from '@glimmer/component';
 import ReactDOM from 'react-dom';
@@ -19,13 +18,9 @@ export default class BaseEmberPaperReact extends Component {
     this.el = null;
 
     this.componentType = COMPONENT_TYPES.NOT_SET;
-    this.nameValue = null;
     this.childrenFragment = null;
-
-    this.lastChildId= uuidv4();
     this.fixedClassString = '';
 
-    this.stateProps = {};
     this.propsToPass = {};
   }
 
@@ -70,6 +65,7 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   createIcon(iconObj) {
+    //iconObj = {icon: ..., iconProps: ...}
     if (iconObj && iconObj.icon) {
       let props = iconObj.iconProps ? iconObj.iconProps : {};
       return React.createElement(iconObj.icon, props);
@@ -80,54 +76,16 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  isEndElement(child) {
-    return child.id === this.lastChildId;
-  }
-
-  setChildrenFragment() {
-    /*
-        Do not use this method to move children if the element children will be manipulated by Ember later.
-        For example Any children that would be dynamic.  Through {{#if}} or {{#each}}
-     */
-    let child = this.el.nextSibling;
-    if (this.reactRef.current.componentRef.current) {
-      child = this.reactRef.current.componentRef.current.nextSibling;
-    }
-
-    this.childrenFragment = document.createDocumentFragment();
-    while (child && !this.isEndElement(child)) {
-      let currentElement = child;
-      child = child.nextSibling;
-      this.childrenFragment.appendChild(currentElement);
-    }
-  }
-
   renderElement() {
-    console.log('Rendering: ' + this.componentType);
     const reactElement = this.reactRef && this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
     this.renderChildren && this.renderChildren();
-
     this.renderAdditionalItems && this.renderAdditionalItems();
+    this.doneRendering && scheduleOnce('afterRender', this, this.doneRendering);
 
     this.el.remove();
-
-    if (this.doneRendering) {
-      scheduleOnce('afterRender', this, this.doneRendering);
-    }
-
-    const childEndMarker = document.getElementById(this.lastChildId);
-    childEndMarker && childEndMarker.remove();
     this.renderStack.renderNext();
-  }
-
-
-
-  removeChildren(element) {
-    while (element.firstChild) {
-      element.firstChild.remove();
-    }
   }
 
   mergeClassWithClassString() {
@@ -192,26 +150,17 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  insertedTasks(element) {
+  @action
+  inserted(element) {
     this.el = element;
     this.reactRef = React.createRef();
     this.renderStack.addRenderCallback(this.renderElement, this);
     scheduleOnce('render', this, this.checkIfCanRender);
 
     this.initializeProps();
-  }
-
-  @action
-  inserted(element) {
-    console.log('Inserted: ' + this.componentType);
-    this.insertedTasks(element);
-    let ReactComponent = this.reactElement;
+    const ReactComponent = this.reactElement;
     const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, element.parentNode);
     ReactDOM.render(reactPortal, document.createElement('div'));
-  }
-
-  willDestroy() {
-    super.willDestroy();
   }
 
 }

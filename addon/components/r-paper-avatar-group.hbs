@@ -3,8 +3,8 @@
   {{did-update this.max @max}}
   {{did-update this.spacing @spacing}}
   {{did-update this.variant @variant}}
-></span>
-{{#in-element this.moveLocation}}
-  {{yield}}
-{{/in-element}}
-<div id={{this.lastChildId}}></div>
+>
+  {{#in-element this.moveLocation}}
+    {{yield}}
+  {{/in-element}}
+</span>
