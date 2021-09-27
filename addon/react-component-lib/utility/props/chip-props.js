@@ -3,7 +3,6 @@ import { ThemePropObj } from './theme-props';
 
 const props = {
   avatar: null,
-  children: null,
   classes: null,
   clickable: null,
   color: null,

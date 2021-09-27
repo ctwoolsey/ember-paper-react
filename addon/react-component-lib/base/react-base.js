@@ -91,30 +91,28 @@ export class ReactBase extends React.Component{
     );
   }
 
-  childrenToRender() {
-    return null;
-  }
-
-  renderChildren() {
-    if (this.props.reactRenderCallback && this.props.saveChildrenCallback) {
-      return this.renderChildrenHolder();
-    } else {
-      return this.childrenToRender();
-    }
-  }
-
   renderComponent() {
     const ComponentToRender = this.DefaultComponentToRender;
-
-    return (
-      <ComponentToRender
-        ref={this.componentRef}
-        {...(this.placeStaticProps(this.staticProps))}
-        {...(this.placeStateProps(this.statePropsForComponent))}
-      >
-        {this.renderChildren()}
-      </ComponentToRender>
-    )
+    //can't simplify this code because react component like chip can't have any children even null.
+    if (this.props.reactRenderCallback && this.props.saveChildrenCallback) {
+      return (
+        <ComponentToRender
+          ref={this.componentRef}
+          {...(this.placeStaticProps(this.staticProps))}
+          {...(this.placeStateProps(this.statePropsForComponent))}
+        >
+          {this.renderChildrenHolder()}
+        </ComponentToRender>
+      )
+    } else {
+      return (
+        <ComponentToRender
+          ref={this.componentRef}
+          {...(this.placeStaticProps(this.staticProps))}
+          {...(this.placeStateProps(this.statePropsForComponent))}
+        />
+      )
+    }
   }
 
   themedRender() {
