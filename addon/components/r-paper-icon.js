@@ -2,13 +2,12 @@ import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactIcon } from '../react-component-lib/react-icon';
 import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
 import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';
-import BaseEmberPaperReact from './base/base-ember-paper-react';
-import BaseChildSpanRender from "./base/base-child-span-render";
 import { IconPropObj } from '../react-component-lib/utility/props/icon-props';
 import { SvgIconPropObj } from '../react-component-lib/utility/props/svg-icon-props';
 import { MaterialIconPropObj } from '../react-component-lib/utility/props/material-icon-props';
+import BaseInElementRender from "./base/base-in-element-render";
 
-export default class RPaperIconComponent extends BaseChildSpanRender {
+export default class RPaperIconComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
@@ -18,6 +17,7 @@ export default class RPaperIconComponent extends BaseChildSpanRender {
       this.loadPropObject(SvgIconPropObj);
       this.renderChildren = this.renderPathChildren;
     } else {
+      this.renderChildren = null;
       if (this.args.reactIcon) {
         this.reactElement = ReactMaterialIcon;
         this.loadPropObject(MaterialIconPropObj);
@@ -38,7 +38,7 @@ export default class RPaperIconComponent extends BaseChildSpanRender {
         svgPath = svgChildNodes[i];
       }
     }
-    this.setChildrenFragment();
+
     for(let i = 0; i < this.childrenFragment.childNodes.length; i++) {
       if (this.childrenFragment.childNodes[i].nodeName .toUpperCase() === 'PATH') {
         svgPath.setAttribute('d', this.childrenFragment.childNodes[i].getAttribute('d'));
