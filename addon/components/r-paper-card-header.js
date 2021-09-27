@@ -1,5 +1,5 @@
 import { ReactCardHeader } from '../react-component-lib/card-related/react-card-header';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES} from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { CardHeaderPropObj } from '../react-component-lib/utility/props/card-header-props';
 import { hasAttributeChildren } from "../decorators/has-attribute-children";
@@ -12,21 +12,19 @@ export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
     this.componentType = COMPONENT_TYPES.CARD_HEADER;
     this.loadPropObject(CardHeaderPropObj);
     this.reactElement = ReactCardHeader;
-    //this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
   }
 
   renderAdditionalItems() {
-    //this.findAndLoadReactAttributeChildren();
-    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.AVATAR, 'MuiCardHeader-avatar');
-    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.ACTION, 'MuiCardHeader-action');
-    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.SUBHEADER, 'MuiCardHeader-subheader');
-    this.renderReactAttributeComponent(REACT_ATTRIBUTE_COMPONENTS.TITLE, 'MuiCardHeader-title');
+    this.moveAttributes('avatar', 'MuiCardHeader-avatar');
+    this.moveAttributes('action', 'MuiCardHeader-action');
+    this.moveAttributes('subheader', 'MuiCardHeader-subheader');
+    this.moveAttributes('title', 'MuiCardHeader-title');
   }
 
-  /*renderChildren() {
-      //intentionally empty
-  }*/
-
+  moveAttributes(attribute, className) {
+    const reactComp = this.reactRef.current.componentRef.current;
+    this.reactFragmentMoveMethods[attribute](reactComp.getElementsByClassName(className)[0]);
+  }
 }
 
 

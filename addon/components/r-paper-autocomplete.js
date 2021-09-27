@@ -5,7 +5,9 @@ import { A } from '@ember/array';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { AutocompletePropObj } from '../react-component-lib/utility/props/autocomplete-props';
 import { TextFieldPropObj } from '../react-component-lib/utility/props/text-field-props';
+import { hasAttributeChildren } from "../decorators/has-attribute-children";
 
+@hasAttributeChildren
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   constructor() {
@@ -22,6 +24,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.existingPoppers = A();
 
     this.inputRef = React.createRef();
+    //this.loadAttributeFragments = this.loadAttributeFragments.bind(this);
   }
 
   initializeProps() {
@@ -36,7 +39,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   }
 
   renderAdditionalItems() {
-    this.findAndLoadReactAttributeChildren();
+   // this.findAndLoadReactAttributeChildren();
     const optionsFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS];
     const headersFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS];
     if (optionsFragment || headersFragment){

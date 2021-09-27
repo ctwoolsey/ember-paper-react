@@ -21,10 +21,10 @@ export default class BaseEmberPaperReact extends Component {
     this.componentType = COMPONENT_TYPES.NOT_SET;
     this.nameValue = null;
     this.childrenFragment = null;
-    //this.reactComponentFragments = null;
+
     this.lastChildId= uuidv4();
     this.fixedClassString = '';
-    //this.reactComponentFragments = {};
+
     this.stateProps = {};
     this.propsToPass = {};
   }
@@ -102,74 +102,12 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  /*findAndLoadReactAttributeChildren() {
-    let child = this.el.nextSibling;
-    if (this.reactRef.current.componentRef.current) {
-      child = this.reactRef.current.componentRef.current.nextSibling;
-    }
-
-    while (child && !this.isEndElement(child)) {
-      let currentElement = child;
-      child = child.nextSibling;
-      if (currentElement.className === REACT_ATTRIBUTE_COMPONENTS.CLASS_NAME) {
-        child = this.findEndReactAttributeElement(currentElement).nextSibling;
-        this.setReactAttributeChildrenFragment(currentElement);
-      }
-    }
-  }*/
-
-  /*findEndReactAttributeElement(attributeElement) {
-    let endElement = attributeElement.nextElementSibling;
-    while (endElement.id !== 'end_'+attributeElement.id) {
-      endElement = endElement.nextElementSibling;
-    }
-
-    return endElement;
-  }*/
-
-  /*renderReactAttributeComponent(attributeName, className) {
-    const reactComp = this.reactRef.current.componentRef.current;
-    if (this.reactComponentFragments[attributeName]) {
-      reactComp.getElementsByClassName(className)[0].replaceChildren(this.reactComponentFragments[attributeName]);
-    } else {
-      if (!this.args[attributeName]) {
-        reactComp.getElementsByClassName(className)[0].remove();
-      }
-    }
-  }*/
-
-  /*setReactAttributeChildrenFragment(attributeElement) {
-    let reactFragment = document.createDocumentFragment();
-    let reactAttribute = attributeElement.id;
-    let sibling = attributeElement.nextSibling;
-    while (sibling.id !== 'end_'+reactAttribute) {
-      let currentElement = sibling;
-      sibling = sibling.nextSibling;
-      reactFragment.appendChild(currentElement);
-    }
-
-    if (reactFragment.childNodes.length) {
-      this.reactComponentFragments[attributeElement.id] = reactFragment;
-    }
-    attributeElement.remove();
-    sibling.remove();
-  }*/
-
   renderElement() {
     console.log('Rendering: ' + this.componentType);
-    const reactElement = this.reactRef.current.componentRef.current;
+    const reactElement = this.reactRef && this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
     this.renderChildren && this.renderChildren();
-    /*if (!this.renderChildren) {
-      /!*this.setChildrenFragment();
-      if (this.childrenFragment.childNodes.length > 0) {
-        this.reactRef.current.componentRef.current.replaceChildren(this.childrenFragment);
-      }*!/
-      //this.moveLocation = this.reactRef.current.componentRef.current;
-    } else {
-      this.renderChildren();
-    }*/
 
     this.renderAdditionalItems && this.renderAdditionalItems();
 

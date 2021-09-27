@@ -31,12 +31,14 @@ const COMPONENT_TYPES = {
   TEXTFIELD: 'ember-paper-react-textfield',
   TOOLBAR: 'ember-paper-react-toolbar',
   TOOLTIP: 'ember-paper-react-tooltip',
+  ATTRIBUTE_COMPONENT: 'ember-paper-attribute-component',
+  ATTRIBUTE_CHILD: 'ember-paper-attribute-child',
   NOT_SET: 'ember-paper-react-notSet'
 };
 
 const AVATAR_GROUP = {
   DEFAULT_MAX_AVATARS: 5
-}
+};
 
 const REACT_ATTRIBUTE_COMPONENTS = {
   CLASS_NAME: 'react-component',
@@ -46,7 +48,7 @@ const REACT_ATTRIBUTE_COMPONENTS = {
   TITLE: 'title',
   GROUP_HEADERS: 'groupHeaders',
   OPTIONS: 'options'
-}
+};
 
 export {
   COMPONENT_TYPES,

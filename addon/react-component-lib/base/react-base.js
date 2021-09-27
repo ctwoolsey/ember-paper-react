@@ -117,47 +117,6 @@ export class ReactBase extends React.Component{
     )
   }
 
-
-  /*renderComponent() {
-    const ComponentToRender = this.DefaultComponentToRender;
-    const ChildrenRender = this.renderChildren();
-
-    return (
-      <ComponentToRender
-        ref={this.componentRef}
-        {...(this.placeStaticProps(this.staticProps))}
-        {...(this.placeStateProps(this.statePropsForComponent))}
-      >
-        {this.props.reactRenderCallback && this.props.saveChildrenCallback
-         ? <ReactChildrenHolder
-            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
-            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
-           />
-         : <ChildrenRender/>
-        }
-      </ComponentToRender>
-    )
-  }*/
-
-  /*renderComponent() {
-    const ComponentToRender = this.DefaultComponentToRender;
-
-    return (
-      <ComponentToRender
-        ref={this.componentRef}
-        {...(this.placeStaticProps(this.staticProps))}
-        {...(this.placeStateProps(this.statePropsForComponent))}
-      >
-        {this.props.reactRenderCallback && this.props.saveChildrenCallback &&
-          <ReactChildrenHolder
-            {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
-            {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
-          />
-        }
-      </ComponentToRender>
-    )
-  }*/
-
   themedRender() {
     const {
       theme

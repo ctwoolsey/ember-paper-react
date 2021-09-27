@@ -18,17 +18,17 @@ const propsNotForComponent = {
 }
 
 const stateProps = {
-  action: null,
-  avatar: null,
   disableTypography: null,
-  subheader: null,
   subheaderTypographyProps: null,
   sx: null,
-  title: null,
   titleTypographyProps: null
 }
 
 const statefulPropsNotForComponent = {
+  action: null,
+  avatar: null,
+  title: null,
+  subheader: null
 }
 
 const CardHeaderProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

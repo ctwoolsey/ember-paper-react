@@ -14,16 +14,16 @@ export class ReactCardHeader extends ReactBase {
   placeStateProps(statePropsForComponent) {
     statePropsForComponent = super.placeStateProps(statePropsForComponent);
     if (!statePropsForComponent.action) {
-      statePropsForComponent.action = (<Button>Dummy</Button>);
+      statePropsForComponent.action = (<Button></Button>);
     }
     if (!statePropsForComponent.avatar) {
-      statePropsForComponent.avatar = (<Avatar>Dummy</Avatar>);
+      statePropsForComponent.avatar = (<Avatar></Avatar>);
     }
     if (!statePropsForComponent.subheader) {
-      statePropsForComponent.subheader = 'Dummy';
+      statePropsForComponent.subheader = '';
     }
     if (!statePropsForComponent.title) {
-      statePropsForComponent.title = 'Dummy';
+      statePropsForComponent.title = '';
     }
     return statePropsForComponent;
   }
