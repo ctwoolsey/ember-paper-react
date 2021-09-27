@@ -8,10 +8,7 @@ export default class RPaperRadioComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.componentType = COMPONENT_TYPES.RADIO;
-    this.props = Object.assign({}, RadioPropObj.props(), FormControlLabelPropObj.props());
-    this.stateProps = Object.assign({}, RadioPropObj.stateProps(), FormControlLabelPropObj.stateProps());
-    this.propsNotForComponent = Object.assign({}, RadioPropObj.propsNotForComponent(), FormControlLabelPropObj.propsNotForComponent());
-    this.statefulPropsNotForComponent = Object.assign({}, RadioPropObj.statefulPropsNotForComponent(), FormControlLabelPropObj.statefulPropsNotForComponent());
+    this.loadPropObject(RadioPropObj, FormControlLabelPropObj);
     this.reactElement = ReactRadio;
   }
 
