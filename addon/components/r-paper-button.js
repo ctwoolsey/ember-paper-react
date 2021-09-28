@@ -3,8 +3,10 @@ import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ButtonPropObj } from '../react-component-lib/utility/props/button-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { reactPresentationCapable } from "../decorators/react-presentation-capable";
+import { overrideHref } from "../decorators/override-href";
 
 @reactPresentationCapable
+@overrideHref
 export default class RPaperButton extends BaseInElementRender {
 
   constructor() {
