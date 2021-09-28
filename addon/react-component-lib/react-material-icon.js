@@ -2,7 +2,9 @@ import { MaterialIconPropObj } from './utility/props/material-icon-props';
 import { ReactBase } from './base/react-base';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import React from 'react';
+import { keepPositionOnUpdate } from "./react-decorators/keep-position-on-update";
 
+@keepPositionOnUpdate
 export class ReactMaterialIcon extends ReactBase{
   constructor(props) {
     super(props);
