@@ -42,7 +42,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
    // this.findAndLoadReactAttributeChildren();
     const optionsFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS];
     const headersFragment = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS];
-    if (optionsFragment || headersFragment){
+    if (optionsFragment.children.length || headersFragment.children.length){
       this.hasCustomDisplay = true;
     } else {
       this.hasCustomDisplay = false;
@@ -92,7 +92,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   }
 
   dropDownOpened(dropDown) {
-    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS] && this.args.groupBy) {
+    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS].children.length && this.args.groupBy) {
       const headers = dropDown.getElementsByClassName('MuiAutocomplete-groupLabel');
       const customHeaders = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS].children;
       for(let i = 0; i < headers.length; i++) {
@@ -105,7 +105,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
       }
     }
 
-    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS]) {
+    if (this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS].children.length) {
       const customDropDownListItems = this.reactComponentFragments[REACT_ATTRIBUTE_COMPONENTS.OPTIONS].children;
       if (this.args.groupBy) {
         let optionCounter = 0;
