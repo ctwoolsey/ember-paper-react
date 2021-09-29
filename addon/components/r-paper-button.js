@@ -23,7 +23,7 @@ export default class RPaperButton extends BaseInElementRender {
   }
 
   renderChildren() {
-    this.reactRender(this.reactRef.current.componentRef.current);
+    //intentionally left blank
   }
 
   reactRender(insertElement) {
