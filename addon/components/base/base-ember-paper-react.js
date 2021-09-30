@@ -81,7 +81,7 @@ export default class BaseEmberPaperReact extends Component {
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
     this.renderChildren && this.renderChildren();
-    this.renderAdditionalItems && this.renderAdditionalItems();
+    this.onRenderAdditionalItems && this.onRenderAdditionalItems();
     this.doneRendering && scheduleOnce('afterRender', this, this.doneRendering);
 
     this.el.remove();

@@ -14,7 +14,6 @@ export default class RPaperAvatarGroupComponent extends BaseInElementRender {
 
 
     this.doneRendering = this.doneRendering.bind(this);
-    this.renderAdditionalItems = this.renderAdditionalItems.bind(this);
     this.applyGroupAttributesToAvatars = this.applyGroupAttributesToAvatars.bind(this);
     this.styleSheetRemoved = false;
     this.avatarCountMarkerFragment = null;
@@ -22,7 +21,7 @@ export default class RPaperAvatarGroupComponent extends BaseInElementRender {
     this.observer = null;
   }
 
-  renderAdditionalItems() {
+  onRenderAdditionalItems() {
     this.removeStyleSheetForLastAvatarChild();
   }
 

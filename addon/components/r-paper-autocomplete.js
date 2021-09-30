@@ -39,8 +39,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.propsToPass.inputRef = this.inputRef;
   }
 
-  @action
-  renderAdditionalItems() {
+  onRenderAdditionalItems() {
     this.optionsFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.OPTIONS);
     this.headersFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS);
 

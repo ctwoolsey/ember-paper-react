@@ -14,7 +14,7 @@ export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
     this.reactElement = ReactCardHeader;
   }
 
-  renderAdditionalItems() {
+  onRenderAdditionalItems() {
     this.moveAttributes('avatar', 'MuiCardHeader-avatar');
     this.moveAttributes('action', 'MuiCardHeader-action');
     this.moveAttributes('subheader', 'MuiCardHeader-subheader');
