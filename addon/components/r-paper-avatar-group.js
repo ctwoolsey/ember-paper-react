@@ -156,9 +156,7 @@ export default class RPaperAvatarGroupComponent extends BaseInElementRender {
   }
 
   willDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+    this.observer && this.observer.disconnect();
     super.willDestroy();
   }
 }

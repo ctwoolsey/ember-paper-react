@@ -21,4 +21,9 @@ export default class AttributeChild extends Component {
     this.args.loadAttributeInfo && this.args.loadAttributeInfo(this.args.attribute, this.childrenFragment, this.moveFragment);
     element.remove();
   }
+
+  willDestroy() {
+    this.childrenFragment.remove();
+    super.willDestroy();
+  }
 }

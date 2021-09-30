@@ -7,8 +7,6 @@ import { AutocompletePropObj } from './utility/props/autocomplete-props';
 import { TextFieldPropObj } from './utility/props/text-field-props';
 import { reactPropSifter } from "./utility/react-prop-sifter";
 
-
-//Theme does not appear to be effective on this component
 export class ReactAutocomplete extends ReactBase{
   constructor(props) {
     super(props);
