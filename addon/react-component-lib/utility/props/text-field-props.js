@@ -58,7 +58,7 @@ const stateProps = {
   size: null,
   sx: null,
   value: null,
-  variant: null,
+  variant: null
 }
 
 const statefulPropsNotForComponent = {

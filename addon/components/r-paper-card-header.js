@@ -23,7 +23,10 @@ export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
 
   moveAttributes(attribute, className) {
     const reactComp = this.reactRef.current.componentRef.current;
-    this.reactFragmentMoveMethods[attribute](reactComp.getElementsByClassName(className)[0]);
+    const moveMethod = this.getAttributeMoveMethod(attribute);
+    if (moveMethod) {
+      moveMethod(reactComp.getElementsByClassName(className)[0]);
+    }
   }
 }
 

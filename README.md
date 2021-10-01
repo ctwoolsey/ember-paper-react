@@ -18,14 +18,14 @@ Compatibility
 Installation
 ==============================================================================
 
-```
-$ ember install --save --dev ember-paper-react
-```
+
+>$ ember install --save --dev ember-paper-react
+
 This addon requires the use of SASS.
-```
-$ ember install --save ember-cli-sass
-```
-In the ```ember-cli-build.js``` file add the following:
+
+>$ ember install --save ember-cli-sass
+
+In the `ember-cli-build.js` file add the following:
 ```angular2html
 let app = new EmberApp(defaults, {
     // Add options here
@@ -34,29 +34,29 @@ let app = new EmberApp(defaults, {
     }
   });
 ```
-rename the ```app/styles/app.css``` file to ```app.scss```
+rename the `app/styles/app.css` file to `app.scss`
 
-Usage
-==============================================================================
-<i>Layout</i>
-------------------------------------------------------------------------------
-This addon uses React's ```material-ui``` components but layout styling is done as in ```ember-paper```. This is because material-ui styling is done through react constructs and would not allow styling via ember's HTML.
+#Usage
+
+##Layout
+***
+This addon uses React's `material-ui` components but layout styling is done as in `ember-paper`. This is because material-ui styling is done through react constructs and would not allow styling via ember's HTML.
 
 [See ember-paper layout docs »](https://miguelcobain.github.io/ember-paper/#/layout/introduction) 
 
 ## Theming  
 ***
 
-If you wish to theme the material-ui components using predefined colors from material-ui, you will need to install "@material-ui/core".
+If you wish to theme the material-ui components using predefined colors from material-ui, you will need to install:
 
-```$ npm install --save --dev @mui/material @emotion/react @emotion/styled```
+>$ npm install --save --dev @mui/material @emotion/react @emotion/style
 
-To use the material-ui theme palette globally, inject the service 'themeManager'.  This should be done within application.js.
+To use the material-ui theme palette globally, inject the service `themeManager`.  This should be done within application.js.
 
 <i>application.js</i>
 ```angular2html
-import pink from '@material-ui/core/colors/pink';
-import green from '@material-ui/core/colors/green';
+import pink from '@mui/material/colors/pink';
+import green from '@mui/material/colors/green';
 
 export default class ApplicationController extends Controller {
   @service themeManager;
@@ -77,7 +77,7 @@ export default class ApplicationController extends Controller {
 To change the global theme, this same pattern can be called from anywhere in the ember app.  To change a specific component, modify the appropriate css file.
 All components support the `@style` and `@class` arguments as well as `@sx`.
 
-Using `@style` can inline or a passed object:  
+`@style` can be inline or as a passed object:  
 > <MyComponent @style="backgroundColor:blue; width:100px" /> 
  
 or
@@ -85,127 +85,63 @@ or
 > <MyComponent @style={{this.myStyle}} />   
 > this.myStyle = { backgroundColor: 'blue', width: '500px' };
 
-<i>Button</i>
-------------------------------------------------------------------------------
-The most basic usage is:
+#Components
+A few important notes that effect all components:  
+>Components need to have a parent html tag at some level.  This cannot be a wrap of the `{{outlet}}` tag.  This can be at the page level in a controler template like so:
+>```angular2html
+><div id="some-page">
+>  <components/>
+></div>
+>```
+
+###icons
+>Components that have `icon` as an attribute take an icon object.  The form of this object is:  
+> {icon: ..., iconProps: ...}  
+>```angular2html
+><RPaperButton @startIcon={{this.icon}}>Button</RPaperButton>
+>
+>//react material-ui icon
+>import AccessAlarmRounded from '@mui/icons-material/AccessAlarmRounded';
+>this.icon={
+> icon: AccessAlarmRounded
+>}
+>
+>Props can also be used on material-ui icons:
+>this.icon={
+> icon: AccessAlarmRounded,
+> iconProps: { color: 'primary' }
+>};
+>
+>//font-awesome icon
+>this.icon={
+> iconProps: {
+>   baseClassName: 'fas fa-award'
+> }
+>};
+>```  
+
+All properties listed on the Material-ui site are available are implemented on the components with the use of `@`.  Properties that might be dynamic and change are implemented so that they will update accordingly.  Properties or functions that return a ReactNode will generally not work unless you pass or return a ReactNode.  Some components have special ways of dealing with this known as `Attribute Children`.
+
+
+
+##Appbar/Toolbar
+***
+[Explore React Material-UI Appbar docs](https://mui.com/components/app-bar/)
+
+The most basic usages are:
 ```angular2html
-<RPaperButton>{{content you want displayed}}</RPaperButton>
-```
-To make the button useful, the following options are supported:
-* ```@onClick={{fn this.myOnClickHandler}}```
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```<i>*</i>
-* ```@disabled={{this.disabled}}```
-* ```@disableElevation={{this.disableElevation}}```
-* ```@disableFocusRipple={{this.disableFocusRipple}}```
-* ```@disableRipple={{this.disableRipple}}```
-* ```@fullWidth={{this.fullWidth}}```
-* ```@href={{this.href}}```
-* ```@size={{this.size}}```
-* ```@theme={{this.theme}}``` <i>attach global theme to component</i>
-* ```@variant={{this.variant}}```
-
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-
-If you want to set the 'tabIndex'  set it as a normal HTML attribute.  ```<RPaperButton tabIndex="2"></RPaperButton>```
-
-Classes, inline-styles, and attributes will be copied over to the react component. 
-
-using handlebars for 'variant, size, href, disabled, or disabledElevation' allows dynamic changing of the values. If you don't need the value to change, you can set the values as a string.
-See the material documentation for possible values for these options.
-
-<b>Note:</b> Icon and Upload buttons are not implemented.  Complex Buttons should be able to be created using ember and css.
-
-<i>Checkbox, Radio, Switch</i>
-------------------------------------------------------------------------------
-The most basic usage is:
-```angular2html
-<RPaperCheckbox/>
-<RPaperRadio/>
-<RPaperSwitch/>
-```
-To make the components useful, the following options are supported:
-
-* ```@onChange={{fn this.myOnChangeHandler}}```
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```<i>*</i>
-* ```@checked={{this.checked}}```
-* ```@color={{this.color}}```
-* ```@disabled={{this.disabled}}```
-* ```@disableRipple={{this.disableRipple}}```
-* ```@edge={{this.edge}}``` <i>used only by radio</i>
-* ```@indeterminate={{this.indeterminate}}``` <i>used only by checkbox</i>
-* ```@label={{this.label}}```
-* ```@labelPlacement={{this.labelPlacement}}```
-* ```@required={{this.required}}```
-* ```@size={{this.size}}```
-* ```@theme={{this.theme}}``` <i>attach global theme to component</i>
-* ```@value={{this.value}}```
-* to attach the 'name' attribute to the radio component use either ```@radioName="someName"``` or a simple HTML ```name="someName"``` attribute
-
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-
-<i>TextField</i>
-------------------------------------------------------------------------------
-The most basic usage is:
-```angular2html
-<RPaperTextField @label"My Label" @value={{this.textFieldValue}} @onChange={{this.onTextFieldChanged}}/>
-```
-To make the components useful, all options are supported, in addition to the standard options, a few additional options are provided:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```<i>*</i>
-* to attach the 'name' attribute to the textField's input component use either ```@inputName="someName"``` or a simple HTML ```name="someName"``` attribute
-
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-
-<b>Note:</b> this component can also act as a select component.  When ```@select={{true}}``` is set, the component will automatically add the object ```{native:true}``` to the ```selectProps``` property.  ```<option/>``` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.
-
-<i>Input Masking</i>
------------------------------------------
-This ```TextField``` has the capability for input masking.  It uses the [inputmask](https://github.com/RobinHerbots/Inputmask/) library.
-
-To use the mask feature the following options are available (only ```@mask``` is required):
-
-* ```@mask``` - In the ```inputmask``` documentation this is the object or string that is input into the ```Inputmask()``` initializer.
-* ```@maskDefaults```
-* ```@maskDefinitions```
-* ```@maskAliases```
-
-When using input masking, the onChange function will return two values for convenience.  The first will be the ```unmasked value``` and the second will be the ```masked value```.
-
-Example:
-```angular2html
-<RPaperTextField @label="InputMaskDemo" @mask={{this.mask}} @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
-<div>
-  Unmasked Value: {{this.unMaskedTextValue}}
-</div>
-<div>
-  Masked Value: {{this.maskedTextValue}}
-</div>
-```
-```angular2html
-//in controller
-export default class ApplicationController extends Controller {
-  @tracked unMaskedTextValue;
-  @tracked maskedTextValue;
-
-  constructor() {
-    super(...arguments);
-    this.mask = 'aa-9{4}';
-  }
-
-  @action
-  onChangeHandler(unmaskedValue, maskedValue) {
-    this.maskedTextValue = value;
-    this.unMaskedTextValue = unmaskedValue;
-  }
-}
+<RPaperAppbar @position="static">
+  <RPaperToolbar>
+    <div>My App bar</div>
+  </RPaperToolbar>
+</RPaperAppbar>
 ```
 
 
-<i>Autocomplete</i>
-------------------------------------------------------------------------------
+##Autocomplete
+***
+[Explore React Material-UI Autocomplete docs](https://mui.com/components/autocomplete/)  
+
 The most basic usage is:
 ```angular2html
 <RPaperAutocomplete @label="My Label" @options={{this.myOptions}} @onChange={{this.onChangeHandler}}/>
@@ -217,10 +153,28 @@ Note: The following options will not work unless a react Node is returned from t
 * `@renderTags`
 * `@getLimitTagsText`
 
-`@renderInput` is fixed internally to use a `TextField` and cannot be changed. The options for the `TextField` are listed below.
+`@renderInput` is fixed internally to use a `TextField` and cannot be changed. The options for the `TextField` are listed below.  
+>*`@color`  
+*`@defaultValue`  
+*`@disabled`  
+*`@error`  
+*`@fullWidth`  
+*`@helperText`  
+*`@label`  
+*`@margin`  
+*`@maxRows`  
+*`@minRows`  
+*`@multiline`  
+*`@placeholder`  
+*`@required`  
+*`@rows`  
+*`@size`  
+*`@sx`  
+*`@value`  
+*`@variant`  
 
 While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
-By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element. 
+By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element.
 If using custom text in the options, to ensure that autocomplete updates these options, `@filterOptions` must be used as in the example below.
 
 ```angular2html
@@ -292,62 +246,22 @@ createGroupHeaders() {
       }
     });
   }
-```
+```  
 
-## Tooltip  
+##Avatar
 ***
-[Explore React Material-UI Tooltip docs](https://mui.com/components/tooltips/)  
-The most basic usage is:
-```angular2html
-<RPaperTooltip @title={{this.myTooltipContent}}>
-Hover over me!
-</RPaperTooltip>
-```   
-The `@title` parameter can contain html.
+[Explore React Material-UI Avatar docs](https://mui.com/components/avatars/)  
 
-
-<i>Dialog</i>
-------------------------------------------------------------------------------
-The most common usage is:
-```angular2html
-<RPaperDialog @open={{this.dialogOpen}}>
-  <RPaperDialogTitle id="dialog-title">
-    My Dialog Title
-  </RPaperDialogTitle>
-  <RPaperDialogContent>
-    <RPaperDialogContentText id="dialog-description">
-      Here is some dialog content.
-    </RPaperDialogContentText>
-  </RPaperDialogContent>
-  <RPaperDialogActions>
-    <RPaperButton @onClick={{this.onDialogCancelClicked}}>Cancel</RPaperButton>
-    <RPaperButton @onClick={{this.onDialogCloseClicked}}>Close</RPaperButton>
-  </RPaperDialogActions>
-</RPaperDialog>
-```
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```<i>*</i>
-
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-
-<i>Avatar</i>
-------------------------------------------------------------------------------
-This component does not use theme in React.
+This component does not use theme in React.  The color of the avatar can be set by `@sx`, `@class`, or `@style`.
 The most basic usages are:
 ```angular2html
 <RPaperAvatar>H</RPaperAvatar>
 <RPaperAvatar><RPaperIcon @reactIcon={{this.chipIcon}}/></RPaperAvatar>
 ```
-To make the components useful, all options are supported, including these additional options:
 
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
 
-<i>Avatar Group</i>
-------------------------------------------------------------------------------
-The most basic usages are:
+###Avatar Group
+The most basic usage is:
 ```angular2html
 <RPaperAvatarGroup>
   <RPaperAvatar>A</RPaperAvatar>
@@ -356,163 +270,38 @@ The most basic usages are:
 </RPaperAvatarGroup>
 
 ```
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
 
 
-<i>Chip</i>
-------------------------------------------------------------------------------
-The most basic usages are:
-```angular2html
-<RPaperChip @avatar={{this.avatarProps}} @label="avatar chip"/>
-<RPaperChip @icon={{this.chipIcon}} @label="icon chip"/> //uses a react material-ui Icon
-<RPaperChip @iconProps={{this.chipIconProps}} @label="icon chip"/> //uses font awesome properties
-```
-To make the components useful, all options are supported, including these additional options:
+##Backdrop
+***
+[Explore React Material-UI Backdrop docs](https://mui.com/components/backdrop/)  
 
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-To use an avatar in the chip:
-
-To use an icon in the chip:
-****explain what chip Icon Props is
-
-<i>Icons</i>
-------------------------------------------------------------------------------
-This component does not use theme in React. (TBD - maybe this can be upgraded to use theme?)
-
-There are four different ways of creating icons, similar to the React Icon specification.
-```angular2html
-<RPaperIcon @baseClassName="material-icons-two-tone" @iconName="add_circle"/>  //Google Material Font Item
-<RPaperIcon @baseClassName="fas" @class="fa-award"/>  //Font Awesome Font
-<RPaperIcon @reactIcon={{this.chipIcon}}/> //React Material-UI Icon
-<RPaperIcon @hasPath={{true}}>  //SVG Icon
-  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-</RPaperIcon>
-  
-
-```
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-To use a ```Font Icon```: 
-In the head of the ```index.html``` file add the icon fonts you want to use.  For example:
-```angular2html
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Material+Icons+Two+Tone"
-/>
-```
-
-To use a ```Fontawesome Icon```
-Note: the ember-fontawesome package will not work for react based font awesome icons.
-In the ember app:
-1) In the head of the ```index.html``` file add the fontawesome fonts you want to use.  For example: 
-```angular2html
-<link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
-/>
-```
-
-To use a ```React Material Icon```:
-In the ember app:
-1) Install material-ui icons package: ```npm install @material-ui/icons@next```
-2) Import the material-ui icon:  ```import AccessAlarmRounded from '@material-ui/icons/AccessAlarmRounded';```
-3) Pass the instance of ```AccessAlarmRounded``` to the ```@reactIcon``` property of ```<RPaperIcon/>```
-
-To use a ```SVG Icon with path```
-1) Set the ```@hasPath``` property of ```<RPaperIcon/>``` to ```true```
-2) Include a ```path``` element with a ```d``` attribute.  Only 1 ```path```element will work. No attributes will be copied to react.
-
-<i>Drawer/SwipeableDrawer</i>
-------------------------------------------------------------------------------
-The most basic usages are:
-```angular2html
-//A Swipeable Drawer
-<RPaperDrawer @anchor="right" @open={{this.drawerOpen}} @onClose={{this.onDrawerClose}} @swipeable={{true}} @onOpen={{this.onDrawerOpen}}>
-  <div>Your Drawer Content</div>
-</RPaperDrawer>
-//A Regular Drawer
-<RPaperDrawer @anchor="right" @open={{this.drawerOpen}} @onClose={{this.onDrawerClose}}>
-  <div>Your Drawer Content</div>
-</RPaperDrawer>
-```
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-<i>Appbar/Toolbar</i>
-------------------------------------------------------------------------------
-The most basic usages are:
-```angular2html
-<RPaperAppbar position="static">
-  <RPaperToolbar>
-    <div>My App bar</div>
-  </RPaperToolbar>
-</RPaperAppbar>
-```
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-<i>Menu/MenuItem</i>
-------------------------------------------------------------------------------
-The most basic usages are:
-```angular2html
-<RPaperButton id="menuTrigger" @onClick={{this.onToggleMenu}}>Toggle Menu</RPaperButton>
-<RPaperMenu @triggerId="menuTrigger" @open={{this.menuOpen}} @onClose={{this.onMenuClose}}>
-  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 1</RPaperMenuItem>
-  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 2</RPaperMenuItem>
-  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 3</RPaperMenuItem>
-</RPaperMenu>
-```
-
-Note:  The ```anchorEl``` option is not explicitly supported.  Instead ```@triggerID```  must be given the ```id``` of the anchoring element.
-To make the components useful, all other options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-<i>CircularProgress</i>
-------------------------------------------------------------------------------
 The most basic usage is:
 ```angular2html
-<RPaperCircularProgress/>
-```
-
-To make the components useful, all options are supported, including these additional options:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
-
-<i>Background</i>
-------------------------------------------------------------------------------
-The most basic usage is:
-```angular2html
-<RPaperButton @variant="contained" @onClick={{this.onToggleBackdrop}}>Show backdrop</RPaperButton>
+<RPaperButton @onClick={{this.onShowBackdropClicked}}>Show backdrop</RPaperButton>
 <RPaperBackdrop
-  @open={{this.backdropOpen}}
-  @onClick={{this.handleBackdropClose}}
+  @open={{this.isBackdropOpen}}
 >
   <RPaperCircularProgress/>
 </RPaperBackdrop>
 ```
 
-To make the components useful, all options are supported, including these additional options:
 
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
+##Button
+***
+[Explore React Material-UI Button docs](https://mui.com/components/buttons/)  
 
-<i>Card</i>
-------------------------------------------------------------------------------
+The most basic usage is:
+```angular2html
+<RPaperButton>{{content you want displayed}}</RPaperButton>
+```
+Using the `@href` attribute in button will use ember's `transitionTo` method so that in app links work as expected.  To transition to an external link a fully qualified link should be used: ```http://...```
+
+
+##Card
+***
+[Explore React Material-UI Card docs](https://mui.com/components/cards/)  
+
 The most basic usage is:
 ```angular2html
 <RPaperCard>
@@ -529,35 +318,240 @@ The most basic usage is:
 </RPaperCard>
 ```
 
-In the ```RPaperCardHeader``` the following attributes can be written as children like so:
+In the `RPaperCardHeader` the following attributes can be written as children like so:
+>@title -> <:title>My Title</:title>  
+>@subheader -> <:subheader>My Sub-header</:subheader>  
+>@avatar -> <:avatar>Place an avatar here</:avatar>  
+>@action -> <:action>Place some action Icon here</:action>  
+
+`@title` and `@subheader` have the option of being passed as an argument using `@` or being passed as an `Attribute Child` for more flexibility.
+
+
+
+##Checkbox, Radio, Switch
+***
+[Explore React Material-UI Checkbox docs](https://mui.com/components/checkboxes/)  
+[Explore React Material-UI Switch docs](https://mui.com/components/switches/)  
+[Explore React Material-UI Radio Button docs](https://mui.com/components/radio-buttons/)  
+
+The most basic usage is:
+```angular2html
+<RPaperCheckbox/>
+<RPaperRadio/>
+<RPaperSwitch/>
+```
+
+
+##Chip
+***
+[Explore React Material-UI Chips docs](https://mui.com/components/chips/)  
+
+The most basic usages are:
+```angular2html
+<RPaperChip @label="My Label"/>
+<RPaperChip @icon={{this.chipIconObj}} @label="icon chip"/>
+<RPaperChip @label="Avatar Chip"/>
+  <:avatar><RPaperAvatar>W</RPaperAvatar></:avatar>
+</RPaperChip>
+```
+
+A chip can contain an icon or avatar but not both.  If an icon and avatar are provided, the icon will be displayed.
+
+##CircularProgress
+***
+[Explore React Material-UI Progress docs](https://mui.com/components/progress/)  
+
+The most basic usage is:
+```angular2html
+<RPaperCircularProgress/>
+```
+
+This component is usually used with `<RPaperBackdrop/>`
+
+
+##Drawer
+***
+[Explore React Material-UI Drawers docs](https://mui.com/components/drawers/)  
+
+The most basic usages are:
+```angular2html
+<RPaperDrawer @anchor="top" @open={{this.drawerTopOpen}} @onClose={{this.onTopDrawerClose}}>
+  <div>Top Content</div>
+</RPaperDrawer>
+```
+
+The `onClose` handler should close the drawer by setting `@open` = false.
+
+
+##Dialog
+***
+[Explore React Material-UI Dialog docs](https://mui.com/components/dialogs/)  
+
+The most common usage is:
+```angular2html
+<RPaperDialog @open={{this.dialogOpen}}>
+  <RPaperDialogTitle>
+    My Dialog Title
+  </RPaperDialogTitle>
+  <RPaperDialogContent>
+    <RPaperDialogContentText>
+      Here is some dialog content.
+    </RPaperDialogContentText>
+  </RPaperDialogContent>
+  <RPaperDialogActions>
+    <RPaperButton @onClick={{this.onDialogCloseClicked}}>Close</RPaperButton>
+  </RPaperDialogActions>
+</RPaperDialog>
+```
+
+
+##Icons
+***
+[Explore React Material-UI Icon docs](https://mui.com/components/icons/)  
+
+There are four different ways of creating icons, similar to the React Icon specification.
+```angular2html
+<RPaperIcon @baseClassName="material-icons-two-tone" @iconName="add_circle"/>  //Google Material Font Item
+<RPaperIcon @baseClassName="fas" @class="fa-award"/>  //Font Awesome Font
+<RPaperIcon @reactIcon={{this.chipIcon}}/> //React Material-UI Icon
+<RPaperIcon @hasPath={{true}}>  //SVG Icon
+  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+</RPaperIcon>
+  
 
 ```
-@title -> <:title>My Title</:title>
-@subheader -> <:subheader>My Sub-header</:subheader>
-@avatar -> <:avatar>Place an avatar here</:avatar>
-@action -> <:action>Place some action Icon here</:action>
+Properties for icons are found in the documentation for `Icon` or `SvgIcon`.
+
+To use a `Font Icon`: 
+In the head of the `index.html` file add the icon fonts you want to use.  For example:
+```angular2html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Material+Icons+Two+Tone"
+/>
 ```
-To make the components useful, all options are supported, including these additional options:
 
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
+To use a `Fontawesome Icon`
+Note: the ember-fontawesome package will not work for react based font awesome icons.
+In the ember app:
+1) In the head of the `index.html` file add the fontawesome fonts you want to use.  For example: 
+```angular2html
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+/>
+```
 
-<i>Paper</i>
-------------------------------------------------------------------------------
+To use a `React Material Icon`:
+In the ember app:
+1) Install material-ui icons package: `npm install @material-ui/icons@next`
+2) Import the material-ui icon:  `import AccessAlarmRounded from '@material-ui/icons/AccessAlarmRounded';`
+3) Pass the instance of `AccessAlarmRounded` to the `@reactIcon` property of `<RPaperIcon/>`
+
+To use a `SVG Icon with path`
+1) Set the `@hasPath` property of `<RPaperIcon/>` to `true`
+2) Include a `path` element with a `d` attribute.  Only 1 `path`element will work. No attributes will be copied to react.
+
+
+##Menu/MenuItem
+***
+The most basic usages are:
+```angular2html
+<RPaperButton id="menuTrigger" @onClick={{this.onToggleMenu}}>Toggle Menu</RPaperButton>
+<RPaperMenu @triggerId="menuTrigger" @open={{this.menuOpen}} @onClose={{this.onMenuClose}}>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 1</RPaperMenuItem>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 2</RPaperMenuItem>
+  <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 3</RPaperMenuItem>
+</RPaperMenu>
+```
+
+Note: `RPaperMenu` can use `@anchorEl` and provide a function that returns an HTML refernce to the trigger 
+element.  But to make life easier, `@triggerId` has been added to the attributes so the trigger element can 
+be referenced in the HTML.
+
+
+##Paper
+***
+[Explore React Material-UI Paper docs](https://mui.com/components/paper/)  
+
 The most basic usage is:
 ```angular2html
 <RPaper @elevation={{24}} @square={{false}}>Here is My Paper</RPaper>
 ```
 
-To make the components useful, all options are supported, including these additional options:
 
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```
+##TextField
+***
+[Explore React Material-UI Textfield docs](https://mui.com/components/text-fields/)  
 
+The most basic usage is:
+```angular2html
+<RPaperTextField @label"My Label" @value={{this.textFieldValue}} @onChange={{this.onTextFieldChanged}}/>
+```
+Note: this component can also act as a select component.  When `@select={{true}}` is set, the component will automatically add the object `{native:true}` to the `selectProps` property.  `<option/>` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.
+```angular2html
+<RPaperTextField @label="Filled" @variant="filled" @value={{this.inputTextValue}} @onChange={{this.onInputTextChanged}} @select={{true}}>
+  {{#each this.contentList as |contentItem|}}
+    <option value="{{contentItem}}">
+      {{contentItem}}
+    </option>
+  {{/each}}
+</RPaperTextField>
+```
+<i>Input Masking</i>
+***
+This `TextField` has the capability for input masking.  It uses the [inputmask](https://github.com/RobinHerbots/Inputmask/) library.
 
-==============================================================================
+To use the mask feature the following options are available (only `@mask` is required):
 
-TBD
+* `@mask` - In the `inputmask` documentation this is the object or string that is input into the `Inputmask()` initializer.
+* `@maskDefaults`
+* `@maskDefinitions`
+* `@maskAliases`
+
+When using input masking, the onChange function will return two values for convenience.  The first will be the `event` and the second will be the `unmasked value`.
+
+Example:
+```angular2html
+<RPaperTextField @label="InputMaskDemo" @mask={{this.mask}} @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
+<div>
+  Unmasked Value: {{this.unMaskedTextValue}}
+</div>
+<div>
+  Masked Value: {{this.maskedTextValue}}
+</div>
+```
+```angular2html
+//in controller
+export default class ApplicationController extends Controller {
+  @tracked unMaskedTextValue;
+  @tracked maskedTextValue;
+
+  constructor() {
+    super(...arguments);
+    this.mask = 'aa-9{4}';
+  }
+
+  @action
+  onChangeHandler(event, unmaskedValue) {
+    this.maskedTextValue = event.target.value;
+    this.unMaskedTextValue = unmaskedValue;
+  }
+}
+```
+
+## Tooltip
+***
+[Explore React Material-UI Tooltip docs](https://mui.com/components/tooltips/)    
+
+The most basic usage is:
+```angular2html
+<RPaperTooltip @title={{this.myTooltipContent}}>
+Hover over me!
+</RPaperTooltip>
+```   
+The `@title` parameter can contain html.
+
 
 
 License

@@ -19,10 +19,10 @@ const props = {
 };
 
 const propsNotForComponent = {
+  avatar: null //avatar is only set via attribute children
 }
 
 const stateProps = {
-  avatar: null,
   clickable: null,
   color: null,
   deleteIcon: null,
