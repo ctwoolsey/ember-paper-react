@@ -64,18 +64,6 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
-  createIcon(iconObj) {
-    //iconObj = {icon: ..., iconProps: ...}
-    if (iconObj && iconObj.icon) {
-      let props = iconObj.iconProps ? iconObj.iconProps : {};
-      return React.createElement(iconObj.icon, props);
-    } else if (iconObj && iconObj.iconProps) { //used for native FontAwesome for example
-      return React.createElement(Icon, iconObj.iconProps);
-    } else {
-      return null;
-    }
-  }
-
   renderElement() {
     const reactElement = this.reactRef && this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);

@@ -12,9 +12,4 @@ export default class RPaperRadioComponent extends BaseEmberPaperReact {
     this.reactElement = ReactRadio;
   }
 
-  initializeProps() {
-    super.initializeProps();
-    this.propsToPass.checkedIcon = this.createIcon(this.args.checkedIcon);
-  }
-
 }

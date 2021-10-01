@@ -1,3 +1,5 @@
+import { reactCreateIcon } from "./react-create-icon";
+
 function reactPropSifter(componentProps, propsObj) {
   const siftedProps = {
     staticProps: {},
@@ -12,17 +14,21 @@ function reactPropSifter(componentProps, propsObj) {
   const statefulPropsNotForComponent = propsObj.statefulPropsNotForComponent();
 
   for (let propName in componentProps) {
+    let value = componentProps[propName];
+    if (value && propName.toLowerCase().endsWith('icon')) {
+      value = reactCreateIcon(value);
+    }
     if (Object.prototype.hasOwnProperty.call(stateProps, propName)) {
-      siftedProps.stateProps[propName] = componentProps[propName];
+      siftedProps.stateProps[propName] = value;
     } else {
       if (Object.prototype.hasOwnProperty.call(statefulPropsNotForComponent, propName)) {
-        siftedProps.statefulPropsNotForComponent[propName] = componentProps[propName];
+        siftedProps.statefulPropsNotForComponent[propName] = value;
       } else {
         if (Object.prototype.hasOwnProperty.call(propsNotForComponent, propName)) {
-          siftedProps.propsNotForComponent[propName] = componentProps[propName];
+          siftedProps.propsNotForComponent[propName] = value;
         } else {
           if (Object.prototype.hasOwnProperty.call(props, propName)) {
-            siftedProps.staticProps[propName] = componentProps[propName];
+            siftedProps.staticProps[propName] = value;
           }
         }
       }

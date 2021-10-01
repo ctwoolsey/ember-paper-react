@@ -70,6 +70,7 @@ const propsNotForComponent = {
 const stateProps = {
   options: null,
   ChipProps: null,
+  clearIcon: null,
   clearText: null,
   closeText: null,
   componentsProps: null,
@@ -89,6 +90,7 @@ const stateProps = {
   noOptionsText: null,
   open: null,
   openText: null,
+  popupIcon: null,
   size: null,
   sx: null,
   value: null

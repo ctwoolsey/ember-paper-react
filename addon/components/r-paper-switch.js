@@ -11,10 +11,4 @@ export default class RPaperSwitchComponent extends BaseEmberPaperReact {
     this.loadPropObject(SwitchPropObj, FormControlLabelPropObj);
     this.reactElement = ReactSwitch;
   }
-
-  initializeProps() {
-    super.initializeProps();
-    this.propsToPass.checkedIcon = this.createIcon(this.args.checkedIcon);
-    this.propsToPass.icon = this.createIcon(this.args.icon);
-  }
 }

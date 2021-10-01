@@ -14,12 +14,6 @@ export default class RPaperChip extends BaseEmberPaperReact {
     this.reactElement = ReactChip;
   }
 
-  initializeProps() {
-    super.initializeProps();
-    this.propsToPass.icon = this.createIcon(this.args.icon);
-    this.propsToPass.deleteIcon = this.createIcon(this.args.deleteIcon);
-  }
-
   onRenderAdditionalItems() {
     if (!this.args.icon) {  //can't have icon and avatar in a chip so icon will take precedence
       const avatarHolder = this.reactRef.current.componentRef.current.getElementsByClassName('MuiAvatar-root')[0];

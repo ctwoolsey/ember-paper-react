@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 import { ReactChildrenHolder } from "../utility/react-children-holder";
 import { reactPropSifter } from "../utility/react-prop-sifter";
+import Icon from "@mui/material/Icon";
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -50,6 +51,18 @@ export class ReactBase extends React.Component{
       }
     }
     return statePropObject;
+  }
+
+  createIcon(iconObject) {
+    //iconObject = {icon: ..., iconProps: ...}
+    if (iconObject && iconObject.icon) {
+      let props = iconObject.iconProps ? iconObject.iconProps : {};
+      return React.createElement(iconObject.icon, props);
+    } else if (iconObject && iconObject.iconProps) { //used for native FontAwesome for example
+      return React.createElement(Icon, iconObject.iconProps);
+    } else {
+      return null;
+    }
   }
 
   formatStyle(styleValue) {
