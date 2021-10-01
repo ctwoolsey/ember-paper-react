@@ -208,60 +208,91 @@ export default class ApplicationController extends Controller {
 ------------------------------------------------------------------------------
 The most basic usage is:
 ```angular2html
-<RPaperAutoComplete @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
+<RPaperAutocomplete @label="My Label" @options={{this.myOptions}} @onChange={{this.onChangeHandler}}/>
 ```
 
-The following options will not work unless a react Node is returned from the function:
-* ```@renderGroup```
-* ```@renderOption```
-* ```@renderTags```
+Note: The following options will not work unless a react Node is returned from the function:
+* `@renderGroup`
+* `@renderOption`
+* `@renderTags`
+* `@getLimitTagsText`
 
-```@renderInput``` is fixed internally to use a ```TextField``` and cannot be changed. The options for the ```TextField``` are listed below.
+`@renderInput` is fixed internally to use a `TextField` and cannot be changed. The options for the `TextField` are listed below.
 
 While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
-By using ```<:groupHeaders>``` or ```<:options>``` those sections may be customized.  Each customization must be wrapped within a ```<li>``` element.
+By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element. 
+If using custom text in the options, to ensure that autocomplete updates these options, `@filterOptions` must be used as in the example below.
 
-<u><b>Note:</b>This is currently a work in progress and will not work except for static lists.  Autocomplete filters the results and they will not match the custom display.</u>
 ```angular2html
-<RPaperAutocomplete @options={{this.filmOptions}} @label="Films" @value={{this.selectedFilm}}
-@onChange={{this.onChangeHandler}} @getOptionLabel={{this.movieOptionLabel}} @groupBy={{this.movieGrouping}}>
+<RPaperAutocomplete  @options={{this.filmOptions}} @label="ComboBox"
+                     @getOptionLabel={{this.movieOptionLabel}} 
+                     @groupBy={{this.movieGrouping}}
+                     @filterOptions={{this.filterOptions}}>
   <:groupHeaders>
     {{#each this.groupHeaders as |groupHeader|}}
-      <li>
-        Group: {{groupHeader}}
-      </li>
+    <li>
+      Group: {{groupHeader}}
+    </li>
     {{/each}}
   </:groupHeaders>
   <:options>
-    {{#each this.filmOptions as |film|}}
-      <li><u>{{film.title}} ({{film.year}})</u></li>
+    {{#each this.filmOptionsFiltered as |film|}}
+    <li><u>{{film.title}} ({{film.year}})</u></li>
     {{/each}}
   </:options>
 </RPaperAutocomplete>
 ```
-
-To make the components useful, these additional options are available:
-
-* ```@class={{this.class}}```
-* ```@style={{this.style}}```<i>*</i>
-  
-<i>*</i> The use of the ```@style``` attribute is meant for dynamic styles tracked by ember, if the style is static it can be added to the normal ```HTML style``` attribute.
-  
-Use the ```@clearIcon and/or  @clearIconProps```  ```@popupIcon and/or @popupIconProps``` attributes to change default icons.
-```angular2html
-<RPaperAutocomplete  @clearIcon={{this.clearIcon}} @clearIconProps={{this.clearIconProps}} @label"My Label" @options={{this.myOptions}} @value={{this.myValue}} @onChange={{this.onChangeHandler}}/>
 ```
+@tracked filmOptionsFiltered;
+@tracked groupHeaders;
 
-Also, a few additional options are provided to handle the TextField portion of the component:
+this.top100Films =  [
+      { title: 'The Shawshank Redemption', year: 1994 },
+      { title: 'The Godfather', year: 1972 },
+      { title: 'The Godfather: Part II', year: 1974 },
+      { title: 'The Dark Knight', year: 2008 },
+      { title: '12 Angry Men', year: 1957 },
+      { title: "Schindler's List", year: 1993 },
+      { title: 'Pulp Fiction', year: 1994 },...];
 
-* ```@color={{this.color}}```
-* ```@error={{this.error}}```
-* ```@formHelperTextProps={{this.formHelperTextProps}}```
-* ```@helperText={{this.helperText}}```
-* ```@inputLabelProps={{this.inputLabelProps}}```
-* ```@label={{this.label}}```
-* ```@required={{this.required}}```
-* ```@variant={{this.variant}}```
+movieOptionLabel(option) {
+    if (option) {
+      return option.title + ' (' + option.year + ') ';
+    } else {
+      return '';
+    }
+}
+ 
+movieGrouping(option) {
+    return option.firstLetter;
+}
+
+@action
+  filterOptions(options, state) {
+    return this.filteredOptions(options, state.inputValue);
+  }
+
+  filteredOptions(options, inputValue) {
+    this.filmOptionsFiltered = [];
+    options.forEach((option) => {
+      const showValue = option.title + ' ' + option.year;
+      if (showValue.toLowerCase().includes(inputValue.toLowerCase())) {
+        this.filmOptionsFiltered.push(option);
+      }
+    });
+    this.createGroupHeaders();
+    return this.filmOptionsFiltered;
+}
+      
+createGroupHeaders() {
+    this.groupHeaders = A();
+    this.filmOptionsFiltered.forEach((filmOption) => {
+      if (!this.groupHeaders.includes(filmOption.firstLetter)) {
+        this.groupHeaders.addObject(filmOption.firstLetter);
+      }
+    });
+  }
+```
 
 ## Tooltip  
 ***
