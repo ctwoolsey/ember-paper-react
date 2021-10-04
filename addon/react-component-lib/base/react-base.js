@@ -105,8 +105,11 @@ export class ReactBase extends React.Component{
   }
 
   childrenToRender() {
-    //return null;
-    return this.props.children;
+    const {
+      children
+    } = this.state;
+
+    return children;
   }
 
   renderChildren() {

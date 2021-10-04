@@ -9,7 +9,7 @@ function usesRealReactChildren(c){
     constructor() {
       super(...arguments);
       this.parentIdentifier = uuidv4();
-      this.reactChildren.create(this.parentIdentifier, this.onChildAdded);
+      this.reactChildren.create(this.parentIdentifier, this.onChildChanged);
     }
 
     initializeProps() {
@@ -18,8 +18,15 @@ function usesRealReactChildren(c){
     }
 
     @action
-    onChildAdded() {
-      console.log('child added');
+    onChildChanged() {
+      if (this.propsToPass.children) {
+        this.changeReactState('children', this.propsToPass.children);
+      }
+    }
+
+    willDestroy() {
+      this.reactChildren.destroyReactChildren(this.parentIdentifier);
+      super.willDestroy();
     }
   }
 }

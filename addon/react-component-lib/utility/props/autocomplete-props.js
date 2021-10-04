@@ -97,6 +97,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const AutocompleteProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

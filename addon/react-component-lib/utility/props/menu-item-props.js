@@ -21,6 +21,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const MenuItemProps = () => { return Object.assign({}, ButtonBasePropObj.props(), props) };

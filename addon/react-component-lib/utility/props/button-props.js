@@ -39,6 +39,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const ButtonProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props)};

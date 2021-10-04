@@ -27,6 +27,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const SvgIconProps = () => { return Object.assign({}, ThemePropObj.props(), SvgNativePropObj.props(), props) };

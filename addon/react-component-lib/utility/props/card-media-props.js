@@ -20,6 +20,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const CardMediaProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

@@ -16,6 +16,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const FadeProps = () => { return Object.assign({}, TransitionPropObj.props(), props)};

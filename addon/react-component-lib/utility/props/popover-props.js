@@ -37,6 +37,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const PopoverProps = () => { return Object.assign({}, ModalPropObj.props(), props) };

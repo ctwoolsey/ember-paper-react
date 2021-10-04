@@ -28,6 +28,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const AvatarProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

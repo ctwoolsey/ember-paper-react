@@ -28,6 +28,7 @@ const propsNotForComponent = {
 }
 
 const stateProps = {
+  children: null,
   open: null,
   fullScreen: null,
   fullWidth: null,

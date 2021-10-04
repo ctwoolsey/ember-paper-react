@@ -28,6 +28,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const MenuProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), PopoverPropObj.props(), props) };

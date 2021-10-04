@@ -21,6 +21,7 @@ const stateProps = {
 //these are part of the props specification but must be removed from component
 //and handled outside of the react component a special case
 const statefulPropsNotForComponent = {
+  children: null,
   max: null,
   spacing: null,
   variant: null

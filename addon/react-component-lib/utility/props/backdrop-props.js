@@ -30,6 +30,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const BackdropProps = () => { return Object.assign({}, GlobalHtmlPropObj.props(), FadePropObj.props(), props)};

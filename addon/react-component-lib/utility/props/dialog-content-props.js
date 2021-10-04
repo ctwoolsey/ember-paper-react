@@ -16,6 +16,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const DialogContentProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

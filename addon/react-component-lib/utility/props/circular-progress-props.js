@@ -26,6 +26,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const CircularProgressProps = () => { return Object.assign({}, ThemePropObj.props(), SvgIconPropObj.props(), props)};

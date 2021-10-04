@@ -24,6 +24,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const TransitionProps = () => { return Object.assign({}, props)};

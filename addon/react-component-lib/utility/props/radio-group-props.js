@@ -16,6 +16,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const RadioGroupProps = () => { return Object.assign({}, FormGroupPropObj.props(), props) };

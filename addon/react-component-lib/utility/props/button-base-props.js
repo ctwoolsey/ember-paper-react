@@ -25,6 +25,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const ButtonBaseProps = () => {return Object.assign({}, ButtonNativePropObj.props(), props)};

@@ -19,6 +19,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const ToolbarProps = () => {return Object.assign({}, DivNativePropObj.props(), props)};

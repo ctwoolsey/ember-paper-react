@@ -23,6 +23,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null,
   iconName: null
 }
 

@@ -44,6 +44,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const TooltipProps = () => {return Object.assign({}, DivNativePropObj.props(), props)};

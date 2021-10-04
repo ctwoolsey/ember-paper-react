@@ -15,6 +15,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const CardActionAreaProps = () => { return Object.assign({}, ButtonBasePropObj.props(), props) };

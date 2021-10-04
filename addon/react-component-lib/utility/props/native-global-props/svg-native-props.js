@@ -1,4 +1,3 @@
-/*import { GlobalSvgProps, GlobalSvgStateProps, GlobalSvgNotForComponent, GlobalSvgStatePropsNotForComponent } from './global-svg-props';*/
 import { GlobalSvgPropObj } from "./global-svg-props";
 
 const props = {

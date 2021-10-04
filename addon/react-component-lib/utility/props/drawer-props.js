@@ -28,6 +28,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const DrawerProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), DivNativePropObj.props(), props) };

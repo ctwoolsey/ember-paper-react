@@ -34,6 +34,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const ModalProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

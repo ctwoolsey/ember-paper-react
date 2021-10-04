@@ -23,6 +23,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const PaperProps = () => {return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props)};

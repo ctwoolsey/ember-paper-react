@@ -17,6 +17,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const CardProps = () => { return Object.assign({}, PaperPropObj.props(), props) };

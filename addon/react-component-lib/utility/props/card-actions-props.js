@@ -15,6 +15,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const CardActionProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

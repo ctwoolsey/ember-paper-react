@@ -35,6 +35,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const FormControlProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

@@ -20,6 +20,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null,
   theme: null
 }
 

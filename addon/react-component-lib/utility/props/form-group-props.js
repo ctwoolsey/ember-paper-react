@@ -17,6 +17,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
+  children: null
 }
 
 const FormGroupProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };
