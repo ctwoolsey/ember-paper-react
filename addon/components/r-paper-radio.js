@@ -3,7 +3,9 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { RadioPropObj } from '../react-component-lib/utility/props/radio-props';
 import { FormControlLabelPropObj } from '../react-component-lib/utility/props/form-control-label-props';
 import { ReactRadio } from '../react-component-lib/react-radio';
+import { canBeRealReactChild } from "../decorators/can-be-real-react-child";
 
+@canBeRealReactChild
 export default class RPaperRadioComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);

@@ -3,7 +3,6 @@ import { inject as service } from '@ember/service';
 import { COMPONENT_TYPES } from '../../react-component-lib/constants/constants';
 import React from 'react';
 import { scheduleOnce } from '@ember/runloop';
-import Icon from '@mui/material/Icon';
 import Component from '@glimmer/component';
 import ReactDOM from 'react-dom';
 
@@ -142,13 +141,19 @@ export default class BaseEmberPaperReact extends Component {
   inserted(element) {
     this.el = element;
     this.reactRef = React.createRef();
+    this.initializeProps();
+
+    this.createReactComponent();
+  }
+
+  createReactComponent() {
     this.renderStack.addRenderCallback(this.renderElement, this);
     scheduleOnce('render', this, this.checkIfCanRender);
-
-    this.initializeProps();
     const ReactComponent = this.reactElement;
-    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, element.parentNode);
+    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, this.el.parentNode);
     ReactDOM.render(reactPortal, document.createElement('div'));
   }
+
+
 
 }

@@ -105,7 +105,8 @@ export class ReactBase extends React.Component{
   }
 
   childrenToRender() {
-    return null;
+    //return null;
+    return this.props.children;
   }
 
   renderChildren() {
