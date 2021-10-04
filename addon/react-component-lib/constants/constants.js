@@ -26,6 +26,7 @@ const COMPONENT_TYPES = {
   MENU_ITEM: 'ember-paper-react-menu-item',
   PAPER: 'ember-paper-react-paper',
   RADIO: 'ember-paper-react-radio',
+  RADIO_GROUP: 'ember-paper-react-radio-group',
   SVG_ICON: 'ember-paper-react-svg-icon',
   SWITCH: 'ember-paper-react-switch',
   TEXTFIELD: 'ember-paper-react-textfield',

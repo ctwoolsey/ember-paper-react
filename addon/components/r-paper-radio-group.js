@@ -8,7 +8,7 @@ import { usesRealReactChildren } from "../decorators/uses-real-react-children";
 export default class RPaperRadioGroupComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.RADIO;
+    this.componentType = COMPONENT_TYPES.RADIO_GROUP;
     this.loadPropObject(RadioGroupPropObj);
     this.reactElement = ReactRadioGroup;
   }
