@@ -6,16 +6,19 @@ export default class ReactChildrenService extends Service {
     super();
     this.queues = {};
     this.onChildChanged = {};
+    this.childrenRenderMethods = {};
   }
 
   create(parentIdentifier, onChildChanged) {
     this.queues[parentIdentifier] = A();
     this.onChildChanged[parentIdentifier] = onChildChanged;
+    this.childrenRenderMethods[parentIdentifier] = A();
   }
 
-  save(parentIdentifier, ReactChild){
+  save(parentIdentifier, ReactChild, onRenderReady){
     this.queues[parentIdentifier].pushObject(ReactChild);
     this.onChildChanged[parentIdentifier]();
+    this.childrenRenderMethods[parentIdentifier].pushObject(onRenderReady);
   }
 
   delete(parentIdentifier, ReactChild) {
@@ -23,6 +26,12 @@ export default class ReactChildrenService extends Service {
       this.queues[parentIdentifier].removeObject(ReactChild);
       this.onChildChanged[parentIdentifier]();
     }
+  }
+
+  render(parentIdentifier) {
+    this.childrenRenderMethods[parentIdentifier].forEach((renderMethod) => {
+      renderMethod();
+    });
   }
 
   load(parentIdentifier) {
@@ -33,5 +42,7 @@ export default class ReactChildrenService extends Service {
     this.queues[parentIdentifier].clear();
     delete this.queues[parentIdentifier];
     delete this.onChildChanged[parentIdentifier];
+    this.childrenRenderMethods[parentIdentifier].clear();
+    delete this.childrenRenderMethods[parentIdentifier];
   }
 }

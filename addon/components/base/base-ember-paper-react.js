@@ -63,16 +63,22 @@ export default class BaseEmberPaperReact extends Component {
     }
   }
 
+  @action
   renderElement() {
     const reactElement = this.reactRef && this.reactRef.current.componentRef.current;
     reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
 
-    this.renderChildren && this.renderChildren();
-    this.onRenderAdditionalItems && this.onRenderAdditionalItems();
-    this.doneRendering && scheduleOnce('afterRender', this, this.doneRendering);
+    this.renderElementItems();
 
     this.el.remove();
     this.renderStack.renderNext();
+  }
+
+  @action
+  renderElementItems() {
+    this.renderChildren && this.renderChildren();
+    this.onRenderAdditionalItems && this.onRenderAdditionalItems();
+    this.doneRendering && scheduleOnce('afterRender', this, this.doneRendering);
   }
 
   mergeClassWithClassString() {

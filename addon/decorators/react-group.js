@@ -2,8 +2,8 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { v4 as uuidv4 } from 'uuid';
 
-function usesRealReactChildren(c){
-  return class UsesRealReactChildren extends c {
+function reactGroup(c){
+  return class ReactGroup extends c {
     @service reactChildren;
 
     constructor() {
@@ -24,6 +24,12 @@ function usesRealReactChildren(c){
       }
     }
 
+    @action
+    renderElement() {
+      super.renderElement();
+      this.reactChildren.render(this.parentIdentifier);
+    }
+
     willDestroy() {
       this.reactChildren.destroyReactChildren(this.parentIdentifier);
       super.willDestroy();
@@ -31,4 +37,4 @@ function usesRealReactChildren(c){
   }
 }
 
-export { usesRealReactChildren }
+export { reactGroup }

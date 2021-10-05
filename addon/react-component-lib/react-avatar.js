@@ -1,7 +1,9 @@
 import Avatar from '@mui/material/Avatar';
 import { AvatarPropObj } from './utility/props/avatar-props';
 import { ReactBase } from './base/react-base';
+import { reactMayBelongToReactGroup } from "./react-decorators/react-may-belong-to-react-group";
 
+@reactMayBelongToReactGroup
 export class ReactAvatar extends ReactBase{
   constructor(props) {
     super(props);

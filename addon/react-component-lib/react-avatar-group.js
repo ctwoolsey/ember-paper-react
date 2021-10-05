@@ -7,6 +7,5 @@ export class ReactAvatarGroup extends ReactBase{
     super(props);
     this.DefaultComponentToRender = AvatarGroup;
     this.initialize(AvatarGroupPropObj);
-
   }
 }

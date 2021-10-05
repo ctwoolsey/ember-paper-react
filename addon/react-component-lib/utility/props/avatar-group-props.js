@@ -15,16 +15,14 @@ const propsNotForComponent = {
 }
 
 const stateProps = {
-  sx: null
-}
-
-//these are part of the props specification but must be removed from component
-//and handled outside of the react component a special case
-const statefulPropsNotForComponent = {
-  children: null,
   max: null,
   spacing: null,
+  sx: null,
   variant: null
+}
+
+const statefulPropsNotForComponent = {
+  children: null
 }
 
 const AvatarGroupProps = () => {return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

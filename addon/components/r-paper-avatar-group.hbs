@@ -1,10 +1,3 @@
-<span class={{this.componentType}} ...attributes
+<span class={{this.componentType}} data-parent-identifier={{this.parentIdentifier}} ...attributes
   {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
-  {{did-update this.max @max}}
-  {{did-update this.spacing @spacing}}
-  {{did-update this.variant @variant}}
->
-  {{#in-element this.moveLocation}}
-    {{yield}}
-  {{/in-element}}
-</span>
+>{{yield}}</span>

@@ -7,16 +7,8 @@
 .ember-paper-react-hide {
   display: none;
 }
-
-.ember-paper-react-avatar-group {
-  flex-direction: row !important;
-  .ember-paper-react-avatar.hide-avatar {
-    display: none;
-  }
-
-  .MuiAvatar-circular { border-radius: 50%; }
-  .MuiAvatar-rounded { border-radius: 4px; }
-  .MuiAvatar-square { border-radius: 0; }
+.ember-paper-react-avatar-group .MuiAvatar-root:last-child {
+  margin-left: 0 !important;
 }
 
 .ember-paper-react-tooltip.tooltip-cursor-pointer-enabled {

@@ -260,13 +260,15 @@ The most basic usages are:
 ```
 
 
-###Avatar Group
-The most basic usage is:
+##Avatar Group
+***
+[Explore React Material-UI Avatar docs](https://mui.com/api/avatar-group/)  
+An example usage is:
 ```angular2html
-<RPaperAvatarGroup>
-  <RPaperAvatar>A</RPaperAvatar>
-  <RPaperAvatar>B</RPaperAvatar>
-  <RPaperAvatar>C</RPaperAvatar>
+<RPaperAvatarGroup @max={{this.maxAvatarGroupSize}} @variant={{this.avatarVariant}} @spacing={{this.avatarGroupSpacing}}>
+  {{#each this.avatarContentList as |avatarContentItem|}}
+  <RPaperAvatar>{{avatarContentItem}}</RPaperAvatar>
+  {{/each}}
 </RPaperAvatarGroup>
 
 ```
@@ -477,6 +479,19 @@ be referenced in the HTML.
 The most basic usage is:
 ```angular2html
 <RPaper @elevation={{24}} @square={{false}}>Here is My Paper</RPaper>
+```
+
+##RadioGroup
+***
+[Explore React Material-UI Radio Group docs](https://mui.com/components/radio-buttons/#radio-group)
+
+The most basic usage is:
+```angular2html
+<RPaperRadioGroup @name="radio-group" @defaultValue="myValue" @onChange={{this.onRadioGroupChange}}>
+  {{#each this.radioGroups as |radioGroup|}}
+    <RPaperRadio @label={{radioGroup}} @value={{radioGroup}}/>
+  {{/each}}
+</RPaperRadioGroup>
 ```
 
 
