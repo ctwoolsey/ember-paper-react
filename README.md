@@ -267,7 +267,7 @@ An example usage is:
 ```angular2html
 <RPaperAvatarGroup @max={{this.maxAvatarGroupSize}} @variant={{this.avatarVariant}} @spacing={{this.avatarGroupSpacing}}>
   {{#each this.avatarContentList as |avatarContentItem|}}
-  <RPaperAvatar>{{avatarContentItem}}</RPaperAvatar>
+    <RPaperAvatar>{{avatarContentItem}}</RPaperAvatar>
   {{/each}}
 </RPaperAvatarGroup>
 
