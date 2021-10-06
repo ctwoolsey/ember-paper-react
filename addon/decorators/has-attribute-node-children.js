@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 
-function hasAttributeChildren(c){
-  return class HasAttributeChildren extends c {
+function hasAttributeNodeChildren(c){
+  return class HasAttributeNodeChildren extends c {
     constructor() {
       super(...arguments);
       this.reactComponentFragments = {};
@@ -23,7 +23,13 @@ function hasAttributeChildren(c){
       this.reactComponentFragments[attributeName] = fragment;
       this.reactFragmentMoveMethods[attributeName] = moveFragmentMethod;
     }
+
+    @action
+    renderElementItems() {
+      super.renderElementItems();
+      this.onRenderAttributeNodeChildren && this.onRenderAttributeNodeChildren();
+    }
   }
 }
 
-export { hasAttributeChildren }
+export { hasAttributeNodeChildren }

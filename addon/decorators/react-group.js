@@ -8,13 +8,13 @@ function reactGroup(c){
 
     constructor() {
       super(...arguments);
-      this.parentIdentifier = uuidv4();
-      this.reactChildren.create(this.parentIdentifier, this.onChildChanged);
+      this.groupIdentifier = uuidv4();
+      this.reactChildren.create(this.groupIdentifier, this.onChildChanged);
     }
 
     initializeProps() {
       super.initializeProps();
-      this.propsToPass.children = this.reactChildren.load(this.parentIdentifier);
+      this.propsToPass.children = this.reactChildren.load(this.groupIdentifier);
     }
 
     @action
@@ -27,11 +27,11 @@ function reactGroup(c){
     @action
     renderElement() {
       super.renderElement();
-      this.reactChildren.render(this.parentIdentifier);
+      this.reactChildren.render(this.groupIdentifier);
     }
 
     willDestroy() {
-      this.reactChildren.destroyReactChildren(this.parentIdentifier);
+      this.reactChildren.destroyReactChildren(this.groupIdentifier);
       super.willDestroy();
     }
   }

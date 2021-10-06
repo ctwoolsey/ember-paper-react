@@ -77,7 +77,6 @@ export default class BaseEmberPaperReact extends Component {
   @action
   renderElementItems() {
     this.renderChildren && this.renderChildren();
-    this.onRenderAdditionalItems && this.onRenderAdditionalItems();
     this.doneRendering && scheduleOnce('afterRender', this, this.doneRendering);
   }
 
@@ -159,7 +158,5 @@ export default class BaseEmberPaperReact extends Component {
     const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, this.el.parentNode);
     ReactDOM.render(reactPortal, document.createElement('div'));
   }
-
-
 
 }

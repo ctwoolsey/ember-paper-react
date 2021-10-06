@@ -10,15 +10,15 @@ module('Integration | Component | attribute-child', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<AttributeChild />`);
+    await render(hbs`<AttributeNodeChild />`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      <AttributeChild>
+      <AttributeNodeChild>
         template block text
-      </AttributeChild>
+      </AttributeNodeChild>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');

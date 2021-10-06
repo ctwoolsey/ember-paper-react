@@ -2,9 +2,9 @@ import { ReactCardHeader } from '../react-component-lib/card-related/react-card-
 import { COMPONENT_TYPES} from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { CardHeaderPropObj } from '../react-component-lib/utility/props/card-header-props';
-import { hasAttributeChildren } from "../decorators/has-attribute-children";
+import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 
-@hasAttributeChildren
+@hasAttributeNodeChildren
 export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
 
   constructor() {
@@ -14,7 +14,7 @@ export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
     this.reactElement = ReactCardHeader;
   }
 
-  onRenderAdditionalItems() {
+  onRenderAttributeNodeChildren() {
     this.moveAttributes('avatar', 'MuiCardHeader-avatar');
     this.moveAttributes('action', 'MuiCardHeader-action');
     this.moveAttributes('subheader', 'MuiCardHeader-subheader');

@@ -9,7 +9,6 @@ export default class RPaperDialogContentComponent extends BaseInElementRender {
     this.componentType = COMPONENT_TYPES.DIALOG_CONTENT;
     this.loadPropObject(DialogContentPropObj);
     this.reactElement = ReactDialogContent;
-    this.renderElement = this.renderElement.bind(this);
   }
 }
 

@@ -1,5 +1,5 @@
-function reactPresentationCapable(c){
-  return class ReactPresentationCapable extends c {
+function protectChildrenFromReactDestruction(c){
+  return class ProtectChildrenFromReactDestruction extends c {
     constructor() {
       super(...arguments);
       this.reactRender = this.reactRender.bind(this);
@@ -30,4 +30,4 @@ function reactPresentationCapable(c){
   }
 }
 
-export { reactPresentationCapable }
+export { protectChildrenFromReactDestruction }

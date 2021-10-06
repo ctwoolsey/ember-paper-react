@@ -2,9 +2,9 @@ import {ReactChip} from '../react-component-lib/react-chip'
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { ChipPropObj } from '../react-component-lib/utility/props/chip-props';
-import { hasAttributeChildren } from "../decorators/has-attribute-children";
+import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 
-@hasAttributeChildren
+@hasAttributeNodeChildren
 export default class RPaperChip extends BaseEmberPaperReact {
 
   constructor() {
@@ -14,7 +14,7 @@ export default class RPaperChip extends BaseEmberPaperReact {
     this.reactElement = ReactChip;
   }
 
-  onRenderAdditionalItems() {
+  onRenderAttributeNodeChildren() {
     if (!this.args.icon) {  //can't have icon and avatar in a chip so icon will take precedence
       const avatarHolder = this.reactRef.current.componentRef.current.getElementsByClassName('MuiAvatar-root')[0];
       const moveMethod = this.getAttributeMoveMethod('avatar');

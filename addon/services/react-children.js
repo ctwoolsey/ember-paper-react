@@ -9,40 +9,40 @@ export default class ReactChildrenService extends Service {
     this.childrenRenderMethods = {};
   }
 
-  create(parentIdentifier, onChildChanged) {
-    this.queues[parentIdentifier] = A();
-    this.onChildChanged[parentIdentifier] = onChildChanged;
-    this.childrenRenderMethods[parentIdentifier] = A();
+  create(groupIdentifier, onChildChanged) {
+    this.queues[groupIdentifier] = A();
+    this.onChildChanged[groupIdentifier] = onChildChanged;
+    this.childrenRenderMethods[groupIdentifier] = A();
   }
 
-  save(parentIdentifier, ReactChild, onRenderReady){
-    this.queues[parentIdentifier].pushObject(ReactChild);
-    this.onChildChanged[parentIdentifier]();
-    this.childrenRenderMethods[parentIdentifier].pushObject(onRenderReady);
+  save(groupIdentifier, ReactChild, onRenderReady){
+    this.queues[groupIdentifier].pushObject(ReactChild);
+    this.onChildChanged[groupIdentifier]();
+    this.childrenRenderMethods[groupIdentifier].pushObject(onRenderReady);
   }
 
-  delete(parentIdentifier, ReactChild) {
-    if (Object.prototype.hasOwnProperty.call(this.queues, parentIdentifier)) {
-      this.queues[parentIdentifier].removeObject(ReactChild);
-      this.onChildChanged[parentIdentifier]();
+  delete(groupIdentifier, ReactChild) {
+    if (Object.prototype.hasOwnProperty.call(this.queues, groupIdentifier)) {
+      this.queues[groupIdentifier].removeObject(ReactChild);
+      this.onChildChanged[groupIdentifier]();
     }
   }
 
-  render(parentIdentifier) {
-    this.childrenRenderMethods[parentIdentifier].forEach((renderMethod) => {
+  render(groupIdentifier) {
+    this.childrenRenderMethods[groupIdentifier].forEach((renderMethod) => {
       renderMethod();
     });
   }
 
-  load(parentIdentifier) {
-    return this.queues[parentIdentifier];
+  load(groupIdentifier) {
+    return this.queues[groupIdentifier];
   }
 
-  destroyReactChildren(parentIdentifier) {
-    this.queues[parentIdentifier].clear();
-    delete this.queues[parentIdentifier];
-    delete this.onChildChanged[parentIdentifier];
-    this.childrenRenderMethods[parentIdentifier].clear();
-    delete this.childrenRenderMethods[parentIdentifier];
+  destroyReactChildren(groupIdentifier) {
+    this.queues[groupIdentifier].clear();
+    delete this.queues[groupIdentifier];
+    delete this.onChildChanged[groupIdentifier];
+    this.childrenRenderMethods[groupIdentifier].clear();
+    delete this.childrenRenderMethods[groupIdentifier];
   }
 }

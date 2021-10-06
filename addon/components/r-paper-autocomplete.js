@@ -6,9 +6,9 @@ import { action } from '@ember/object';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { AutocompletePropObj } from '../react-component-lib/utility/props/autocomplete-props';
 import { TextFieldPropObj } from '../react-component-lib/utility/props/text-field-props';
-import { hasAttributeChildren } from "../decorators/has-attribute-children";
+import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 
-@hasAttributeChildren
+@hasAttributeNodeChildren
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
@@ -37,7 +37,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.propsToPass.inputRef = this.inputRef;
   }
 
-  onRenderAdditionalItems() {
+  onRenderAttributeNodeChildren() {
     this.optionsFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.OPTIONS);
     this.headersFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS);
 

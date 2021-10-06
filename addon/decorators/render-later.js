@@ -1,6 +1,8 @@
-function renderLater(c){
-  return class RenderLater extends c {
+import { protectChildrenFromReactDestruction } from "./protect-children-from-react-destruction";
 
+function renderLater(c){
+  @protectChildrenFromReactDestruction
+  class RenderLater extends c {
     renderElement() {
       this.renderStack.addRenderLaterCallback(this.renderLater, this);
       this.renderStack.renderNext();
@@ -9,12 +11,10 @@ function renderLater(c){
     renderLater() {
       super.renderLater && super.renderLater();
       this.el.remove();
-      const childEndMarker = document.getElementById(this.lastChildId);
-      childEndMarker && childEndMarker.remove();
       this.renderStack.renderNext();
     }
-
   }
+  return RenderLater;
 }
 
 export { renderLater }

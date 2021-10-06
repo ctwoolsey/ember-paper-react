@@ -2,7 +2,7 @@ import { action } from '@ember/object';
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
 
-export default class AttributeChild extends Component {
+export default class AttributeNodeChildComponent extends Component {
   @tracked moveLocation;
 
   constructor() {

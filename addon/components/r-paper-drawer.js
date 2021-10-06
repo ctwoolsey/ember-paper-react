@@ -2,10 +2,8 @@ import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactDrawer } from '../react-component-lib/react-drawer';
 import { DrawerPropObj } from '../react-component-lib/utility/props/drawer-props';
 import { renderLater } from "../decorators/render-later";
-import { reactPresentationCapable } from "../decorators/react-presentation-capable";
 import BaseInElementRender from "./base/base-in-element-render";
 
-@reactPresentationCapable
 @renderLater
 export default class RPaperDrawerComponent extends BaseInElementRender {
 

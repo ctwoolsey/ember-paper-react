@@ -1,10 +1,10 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactMenu } from '../react-component-lib/react-menu';
-import { reactPresentationCapable } from "../decorators/react-presentation-capable";
+import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
 import { MenuPropObj } from '../react-component-lib/utility/props/menu-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
-@reactPresentationCapable
+@protectChildrenFromReactDestruction
 export default class RPaperMenuComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);

@@ -17,27 +17,6 @@
 * `ember test --server` – Runs the test suite in "watch mode"
 * `ember try:each` – Runs the test suite against multiple Ember versions
 
-##Updated Rendering Section
-Principles:
-* Want all items inserted onto DOM
-  * all items are inserted into DOM in a flat manner and React items are at the bottom of the DOM
-  * HTML for component uses a structure of a thow away 'span' where all change args and attributes get attached initially
-  * On most components there is a child span so that ember functionality will work inside of {{each}} loops.
-  * There is an end identifier span, to help copy all children.  ??? Is this really needed if we use a child span now?
-* Once that is done, do rendering.  Hence using a render stack.  Items are usually rendered in the order they were added, so more of a queue than a stack.
-* There is a renderLaterStack (true stack) This should be used for React components which have other react elements as their children. This allows the children to render first. And then be added to the parent.
-
-Rendering Default:
-* move React element from bottom of DOM to be a sibling of the current ember component
-* clone Attributes and styles from component throw away 'span' and put it on the react element
-* Render children into the react item
-* Render additional Items (??Need to explain this??)
-* remove ember el (removes throw away span)
-* call an after Render method (??Need to explain this??)
-* remove child end marker
-* render next item in renderStack (queue)
-* some children need to handle {{each}} loops so we use inline #in-element to move the children, Can I refactor and remove the other children methods?
-
 ##Understanding Rendering
 The issue to overcome is that React wants its children to be react children.
 Take for example the following Ember code:
@@ -46,17 +25,17 @@ Take for example the following Ember code:
     <RPaperButton>Cancel</RPaperButton>
 </RPaperDialogActions>
 ```
-```<RPaperDialogActions>``` and ```<RPaperButton>``` are separate ember components but the button needs to be a child of the dialog action component.  Additionally the Cancel Text is a child of the button.
+```<RPaperDialogActions>``` and ```<RPaperButton>``` are separate ember components but the button needs to be a 
+child of the dialog action component.  Additionally, the `Cancel` text is a child of the button.
 
-When ember renders this, it will insert ```<RPaperDialogActions>``` first. But the button won't be assembled yet.
+While some of the rendering problems can be solved similar to how the decorators `react-group` and `may-belong-to-react-group`
+operate, This is not practical since not all children will be React Material-UI components.  
 
-To get over this, a ```renderStack is used```.  When a no children of a ember-react component are found, then the renderStack will reverse the rendering order even though all components have been inserted.
-The ```@action inserted``` is defined in the ```base-react-ember``` and then each individual component calls the base ```inserted``` method.  Within this base method the component is examined to see if it should start the rendering sequence of events.
+`<RPaperButton>` will be inserted and rendered first and then `<RPaperDialogActions>` will be rendered and copy the React
+children into the React representation of `<RPaperDialogActions>`.
 
-A base ```render``` method is called which covers the most common render cases.  The re-arranging of the ember and react components occurs here.  If special needs are determined for children or child insertion points, the base method can be overridden in the component.
-
-A special use case occurs in component which move in and off of the DOM like a ```dialog``` component.  The dialog does not initially present any insertion points when it is created.  Therefore, special callbacks must be used to insert the children when the component is displayed and then also pull the children into a ```DOMFragment``` before the component will disappear.  The cycle continues when the react component re-mounts and the children must be re-added.
-These callbacks can be seen by examining the ```react-dialog.js``` code.
+All items need to be inserted before `rendering/assembly` takes place.  To achieve this, a `renderStack` is used.  (In reality
+the `renderStack` is really used as a `queue`.)
 
 React attaches events to the parent container, so by creating a portal and then rendering,
 the element is not placed into this r-paper-button, but at the end of the parent of r-paper-button.
@@ -80,54 +59,160 @@ the children, so ember needs to intercept these components.
 
 the method `initializeProps` combines `propsNotForComponent` and `statefulPropsNotForComponent` into `this.props` for sending to the React Component.
 
-## Render Types
+## Ember Render Types
 ***
+There are two base classes Ember React Components are based on. `base-emeber-paper-react` or `base-in-element-render`.
+The later inherits from the former.
 
-### in-element  
- uses:
-1. Allows no wrapping of component children
-2. Allows children to support dynamic ember code like `{{each}}`
-3. Use when the react component will create a portal to display component information. (*See `reactPresentationCapable` decorator info below)
-> * extend from: BaseInElementRender  
-> * place rendering code in component file 
-> ```angular2html
-> renderElement() {
->   ~your code here~
->   set this.moveLocation = <some HTML element> if component displays immediately
->   super.renderElement();
-> }
-> ```
-> * follow this form in template
-> ```angular2html
->  {{#in-element this.moveLocation}}
->    {{yield}}
->  {{/in-element}}
-> ```
->> Examples: r-paper-menu & r-paper-text-field  
+### base-ember-paper-react
+This is the base class upon which all elements `Ember Paper React` elements are rendered.  
+  
+1. Elements are inserted on the DOM  
+   1. Props for the react element are initialized
+   2. Element is added to Ember's render stack (elaborate more)
+   3. React component is created and added to DOM
+2. Elements are "rendered"  
+   1. React Element is moved into correct position on DOM
+   2. Hooks for rendering customization are called.  
+      1. renderChildren - allows customization of where children get inserted
+      2. doneRendering - if rendering needs to happen on ember's `afterRender` lifestyle hook.
+   3. HTML not associated with React's generated HTML is removed from DOM
+  
+Components that directly use this class are components that don't have children. Examples ( `RPaperCircularProgress`,
+`RPaperRadio`).  This can include components that only have `Attribute Node Children` (`RPaperChip`, `RPaperAutocomplete`).
 
-To save the components children when the react component creates a presentation portal set the `reactPresentationCapable` decorator on the class. The rendering via `this.moveLocation` is handled automatically.  
+The template for this type of a component without `Attribute Node Children` will look like this:
 ```angular2html
-@reactPresentationCapable
-export default class RPaperMenuComponent extends BaseInElementRender {}
-```  
+<span class={{this.componentType}} ...attributes
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+></span>
+```
+  
+### base-in-element-render
+This is the base class for elements that have children.  It inherits from `base-ember-paper-react`.  Most components
+use this base class.  
 
-## Input Masking  
-***
-If a class has a react component that has an `inputRef` property and that input should have the capability of masking,
-the class decorator `@useInputMask` should be used.
+It modifies the base class by:
+1. Moving the children off of the viewable DOM into a fragment
+2. When the component is rendered, it moves the children into the React Element's children.
+
+The template for this type of a component will look like this:
 ```angular2html
-@useInputMask
-export default class RPaperTextFieldComponent extends BaseInElementRender {}
-```  
-This will utilize the mask arguments of:
-* mask
-* maskDefaults
-* maskDefinitions
-* maskAliases
+<span class={{this.componentType}} ...attributes
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+>
+  {{#in-element this.moveLocation}}
+    {{yield}}
+  {{/in-element}}
+</span>
+```
+As the name implies, the template uses Ember's `in-element` helper.  This has the advantage of:  
+1. No wrapping of component children
+2. Support dynamic ember code like `{{each}}` as direct children.  
 
+##Enhanced render types
+Decorators are used for enhancing the existing render types.  
+###has-attribute-node-children
+>Note, that even though "icon" attributes by definition should return a react Icon, attribute-node-children are not needed.
+> All icon attributes take a javascript object of the format: {icon: ..., iconProps: ...} instead of using attribute-node-children.
+
+Sometimes a React component will have an attribute that should be a ReactNode.  This decorator is added so that the Ember 
+Application does not have to use React and also to preserve the functionality and advantages of using Ember.
+In the main Ember application `named block content` can be used. So for `<RPaperCardHeader>` which has an avatar node,
+an avatar can be used like so:  
+```angular2html
+<RPaperCardHeader>
+  <:avatar><RPaperAvatar>Y</RPaperAvatar></:avatar>
+</RPaperCardHeader>
+```
+The library component will have the following template:
+```angular2html
+<span class={{this.componentType}} ...attributes
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+>
+  {{#if (has-block 'avatar')}}
+    <AttributeNodeChild class="react=component avatar" @attribute="avatar" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeNodeChild>
+  {{/if}}
+</span>
+```
+The Ember component will need to define one method: ```onRenderAttributeNodeChildren()```  
+This method needs to place the Attribute Node into the correct spot in the React Component.  This can be done like so:
+```angular2html
+onRenderAttributeNodeChildren() {
+  const reactComp = this.reactRef.current.componentRef.current;
+  const moveMethod = this.getAttributeMoveMethod('avatar');
+  if (moveMethod) {
+    moveMethod(reactComp.getElementsByClassName('MuiCardHeader-avatar')[0]);
+  }
+}
+```
+An advanced variation usage of this can be found in `r-paper-autocomplete.js`.  Autocomplete uses attribute nodes, but
+does not render/place them immediately.  To facilitate this, `has-attribute-node-children`  provides the move method used
+to move the children as well as the fragment where the children are stored.
+
+###protect-children-from-react-destruction
+Sometimes, when an attribute changes or react used a presentation portal (with dialogs and drawers) react will re-render
+the component.  Since children that react knows nothing about have been placed inside the React component, 
+these children will be destroyed.  
+
+This decorator adds callbacks that trigger React to save the children to a fragment and then when it loads again, pull
+the children from the fragment.
+
+If special placement is needed, the Ember component can override `reactRender(insertElement)` similar to how `RPaperButton`
+does.
+
+###render-later
+This decorator incorporates the `protect-children-from-react-destruction` decorator.  Some components render
+their children into a portal and are not displayed immediately.  It will keep children from being
+rendered into a non-existant element.  By using with the `protect-children-from-react-destruction` decorator, when the 
+React element is ready to display the children, the children will be rendered correctly.
+
+`renderLater()` can be overridden to provide custom rendering as in `RPaperDrawer`.  
+
+###react-group & may-belong-to-react-group  
+Certain React components are groups and exercise control over their children only if they are created with those children.
+The children cannot be added after their creation.  These types of groups should be decorated with `@reactGroup`.  Some examples
+are: `<RPaperRadioGroup>` and `<RPaperAvatarGroup>`  Their children must be React Material-UI children.  These children can 
+be part of the Group or they can stand alone on their own.  Thus they get decorated with: `@mayBelongToReactGroup`.
+
+The group requires a template of the form:
+```angular2html
+<span class={{this.componentType}} data-group-identifier={{this.groupIdentifier}} ...attributes
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+>{{yield}}</span>
+```
+
+##Render Helpers/Enhancers
+The following decorators add capabilities to components and simplify the code.
+
+###overrride-href
+If a component like `<RPaperButton>` uses an `href` attribute it will break react's routing.  React requires `<LinkTo>`
+or `TransitionTo`.  Placing an `@overrideHref` decorator on `RPaperButton` converts the `href` into a `TransitionTo` usage.
+
+###use-input-mask
+If a component has an input and uses an `inputRef`, using `@useInputMask` will allow add certain `input mask` attributes
+on the component. The following link is to the input mask library used: [inputmask](https://github.com/RobinHerbots/Inputmask/)
+
+To use the mask feature the following attributes become available (only `@mask` is required):
+* `@mask` - In the `inputmask` documentation this is the object or string that is input into the `Inputmask()` initializer.
+* `@maskDefaults`
+* `@maskDefinitions`
+* `@maskAliases`  
+  
 This will also automatically update the change handler so that the method will return the `event` and `unmasked value`.
-If no mask is defined, the change handler will only return the `event`.
+If no `@mask` is defined, the change handler will only return the `event`.
 
- 
+##Understanding the React Side
+Part of the magic of ember is that arguments that change can update the component.  In React this is done by changing 
+`state`. The modifier `ember-paper-reactable` links the two.  An ember `arg` change will trigger a `state` change if 
+it should trigger a `state` change as defined by the component `prop` files.
 
+All react components are derived from `react-base.js`.  This base code, initializes props, determines which ones should
+be assigned to state vs static props etc.  Rendering is also defined here.  Should the component be wrapped with `theme`
+or should it have children?
+
+This allows the majority of React components to be very simple.  Each component needs to pass the actual React Material-UI
+component to the base and call the initialze method with the component specific `prop` file.
+
+Occasionally a component like `Autocomplete` may need to override the generic render method.
 
