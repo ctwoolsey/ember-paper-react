@@ -1,4 +1,4 @@
-import { MaterialIconPropObj } from './utility/props/material-icon-props';
+import { MaterialIconPropObj } from '../prop-files/material-icon-props';
 import { ReactBase } from './base/react-base';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import React from 'react';

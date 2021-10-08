@@ -1,6 +1,6 @@
 import Backdrop from '@mui/material/Backdrop';
 import { ReactBase } from './base/react-base';
-import { BackdropPropObj } from './utility/props/backdrop-props';
+import { BackdropPropObj } from '../prop-files/backdrop-props';
 
 export class ReactBackdrop extends ReactBase{
   constructor(props) {

@@ -1,6 +1,6 @@
 import CardContent from '@mui/material/CardContent';
 import { ReactBase } from '../base/react-base';
-import { CardContentPropObj } from '../utility/props/card-content-props';
+import { CardContentPropObj } from '../../prop-files/card-content-props';
 
 export class ReactCardContent extends ReactBase{
   constructor(props) {

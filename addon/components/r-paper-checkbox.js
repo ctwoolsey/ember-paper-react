@@ -1,7 +1,7 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { CheckboxPropObj } from '../react-component-lib/utility/props/checkbox-props';
-import { FormControlLabelPropObj } from '../react-component-lib/utility/props/form-control-label-props';
+import { CheckboxPropObj } from '../prop-files/checkbox-props';
+import { FormControlLabelPropObj } from '../prop-files/form-control-label-props';
 import { ReactCheckbox } from '../react-component-lib/react-checkbox';
 
 export default class RPaperCheckbox extends BaseEmberPaperReact {

@@ -1,6 +1,6 @@
 import { ReactDialogContentText } from '../react-component-lib/dialog-related/react-dialog-content-text';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import { DialogContentTextPropObj } from '../react-component-lib/utility/props/dialog-content-text-props';
+import { DialogContentTextPropObj } from '../prop-files/dialog-content-text-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 

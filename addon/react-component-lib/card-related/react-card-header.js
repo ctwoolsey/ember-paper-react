@@ -2,7 +2,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { ReactBase } from '../base/react-base';
-import { CardHeaderPropObj } from '../utility/props/card-header-props';
+import { CardHeaderPropObj } from '../../prop-files/card-header-props';
 
 export class ReactCardHeader extends ReactBase {
   constructor(props) {

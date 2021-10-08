@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { ButtonPropObj } from './utility/props/button-props';
+import { ButtonPropObj } from '../prop-files/button-props';
 import { ReactBase } from './base/react-base';
 
 export class ReactButton extends ReactBase{

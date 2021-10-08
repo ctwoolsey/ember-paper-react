@@ -1,7 +1,7 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactMenu } from '../react-component-lib/react-menu';
 import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
-import { MenuPropObj } from '../react-component-lib/utility/props/menu-props';
+import { MenuPropObj } from '../prop-files/menu-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 @protectChildrenFromReactDestruction

@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import { ReactBase } from './base/react-base';
-import { TextFieldPropObj } from './utility/props/text-field-props';
+import { TextFieldPropObj } from '../prop-files/text-field-props';
 
 export class ReactTextField extends ReactBase{
   constructor(props) {

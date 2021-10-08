@@ -1,6 +1,6 @@
 import Dialog from '@mui/material/Dialog';
 import { ReactBase } from '../base/react-base';
-import { DialogPropObj } from '../utility/props/dialog-props';
+import { DialogPropObj } from '../../prop-files/dialog-props';
 
 
 export class ReactDialog extends ReactBase{

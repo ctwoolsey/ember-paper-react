@@ -1,6 +1,6 @@
 import Chip from '@mui/material/Chip';
 import { ReactBase } from './base/react-base';
-import {ChipPropObj} from './utility/props/chip-props';
+import {ChipPropObj} from '../prop-files/chip-props';
 import Avatar from "@mui/material/Avatar";
 
 export class ReactChip extends ReactBase{

@@ -1,6 +1,6 @@
 import { ReactLabeledCheckRadioSwitch } from './react-labeled-check-radio-switch';
 import Radio from '@mui/material/Radio';
-import {RadioPropObj} from './utility/props/radio-props';
+import {RadioPropObj} from '../prop-files/radio-props';
 import { reactMayBelongToReactGroup } from "./react-decorators/react-may-belong-to-react-group";
 
 @reactMayBelongToReactGroup

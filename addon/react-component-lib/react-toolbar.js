@@ -1,5 +1,5 @@
 import Toolbar from '@mui/material/Toolbar';
-import { ToolbarPropObj } from './utility/props/toolbar-props';
+import { ToolbarPropObj } from '../prop-files/toolbar-props';
 import { ReactBase } from './base/react-base';
 
 export class ReactToolbar extends ReactBase{

@@ -1,6 +1,6 @@
 import SvgIcon from '@mui/material/SvgIcon'
 import { ReactBase } from './base/react-base';
-import { SvgIconPropObj } from './utility/props/svg-icon-props';
+import { SvgIconPropObj } from '../prop-files/svg-icon-props';
 
 export class ReactSvgIcon extends ReactBase{
   constructor(props) {

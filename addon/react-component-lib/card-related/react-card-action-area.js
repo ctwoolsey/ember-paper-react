@@ -1,6 +1,6 @@
 import CardActionArea from '@mui/material/CardActionArea';
 import { ReactBase } from '../base/react-base';
-import { CardActionAreaPropObj } from '../utility/props/card-action-area-props';
+import { CardActionAreaPropObj } from '../../prop-files/card-action-area-props';
 
 export class ReactCardActionArea extends ReactBase{
   constructor(props) {

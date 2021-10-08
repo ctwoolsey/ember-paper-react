@@ -1,7 +1,7 @@
 import { ReactCardHeader } from '../react-component-lib/card-related/react-card-header';
 import { COMPONENT_TYPES} from '../react-component-lib/constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { CardHeaderPropObj } from '../react-component-lib/utility/props/card-header-props';
+import { CardHeaderPropObj } from '../prop-files/card-header-props';
 import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 
 @hasAttributeNodeChildren

@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { ReactBase } from './base/react-base';
-import { FormControlLabelPropObj } from '../react-component-lib/utility/props/form-control-label-props';
+import { FormControlLabelPropObj } from '../prop-files/form-control-label-props';
 import { reactPropSifter } from "./utility/react-prop-sifter";
 
 export class ReactLabeledCheckRadioSwitch extends ReactBase{

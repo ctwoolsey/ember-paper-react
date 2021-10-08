@@ -3,8 +3,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { ReactConditionalThemeProvider } from './react-conditional-theme-provider';
 import { ReactBase } from './base/react-base';
-import { AutocompletePropObj } from './utility/props/autocomplete-props';
-import { TextFieldPropObj } from './utility/props/text-field-props';
+import { AutocompletePropObj } from '../prop-files/autocomplete-props';
+import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { reactPropSifter } from "./utility/react-prop-sifter";
 
 export class ReactAutocomplete extends ReactBase{

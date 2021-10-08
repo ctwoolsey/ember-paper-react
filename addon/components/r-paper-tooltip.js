@@ -1,6 +1,6 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactTooltip } from '../react-component-lib/react-tooltip';
-import { TooltipPropObj } from '../react-component-lib/utility/props/tooltip-props';
+import { TooltipPropObj } from '../prop-files/tooltip-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 export default class RPaperTooltipComponent extends BaseInElementRender {

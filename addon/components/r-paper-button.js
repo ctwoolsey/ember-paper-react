@@ -1,6 +1,6 @@
 import {ReactButton} from '../react-component-lib/react-button'
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import { ButtonPropObj } from '../react-component-lib/utility/props/button-props';
+import { ButtonPropObj } from '../prop-files/button-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
 import { overrideHref } from "../decorators/override-href";

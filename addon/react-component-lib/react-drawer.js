@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactBase } from './base/react-base';
-import { DrawerPropObj } from './utility/props/drawer-props';
+import { DrawerPropObj } from '../prop-files/drawer-props';
 import Drawer from '@mui/material/Drawer';
 
 

@@ -1,6 +1,6 @@
 import RadioGroup from '@mui/material/RadioGroup';
 import { ReactBase } from './base/react-base';
-import { RadioGroupPropObj } from './utility/props/radio-group-props';
+import { RadioGroupPropObj } from '../prop-files/radio-group-props';
 
 export class ReactRadioGroup extends ReactBase{
   constructor(props) {

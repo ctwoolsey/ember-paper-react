@@ -4,8 +4,8 @@ import { ReactAutocomplete } from '../react-component-lib/react-autocomplete';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
-import { AutocompletePropObj } from '../react-component-lib/utility/props/autocomplete-props';
-import { TextFieldPropObj } from '../react-component-lib/utility/props/text-field-props';
+import { AutocompletePropObj } from '../prop-files/autocomplete-props';
+import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 
 @hasAttributeNodeChildren

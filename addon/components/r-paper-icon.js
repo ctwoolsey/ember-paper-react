@@ -2,9 +2,9 @@ import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactIcon } from '../react-component-lib/react-icon';
 import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
 import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';
-import { IconPropObj } from '../react-component-lib/utility/props/icon-props';
-import { SvgIconPropObj } from '../react-component-lib/utility/props/svg-icon-props';
-import { MaterialIconPropObj } from '../react-component-lib/utility/props/material-icon-props';
+import { IconPropObj } from '../prop-files/icon-props';
+import { SvgIconPropObj } from '../prop-files/svg-icon-props';
+import { MaterialIconPropObj } from '../prop-files/material-icon-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 export default class RPaperIconComponent extends BaseInElementRender {

@@ -1,6 +1,6 @@
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
 import { ReactDrawer } from '../react-component-lib/react-drawer';
-import { DrawerPropObj } from '../react-component-lib/utility/props/drawer-props';
+import { DrawerPropObj } from '../prop-files/drawer-props';
 import { renderLater } from "../decorators/render-later";
 import BaseInElementRender from "./base/base-in-element-render";
 

@@ -1,6 +1,6 @@
 import { ReactCardMedia } from '../react-component-lib/card-related/react-card-media';
 import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
-import { CardMediaPropObj } from '../react-component-lib/utility/props/card-media-props';
+import { CardMediaPropObj } from '../prop-files/card-media-props';
 import BaseInElementRender from "./base/base-in-element-render";
 
 export default class RPaperCardMediaComponent extends BaseInElementRender {
