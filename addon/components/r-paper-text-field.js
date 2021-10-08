@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { ReactTextField } from '../react-component-lib/react-text-field';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import BaseInElementRender from "./base/base-in-element-render";

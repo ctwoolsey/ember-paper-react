@@ -1,5 +1,5 @@
 import { ReactCardActionArea } from '../react-component-lib/card-related/react-card-action-area';
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { CardActionAreaPropObj } from '../prop-files/card-action-area-props';
 import BaseInElementRender from "./base/base-in-element-render";
 

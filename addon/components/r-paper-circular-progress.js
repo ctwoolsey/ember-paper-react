@@ -1,5 +1,5 @@
 import {ReactCircularProgress} from '../react-component-lib/react-circular-progress'
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { CircularProgressPropObj } from '../prop-files/circular-progress-props';
 

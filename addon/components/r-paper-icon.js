@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { ReactIcon } from '../react-component-lib/react-icon';
 import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
 import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';

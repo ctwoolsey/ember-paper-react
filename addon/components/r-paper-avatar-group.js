@@ -1,5 +1,5 @@
 import {ReactAvatarGroup} from '../react-component-lib/react-avatar-group'
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { AvatarGroupPropObj } from '../prop-files/avatar-group-props';
 import { reactGroup } from "../decorators/react-group";
 import BaseEmberPaperReact from "./base/base-ember-paper-react";

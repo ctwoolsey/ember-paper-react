@@ -1,5 +1,5 @@
 import {ReactButton} from '../react-component-lib/react-button'
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { ButtonPropObj } from '../prop-files/button-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";

@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { CheckboxPropObj } from '../prop-files/checkbox-props';
 import { FormControlLabelPropObj } from '../prop-files/form-control-label-props';

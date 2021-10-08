@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES } from '../../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../../constants/constants';
 import React from 'react';
 import { scheduleOnce } from '@ember/runloop';
 import Component from '@glimmer/component';

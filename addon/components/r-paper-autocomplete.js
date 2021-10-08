@@ -1,5 +1,5 @@
 import React from 'react';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../constants/constants';
 import { ReactAutocomplete } from '../react-component-lib/react-autocomplete';
 import { A } from '@ember/array';
 import { action } from '@ember/object';

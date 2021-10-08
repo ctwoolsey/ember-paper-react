@@ -1,5 +1,5 @@
 import {ReactChip} from '../react-component-lib/react-chip'
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { ChipPropObj } from '../prop-files/chip-props';
 import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";

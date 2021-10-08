@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { ReactDrawer } from '../react-component-lib/react-drawer';
 import { DrawerPropObj } from '../prop-files/drawer-props';
 import { renderLater } from "../decorators/render-later";

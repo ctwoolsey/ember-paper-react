@@ -1,5 +1,5 @@
 import { ReactDialogActions } from '../react-component-lib/dialog-related/react-dialog-actions';
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { DialogActionsPropObj } from '../prop-files/dialog-actions-props';
 import BaseInElementRender from "./base/base-in-element-render";
 

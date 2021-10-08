@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { RadioGroupPropObj } from '../prop-files/radio-group-props';
 import { ReactRadioGroup } from '../react-component-lib/react-radio-group';

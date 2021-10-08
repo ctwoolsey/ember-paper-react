@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { ReactTooltip } from '../react-component-lib/react-tooltip';
 import { TooltipPropObj } from '../prop-files/tooltip-props';
 import BaseInElementRender from "./base/base-in-element-render";

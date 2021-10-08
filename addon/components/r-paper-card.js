@@ -1,5 +1,5 @@
 import { ReactCard } from '../react-component-lib/card-related/react-card';
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { CardPropObj } from '../prop-files/card-props';
 import BaseInElementRender from "./base/base-in-element-render";
 

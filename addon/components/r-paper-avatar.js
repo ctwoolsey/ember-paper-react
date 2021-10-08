@@ -1,5 +1,5 @@
 import {ReactAvatar} from '../react-component-lib/react-avatar'
-import { COMPONENT_TYPES } from '../react-component-lib/constants/constants';
+import { COMPONENT_TYPES } from '../constants/constants';
 import { AvatarPropObj } from '../prop-files/avatar-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { mayBelongToReactGroup } from "../decorators/may-belong-to-react-group";
