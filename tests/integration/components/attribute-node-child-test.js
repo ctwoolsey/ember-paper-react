@@ -2,25 +2,38 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { next } from '@ember/runloop';
 
-module('Integration | Component | attribute-child', function(hooks) {
+module('Integration | Component | attribute-node-child', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it correctly returns loadAttribute data', async function(assert) {
+    this.attributeName = null;
+    this.fragment = null;
+    this.moveMethod = null;
 
-    await render(hbs`<AttributeNodeChild />`);
+    this.set('onLoadAttributes', (attributeName, fragment, moveMethod) => {
+      this.attributeName = attributeName;
+      this.fragment = fragment;
+      this.moveMethod = moveMethod;
+    });
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`<AttributeNodeChild @attribute="testAttribute" @loadAttributeInfo={{this.onLoadAttributes}}>
+                      <div>A</div>
+                      <div>B</div>
+                    </AttributeNodeChild>`);
 
-    // Template block usage:
-    await render(hbs`
-      <AttributeNodeChild>
-        template block text
-      </AttributeNodeChild>
-    `);
+    assert.equal(this.attributeName, 'testAttribute');
+    assert.equal(this.fragment.childElementCount, 2);
+    assert.equal(this.fragment.children[0].textContent, 'A');
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    const movedDiv = document.createElement('div');
+    this.moveMethod(movedDiv);
+    next(this, function() {
+      assert.equal(this.fragment.childElementCount, 0);
+      assert.equal(movedDiv.childElementCount, 2);
+      assert.equal(movedDiv.children[0].textContent, 'A');
+      assert.equal(movedDiv.children[1].textContent, 'B');
+    });
   });
 });

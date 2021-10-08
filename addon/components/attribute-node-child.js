@@ -19,6 +19,6 @@ export default class AttributeNodeChildComponent extends Component {
   @action
   inserted(element) {
     this.args.loadAttributeInfo && this.args.loadAttributeInfo(this.args.attribute, this.childrenFragment, this.moveFragment);
-    element.remove();
+    element.hidden = true;
   }
 }
