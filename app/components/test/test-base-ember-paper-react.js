@@ -1,0 +1,1 @@
+export { default } from 'ember-paper-react/components/test/test-base-ember-paper-react';

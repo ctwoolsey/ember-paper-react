@@ -1,21 +1,21 @@
 const props = {
-  a: null,
-  b: null,
-  c: null,
-  d: null
+  a: 'A',
+  b: 'B',
+  c: 'C',
+  d: 'D'
 };
 
 const propsNotForComponent = {
-  e: null
+  e: 'E-prop-not-for-component'
 }
 
 const stateProps = {
-  b: null,
-  c: null
+  b: 'B-state',
+  c: 'C-state'
 }
 
 const statefulPropsNotForComponent = {
-  d: null
+  d: 'D-state-not-for-component'
 }
 
 const TestProps = () => { return Object.assign({}, props) };
