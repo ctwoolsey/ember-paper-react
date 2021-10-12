@@ -154,9 +154,11 @@ export default class BaseEmberPaperReact extends Component {
   createReactComponent() {
     this.renderStack.addRenderCallback(this.renderElement, this);
     scheduleOnce('render', this, this.checkIfCanRender);
-    const ReactComponent = this.reactElement;
-    const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, this.el.parentNode);
-    ReactDOM.render(reactPortal, document.createElement('div'));
+    if (this.reactElement) {
+      const ReactComponent = this.reactElement;
+      const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, this.el.parentNode);
+      ReactDOM.render(reactPortal, document.createElement('div'));
+    }
   }
 
 }

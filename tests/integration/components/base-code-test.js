@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import BaseEmberPaperReact from 'ember-paper-react/components/base/base-ember-paper-react';
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { TestPropObj } from "../../prop-files/test-props";
 import Service from '@ember/service';
@@ -12,8 +12,18 @@ module('Integration | Component | base-code', function(hooks) {
     theme = 'myTheme';
   }
 
+  class RenderStackStub extends Service {
+    renderNextCalled = false;
+    addRenderCallbackCalled = false;
+
+    renderNext = () => { this.renderNextCalled = true };
+    addRenderCallback = () => { this.addRenderCallbackCalled = true };
+    canStartRendering = () => { return true; };
+  }
+
   hooks.beforeEach(function(hooks) {
     this.owner.register('service:theme-manager', ThemeManagerStub);
+    this.owner.register('service:render-stack', RenderStackStub);
     this.component = null;
 
     this.set('getComponentReference', (reference) => {
@@ -24,10 +34,20 @@ module('Integration | Component | base-code', function(hooks) {
         super(...arguments);
         this.args.setReference(this);
         this.createComponentCalled = false;
+        this.renderChildrenCalled = false;
+        this.doneRenderingCalled = false;
       }
 
       createReactComponent() {
         this.createComponentCalled = true;
+      }
+
+      renderChildren() {
+        this.renderChildrenCalled = true;
+      }
+
+      doneRendering() {
+        this.doneRenderingCalled = true;
       }
     }
     this.setProperties({ MyTestComponent });
@@ -148,13 +168,101 @@ module('Integration | Component | base-code', function(hooks) {
     assert.equal(this.component.propsToPass.class.trim(), 'attributeClass', `'class' not equal to 'attr.class'`);
   });
 
-  /*
-  changeArgs,
-  changeReactState,
-  renderElement,
-  renderElementItems,
-  checkIfCanRender,
-  createReactComponent
-   */
+  test(`it properly creates changeObj`, async function(assert) {
+    await render(hbs`<this.MyTestComponent @setReference={{this.getComponentReference}}
+                                           @a="A" @b="B" @c="C" @d="D" @e="E"
+                                           @class="myClass" @label="myLabel"
+                     />`);
+    this.component.loadPropObject(TestPropObj);
+    const changeObj = this.component.changeArgs;
 
+    assert.equal(Object.keys(changeObj).length, 6, `changeObj length is not correct`);
+    assert.equal(changeObj.b, 'B', `changeObj 'b' incorrect`);
+    assert.equal(changeObj.c, 'C', `changeObj 'c' incorrect`);
+    assert.equal(changeObj.label, 'myLabel', `changeObj 'label' incorrect`);
+    assert.equal(changeObj.class.trim(), 'myClass', `changeObj 'class' incorrect`);
+    assert.equal(changeObj.d, 'D', `changeObj 'd' incorrect`);
+    assert.equal(changeObj.theme, 'myTheme', `changeObj 'theme' incorrect`);
+  });
+
+  test(`it correctly called change react state`, async function(assert) {
+    this.set('stateName', null);
+    this.set('stateValue', null);
+    this.set('setStateProp', (stateName, value) => {
+      this.stateName = stateName;
+      this.stateValue = value;
+    });
+    await render(hbs`<this.MyTestComponent @setReference={{this.getComponentReference}} @class="myClass" />`);
+    this.component.reactRef = {
+      current: {setStateProp: this.setStateProp}
+    }
+
+    this.component.changeReactState('class');
+    assert.equal(this.stateName, 'class', `'stateName' 'class' not set correctly`);
+    assert.equal(this.stateValue.trim(), 'myClass', `'stateValue' for 'class' not set correctly`);
+
+    this.component.changeReactState('hello', 'myHello');
+    assert.equal(this.stateName, 'hello', `'stateName' 'hello' not set correctly`);
+    assert.equal(this.stateValue, 'myHello', `'stateValue' for 'hello' not set correctly`);
+
+    this.component.changeReactState('helloNull');
+    assert.equal(this.stateName, 'helloNull', `'stateName' 'helloNull' not set correctly`);
+    assert.equal(this.stateValue, null, `'stateValue' for 'helloNull' not set correctly`);
+  });
+
+  test(`it correctly renders the element`, async function(assert) {
+    this.set('whereString', null);
+    this.set('reactElement', null);
+    this.set('insertAdjacentElement', (whereString, reactElement) => {
+      this.whereString = whereString;
+      this.reactElement = reactElement;
+    });
+
+    await render(hbs`<this.MyTestComponent @setReference={{this.getComponentReference}} />`);
+
+    this.component.reactRef = {
+      current: {
+        componentRef: {
+          current: 'myElement'
+        }
+      }
+    }
+
+    this.component.el = {
+      insertAdjacentElement: this.insertAdjacentElement,
+      hidden: false
+    }
+    const renderStackService = this.owner.lookup('service:render-stack');
+    renderStackService.renderNextCalled = false;
+    assert.false(this.component.el.hidden, 'el hidden');
+    assert.false(this.component.renderChildrenCalled, 'renderChildren already called');
+    assert.false(this.component.doneRenderingCalled, 'doneRendering already called');
+    this.component.renderElement();
+    assert.equal(this.whereString, 'afterend', `'whereString' not properly set`);
+    assert.equal(this.reactElement, 'myElement', `'reactElement' not properly set`);
+    assert.true(this.component.el.hidden, 'el not hidden');
+    assert.true(renderStackService.renderNextCalled, 'renderNext not called');
+    assert.true(this.component.renderChildrenCalled, 'renderChildren not called');
+    await settled();
+    assert.true(this.component.doneRenderingCalled, 'doneRendering not called');
+  });
+
+  test(`it correctly creates the react element`, async function(assert) {
+    class MyTestComponent2 extends BaseEmberPaperReact {
+      constructor() {
+        super(...arguments);
+        this.args.setReference(this);
+      }
+    }
+    this.setProperties({ MyTestComponent2 });
+    await render(hbs`<this.MyTestComponent2 @setReference={{this.getComponentReference}} />`);
+    const renderStackService = this.owner.lookup('service:render-stack');
+    this.component.loadPropObject(TestPropObj);
+
+    this.component.inserted({ attributes: []});
+    assert.ok(this.component.reactRef, `react ref is not set`);
+    await settled();
+    assert.true(renderStackService.addRenderCallbackCalled, 'addRenderCallbackCalled not called');
+    assert.true(renderStackService.renderNextCalled, 'renderNext not called');
+  });
 });
