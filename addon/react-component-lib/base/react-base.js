@@ -53,18 +53,6 @@ export class ReactBase extends React.Component{
     return statePropObject;
   }
 
-  createIcon(iconObject) {
-    //iconObject = {icon: ..., iconProps: ...}
-    if (iconObject && iconObject.icon) {
-      let props = iconObject.iconProps ? iconObject.iconProps : {};
-      return React.createElement(iconObject.icon, props);
-    } else if (iconObject && iconObject.iconProps) { //used for native FontAwesome for example
-      return React.createElement(Icon, iconObject.iconProps);
-    } else {
-      return null;
-    }
-  }
-
   formatStyle(styleValue) {
     let styleObj = {};
 
@@ -84,9 +72,6 @@ export class ReactBase extends React.Component{
 
   setStateProp(propName, value) {
     if (Object.prototype.hasOwnProperty.call(this.state, propName)) {
-      if (this.state.propName === 'label') {  //TODO make this generic that if a propName is null it defaults to the props.js defined value
-        this.setState({label: ''});
-      }
       if (propName === 'style') {
         value = this.formatStyle(value);
       }
