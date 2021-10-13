@@ -10,9 +10,11 @@ module('Integration | Component | r-paper', function(hooks) {
 
   test('it renders content into the correct location', async function(assert) {
     await render(hbs`
-      <RPaper @id="test-me">
-        template block text
-      </RPaper>
+      <div>
+        <RPaper @id="test-me">
+          template block text
+        </RPaper>
+      </div>
     `);
 
     next(this, function() {
@@ -29,11 +31,13 @@ module('Integration | Component | r-paper', function(hooks) {
     this.setProperties({ctx});
 
     await render(hbs`
-      <RPaper @id="test-me">
-        {{#each this.ctx.eachTest}}
-          <div>A</div>
-        {{/each}}
-      </RPaper>
+      <div>
+        <RPaper @id="test-me">
+          {{#each this.ctx.eachTest}}
+            <div>A</div>
+          {{/each}}
+        </RPaper>
+      </div>
     `);
 
     let testElement;
