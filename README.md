@@ -446,8 +446,8 @@ In the ember app:
 
 To use a `React Material Icon`:
 In the ember app:
-1) Install material-ui icons package: `npm install @material-ui/icons@next`
-2) Import the material-ui icon:  `import AccessAlarmRounded from '@material-ui/icons/AccessAlarmRounded';`
+1) Install material-ui icons package: `npm install @mui/icons-material`
+2) Import the material-ui icon:  `import AccessAlarmRounded from '@mui/icons-material/AccessAlarmRounded';`
 3) Pass the instance of `AccessAlarmRounded` to the `@reactIcon` property of `<RPaperIcon/>`
 
 To use a `SVG Icon with path`
