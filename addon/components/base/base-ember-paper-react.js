@@ -69,7 +69,7 @@ export default class BaseEmberPaperReact extends Component {
 
     this.renderElementItems();
 
-    this.el.hidden = true;
+    this.el.remove();
     this.renderStack.renderNext();
   }
 

@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 import { TestPropObj } from "../../prop-files/test-props";
 import Service from '@ember/service';
 
-module('Unit | Component | base-code', function(hooks) {
+module('Unit | React Component | base-code', function(hooks) {
   setupRenderingTest(hooks);
   class ThemeManagerStub extends Service {
     theme = 'myTheme';
@@ -228,19 +228,20 @@ module('Unit | Component | base-code', function(hooks) {
       }
     }
 
+    let removed = false;
     this.component.el = {
       insertAdjacentElement: this.insertAdjacentElement,
-      hidden: false
+      remove: () => { removed = true; }
     }
     const renderStackService = this.owner.lookup('service:render-stack');
     renderStackService.renderNextCalled = false;
-    assert.false(this.component.el.hidden, 'el hidden');
+    assert.false(removed, 'el already removed');
     assert.false(this.component.renderChildrenCalled, 'renderChildren already called');
     assert.false(this.component.doneRenderingCalled, 'doneRendering already called');
     this.component.renderElement();
     assert.equal(this.whereString, 'afterend', `'whereString' not properly set`);
     assert.equal(this.reactElement, 'myElement', `'reactElement' not properly set`);
-    assert.true(this.component.el.hidden, 'el not hidden');
+    assert.true(removed, 'el not removed');
     assert.true(renderStackService.renderNextCalled, 'renderNext not called');
     assert.true(this.component.renderChildrenCalled, 'renderChildren not called');
     await settled();

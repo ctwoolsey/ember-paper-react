@@ -18,10 +18,10 @@ module('Integration | Component | attribute-node-child', function(hooks) {
       this.moveMethod = moveMethod;
     });
 
-    await render(hbs`<AttributeNodeChild @attribute="testAttribute" @loadAttributeInfo={{this.onLoadAttributes}}>
+    await render(hbs`<div><AttributeNodeChild @attribute="testAttribute" @loadAttributeInfo={{this.onLoadAttributes}}>
                       <div>A</div>
                       <div>B</div>
-                    </AttributeNodeChild>`);
+                    </AttributeNodeChild></div>`);
 
     assert.equal(this.attributeName, 'testAttribute');
     assert.equal(this.fragment.childElementCount, 2);
