@@ -17,7 +17,6 @@ export default class BaseEmberPaperReact extends Component {
     this.el = null;
 
     this.componentType = COMPONENT_TYPES.NOT_SET;
-    //this.childrenFragment = null;
     this.fixedClassString = '';
 
     this.propsToPass = {};
