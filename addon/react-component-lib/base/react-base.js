@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
-import { ReactChildrenHolder } from "../utility/react-children-holder";
+import { ReactChildrenHolder } from "../react-children-holder/react-children-holder";
 import { reactPropSifter } from "../utility/react-prop-sifter";
 
 export class ReactBase extends React.Component{
