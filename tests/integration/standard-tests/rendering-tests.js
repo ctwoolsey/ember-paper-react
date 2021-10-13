@@ -56,7 +56,60 @@ const TestStandardLocationDynamicRender = (ComponentToRender) => {
   });
 };
 
+const TestStandardLocationChangingContent = (ComponentToRender) => {
+  test('it has text content that can be updated', async function(assert) {
+    class MyContext {
+      @tracked changeableContent = 'A';
+    }
+    let ctx = new MyContext();
+    this.setProperties({ctx});
+
+    await render(compileTemplate(`
+      <div>
+        <${ComponentToRender} @id="test-me">
+          {{this.ctx.changeableContent}}
+        </${ComponentToRender}>
+      </div>
+    `));
+
+    let testElement;
+    next(this, function() {
+      testElement = document.getElementById('test-me');
+      assert.equal(testElement.textContent.trim(), 'A', `Initial text content is incorrect`);
+    });
+
+    await settled();
+    ctx.changeableContent = 'B';
+    await settled();
+    assert.equal(testElement.textContent.trim(), 'B', `Changed text content is incorrect`);
+
+  });
+};
+
+const TestSimpleRender = (ComponentToRender) => {
+  test('it renders', async function(assert) {
+    await render(compileTemplate(`
+      <div>
+        <${ComponentToRender} @id="test-me" />
+      </div>
+    `));
+
+    next(this, function() {
+      assert.ok(document.getElementById('test-me'));
+    });
+  });
+};
+
+const RunStandardTests = (ComponentToRender) => {
+  TestStandardLocationRender(ComponentToRender);
+  TestStandardLocationDynamicRender(ComponentToRender);
+  TestStandardLocationChangingContent(ComponentToRender);
+}
+
 export {
+  RunStandardTests,
   TestStandardLocationRender,
-  TestStandardLocationDynamicRender
+  TestStandardLocationDynamicRender,
+  TestStandardLocationChangingContent,
+  TestSimpleRender
 }
