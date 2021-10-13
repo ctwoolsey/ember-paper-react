@@ -3,10 +3,8 @@ import { setupTest } from 'ember-qunit';
 import { ReactBase } from 'ember-paper-react/react-component-lib/base/react-base';
 import { TestPropObj } from '../../prop-files/test-props';
 import { props } from '../../prop-files/test-props-for-react';
-import AcUnit from '@mui/icons-material/AcUnit';
 
-
-module('Integration | Component | react-base', function(hooks) {
+module('Unit | React Component | react-base', function(hooks) {
   setupTest(hooks);
 
   let reactBase = null;

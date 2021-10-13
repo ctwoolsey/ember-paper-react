@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 import { TestPropObj } from "../../prop-files/test-props";
 import Service from '@ember/service';
 
-module('Integration | Component | base-code', function(hooks) {
+module('Unit | Component | base-code', function(hooks) {
   setupRenderingTest(hooks);
   class ThemeManagerStub extends Service {
     theme = 'myTheme';

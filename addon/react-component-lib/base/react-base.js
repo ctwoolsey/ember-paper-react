@@ -18,7 +18,6 @@ export class ReactBase extends React.Component{
     this.state = Object.assign({}, propsSifted.stateProps, propsSifted.statefulPropsNotForComponent);
     this.staticProps = propsSifted.staticProps;
     this.statePropsForComponent = propsSifted.stateProps;
-
   }
 
   placeStaticProps(staticProps) {
