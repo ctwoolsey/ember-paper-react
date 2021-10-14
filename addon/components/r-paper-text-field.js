@@ -3,6 +3,7 @@ import { ReactTextField } from '../react-component-lib/react-text-field';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { useInputMask }  from '../decorators/use-input-mask'
+import { next } from '@ember/runloop';
 
 @useInputMask
 export default class RPaperTextFieldComponent extends BaseInElementRender {
@@ -31,8 +32,10 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
   renderChildren() {
     if (this.args.select) {
       this.moveLocation = this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0];
+      this.args.value && next(this, () => {
+        this.moveLocation.value = this.args.value;
+      });
     }
   }
-
 }
 

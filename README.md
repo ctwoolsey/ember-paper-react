@@ -503,8 +503,12 @@ The most basic usage is:
 ```angular2html
 <RPaperTextField @label"My Label" @value={{this.textFieldValue}} @onChange={{this.onTextFieldChanged}}/>
 ```
-Note: this component can also act as a select component.  When `@select={{true}}` is set, the component will automatically add the object `{native:true}` to the `selectProps` property.  `<option/>` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.
+Note: this component can also act as a select component.  When `@select={{true}}` is set, the component will automatically add the object `{native:true}` to the `selectProps` property.  `<option/>` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.  
+When using the component as a select component, the selected value can be initialized by setting `@value` to the value desired.  `@value` and `@onChange`
+must be set so that the select updates when the user changes the value of the select.
 ```angular2html
+@tracked inputTextValue = 'some-initial-value';
+
 <RPaperTextField @label="Filled" @variant="filled" @value={{this.inputTextValue}} @onChange={{this.onInputTextChanged}} @select={{true}}>
   {{#each this.contentList as |contentItem|}}
     <option value="{{contentItem}}">
