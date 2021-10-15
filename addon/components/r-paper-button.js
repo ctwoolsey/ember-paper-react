@@ -21,19 +21,8 @@ export default class RPaperButton extends BaseInElementRender {
   }
 
   reactRender(insertElement) {
-    const buttonContentSpan = document.createElement('span');
-    buttonContentSpan.className = 'ember-paper-button-content';
-    if (this.args.startIcon || this.args.endIcon) {
-      if (this.args.startIcon) {
-        const startIconSpan = insertElement.getElementsByClassName('MuiButton-startIcon')[0];
-        startIconSpan.parentNode.insertBefore(buttonContentSpan, startIconSpan.nextSibling);
-      } else {
-        const endIconSpan = insertElement.getElementsByClassName('MuiButton-endIcon')[0];
-        endIconSpan.parentNode.insertBefore(buttonContentSpan, endIconSpan);
-      }
-    } else {
-      insertElement.appendChild(buttonContentSpan);
-    }
+    const buttonContentSpan = insertElement.getElementsByClassName('children-holder')[0];
+    buttonContentSpan.className += ' ember-paper-button-content';
     this.moveLocation = buttonContentSpan;
   }
 }

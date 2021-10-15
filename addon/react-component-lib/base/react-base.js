@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactConditionalThemeProvider } from '../react-conditional-theme-provider';
 import { ReactChildrenHolder } from "../react-children-holder/react-children-holder";
 import { reactPropSifter } from "../utility/react-prop-sifter";
+import { reactCreateIcon } from "../utility/react-create-icon";
 
 export class ReactBase extends React.Component{
   constructor(props) {
@@ -25,6 +26,9 @@ export class ReactBase extends React.Component{
     for (let propName in staticProps) {
       if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
         propObject[propName] = staticProps[propName];
+        if (this.isIcon(propName)) {
+          propObject[propName] = reactCreateIcon(propObject[propName]);
+        }
       }
     }
 
@@ -44,11 +48,18 @@ export class ReactBase extends React.Component{
         default:
           if (this.state[propName] !== null && this.state[propName] !== undefined) {
             statePropObject[propName] = this.state[propName];
+            if (this.isIcon(propName)) {
+              statePropObject[propName] = reactCreateIcon(statePropObject[propName]);
+            }
           }
           break;
       }
     }
     return statePropObject;
+  }
+
+  isIcon(propName) {
+    return propName.toLowerCase().endsWith('icon');
   }
 
   formatStyle(styleValue) {

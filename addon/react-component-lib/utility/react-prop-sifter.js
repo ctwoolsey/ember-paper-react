@@ -1,5 +1,3 @@
-import { reactCreateIcon } from "./react-create-icon";
-
 function reactPropSifter(componentProps, propsObj) {
   const siftedProps = {
     staticProps: {},
@@ -15,10 +13,7 @@ function reactPropSifter(componentProps, propsObj) {
 
   for (let propName in componentProps) {
     let value = componentProps[propName];
-    if (value && propName.toLowerCase().endsWith('icon')) {
-      value = reactCreateIcon(value);
-      //icons will not update any props or state props not for the component
-    }
+
     if (Object.prototype.hasOwnProperty.call(stateProps, propName)) {
       siftedProps.stateProps[propName] = value;
     } else {
