@@ -26,9 +26,7 @@ export class ReactBase extends React.Component{
     for (let propName in staticProps) {
       if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
         propObject[propName] = staticProps[propName];
-        if (this.isIcon(propName)) {
-          propObject[propName] = reactCreateIcon(propObject[propName]);
-        }
+        this.loadIconIfIcon(propName, propObject);
       }
     }
 
@@ -48,18 +46,19 @@ export class ReactBase extends React.Component{
         default:
           if (this.state[propName] !== null && this.state[propName] !== undefined) {
             statePropObject[propName] = this.state[propName];
-            if (this.isIcon(propName)) {
-              statePropObject[propName] = reactCreateIcon(statePropObject[propName]);
-            }
+            this.loadIconIfIcon(propName, statePropObject);
           }
           break;
       }
+
     }
     return statePropObject;
   }
 
-  isIcon(propName) {
-    return propName.toLowerCase().endsWith('icon');
+  loadIconIfIcon(propName, object) {
+    if (propName.toLowerCase().endsWith('icon')) {
+      object[propName] = reactCreateIcon(object[propName]);
+    }
   }
 
   formatStyle(styleValue) {

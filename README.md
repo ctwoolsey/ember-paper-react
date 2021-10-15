@@ -97,6 +97,7 @@ A few important notes that effect all components:
 ###icons
 >Components that have `icon` as an attribute take an icon object.  The form of this object is:  
 > {icon: ..., iconProps: ...}  
+> if no iconProps are needed the icon can be passed directly.
 >```angular2html
 ><RPaperButton @startIcon={{this.icon}}>Button</RPaperButton>
 >
@@ -105,6 +106,8 @@ A few important notes that effect all components:
 >this.icon={
 > icon: AccessAlarmRounded
 >}
+>-or-
+>this.icon = AccessAlarmmRounded;
 >
 >Props can also be used on material-ui icons:
 >this.icon={
