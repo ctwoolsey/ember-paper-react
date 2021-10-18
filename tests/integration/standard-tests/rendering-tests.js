@@ -20,8 +20,9 @@ const TestStandardLocationRender = (ComponentToRender) => {
   });
 };
 
-const TestStandardLocationDynamicRender = (ComponentToRender) => {
+const TestStandardLocationDynamicRender = (ComponentToRender, extraElementsToRemove) => {
   test('it renders dynamic content correctly', async function(assert) {
+    extraElementsToRemove = extraElementsToRemove ? extraElementsToRemove : 0;
     class MyContext {
       @tracked eachTest = [1,2,3];
     }
@@ -39,20 +40,16 @@ const TestStandardLocationDynamicRender = (ComponentToRender) => {
     `));
 
     let testElement;
-    next(this, function() {
-      testElement = document.getElementById('test-me');
-      assert.equal(testElement.childElementCount, 3, `Children count does not match initial count`);
-    });
+    testElement = document.getElementById('test-me');
+    assert.equal(testElement.childElementCount, 3+extraElementsToRemove, `Children count does not match initial count`);
 
-    await settled();
     ctx.eachTest = [1,2,3,4];
     await settled();
-    assert.equal(testElement.childElementCount, 4, `Children count does not match added count`);
+    assert.equal(testElement.childElementCount, 4+extraElementsToRemove, `Children count does not match added count`);
 
-    await settled();
     ctx.eachTest = [1,2];
     await settled();
-    assert.equal(testElement.childElementCount, 2, `Children count does not match removed count`);
+    assert.equal(testElement.childElementCount, 2+extraElementsToRemove, `Children count does not match removed count`);
   });
 };
 
@@ -73,12 +70,9 @@ const TestStandardLocationChangingContent = (ComponentToRender) => {
     `));
 
     let testElement;
-    next(this, function() {
-      testElement = document.getElementById('test-me');
-      assert.equal(testElement.textContent.trim(), 'A', `Initial text content is incorrect`);
-    });
+    testElement = document.getElementById('test-me');
+    assert.equal(testElement.textContent.trim(), 'A', `Initial text content is incorrect`);
 
-    await settled();
     ctx.changeableContent = 'B';
     await settled();
     assert.equal(testElement.textContent.trim(), 'B', `Changed text content is incorrect`);

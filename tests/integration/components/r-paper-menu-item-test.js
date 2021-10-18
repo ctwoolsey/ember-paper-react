@@ -1,10 +1,16 @@
 import { module} from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { RunStandardTests } from "../standard-tests/rendering-tests";
+import {
+  TestStandardLocationChangingContent,
+  TestStandardLocationDynamicRender,
+  TestStandardLocationRender
+} from "../standard-tests/rendering-tests";
 
 module('Integration | Component | r-paper-menu-item', function(hooks) {
   setupRenderingTest(hooks);
 
-  RunStandardTests('RPaperMenuItem');
+  TestStandardLocationRender('RPaperMenuItem');
+  TestStandardLocationDynamicRender('RPaperMenuItem', 1);
+  TestStandardLocationChangingContent('RPaperMenuItem')
 });
 

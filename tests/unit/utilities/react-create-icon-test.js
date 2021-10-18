@@ -16,9 +16,9 @@ module('Unit | React Component Utility | react-create-icon', function() {
     assert.ok(createdIcon, `did not create icon from 'iconProps' property alone`);
   });
 
-  test('it does not create an icon from empty iconObj', function(assert) {
+  test('it does not create an icon from null', function(assert) {
     //using font awesome fonts, imported in index page.
-    const iconObj = { someOtherProp: 1 };
+    const iconObj = null;
     const createdIcon = reactCreateIcon(iconObj);
     assert.notOk(createdIcon, `created an icon from empty iconObj`);
   });
