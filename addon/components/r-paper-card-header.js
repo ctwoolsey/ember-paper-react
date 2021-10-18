@@ -28,6 +28,18 @@ export default class RPaperCardHeaderComponent extends BaseEmberPaperReact {
       moveMethod(reactComp.getElementsByClassName(className)[0]);
     }
   }
+
+  createReactComponent() {
+    //signal to react component whether to create dummy placeholders for avatar and action
+
+    if (this.getAttributeFragment('avatar')) {
+      this.propsToPass.avatar = true;
+    }
+    if (this.getAttributeFragment('action')) {
+      this.propsToPass.action = true;
+    }
+    super.createReactComponent();
+  }
 }
 
 

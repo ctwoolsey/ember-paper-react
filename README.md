@@ -157,7 +157,8 @@ Note: The following options will not work unless a react Node is returned from t
 * `@getLimitTagsText`
 
 `@renderInput` is fixed internally to use a `TextField` and cannot be changed. The options for the `TextField` are listed below.  
->*`@color`  
+
+*`@color`  
 *`@defaultValue`  
 *`@disabled`  
 *`@error`  
