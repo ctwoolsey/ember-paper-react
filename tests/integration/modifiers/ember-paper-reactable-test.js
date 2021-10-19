@@ -1,11 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled, pauseTest } from '@ember/test-helpers';
-import BaseEmberPaperReact from 'ember-paper-react/components/base/base-ember-paper-react';
-import EmberPaperReactableModifier from 'ember-paper-react/modifiers/ember-paper-reactable';
-//import { ModifierPropObj } from "../../dummy/app/prop-files/modifier-props";
+import { render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { setComponentTemplate } from '@ember/component';
 import { tracked } from "@glimmer/tracking";
 import ReactableTestComponent from 'dummy/components/reactable-test-component';
 
