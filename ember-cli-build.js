@@ -29,5 +29,11 @@ module.exports = function (defaults) {
   app.import('vendor/ember/ember-template-compiler.js');
 
   const { maybeEmbroider } = require('@embroider/test-setup');
-  return maybeEmbroider(app);
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };
