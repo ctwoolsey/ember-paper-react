@@ -1,17 +1,18 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, settled, pauseTest } from '@ember/test-helpers';
 import BaseEmberPaperReact from 'ember-paper-react/components/base/base-ember-paper-react';
 import EmberPaperReactableModifier from 'ember-paper-react/modifiers/ember-paper-reactable';
-import { ModifierPropObj } from "../../prop-files/modifier-props";
+//import { ModifierPropObj } from "../../dummy/app/prop-files/modifier-props";
 import { hbs } from 'ember-cli-htmlbars';
 import { setComponentTemplate } from '@ember/component';
 import { tracked } from "@glimmer/tracking";
+import ReactableTestComponent from 'dummy/components/reactable-test-component';
 
 module('Integration | Modifier | ember-paper-reactable', function(hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function(hooks) {
+ hooks.beforeEach(function(hooks) {
     this.component = null;
 
     this.set('getComponentReference', (reference) => {
@@ -30,42 +31,12 @@ module('Integration | Modifier | ember-paper-reactable', function(hooks) {
     let ctx = new MyContext();
     this.setProperties({ctx});
 
-    class MyTestComponent extends BaseEmberPaperReact {
-      constructor() {
-        super(...arguments);
-        this.args.setReference(this);
-        this.loadPropObject(ModifierPropObj);
-        this.modifier = EmberPaperReactableModifier;
-        this.wasInserted = false;
-        this.stateChanged = null;
-        this.stateValue = null;
+    this.setProperties({ReactableTestComponent});
 
-        this.changeReactState = this.changeReactState.bind(this);
-        this.resetStateChecker = this.resetStateChecker.bind(this);
-      }
-
-      createReactComponent() {
-        this.wasInserted = true;
-      }
-
-      changeReactState(propName, value)   {
-        this.stateChanged = propName;
-        this.stateValue = value;
-      }
-
-      resetStateChecker() {
-        this.stateChanged = null;
-        this.stateValue = null;
-      }
-    }
-    this.setProperties({ MyTestComponent });
-    setComponentTemplate(hbs`
-        <span {{this.modifier this.inserted this.changeReactState this.changeArgs}}></span>
-      `, MyTestComponent);
   });
 
   test('it renders', async function(assert) {
-    assert.expect(7);
+    assert.expect(21);
 
     this.set('checkState', (expectedPropName, expectedValue) => {
       assert.equal(expectedPropName, this.component.stateChanged, `Expected prop name: ${expectedPropName} to equal ${this.component.stateChanged}`);
@@ -74,7 +45,7 @@ module('Integration | Modifier | ember-paper-reactable', function(hooks) {
 
     assert.notOk(this.component, `Component is null before initialization`);
 
-    await render(hbs`<this.MyTestComponent
+    await render(hbs`<this.ReactableTestComponent
                         @setReference={{this.getComponentReference}}
                         @a={{this.ctx.a}}
                         @b={{this.ctx.b}}
@@ -90,6 +61,28 @@ module('Integration | Modifier | ember-paper-reactable', function(hooks) {
     this.ctx.a = 2;
     await settled();
     this.checkState('a', 2);
+    this.component.resetStateChecker();
+    this.checkState(null, null);
+
+    this.ctx.b = 11;
+    await settled();
+    this.checkState('b', 11);
+    this.component.resetStateChecker();
+    this.checkState(null, null);
+
+    this.ctx.c = 22;
+    await settled();
+    this.checkState('c', 22);
+    this.component.resetStateChecker();
+    this.checkState(null, null);
+
+    this.ctx.d = 33;
+    await settled();
+    this.checkState(null, null);
+
+    this.ctx.e = 44;
+    await settled();
+    this.checkState(null, null);
 
   });
 });
