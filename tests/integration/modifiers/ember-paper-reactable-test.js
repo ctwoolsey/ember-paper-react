@@ -1,140 +1,95 @@
-import { setComponentTemplate } from '@ember/component';
-import templateOnly from '@ember/component/template-only';
-import { click, render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import { render, settled } from '@ember/test-helpers';
+import BaseEmberPaperReact from 'ember-paper-react/components/base/base-ember-paper-react';
+import EmberPaperReactableModifier from 'ember-paper-react/modifiers/ember-paper-reactable';
+import { ModifierPropObj } from "../../prop-files/modifier-props";
+import { hbs } from 'ember-cli-htmlbars';
+import { setComponentTemplate } from '@ember/component';
+import { tracked } from "@glimmer/tracking";
 
-// import this so we don't tree-shake it away
-import ExampleComponent from 'dummy/components/example-component';
-import { compileJS } from 'ember-repl';
-
-import { Await } from '../helpers/await';
-
-module('Integration | Modifier | ember-paper-reactable', function (hooks) {
+module('Integration | Modifier | ember-paper-reactable', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it works', async function (assert) {
-    assert.expect(6);
+  hooks.beforeEach(function(hooks) {
+    this.component = null;
 
-    this.setProperties({
-      await: Await,
-      compile: async () => {
-        let template = `
-          import Component from '@glimmer/component';
-          import { tracked } from '@glimmer/tracking';
-          import { on } from '@ember/modifier';
-          export default class MyComponent extends Component {
-            @tracked value = 0;
-            increment = () => this.value++;
-            <template>
-              <output>{{this.value}}</output>
-              <button {{on "click" this.increment}}>+1</button>
-            </template>
-          }
-        `;
-
-        let { component, name, error } = await compileJS(template);
-
-        assert.notOk(error);
-        assert.ok(name);
-
-        return component;
-      },
+    this.set('getComponentReference', (reference) => {
+      this.component = reference;
     });
 
-    await render(
-      hbs`
-        {{#let (this.compile) as |CustomComponent|}}
-          <this.await @promise={{CustomComponent}} />
-        {{/let}}
-      `
-    );
 
-    assert.dom('output').exists();
-    assert.dom('output').hasText('0');
+    class MyContext {
+      @tracked a = 1;
+      @tracked b = 10;
+      @tracked c = 20;
+      @tracked d = 30;
+      @tracked e = 40;
+    }
 
-    await click('button');
-    assert.dom('output').hasText('1');
+    let ctx = new MyContext();
+    this.setProperties({ctx});
 
-    await click('button');
-    assert.dom('output').hasText('2');
+    class MyTestComponent extends BaseEmberPaperReact {
+      constructor() {
+        super(...arguments);
+        this.args.setReference(this);
+        this.loadPropObject(ModifierPropObj);
+        this.modifier = EmberPaperReactableModifier;
+        this.wasInserted = false;
+        this.stateChanged = null;
+        this.stateValue = null;
+
+        this.changeReactState = this.changeReactState.bind(this);
+        this.resetStateChecker = this.resetStateChecker.bind(this);
+      }
+
+      createReactComponent() {
+        this.wasInserted = true;
+      }
+
+      changeReactState(propName, value)   {
+        this.stateChanged = propName;
+        this.stateValue = value;
+      }
+
+      resetStateChecker() {
+        this.stateChanged = null;
+        this.stateValue = null;
+      }
+    }
+    this.setProperties({ MyTestComponent });
+    setComponentTemplate(hbs`
+        <span {{this.modifier this.inserted this.changeReactState this.changeArgs}}></span>
+      `, MyTestComponent);
   });
 
-  test('can import components available to the app', async function (assert) {
-    assert.expect(4);
-    assert.ok(ExampleComponent);
+  test('it renders', async function(assert) {
+    assert.expect(7);
 
-    this.setProperties({
-      await: Await,
-      compile: async () => {
-        let template = `
-          import Component from '@glimmer/component';
-          import { tracked } from '@glimmer/tracking';
-          import { on } from '@ember/modifier';
-          import Example from 'dummy/components/example-component';
-          <template>
-            <Example />
-          </template>
-        `;
-
-        let { component, name, error } = await compileJS(template);
-
-        assert.notOk(error);
-        assert.ok(name);
-
-        return component;
-      },
+    this.set('checkState', (expectedPropName, expectedValue) => {
+      assert.equal(expectedPropName, this.component.stateChanged, `Expected prop name: ${expectedPropName} to equal ${this.component.stateChanged}`);
+      assert.equal(expectedValue, this.component.stateValue, `Expected prop value: ${expectedValue} to equal ${this.component.stateValue}`);
     });
 
-    await render(
-      hbs`
-        {{#let (this.compile) as |CustomComponent|}}
-          <this.await @promise={{CustomComponent}} />
-        {{/let}}
-      `
-    );
+    assert.notOk(this.component, `Component is null before initialization`);
 
-    assert.dom().hasText('!!Example!!');
-  });
+    await render(hbs`<this.MyTestComponent
+                        @setReference={{this.getComponentReference}}
+                        @a={{this.ctx.a}}
+                        @b={{this.ctx.b}}
+                        @c={{this.ctx.c}}
+                        @d={{this.ctx.d}}
+                        @e={{this.ctx.e}}
+                     />`);
 
-  test('extra modules may be passed, explicitly', async function (assert) {
-    assert.expect(3);
+    assert.ok(this.component, `Component is assigned after initialization`);
+    assert.true(this.component.wasInserted, `Component has been inserted`);
+    this.checkState(null, null);
 
-    const AComponent = setComponentTemplate(hbs`Custom extra module`, templateOnly());
+    this.ctx.a = 2;
+    await settled();
+    this.checkState('a', 2);
 
-    this.setProperties({
-      await: Await,
-      compile: async () => {
-        let template = `
-          import Component from '@glimmer/component';
-          import { tracked } from '@glimmer/tracking';
-          import { on } from '@ember/modifier';
-          import AComponent from 'my-silly-import-path/a-component';
-          <template>
-            <AComponent />
-          </template>
-        `;
-
-        let { component, name, error } = await compileJS(template, {
-          'my-silly-import-path/a-component': AComponent,
-        });
-
-        assert.notOk(error);
-        assert.ok(name);
-
-        return component;
-      },
-    });
-
-    await render(
-      hbs`
-        {{#let (this.compile) as |CustomComponent|}}
-          <this.await @promise={{CustomComponent}} />
-        {{/let}}
-      `
-    );
-
-    assert.dom().hasText('Custom extra module');
   });
 });
