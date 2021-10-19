@@ -1,95 +1,140 @@
+import { setComponentTemplate } from '@ember/component';
+import templateOnly from '@ember/component/template-only';
+import { click, render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
-import BaseEmberPaperReact from 'ember-paper-react/components/base/base-ember-paper-react';
-import { hbs } from 'ember-cli-htmlbars';
-import { tracked } from "@glimmer/tracking";
 
-module('Integration | Modifier | ember-paper-reactable', function(hooks) {
+// import this so we don't tree-shake it away
+import ExampleComponent from 'dummy/components/example-component';
+import { compileJS } from 'ember-repl';
+
+import { Await } from '../helpers/await';
+
+module('Integration | Modifier | ember-paper-reactable', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function(hooks) {
-    this.component = null;
+  test('it works', async function (assert) {
+    assert.expect(6);
 
-    class MyTestComponent extends BaseEmberPaperReact {
-      constructor() {
-        super(...arguments);
-      }
+    this.setProperties({
+      await: Await,
+      compile: async () => {
+        let template = `
+          import Component from '@glimmer/component';
+          import { tracked } from '@glimmer/tracking';
+          import { on } from '@ember/modifier';
+          export default class MyComponent extends Component {
+            @tracked value = 0;
+            increment = () => this.value++;
+            <template>
+              <output>{{this.value}}</output>
+              <button {{on "click" this.increment}}>+1</button>
+            </template>
+          }
+        `;
 
-      createReactComponent() {
+        let { component, name, error } = await compileJS(template);
 
-      }
+        assert.notOk(error);
+        assert.ok(name);
 
-      renderChildren() {
-        this.renderChildrenCalled = true;
-      }
+        return component;
+      },
+    });
 
-      doneRendering() {
-        this.doneRenderingCalled = true;
-      }
-    }
-    this.setProperties({ MyTestComponent });
-
-    this.set('removeAttributeCalled', false);
-    this.set('removeAttribute', () => {
-        this.set('removeAttributeCalled', true);
-      }
+    await render(
+      hbs`
+        {{#let (this.compile) as |CustomComponent|}}
+          <this.await @promise={{CustomComponent}} />
+        {{/let}}
+      `
     );
+
+    assert.dom('output').exists();
+    assert.dom('output').hasText('0');
+
+    await click('button');
+    assert.dom('output').hasText('1');
+
+    await click('button');
+    assert.dom('output').hasText('2');
   });
 
-  test('it renders', async function(assert) {
-    class MyContext {
-      @tracked a = 1;
-      @tracked b = 10;
-      @tracked c = 20;
-    }
+  test('can import components available to the app', async function (assert) {
+    assert.expect(4);
+    assert.ok(ExampleComponent);
 
-    let ctx = new MyContext();
-    this.setProperties({ctx});
+    this.setProperties({
+      await: Await,
+      compile: async () => {
+        let template = `
+          import Component from '@glimmer/component';
+          import { tracked } from '@glimmer/tracking';
+          import { on } from '@ember/modifier';
+          import Example from 'dummy/components/example-component';
+          <template>
+            <Example />
+          </template>
+        `;
 
-    this.set('wasInserted', false);
-    this.set('onInserted', () => {
-      this.wasInserted = true;
+        let { component, name, error } = await compileJS(template);
+
+        assert.notOk(error);
+        assert.ok(name);
+
+        return component;
+      },
     });
 
-    this.set('stateChanged', null);
-    this.set('stateValue', null);
-    this.set('onStateChange', (propName, value) => {
-      this.stateChanged = propName;
-      this.stateValue = value;
+    await render(
+      hbs`
+        {{#let (this.compile) as |CustomComponent|}}
+          <this.await @promise={{CustomComponent}} />
+        {{/let}}
+      `
+    );
+
+    assert.dom().hasText('!!Example!!');
+  });
+
+  test('extra modules may be passed, explicitly', async function (assert) {
+    assert.expect(3);
+
+    const AComponent = setComponentTemplate(hbs`Custom extra module`, templateOnly());
+
+    this.setProperties({
+      await: Await,
+      compile: async () => {
+        let template = `
+          import Component from '@glimmer/component';
+          import { tracked } from '@glimmer/tracking';
+          import { on } from '@ember/modifier';
+          import AComponent from 'my-silly-import-path/a-component';
+          <template>
+            <AComponent />
+          </template>
+        `;
+
+        let { component, name, error } = await compileJS(template, {
+          'my-silly-import-path/a-component': AComponent,
+        });
+
+        assert.notOk(error);
+        assert.ok(name);
+
+        return component;
+      },
     });
 
-    this.set('resetStateChecker', () => {
-      this.stateChanged = null;
-      this.stateValue = null;
-    });
+    await render(
+      hbs`
+        {{#let (this.compile) as |CustomComponent|}}
+          <this.await @promise={{CustomComponent}} />
+        {{/let}}
+      `
+    );
 
-    this.set('checkState', (expectedPropName, expectedValue) => {
-      assert.equal(expectedPropName, this.stateChanged, `Expected prop name: ${expectedPropName} to equal ${this.stateChanged}`);
-      assert.equal(expectedValue, this.stateValue, `Expected prop value: ${expectedValue} to equal ${this.stateValue}`);
-    });
-
-    this.get('changeArgs', () => {
-      let changeObj = {};
-      changeObj['a'] = this.ctx.a;
-      changeObj['b'] = this.ctx.b;
-
-      return changeObj;
-    });
-
-    assert.false(this.wasInserted, `not inserted yet`);
-    await render(hbs`<div>
-                        <div {{ember-paper-reactable this.onInserted this.onStateChange this.changeArgs}}
-
-                        >Dummy Button</div>
-                      </div>`);
-    assert.true(this.wasInserted, `was inserted`);
-
-    this.checkState(null, null);
-    this.ctx.a = 2;
-    await settled();
-    this.checkState('a', 2);
-
-
+    assert.dom().hasText('Custom extra module');
   });
 });
