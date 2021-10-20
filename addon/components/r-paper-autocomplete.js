@@ -64,35 +64,27 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.args.onClose && this.args.onClose(event, reason);
   }
 
-  setExistingPoppers() {
-    const poppers = document.getElementsByClassName('MuiAutocomplete-popper');
-    this.existingPoppers.clear();
-    for(let i = 0; i < poppers.length; i++) {
-      this.existingPoppers.pushObject(poppers[i]);
-    }
-  }
-
   @action
   onOpenHandler(event) {
     this.args.onOpen && this.args.onOpen(event);
     if (this.optionsFragment) {
-      this.setExistingPoppers();
       setTimeout(this.onCheckIfDropDownOpened, 25);
     }
   }
 
   findDropDownElement() {
-    const poppers = document.getElementsByClassName('MuiAutocomplete-popper');
     let dropDownElement = null;
-    for(let i = 0; i < poppers.length; i++) {
-      let dropDown = poppers[i];
-      if (!this.existingPoppers.includes(dropDown)) {
-        dropDown.classList.add('ember-paper-react-hide');
-        dropDownElement = dropDown;
-
-        break;
+    const reactElement = this.reactRef.current.componentRef.current;
+    if (reactElement.getAttribute('aria-expanded')) {
+      const dropDownId = reactElement.getAttribute('aria-owns');
+      if (dropDownId) {
+        const dropDownListBox = document.getElementById(dropDownId);
+        if (dropDownListBox) {
+          dropDownElement = dropDownListBox.closest('[role="presentation"]')
+        }
       }
     }
+
     return dropDownElement;
   }
 
@@ -121,9 +113,20 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   @action
   onDropDownOpened() {
-    if ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length) &&
-        (this.optionsFragment?.children.length === this.totalDropdownGroupedChildren)) ||
+    console.log(`
+    GroupBy: ${!!this.args.groupBy},
+    headersFragment: ${!!this.headersFragment}, (${this.headersFragment?.children.length}),
+    dropDownElementGroup Label: ${!!this.dropDownElement}, (${this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length}),
+    dropDownElementGroup UL: ${!!this.dropDownElement}, (${this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupUl').length}),
+    optionsFragment: ${!!this.optionsFragment}, (${this.optionsFragment?.children.length}),
+    dropDownElementGroup Options: ${!!this.dropDownElement}, (${this.dropDownOptionListCountForGrouped()}),
+    `);
+    /*if ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length) &&
+        (this.optionsFragment?.children.length === this.totalDropdownGroupedChildren)) ||*/
+    if (this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length)  ||
+
       (this.args.groupBy && !this.headersFragment && (this.optionsFragment?.children.length === this.dropDownOptionListCountForGrouped())) ||
+
       (!this.args.groupBy && (this.optionsFragment?.children.length === this.dropDownElement?.getElementsByTagName('LI').length))) {
 
       this.dropDownObserver.disconnect();
