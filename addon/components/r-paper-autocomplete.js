@@ -115,7 +115,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   onDropDownOpened() {
     if (this.dropDownElement &&
 
-      (this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupLabel').length)  ||
+      ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupLabel').length))  ||
 
       (this.args.groupBy && !this.headersFragment && (this.optionsFragment?.children.length === this.dropDownOptionListCountForGrouped())) ||
 
