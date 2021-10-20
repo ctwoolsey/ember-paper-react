@@ -67,7 +67,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   @action
   onOpenHandler(event) {
     this.args.onOpen && this.args.onOpen(event);
-    if (this.optionsFragment) {
+    if (this.optionsFragment || this.headersFragment) {
       setTimeout(this.onCheckIfDropDownOpened, 25);
     }
   }
@@ -113,16 +113,6 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   @action
   onDropDownOpened() {
-    console.log(`
-    GroupBy: ${!!this.args.groupBy},
-    headersFragment: ${!!this.headersFragment}, (${this.headersFragment?.children.length}),
-    dropDownElementGroup Label: ${!!this.dropDownElement}, (${this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length}),
-    dropDownElementGroup UL: ${!!this.dropDownElement}, (${this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupUl').length}),
-    optionsFragment: ${!!this.optionsFragment}, (${this.optionsFragment?.children.length}),
-    dropDownElementGroup Options: ${!!this.dropDownElement}, (${this.dropDownOptionListCountForGrouped()}),
-    `);
-    /*if ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length) &&
-        (this.optionsFragment?.children.length === this.totalDropdownGroupedChildren)) ||*/
     if (this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupLabel').length)  ||
 
       (this.args.groupBy && !this.headersFragment && (this.optionsFragment?.children.length === this.dropDownOptionListCountForGrouped())) ||
