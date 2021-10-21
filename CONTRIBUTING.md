@@ -17,6 +17,19 @@
 * `ember test --server` – Runs the test suite in "watch mode"
 * `ember try:each` – Runs the test suite against multiple Ember versions
 
+## Generating Basic Component
+* `ember g r-paper <dasherized-react-component-name>`  
+If the react component is IconButton the use: `icon-button`.  
+This will generate the following files:
+  * `addon/components/r-paper-icon-button.hbs`
+  * `addon/components/r-paper-icon-button.js`
+  * `addon/prop-files/icon-button-props.js`
+  * `addon/react-component-lib/react-icon-button.js`
+  * `app/components/r-paper-icon-button.js`
+  * `tests/integration/components/r-paper-icon-button-test.js`
+
+
+
 ##Understanding Rendering
 The issue to overcome is that React wants its children to be react children.
 Take for example the following Ember code:
