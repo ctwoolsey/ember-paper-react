@@ -127,17 +127,17 @@ All properties listed on the Material-ui site are available are implemented on t
 
 
 
-##Appbar/Toolbar
+##AppBar/Toolbar
 ***
-[Explore React Material-UI Appbar docs](https://mui.com/components/app-bar/)
+[Explore React Material-UI AppBar docs](https://mui.com/components/app-bar/)
 
 The most basic usages are:
 ```angular2html
-<RPaperAppbar @position="static">
+<RPaperAppBar @position="static">
   <RPaperToolbar>
     <div>My App bar</div>
   </RPaperToolbar>
-</RPaperAppbar>
+</RPaperAppBar>
 ```
 
 
