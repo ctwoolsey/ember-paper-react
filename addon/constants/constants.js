@@ -34,6 +34,7 @@ const COMPONENT_TYPES = {
   TOOLTIP: 'ember-paper-react-tooltip',
   ATTRIBUTE_COMPONENT: 'ember-paper-attribute-component',
   ATTRIBUTE_CHILD: 'ember-paper-attribute-child',
+  ICON_BUTTON: 'ember-paper-react-icon-button',
   NOT_SET: 'ember-paper-react-notSet'
 };
 

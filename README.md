@@ -458,7 +458,16 @@ To use a `SVG Icon with path`
 1) Set the `@hasPath` property of `<RPaperIcon/>` to `true`
 2) Include a `path` element with a `d` attribute.  Only 1 `path`element will work. No attributes will be copied to react.
 
+##IconButton
+***
+[Explore React Material-UI Icon docs](https://mui.com/components/buttons/#icon-button)
 
+Basic Usage:
+```angular2html
+<RPaperIconButton>
+  <RPaperIcon ... /> //Any RPaperIcon
+</RPaperIconButton>
+```
 ##Menu/MenuItem
 ***
 The most basic usages are:
