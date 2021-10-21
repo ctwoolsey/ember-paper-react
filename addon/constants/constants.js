@@ -20,7 +20,9 @@ const COMPONENT_TYPES = {
   DIALOG_CONTENT_TEXT: 'ember-paper-react-dialogContentText',
   DIALOG_TITLE: 'ember-paper-react-dialogTitle',
   DRAWER: 'ember-paper-react-drawer',
+  FAB: 'ember-paper-react-fab',
   ICON: 'ember-paper-react-icon',
+  ICON_BUTTON: 'ember-paper-react-icon-button',
   MATERIAL_ICON: 'ember-paper-react-material-icon',
   MENU: 'ember-paper-react-menu',
   MENU_ITEM: 'ember-paper-react-menu-item',
@@ -34,7 +36,6 @@ const COMPONENT_TYPES = {
   TOOLTIP: 'ember-paper-react-tooltip',
   ATTRIBUTE_COMPONENT: 'ember-paper-attribute-component',
   ATTRIBUTE_CHILD: 'ember-paper-attribute-child',
-  ICON_BUTTON: 'ember-paper-react-icon-button',
   NOT_SET: 'ember-paper-react-notSet'
 };
 

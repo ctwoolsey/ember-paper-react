@@ -10,9 +10,5 @@ export default class RPaperIconButtonComponent extends BaseInElementRender {
     this.loadPropObject(IconButtonPropObj);
     this.reactElement = ReactIconButton;
   }
-
-  /*renderChildren() {
-    this.moveLocation = this.reactRef.current.componentRef.current.firstElementChild;
-  }*/
 }
 
