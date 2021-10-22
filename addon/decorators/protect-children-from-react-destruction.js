@@ -20,6 +20,10 @@ function protectChildrenFromReactDestruction(c){
       }
     }
 
+    renderChildren() {
+      //intentionally left blank
+    }
+
     saveChildren() {
       if (super.saveChildren) {
         super.saveChildren();

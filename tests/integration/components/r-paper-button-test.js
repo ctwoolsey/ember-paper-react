@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { BUTTON } from "ember-paper-react/constants/button";
+import { GLOBAL_STRINGS } from "ember-paper-react/constants/constants";
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click} from '@ember/test-helpers';
 import { TestSimpleRender, TestStandardLocationChangingContent } from "../standard-tests/rendering-tests";
@@ -38,7 +38,7 @@ module('Integration | Component | r-paper-button', function(hooks) {
     const testElement = document.getElementById('test-me');
     assert.ok(testElement, `test-me found`);
     assert.equal(testElement.nodeName, 'BUTTON', `found button element`);
-    const buttonTextElement = testElement.querySelector(`.${BUTTON.CONTENT_SPAN_CLASS_NAME}`);
+    const buttonTextElement = testElement.querySelector(`.${GLOBAL_STRINGS.CHILDREN_HOLDER_CLASS_NAME}`);
     assert.ok(buttonTextElement, `Button text element found`);
     assert.equal(buttonTextElement.textContent.trim(), 'Some Button Text', `Button text matched`);
     const startSVGIconElement = testElement.querySelectorAll('[data-testid]');

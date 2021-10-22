@@ -6,9 +6,7 @@ const IDS = {
 
 const BUTTON = {
   ID: IDS.BUTTON,
-  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-button`,
-  CONTENT_SPAN_CLASS_NAME: `${BASE_EMBER_COMPONENT_PREFIX}-button-content`,
-  INSERT_CLASS: `children-holder`
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-button`
 }
 
 export {

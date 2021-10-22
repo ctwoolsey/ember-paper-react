@@ -11,6 +11,7 @@ export class ReactBase extends React.Component{
     this.setStateProp = this.setStateProp.bind(this);
     this.staticProps = {};  //properties that are not connected to state
     this.statePropsForComponent = {};
+    this.propsNotForComponent = {};
     this.DefaultComponentToRender = null;
   }
 
@@ -19,6 +20,7 @@ export class ReactBase extends React.Component{
     this.state = Object.assign({}, propsSifted.stateProps, propsSifted.statefulPropsNotForComponent);
     this.staticProps = propsSifted.staticProps;
     this.statePropsForComponent = propsSifted.stateProps;
+    this.propsNotForComponent = propsSifted.propsNotForComponent;
   }
 
   placeStaticProps(staticProps) {
@@ -89,8 +91,12 @@ export class ReactBase extends React.Component{
   }
 
   renderChildrenHolder(){
+    if (!Object.prototype.hasOwnProperty.call(this.propsNotForComponent, 'renderToChildrenHolderSpan')) {
+      this.propsNotForComponent.renderToChildrenHolderSpan = false;
+    }
     return (
       <ReactChildrenHolder
+        renderToChildrenHolderSpan={this.propsNotForComponent.renderToChildrenHolderSpan}
         {...(this.props.reactRenderCallback ? {reactRenderCallback: this.props.reactRenderCallback} : {})}
         {...(this.props.saveChildrenCallback ? {saveChildrenCallback: this.props.saveChildrenCallback} : {})}
       />

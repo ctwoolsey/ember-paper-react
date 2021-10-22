@@ -7,6 +7,7 @@ const IDS = {
 const BADGE = {
   ID: IDS.BADGE,
   COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-badge`,
+  BADGE_CLASS_NAME: `${IDS.BADGE}-badge`
 }
 
 export {

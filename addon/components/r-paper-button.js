@@ -15,14 +15,4 @@ export default class RPaperButton extends BaseInElementRender {
     this.loadPropObject(ButtonPropObj);
     this.reactElement = ReactButton;
   }
-
-  renderChildren() {
-    //intentionally left blank
-  }
-
-  reactRender(insertElement) {
-    const buttonContentSpan = insertElement.getElementsByClassName(BUTTON.INSERT_CLASS)[0];
-    buttonContentSpan.className += ` ${BUTTON.CONTENT_SPAN_CLASS_NAME}`;
-    this.moveLocation = buttonContentSpan;
-  }
 }

@@ -7,5 +7,6 @@ export class ReactBadge extends ReactBase{
     super(props);
     this.DefaultComponentToRender = Badge;
     this.initialize(BadgePropObj);
+    this.propsNotForComponent.renderToChildrenHolderSpan = true;
   }
 }

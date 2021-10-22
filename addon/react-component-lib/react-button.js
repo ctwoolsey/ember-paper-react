@@ -13,5 +13,6 @@ export class ReactButton extends ReactBase{
     super(props);
     this.DefaultComponentToRender = Button;
     this.initialize(ButtonPropObj);
+    this.propsNotForComponent.renderToChildrenHolderSpan = true;
   }
 }

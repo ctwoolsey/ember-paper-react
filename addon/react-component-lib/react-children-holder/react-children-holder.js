@@ -1,3 +1,4 @@
+import { GLOBAL_STRINGS } from "../../constants/constants";
 import React from 'react';
 
 export class ReactChildrenHolder extends React.Component{
@@ -10,13 +11,23 @@ export class ReactChildrenHolder extends React.Component{
   componentDidMount() {
     if (this.spanRef.current && this.props.reactRenderCallback) {
       this.parent = this.spanRef.current.parentElement;
-      this.props.reactRenderCallback(this.parent);
+      //By default the component will erase the children-holder span
+      //and render into the parent
+      if (this.props.renderToChildrenHolderSpan) {
+        this.props.reactRenderCallback(this.spanRef.current);
+      } else {
+        this.props.reactRenderCallback(this.parent);
+      }
     }
   }
 
   componentWillUnmount() {
     if (this.spanRef.current && this.props.saveChildrenCallback) {
-      this.props.saveChildrenCallback(this.parent);
+      if (this.props.renderToChildrenHolderSpan) {
+        this.props.saveChildrenCallback(this.spanRef.current);
+      } else {
+        this.props.saveChildrenCallback(this.parent);
+      }
     }
   }
 
@@ -26,7 +37,7 @@ export class ReactChildrenHolder extends React.Component{
 
   render() {
     return (
-      <span ref={this.spanRef} className='children-holder'></span>
+      <span ref={this.spanRef} className={GLOBAL_STRINGS.CHILDREN_HOLDER_CLASS_NAME}></span>
     );
   }
 }

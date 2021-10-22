@@ -302,6 +302,17 @@ The most basic usage is:
 </RPaperBackdrop>
 ```
 
+##Badge
+***
+[Explore React Material-UI Badge docs](https://mui.com/components/badges/)
+
+The most basic usage is:
+```angular2html
+<RPaperBadge @badgeContent={{4}}>
+  Some Content
+</RPaperBadge>
+```
+
 
 ##Button
 ***
