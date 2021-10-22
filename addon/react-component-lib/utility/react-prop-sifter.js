@@ -1,4 +1,5 @@
-function reactPropSifter(componentProps, propsObj) {
+function reactPropSifter(componentProps, propsObj, includeAriaAndData) {
+  includeAriaAndData = includeAriaAndData === false ? includeAriaAndData : true;
   const siftedProps = {
     staticProps: {},
     stateProps: {},
@@ -28,6 +29,12 @@ function reactPropSifter(componentProps, propsObj) {
           }
         }
       }
+    }
+
+    if (includeAriaAndData && (propName.startsWith('aria-') || propName.startsWith('data-') || propName === 'role')){
+      //all aria, data, and role attributes are stored in state props, but are not always stateful.
+      // Only if the attribute is passed as an ember attribute ('@') will it trigger a change
+      siftedProps.stateProps[propName] = value;
     }
   }
   return siftedProps;

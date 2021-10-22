@@ -92,7 +92,17 @@ A few important notes that effect all components:
 ><div id="some-page">
 >  <components/>
 ></div>
->```
+>```  
+
+>`role` and `aria-*` and `data-*` these attributes will be recognized on all components. It is the user's responsibility
+>to make sure the component should have a `role` or `aria-*` attribute.  These fields can be static or dynamic:
+>```angular2html
+><RPaperComponent @role={{this.role}} @aria-label={{this.label}} @data-counter={{this.counter}}/>
+><RPaperComponent role='button' aria-label='myLabel' data-counter='1'/>
+>```  
+>The first example will update 
+
+
 
 ###icons
 >Components that have `icon` as an attribute take an icon object.  The form of this object is:  

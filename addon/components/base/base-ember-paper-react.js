@@ -17,9 +17,23 @@ export default class BaseEmberPaperReact extends Component {
     this.el = null;
 
     this.componentType = COMPONENT_TYPES.NOT_SET;
-    this.fixedClassString = '';
 
     this.propsToPass = {};
+    this.attributeObject = {
+      fixedClassString: '',
+      id: null,
+      static: {
+        aria: [],
+        data: [],
+        role: null
+      },
+      dynamic: {
+        aria: [],
+        data: [],
+        role: null
+      }
+    };
+    this.loadDynamicAriaAndData();
   }
 
   loadPropObject(...propObjs) {
@@ -48,7 +62,36 @@ export default class BaseEmberPaperReact extends Component {
         changeObj[propName] = this.themeManager.theme;
       }
     }
+    this.includeAriaAndDataInChangeArgs(changeObj);
     return changeObj;
+  }
+
+  loadDynamicAriaAndData() {
+    for(let propName in this.args) {
+      if (propName.startsWith('aria-')){
+        this.attributeObject.dynamic.aria.push({propName: propName, value:this.args[propName]});
+      }
+      if (propName.startsWith('data-')){
+        this.attributeObject.dynamic.data.push({propName: propName, value:this.args[propName]});
+      }
+      if (propName === ('role')){
+        this.attributeObject.dynamic.role = this.args.role;
+      }
+    }
+  }
+
+  includeAriaAndDataInChangeArgs(changeObj) {
+    this.attributeObject.dynamic.aria.forEach((ariaObj) => {
+      changeObj[ariaObj.propName] = this.args[ariaObj.propName];
+    })
+
+    this.attributeObject.dynamic.data.forEach((dataObj) => {
+      changeObj[dataObj.propName] = this.args[dataObj.propName];
+    })
+
+    if (this.args.role) {
+      changeObj.role = this.args.role;
+    }
   }
 
   @action
@@ -80,42 +123,40 @@ export default class BaseEmberPaperReact extends Component {
   }
 
   mergeClassWithClassString() {
-    return this.args.class ? this.fixedClassString + ' ' + this.args.class : this.fixedClassString;
+    return this.args.class ? this.attributeObject.fixedClassString + ' ' + this.args.class : this.attributeObject.fixedClassString;
   }
 
-  initializeAndMergeClassWithClassString() {
+  grabAttributes() {
     [...this.el.attributes].forEach( attr => {
       if (attr.nodeName === 'class') {
-        this.fixedClassString = attr.nodeValue;
+        this.attributeObject.fixedClassString = attr.nodeValue;
+      }
+      if (attr.nodeName === 'id') {
+        this.attributeObject.id = attr.nodeValue;
+        this.el.removeAttribute('id');
+      }
+      if (attr.nodeName.startsWith('aria-')) {
+        this.attributeObject.static.aria.push({propName: attr.nodeName, value:attr.nodeValue});
+      }
+      if (attr.nodeName.startsWith('data-')) {
+        this.attributeObject.static.data.push({propName: attr.nodeName, value:attr.nodeValue});
+      }
+      if (attr.nodeName === 'role') {
+        this.attributeObject.static.role = attr.nodeValue;
       }
     });
-    return this.mergeClassWithClassString();
-  }
-
-  findElementId() {
-    let elementId = null;
-    if (this.args.id) {
-      elementId = this.args.id;
-    } else {
-      [...this.el.attributes].forEach(attr => {
-        if (attr.nodeName === 'id') {
-          elementId = attr.nodeValue;
-          this.el.removeAttribute('id');
-        }
-      });
-    }
-    return elementId;
   }
 
   initializeProps() {
+    this.grabAttributes();
     Object.assign(this.propsToPass, this.props, this.stateProps, this.propsNotForComponent, this.statefulPropsNotForComponent);
     for (let propName in this.propsToPass) {
       switch (propName) {
         case 'class':
-          this.propsToPass.class = this.initializeAndMergeClassWithClassString() || '';
+          this.propsToPass.class = this.mergeClassWithClassString();
           break;
         case 'id':
-          this.propsToPass.id = this.findElementId();
+          this.propsToPass.id = this.args.id || this.attributeObject.id;
           break;
         case 'theme':
           this.propsToPass.theme = this.themeManager.theme || null;
@@ -133,6 +174,30 @@ export default class BaseEmberPaperReact extends Component {
           break;
       }
     }
+    this.loadAriaAndDataAttributesIntoProps();
+  }
+
+  loadAriaAndDataAttributesIntoProps(){
+    if (this.attributeObject.static.role || this.attributeObject.dynamic.role) {
+      this.propsToPass.role = this.attributeObject.static.role || this.attributeObject.dynamic.role;
+    }
+
+    this.attributeObject.static.aria.forEach((ariaObj) => {
+      this.propsToPass[ariaObj.propName] = ariaObj.value;
+    })
+
+    this.attributeObject.static.data.forEach((dataObj) => {
+      this.propsToPass[dataObj.propName] = dataObj.value;
+    })
+
+    //dynamic aria & data are passed with the '@' symbol
+    this.attributeObject.dynamic.aria.forEach((ariaObj) => {
+      this.propsToPass[ariaObj.propName] = ariaObj.value;
+    })
+
+    this.attributeObject.dynamic.data.forEach((dataObj) => {
+      this.propsToPass[dataObj.propName] = dataObj.value;
+    })
   }
 
   checkIfCanRender() {

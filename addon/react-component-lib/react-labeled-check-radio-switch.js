@@ -11,7 +11,7 @@ export class ReactLabeledCheckRadioSwitch extends ReactBase{
   }
 
   initialize(controlPropObj) {
-    const formControlLabelSifted = reactPropSifter(this.props, FormControlLabelPropObj);
+    const formControlLabelSifted = reactPropSifter(this.props, FormControlLabelPropObj, false);
     const controlPropSifted = reactPropSifter(this.props, controlPropObj);
     this.state = Object.assign({},
       formControlLabelSifted.stateProps,

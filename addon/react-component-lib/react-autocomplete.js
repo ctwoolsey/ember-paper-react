@@ -16,7 +16,7 @@ export class ReactAutocomplete extends ReactBase{
 
   initialize() {
     const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
-    const siftedAutocompleteProps = reactPropSifter(this.props, AutocompletePropObj);
+    const siftedAutocompleteProps = reactPropSifter(this.props, AutocompletePropObj, false);
 
     siftedAutocompleteProps.staticProps['renderInput'] = this.renderTextField;
     delete siftedTextFieldProps.ref;
