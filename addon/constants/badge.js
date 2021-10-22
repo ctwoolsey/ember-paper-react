@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from './constants';
+
+const IDS = {
+  BADGE: `${REACT_COMPONENT_PREFIX}Badge`
+}
+
+const BADGE = {
+  ID: IDS.BADGE,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-badge`,
+}
+
+export {
+  BADGE
+}
