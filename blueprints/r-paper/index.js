@@ -24,16 +24,4 @@ module.exports = {
               snakeCase: name.replace(/-/g,'_').toUpperCase()
            });
   }
-
-
-  // locals(options) {
-  //   // Return custom template variables here.
-  //   return {
-  //     foo: options.entity.options.foo
-  //   };
-  // }
-
-  // afterInstall(options) {
-  //   // Perform extra work here.
-  // }
 };

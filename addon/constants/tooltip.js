@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  TOOLTIP: `${REACT_COMPONENT_PREFIX}Tooltip`
+}
+
+const TOOLTIP = {
+  ID: IDS.TOOLTIP,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-tooltip`,
+}
+
+export {
+  TOOLTIP
+}

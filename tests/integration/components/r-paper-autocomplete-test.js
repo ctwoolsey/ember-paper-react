@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, settled, tap, waitUntil, pauseTest } from '@ember/test-helpers';
+import { render, click, settled, tap, waitUntil } from '@ember/test-helpers';
+import { AUTOCOMPLETE } from 'ember-paper-react/constants/autocomplete';
 import { fireEvent, act } from '@testing-library/react'
 import { hbs } from 'ember-cli-htmlbars';
 import { A } from '@ember/array';
@@ -82,8 +83,8 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
     });
 
     this.set('countOfListItemsInGroups', () => {
-      const presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
-      const ulComponents = presentationElement[0].querySelectorAll('.MuiAutocomplete-groupUl');
+      const presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
+      const ulComponents = presentationElement[0].querySelectorAll(`.${AUTOCOMPLETE.GROUPED_GROUP_HOLDER}`);
       let count = 0;
       for(let i = 0; i < ulComponents.length; i++) {
         count += ulComponents[i].children.length;
@@ -92,14 +93,14 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
     });
 
     this.set('getFirstListIteminGroupText', () => {
-      const presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
-      const ulComponents = presentationElement[0].querySelectorAll('.MuiAutocomplete-groupUl');
+      const presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
+      const ulComponents = presentationElement[0].querySelectorAll(`.${AUTOCOMPLETE.GROUPED_GROUP_HOLDER}`);
       return ulComponents[0].firstElementChild.textContent.trim();
     });
 
     this.set('getFirstGroupItemText', () => {
-      const presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
-      return presentationElement[0].querySelectorAll('li')[0].firstElementChild.textContent.trim();
+      const presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
+      return presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT)[0].firstElementChild.textContent.trim();
     });
 
     this.set('createGroupHeaders', () => {
@@ -125,9 +126,9 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
     let testElement = document.getElementById('test-me');
     assert.ok(testElement, `rendered basic autocomplete`);
     await click(testElement);
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
-    let foundOptions = presentationElement[0].querySelectorAll(`li`);
+    let foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 3, `correct number of options`);
     assert.equal(foundOptions[0].textContent.trim(), 'A', `'A' options matches`);
     assert.equal(foundOptions[1].textContent.trim(), 'B', `'B' options matches`);
@@ -135,9 +136,9 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
 
     this.ctx.options = ['D', 'E'];
     await settled();
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
-    foundOptions = presentationElement[0].querySelectorAll(`li`);
+    foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 2, `correct number of options`);
     assert.equal(foundOptions[0].textContent.trim(), 'D', `'D' options matches`);
     assert.equal(foundOptions[1].textContent.trim(), 'E', `'E' options matches`);
@@ -159,18 +160,18 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
-    let foundOptions = presentationElement[0].querySelectorAll(`li`);
+    let foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 3, `correct number of options`);
 
     act(() => {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'BB' } });
     });
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found for 'BB'`);
-    foundOptions = presentationElement[0].querySelectorAll(`li`);
+    foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 2, `correct number of options for input: 'BB'`);
   });
 
@@ -198,7 +199,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
 
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     /*
@@ -206,11 +207,11 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       if we don't wait, only the react rendered options will be examined.
     */
     await waitUntil(() => {
-      return presentationElement[0].querySelectorAll(`li`)[0].textContent.trim() === 'Modified B (1994)';
+      return presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT)[0].textContent.trim() === 'Modified B (1994)';
     }, { timeout: 2000 });
 
 
-    let foundOptions = presentationElement[0].querySelectorAll(`li`);
+    let foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 3, `correct number of options`);
     assert.equal(foundOptions[0].textContent.trim(), 'Modified B (1994)', `'Modified B (1994)' received as expected`);
 
@@ -218,14 +219,14 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'BB' } });
     });
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     await waitUntil(() => {
-      return presentationElement[0].querySelectorAll(`li`)[0].textContent.trim() === 'Modified BB (1972)';
+      return presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT)[0].textContent.trim() === 'Modified BB (1972)';
     }, { timeout: 2000 });
 
-    foundOptions = presentationElement[0].querySelectorAll(`li`);
+    foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions[0].textContent.trim(), 'Modified BB (1972)', `'Modified BB (1972)' received as expected`);
   });
 
@@ -254,7 +255,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
 
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     /*
@@ -274,7 +275,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'BB' } });
     });
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     await waitUntil(() => {
@@ -319,7 +320,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
 
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     /*
@@ -342,7 +343,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'C' } });
     });
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     await waitUntil(() => {
@@ -383,7 +384,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
 
-    let presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
     /*
       With custom options, react will render the options, then ember will replace the options with the custom options,
@@ -403,7 +404,7 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
 
     tap(testElement);
 
-    presentationElement = document.getElementsByClassName('MuiAutocomplete-popper');
+    presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
 
     await waitUntil(() => {

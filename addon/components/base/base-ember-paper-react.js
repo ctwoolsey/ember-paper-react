@@ -1,6 +1,6 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { COMPONENT_TYPES } from '../../constants/constants';
+import { NOT_SET_COMPONENT_TYPE } from '../../constants/constants';
 import React from 'react';
 import { scheduleOnce } from '@ember/runloop';
 import Component from '@glimmer/component';
@@ -16,7 +16,7 @@ export default class BaseEmberPaperReact extends Component {
     this.reactRef = null;
     this.el = null;
 
-    this.componentType = COMPONENT_TYPES.NOT_SET;
+    this.componentType = NOT_SET_COMPONENT_TYPE;
 
     this.propsToPass = {};
     this.attributeObject = {

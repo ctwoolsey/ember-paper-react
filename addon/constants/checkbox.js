@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  CHECKBOX: `${REACT_COMPONENT_PREFIX}Checkbox`
+}
+
+const CHECKBOX = {
+  ID: IDS.CHECKBOX,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-checkbox`,
+}
+
+export {
+  CHECKBOX
+}

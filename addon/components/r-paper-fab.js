@@ -1,5 +1,5 @@
 import {ReactFab} from '../react-component-lib/react-fab'
-import { COMPONENT_TYPES } from '../constants/constants';
+import { FAB } from "../constants/fab";
 import {FabPropObj} from '../prop-files/fab-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { overrideHref } from "../decorators/override-href";
@@ -8,7 +8,7 @@ import { overrideHref } from "../decorators/override-href";
 export default class RPaperFabComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.FAB;
+    this.componentType = FAB.COMPONENT_TYPE;
     this.loadPropObject(FabPropObj);
     this.reactElement = ReactFab;
   }

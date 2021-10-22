@@ -2,6 +2,6 @@
   {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
 >
   {{#if (has-block 'avatar')}}
-    <AttributeNodeChild class="react=component avatar" @attribute="avatar" @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeNodeChild>
+    <AttributeNodeChild class="react=component {{this.avatar}}" @attribute={{this.avatar}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeNodeChild>
   {{/if}}
 </span>

@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../constants/constants';
+import { ICON } from "../constants/icon";
 import { ReactIcon } from '../react-component-lib/react-icon';
 import { ReactSvgIcon } from '../react-component-lib/react-svg-icon';
 import { ReactMaterialIcon } from '../react-component-lib/react-material-icon';
@@ -11,7 +11,7 @@ export default class RPaperIconComponent extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.ICON;
+    this.componentType = ICON.COMPONENT_TYPE;
     if (this.args.hasPath) {
       this.reactElement = ReactSvgIcon;
       this.loadPropObject(SvgIconPropObj);
@@ -34,14 +34,14 @@ export default class RPaperIconComponent extends BaseInElementRender {
     const svgChildNodes = this.reactRef.current.componentRef.current.childNodes;
     let svgPath = null;
     for(let i = 0; i < svgChildNodes.length; i++) {
-      if (svgChildNodes[i].nodeName.toUpperCase() === 'PATH') {
+      if (svgChildNodes[i].nodeName.toUpperCase() === ICON.SVG_PATH) {
         svgPath = svgChildNodes[i];
       }
     }
 
     for(let i = 0; i < this.childrenFragment.childNodes.length; i++) {
-      if (this.childrenFragment.childNodes[i].nodeName .toUpperCase() === 'PATH') {
-        svgPath.setAttribute('d', this.childrenFragment.childNodes[i].getAttribute('d'));
+      if (this.childrenFragment.childNodes[i].nodeName .toUpperCase() === ICON.SVG_PATH) {
+        svgPath.setAttribute(ICON.SVG_D, this.childrenFragment.childNodes[i].getAttribute(ICON.SVG_D));
       }
     }
   }

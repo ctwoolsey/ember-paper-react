@@ -1,0 +1,16 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  BUTTON: `${REACT_COMPONENT_PREFIX}Button`
+}
+
+const BUTTON = {
+  ID: IDS.BUTTON,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-button`,
+  CONTENT_SPAN_CLASS_NAME: `${BASE_EMBER_COMPONENT_PREFIX}-button-content`,
+  INSERT_CLASS: `children-holder`
+}
+
+export {
+  BUTTON
+}

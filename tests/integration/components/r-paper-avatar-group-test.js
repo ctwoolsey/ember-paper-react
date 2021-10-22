@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import { AVATAR } from 'ember-paper-react/constants/avatar';
 import { render, settled } from '@ember/test-helpers';
 import { A } from '@ember/array';
 import { hbs } from 'ember-cli-htmlbars';
@@ -30,7 +31,7 @@ module('Integration | Component | r-paper-avatar-group', function(hooks) {
     assert.ok(testElement,`avatar group rendered`);
     assert.equal(testElement.childElementCount, `3`, `avatar group has correct number of children`);
     for(let i = 0; i < testElement.children.length; i++) {
-      assert.true(testElement.children[i].className.includes('MuiAvatar-circular'), `avatar group passes correct variant to children`);
+      assert.true(testElement.children[i].className.includes(AVATAR.VARIATION_CIRCULAR_CLASS), `avatar group passes correct variant to children`);
     }
     this.ctx.avatarContentList.pushObject('D');
     await settled();
@@ -41,7 +42,7 @@ module('Integration | Component | r-paper-avatar-group', function(hooks) {
     await settled();
     assert.equal(testElement.childElementCount, `2`, `avatar group has correct number of removed children`);
     for(let i = 0; i < testElement.children.length; i++) {
-      assert.true(testElement.children[i].className.includes('MuiAvatar-square'), `avatar group passes updated correct variant to children`);
+      assert.true(testElement.children[i].className.includes(AVATAR.VARIATION_SQUARE_CLASS), `avatar group passes updated correct variant to children`);
     }
   });
 });

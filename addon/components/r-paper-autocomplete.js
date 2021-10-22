@@ -1,5 +1,6 @@
 import React from 'react';
-import { COMPONENT_TYPES, REACT_ATTRIBUTE_COMPONENTS } from '../constants/constants';
+import {  PAPER_REACT_HIDDEN_CLASS } from '../constants/constants';
+import { AUTOCOMPLETE } from "../constants/autocomplete";
 import { ReactAutocomplete } from '../react-component-lib/react-autocomplete';
 import { A } from '@ember/array';
 import { action } from '@ember/object';
@@ -12,7 +13,7 @@ import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-child
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.AUTOCOMPLETE;
+    this.componentType = AUTOCOMPLETE.COMPONENT_TYPE;
     this.loadPropObject(TextFieldPropObj, AutocompletePropObj);
     this.reactElement = ReactAutocomplete;
 
@@ -27,6 +28,14 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.dropDownElement = null;
   }
 
+  get groupHeaders() {
+    return AUTOCOMPLETE.ATTRIBUTE_COMPONENT.GROUP_HEADERS;
+  }
+
+  get options() {
+    return AUTOCOMPLETE.ATTRIBUTE_COMPONENT.OPTIONS;
+  }
+
   initializeProps() {
     super.initializeProps();
     this.propsToPass.onOpen = this.onOpenHandler;
@@ -38,8 +47,8 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   }
 
   onRenderAttributeNodeChildren() {
-    this.optionsFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.OPTIONS);
-    this.headersFragment = this.getAttributeFragment(REACT_ATTRIBUTE_COMPONENTS.GROUP_HEADERS);
+    this.optionsFragment = this.getAttributeFragment(AUTOCOMPLETE.ATTRIBUTE_COMPONENT.OPTIONS);
+    this.headersFragment = this.getAttributeFragment(AUTOCOMPLETE.ATTRIBUTE_COMPONENT.GROUP_HEADERS);
 
     if (this.optionsFragment) {
       this.optionsObserver = this.createObserver(this.optionsFragment);
@@ -103,7 +112,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   get totalDropdownGroupedChildren() {
     let totalChildren = null;
     if (this.dropDownElement) {
-      const optionGroups = this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupUl');
+      const optionGroups = this.dropDownElement.getElementsByClassName(AUTOCOMPLETE.GROUPED_GROUP_HOLDER);
       for(let ogIndex = 0; ogIndex < optionGroups.length; ogIndex++) {
         totalChildren += optionGroups[ogIndex].children.length;
       }
@@ -115,11 +124,11 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   onDropDownOpened() {
     if (this.dropDownElement &&
 
-      ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupLabel').length))  ||
+      ((this.args.groupBy && (this.headersFragment?.children.length === this.dropDownElement.getElementsByClassName(AUTOCOMPLETE.GROUP_LABEL).length))  ||
 
       (this.args.groupBy && !this.headersFragment && (this.optionsFragment?.children.length === this.dropDownOptionListCountForGrouped())) ||
 
-      (!this.args.groupBy && (this.optionsFragment?.children.length === this.dropDownElement.getElementsByTagName('LI').length)))) {
+      (!this.args.groupBy && (this.optionsFragment?.children.length === this.dropDownElement.getElementsByTagName(AUTOCOMPLETE.DROP_DOWN_ITEM_TAG_NAME).length)))) {
 
       this.dropDownObserver && this.dropDownObserver.disconnect();
       this.loadCustomDropDownItems();
@@ -129,7 +138,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   dropDownOptionListCountForGrouped() {
     let optionCounter = 0;
-    const optionGroups = this.dropDownElement?.getElementsByClassName('MuiAutocomplete-groupUl');
+    const optionGroups = this.dropDownElement?.getElementsByClassName(AUTOCOMPLETE.GROUPED_GROUP_HOLDER);
     if (optionGroups) {
       for(let ogIndex = 0; ogIndex < optionGroups.length; ogIndex++) {
         const dropDownListItems = optionGroups[ogIndex].children;
@@ -143,7 +152,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
 
   loadCustomDropDownItems() {
     if (this.args.groupBy && this.headersFragment?.children.length) {
-      const headers = this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupLabel');
+      const headers = this.dropDownElement.getElementsByClassName(AUTOCOMPLETE.GROUP_LABEL);
       const customHeaders = this.headersFragment.children;
       for(let i = 0; i < headers.length; i++) {
         const clonedCustomHeader = customHeaders[i].cloneNode(true);
@@ -159,7 +168,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
       const customDropDownListItems = this.optionsFragment.children;
       if (this.args.groupBy) {
         let optionCounter = 0;
-        const optionGroups = this.dropDownElement.getElementsByClassName('MuiAutocomplete-groupUl');
+        const optionGroups = this.dropDownElement.getElementsByClassName(AUTOCOMPLETE.GROUPED_GROUP_HOLDER);
         for(let ogIndex = 0; ogIndex < optionGroups.length; ogIndex++) {
           const dropDownListItems = optionGroups[ogIndex].children;
           for(let i = 0; i < dropDownListItems.length; i++) {
@@ -174,7 +183,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
         }
       } else {
         //Since no grouping the dropdown structure is organized differently for only option display
-        const dropDownListItems = this.dropDownElement.getElementsByTagName('LI');
+        const dropDownListItems = this.dropDownElement.getElementsByTagName(AUTOCOMPLETE.DROP_DOWN_ITEM_TAG_NAME);
         for(let i = 0; i < dropDownListItems.length; i++) {
           const clonedCustomDropDownListItem = customDropDownListItems[i].cloneNode(true);
           const customFragment = document.createDocumentFragment();
@@ -186,7 +195,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
       }
     }
 
-    this.dropDownElement.classList.remove('ember-paper-react-hide');
+    this.dropDownElement.classList.remove(PAPER_REACT_HIDDEN_CLASS);
   }
 
   willDestroy() {

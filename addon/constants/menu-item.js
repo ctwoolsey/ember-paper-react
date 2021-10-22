@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  MENU_ITEM: `${REACT_COMPONENT_PREFIX}MenuItem`
+}
+
+const MENU_ITEM = {
+  ID: IDS.MENU_ITEM,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-menu-item`,
+}
+
+export {
+  MENU_ITEM
+}

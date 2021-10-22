@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  TOOLBAR: `${REACT_COMPONENT_PREFIX}Toolbar`
+}
+
+const TOOLBAR = {
+  ID: IDS.TOOLBAR,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-toolbar`,
+}
+
+export {
+  TOOLBAR
+}

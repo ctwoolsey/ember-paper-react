@@ -1,0 +1,15 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  TEXT_FIELD: `${REACT_COMPONENT_PREFIX}TextField`
+}
+
+const TEXT_FIELD = {
+  ID: IDS.TEXT_FIELD,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-text-field`,
+  INSERT_CLASS: `${REACT_COMPONENT_PREFIX}NativeSelect-select`
+}
+
+export {
+  TEXT_FIELD
+}
