@@ -3,7 +3,7 @@ import { reactPropSifter } from 'ember-paper-react/react-component-lib/utility/r
 import { TestPropObj, PassedProps } from "../../../prop-files/react-prop-sifter-props";
 
 
-module('Unit | React Component Utility | react-prop-sifter', function(hooks) {
+module('Unit | React Component Lib Utility | react-prop-sifter', function(hooks) {
   test('it creates props correctly', async function(assert) {
     assert.ok(true);
     let siftedProps = reactPropSifter(PassedProps, TestPropObj);

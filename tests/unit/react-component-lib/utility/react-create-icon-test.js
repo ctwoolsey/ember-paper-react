@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { reactCreateIcon } from 'ember-paper-react/react-component-lib/utility/react-create-icon';
 import AcUnit from '@mui/icons-material/AcUnit';
 
-module('Unit | React Component Utility | react-create-icon', function() {
+module('Unit | React Component Lib Utility | react-create-icon', function() {
   test('it creates an icon from icon property', function(assert) {
     const iconObj = { icon: AcUnit };
     const createdIcon = reactCreateIcon(iconObj);

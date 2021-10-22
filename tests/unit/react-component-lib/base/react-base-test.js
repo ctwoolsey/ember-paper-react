@@ -1,10 +1,10 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { ReactBase } from 'ember-paper-react/react-component-lib/base/react-base';
-import { TestPropObj } from '../../prop-files/test-props';
-import { props } from '../../prop-files/test-props-for-react';
+import { TestPropObj } from '../../../prop-files/test-props';
+import { props } from '../../../prop-files/test-props-for-react';
 
-module('Unit | React Component | react-base', function(hooks) {
+module('Unit | React Component Lib Base | react-base', function(hooks) {
   setupTest(hooks);
 
   let reactBase = null;
