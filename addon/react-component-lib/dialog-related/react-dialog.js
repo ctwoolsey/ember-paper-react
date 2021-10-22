@@ -1,4 +1,5 @@
 import Dialog from '@mui/material/Dialog';
+import { DIALOG } from "../../constants/dialog";
 import { ReactBase } from '../base/react-base';
 import { DialogPropObj } from '../../prop-files/dialog-props';
 
@@ -19,18 +20,18 @@ export class ReactDialog extends ReactBase{
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-    const dialogArea = document.getElementsByClassName('MuiDialog-paper')
+    const dialogArea = document.getElementsByClassName(DIALOG.INSERT_CLASS)
     dialogArea.length && dialogArea[0].addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
-    const dialogArea = document.getElementsByClassName('MuiDialog-paper')
+    const dialogArea = document.getElementsByClassName(DIALOG.INSERT_CLASS)
     dialogArea.length && dialogArea[0].removeEventListener('keydown', this.onKeyDown);
   }
 
   handleClickOutside(event) {
-    const dialogArea = document.getElementsByClassName('MuiDialog-paper');
+    const dialogArea = document.getElementsByClassName(DIALOG.INSERT_CLASS);
     if (dialogArea.length && !dialogArea[0].contains(event.target)) {
       this.backgroundClicked = true;
     }

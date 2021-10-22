@@ -1,5 +1,5 @@
 import {ReactButton} from '../react-component-lib/react-button'
-import { COMPONENT_TYPES } from '../constants/constants';
+import { BUTTON } from "../constants/button";
 import { ButtonPropObj } from '../prop-files/button-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
@@ -11,7 +11,7 @@ export default class RPaperButton extends BaseInElementRender {
 
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.BUTTON;
+    this.componentType = BUTTON.COMPONENT_TYPE;
     this.loadPropObject(ButtonPropObj);
     this.reactElement = ReactButton;
   }
@@ -21,8 +21,8 @@ export default class RPaperButton extends BaseInElementRender {
   }
 
   reactRender(insertElement) {
-    const buttonContentSpan = insertElement.getElementsByClassName('children-holder')[0];
-    buttonContentSpan.className += ' ember-paper-button-content';
+    const buttonContentSpan = insertElement.getElementsByClassName(BUTTON.INSERT_CLASS)[0];
+    buttonContentSpan.className += ` ${BUTTON.CONTENT_SPAN_CLASS_NAME}`;
     this.moveLocation = buttonContentSpan;
   }
 }

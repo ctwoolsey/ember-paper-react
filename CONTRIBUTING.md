@@ -25,6 +25,7 @@ This will generate the following files:
   * `addon/components/r-paper-icon-button.js`
   * `addon/prop-files/icon-button-props.js`
   * `addon/react-component-lib/react-icon-button.js`
+  * `addon/constants/icon-button.js`  
   * `app/components/r-paper-icon-button.js`
   * `tests/integration/components/r-paper-icon-button-test.js`
 

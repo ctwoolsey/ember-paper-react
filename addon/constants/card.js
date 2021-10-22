@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  CARD: `${REACT_COMPONENT_PREFIX}Card`
+}
+
+const CARD = {
+  ID: IDS.CARD,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-card`,
+}
+
+export {
+  CARD
+}

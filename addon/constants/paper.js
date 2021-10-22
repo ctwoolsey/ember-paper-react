@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  PAPER: `${REACT_COMPONENT_PREFIX}Paper`
+}
+
+const PAPER = {
+  ID: IDS.PAPER,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-paper`,
+}
+
+export {
+  PAPER
+}

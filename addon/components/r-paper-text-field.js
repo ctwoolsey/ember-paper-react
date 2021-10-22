@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../constants/constants';
+import { TEXT_FIELD } from "../constants/text-field";
 import { ReactTextField } from '../react-component-lib/react-text-field';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import BaseInElementRender from "./base/base-in-element-render";
@@ -9,7 +9,7 @@ import { next } from '@ember/runloop';
 export default class RPaperTextFieldComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.TEXTFIELD;
+    this.componentType = TEXT_FIELD.COMPONENT_TYPE;
     this.loadPropObject(TextFieldPropObj);
     this.reactElement = ReactTextField;
   }
@@ -31,7 +31,7 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
 
   renderChildren() {
     if (this.args.select) {
-      this.moveLocation = this.reactRef.current.componentRef.current.getElementsByClassName('MuiNativeSelect-select')[0];
+      this.moveLocation = this.reactRef.current.componentRef.current.getElementsByClassName(TEXT_FIELD.INSERT_CLASS)[0];
       this.args.value && next(this, () => {
         this.moveLocation.value = this.args.value;
       });

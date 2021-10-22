@@ -1,4 +1,4 @@
-import { COMPONENT_TYPES } from '../constants/constants';
+import { MENU } from "../constants/menu";
 import { ReactMenu } from '../react-component-lib/react-menu';
 import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
 import { MenuPropObj } from '../prop-files/menu-props';
@@ -8,7 +8,7 @@ import BaseInElementRender from "./base/base-in-element-render";
 export default class RPaperMenuComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);
-    this.componentType = COMPONENT_TYPES.MENU;
+    this.componentType = MENU.COMPONENT_TYPE;
     this.loadPropObject(MenuPropObj);
     this.reactElement = ReactMenu;
   }
