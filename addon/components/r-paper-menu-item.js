@@ -4,8 +4,10 @@ import { MenuItemPropObj } from '../prop-files/menu-item-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { mayBelongToReactGroup } from "../decorators/may-belong-to-react-group";
 
-@mayBelongToReactGroup
-export default class RPaperMenuItemComponent extends BaseInElementRender {
+import BaseRenderReactComponent from "./base/base-render-react-component";
+
+
+export default class RPaperMenuItemComponent extends BaseRenderReactComponent {
   constructor() {
     super(...arguments);
     this.componentType = MENU_ITEM.COMPONENT_TYPE;

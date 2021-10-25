@@ -7,10 +7,10 @@ export default class BaseInElementRender extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
     this.childrenFragment = document.createDocumentFragment();
-    this.moveLocation = this.childrenFragment;
+ //   this.moveLocation = this.childrenFragment;
   }
 
   renderChildren() {
-    this.moveLocation = this.reactRef.current.componentRef.current;
+ //   this.moveLocation = this.reactRef.current.componentRef.current;
   }
 }
