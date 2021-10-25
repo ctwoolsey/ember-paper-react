@@ -2,7 +2,9 @@ import {ReactMenuItem} from '../react-component-lib/react-menu-item'
 import { MENU_ITEM } from "../constants/menu-item";
 import { MenuItemPropObj } from '../prop-files/menu-item-props';
 import BaseInElementRender from "./base/base-in-element-render";
+import { mayBelongToReactGroup } from "../decorators/may-belong-to-react-group";
 
+@mayBelongToReactGroup
 export default class RPaperMenuItemComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);

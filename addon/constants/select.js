@@ -1,0 +1,15 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from './constants';
+
+const IDS = {
+  SELECT: `${REACT_COMPONENT_PREFIX}Select`
+}
+
+const SELECT = {
+  ID: IDS.SELECT,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-select`,
+  SELECT_TEXT_LOCATION_CLASS_NAME: `MuiSelect-select`
+}
+
+export {
+  SELECT
+}

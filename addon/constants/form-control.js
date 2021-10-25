@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from './constants';
+
+const IDS = {
+  FORM_CONTROL: `${REACT_COMPONENT_PREFIX}FormControl`
+}
+
+const FORM_CONTROL = {
+  ID: IDS.FORM_CONTROL,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-form-control`,
+}
+
+export {
+  FORM_CONTROL
+}
