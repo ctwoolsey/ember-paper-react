@@ -8,6 +8,9 @@ export default class AttributeNodeChildComponent extends Component {
   constructor() {
     super(...arguments);
     this.childrenFragment = document.createDocumentFragment();
+    //this.childrenFragment = document.createElement('template');
+    //this.childrenFragment = document.createElement('span');
+    //document.body.append(this.childrenFragment);
     this.moveLocation = this.childrenFragment;
   }
 

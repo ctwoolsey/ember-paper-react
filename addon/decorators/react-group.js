@@ -10,6 +10,7 @@ function reactGroup(c){
       super(...arguments);
       this.groupIdentifier = uuidv4();
       this.reactChildren.create(this.groupIdentifier, this.onChildChanged);
+      this.createGroupList && this.createGroupList();
     }
 
     initializeProps() {

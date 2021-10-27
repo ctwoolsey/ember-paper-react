@@ -7,7 +7,11 @@ const IDS = {
 const SELECT = {
   ID: IDS.SELECT,
   COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-select`,
-  SELECT_TEXT_LOCATION_CLASS_NAME: `MuiSelect-select`
+  SELECT_TEXT_LOCATION_CLASS_NAME: `MuiSelect-select`,
+  ATTRIBUTE_COMPONENT: {
+    RENDER_VALUE: `renderValue`,
+  },
+  SHOW_EMPTY_CONTENT_CLASS: `${BASE_EMBER_COMPONENT_PREFIX}-show-empty-content`
 }
 
 export {

@@ -22,6 +22,7 @@ function mayBelongToReactGroup(c){
         this.createdReactElement = React.createElement(ReactComponent,this.propsToPass);
         this.groupIdentifier = this.el.parentElement.dataset.groupIdentifier;
         this.reactChildren.save(this.groupIdentifier,this.createdReactElement, this.renderElementItems);
+        this.saveList && this.saveList();
       } else {
         super.createReactComponent();
       }

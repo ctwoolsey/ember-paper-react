@@ -6,6 +6,9 @@ export default class BaseInElementRender extends BaseEmberPaperReact {
 
   constructor() {
     super(...arguments);
+    //this.childrenFragment = document.createElement('template'); //document.createDocumentFragment();
+    //this.childrenFragment = document.createElement('div');
+    //document.body.append(this.childrenFragment);
     this.childrenFragment = document.createDocumentFragment();
     this.moveLocation = this.childrenFragment;
   }

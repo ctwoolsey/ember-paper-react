@@ -1,3 +1,9 @@
 <span class={{this.componentType}} data-group-identifier={{this.groupIdentifier}} ...attributes
   {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
->{{yield}}</span>
+>
+  {{#if (has-block 'renderValue')}}
+    <AttributeNodeChild class="react=component {{this.renderValue}}" @attribute={{this.renderValue}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='renderValue'}}</AttributeNodeChild>
+  {{/if}}
+
+  {{yield}}
+</span>
