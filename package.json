@@ -1,15 +1,20 @@
 {
   "name": "ember-paper-react",
-  "version": "0.0.1",
-  "description": "An ember paper implementation build on react material-ui components",
+  "version": "0.1.0",
+  "description": "An ember paper implementation built on react material-ui components",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "material-ui",
+    "ember-paper"
   ],
-  "repository": "",
+  "homepage": "https://github.com/ctwoolsey/ember-paper-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ctwoolsey/ember-paper-react.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "Clark Woolsey",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
