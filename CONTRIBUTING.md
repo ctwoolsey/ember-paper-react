@@ -31,7 +31,7 @@ This will generate the following files:
 
 
 
-##Understanding Rendering
+## Understanding Rendering
 The issue to overcome is that React wants its children to be react children.
 Take for example the following Ember code:
 ```angular2html
@@ -124,9 +124,9 @@ As the name implies, the template uses Ember's `in-element` helper.  This has th
 1. No wrapping of component children
 2. Support dynamic ember code like `{{each}}` as direct children.  
 
-##Enhanced render types
+## Enhanced render types
 Decorators are used for enhancing the existing render types.  
-###has-attribute-node-children
+### has-attribute-node-children
 >Note, that even though "icon" attributes by definition should return a react Icon, attribute-node-children are not needed.
 > All icon attributes take a javascript object of the format: {icon: ..., iconProps: ...} instead of using attribute-node-children.
 
@@ -164,7 +164,7 @@ An advanced variation usage of this can be found in `r-paper-autocomplete.js`.  
 does not render/place them immediately.  To facilitate this, `has-attribute-node-children`  provides the move method used
 to move the children as well as the fragment where the children are stored.
 
-###protect-children-from-react-destruction
+### protect-children-from-react-destruction
 Sometimes, when an attribute changes or react used a presentation portal (with dialogs and drawers) react will re-render
 the component.  Since children that react knows nothing about have been placed inside the React component, 
 these children will be destroyed.  
@@ -175,7 +175,7 @@ the children from the fragment.
 If special placement is needed, the Ember component can override `reactRender(insertElement)` similar to how `RPaperButton`
 does.
 
-###render-later
+### render-later
 This decorator incorporates the `protect-children-from-react-destruction` decorator.  Some components render
 their children into a portal and are not displayed immediately.  It will keep children from being
 rendered into a non-existant element.  By using with the `protect-children-from-react-destruction` decorator, when the 
@@ -183,7 +183,7 @@ React element is ready to display the children, the children will be rendered co
 
 `renderLater()` can be overridden to provide custom rendering as in `RPaperDrawer`.  
 
-###react-group & may-belong-to-react-group  
+### react-group & may-belong-to-react-group  
 Certain React components are groups and exercise control over their children only if they are created with those children.
 The children cannot be added after their creation.  These types of groups should be decorated with `@reactGroup`.  Some examples
 are: `<RPaperRadioGroup>` and `<RPaperAvatarGroup>`  Their children must be React Material-UI children.  These children can 
@@ -196,14 +196,14 @@ The group requires a template of the form:
 >{{yield}}</span>
 ```
 
-##Render Helpers/Enhancers
+## Render Helpers/Enhancers
 The following decorators add capabilities to components and simplify the code.
 
-###overrride-href
+### overrride-href
 If a component like `<RPaperButton>` uses an `href` attribute it will break react's routing.  React requires `<LinkTo>`
 or `TransitionTo`.  Placing an `@overrideHref` decorator on `RPaperButton` converts the `href` into a `TransitionTo` usage.
 
-###use-input-mask
+### use-input-mask
 If a component has an input and uses an `inputRef`, using `@useInputMask` will allow add certain `input mask` attributes
 on the component. The following link is to the input mask library used: [inputmask](https://github.com/RobinHerbots/Inputmask/)
 
@@ -216,7 +216,7 @@ To use the mask feature the following attributes become available (only `@mask` 
 This will also automatically update the change handler so that the method will return the `event` and `unmasked value`.
 If no `@mask` is defined, the change handler will only return the `event`.
 
-##Understanding the React Side
+## Understanding the React Side
 Part of the magic of ember is that arguments that change can update the component.  In React this is done by changing 
 `state`. The modifier `ember-paper-reactable` links the two.  An ember `arg` change will trigger a `state` change if 
 it should trigger a `state` change as defined by the component `prop` files.

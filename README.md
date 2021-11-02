@@ -36,9 +36,9 @@ let app = new EmberApp(defaults, {
 ```
 rename the `app/styles/app.css` file to `app.scss`
 
-#Usage
+# Usage
 
-##Layout
+## Layout
 ***
 This addon uses React's `material-ui` components but layout styling is done as in `ember-paper`. This is because material-ui styling is done through react constructs and would not allow styling via ember's HTML.
 
@@ -85,7 +85,7 @@ or
 > <MyComponent @style={{this.myStyle}} />   
 > this.myStyle = { backgroundColor: 'blue', width: '500px' };
 
-#Components
+# Components
 A few important notes that effect all components:  
 >Components need to have a parent html tag at some level.  This cannot be a wrap of the `{{outlet}}` tag.  This can be at the page level in a controler template like so:
 >```angular2html
@@ -104,7 +104,7 @@ A few important notes that effect all components:
 
 
 
-###icons
+### icons
 >Components that have `icon` as an attribute take an icon object.  The form of this object is:  
 > {icon: ..., iconProps: ...}  
 > if no iconProps are needed the icon can be passed directly.
@@ -137,7 +137,7 @@ All properties listed on the Material-ui site are available are implemented on t
 
 
 
-##AppBar/Toolbar
+## AppBar/Toolbar
 ***
 [Explore React Material-UI AppBar docs](https://mui.com/components/app-bar/)
 
@@ -151,7 +151,7 @@ The most basic usages are:
 ```
 
 
-##Autocomplete
+## Autocomplete
 ***
 [Explore React Material-UI Autocomplete docs](https://mui.com/components/autocomplete/)  
 
@@ -262,7 +262,7 @@ createGroupHeaders() {
   }
 ```  
 
-##Avatar
+## Avatar
 ***
 [Explore React Material-UI Avatar docs](https://mui.com/components/avatars/)  
 
@@ -274,7 +274,7 @@ The most basic usages are:
 ```
 
 
-##Avatar Group
+## Avatar Group
 ***
 [Explore React Material-UI Avatar docs](https://mui.com/api/avatar-group/)  
 An example usage is:
@@ -288,7 +288,7 @@ An example usage is:
 ```
 
 
-##Backdrop
+## Backdrop
 ***
 [Explore React Material-UI Backdrop docs](https://mui.com/components/backdrop/)  
 
@@ -302,7 +302,7 @@ The most basic usage is:
 </RPaperBackdrop>
 ```
 
-##Badge
+## Badge
 ***
 [Explore React Material-UI Badge docs](https://mui.com/components/badges/)
 
@@ -314,7 +314,7 @@ The most basic usage is:
 ```
 
 
-##Button
+## Button
 ***
 [Explore React Material-UI Button docs](https://mui.com/components/buttons/)  
 
@@ -325,7 +325,7 @@ The most basic usage is:
 Using the `@href` attribute in button will use ember's `transitionTo` method so that in app links work as expected.  To transition to an external link a fully qualified link should be used: ```http://...```
 
 
-##Card
+## Card
 ***
 [Explore React Material-UI Card docs](https://mui.com/components/cards/)  
 
@@ -355,7 +355,7 @@ In the `RPaperCardHeader` the following attributes can be written as children li
 
 
 
-##Checkbox, Radio, Switch
+## Checkbox, Radio, Switch
 ***
 [Explore React Material-UI Checkbox docs](https://mui.com/components/checkboxes/)  
 [Explore React Material-UI Switch docs](https://mui.com/components/switches/)  
@@ -369,7 +369,7 @@ The most basic usage is:
 ```
 
 
-##Chip
+## Chip
 ***
 [Explore React Material-UI Chips docs](https://mui.com/components/chips/)  
 
@@ -384,7 +384,7 @@ The most basic usages are:
 
 A chip can contain an icon or avatar but not both.  If an icon and avatar are provided, the icon will be displayed.
 
-##CircularProgress
+## CircularProgress
 ***
 [Explore React Material-UI Progress docs](https://mui.com/components/progress/)  
 
@@ -396,7 +396,7 @@ The most basic usage is:
 This component is usually used with `<RPaperBackdrop/>`
 
 
-##Drawer
+## Drawer
 ***
 [Explore React Material-UI Drawers docs](https://mui.com/components/drawers/)  
 
@@ -410,7 +410,7 @@ The most basic usages are:
 The `onClose` handler should close the drawer by setting `@open` = false.
 
 
-##Dialog
+## Dialog
 ***
 [Explore React Material-UI Dialog docs](https://mui.com/components/dialogs/)  
 
@@ -432,7 +432,7 @@ The most common usage is:
 ```
 
 
-##Icons
+## Icons
 ***
 [Explore React Material-UI Icon docs](https://mui.com/components/icons/)  
 
@@ -479,7 +479,7 @@ To use a `SVG Icon with path`
 1) Set the `@hasPath` property of `<RPaperIcon/>` to `true`
 2) Include a `path` element with a `d` attribute.  Only 1 `path`element will work. No attributes will be copied to react.
 
-##Floating Action Button (Fab)
+## Floating Action Button (Fab)
 ***
 [Explore React Material-UI Fab docs](https://mui.com/components/floating-action-button/)
 
@@ -490,7 +490,7 @@ Basic Usage:
 </RPaperFab>
 ```
 
-##IconButton
+## IconButton
 ***
 [Explore React Material-UI Icon docs](https://mui.com/components/buttons/#icon-button)
 
@@ -500,7 +500,7 @@ Basic Usage:
   <RPaperIcon ... /> //Any RPaperIcon
 </RPaperIconButton>
 ```
-##Menu/MenuItem
+## Menu/MenuItem
 ***
 The most basic usages are:
 ```angular2html
@@ -517,7 +517,7 @@ element.  But to make life easier, `@triggerId` has been added to the attributes
 be referenced in the HTML.
 
 
-##Paper
+## Paper
 ***
 [Explore React Material-UI Paper docs](https://mui.com/components/paper/)  
 
@@ -526,7 +526,7 @@ The most basic usage is:
 <RPaper @elevation={{24}} @square={{false}}>Here is My Paper</RPaper>
 ```
 
-##RadioGroup
+## RadioGroup
 ***
 [Explore React Material-UI Radio Group docs](https://mui.com/components/radio-buttons/#radio-group)
 
@@ -540,7 +540,7 @@ The most basic usage is:
 ```
 
 
-##TextField
+## TextField
 ***
 [Explore React Material-UI Textfield docs](https://mui.com/components/text-fields/)  
 
