@@ -1,26 +1,68 @@
 import { module, test } from 'qunit';
+import { GLOBAL_STRINGS } from "ember-paper-react/constants/constants";
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click} from '@ember/test-helpers';
+import { TestSimpleRender, TestStandardLocationChangingContent } from "../standard-tests/rendering-tests";
 import { hbs } from 'ember-cli-htmlbars';
+import AccessAlarmRounded from '@mui/icons-material/AccessAlarmRounded';
+import Service from '@ember/service';
+
+
 
 module('Integration | Component | r-paper-button', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  class RouterStub extends Service {
+    transitionToHrefValue = null;
 
-    await render(hbs`<RPaperButton />`);
+    transitionTo = (href) => {
+      this.transitionToHrefValue = href;
+    };
+  }
 
-    assert.equal(this.element.textContent.trim(), '');
+  //Render just button text
+  TestSimpleRender('RPaperButton');
+  TestStandardLocationChangingContent('RPaperButton');
 
-    // Template block usage:
+  test('it places button text between icons', async function(assert) {
+    this.set('iconToUseFront', {icon: AccessAlarmRounded});
+    this.set('iconToUseBack', AccessAlarmRounded);
     await render(hbs`
-      <RPaperButton>
-        template block text
-      </RPaperButton>
+      <div>
+        <RPaperButton @id='test-me' @startIcon={{this.iconToUseFront}} @endIcon={{this.iconToUseBack}}>
+          Some Button Text
+        </RPaperButton>
+      </div>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    const testElement = document.getElementById('test-me');
+    assert.ok(testElement, `test-me found`);
+    assert.equal(testElement.nodeName, 'BUTTON', `found button element`);
+    const buttonTextElement = testElement.querySelector(`.${GLOBAL_STRINGS.CHILDREN_HOLDER_CLASS_NAME}`);
+    assert.ok(buttonTextElement, `Button text element found`);
+    assert.equal(buttonTextElement.textContent.trim(), 'Some Button Text', `Button text matched`);
+    const startSVGIconElement = testElement.querySelectorAll('[data-testid]');
+    assert.equal(startSVGIconElement.length, '2', `SVG count matched expected`);
+  });
+
+  test('it calls transitionTo when using href', async function(assert) {
+    this.owner.register('service:router', RouterStub);
+    const routerService = this.owner.lookup('service:router');
+
+    await render(hbs`
+      <div>
+        <RPaperButton @id='test-me' @href="my-href-value">
+          Some Button Text
+        </RPaperButton>
+      </div>
+    `);
+
+    const testElement = document.getElementById('test-me');
+    assert.notOk(routerService.transitionToHrefValue, `'transitionToHrefValue' was null`);
+    await click(testElement);
+    assert.equal(routerService.transitionToHrefValue, 'my-href-value', `transitionTo was called with correct href`);
   });
 });
+
+
+

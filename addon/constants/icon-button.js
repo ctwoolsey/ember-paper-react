@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  ICON_BUTTON: `${REACT_COMPONENT_PREFIX}IconButton`
+}
+
+const ICON_BUTTON = {
+  ID: IDS.ICON_BUTTON,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-icon-button`,
+}
+
+export {
+  ICON_BUTTON
+}

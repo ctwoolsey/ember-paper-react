@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  RADIO_GROUP: `${REACT_COMPONENT_PREFIX}RadioGroup`
+}
+
+const RADIO_GROUP = {
+  ID: IDS.RADIO_GROUP,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-radio-group`,
+}
+
+export {
+  RADIO_GROUP
+}

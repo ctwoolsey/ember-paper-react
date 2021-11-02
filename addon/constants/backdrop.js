@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  BACKDROP: `${REACT_COMPONENT_PREFIX}Backdrop`
+}
+
+const BACKDROP = {
+  ID: IDS.BACKDROP,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-backdrop`,
+}
+
+export {
+  BACKDROP
+}

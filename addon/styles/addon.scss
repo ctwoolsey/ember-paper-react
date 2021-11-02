@@ -1,0 +1,18 @@
+@import 'layout-attributes';
+@import 'mixins';
+@import 'layout1';
+@import 'layout2';
+@import 'variables';
+
+.ember-paper-react-hide {
+  display: none;
+}
+.ember-paper-react-avatar-group .MuiAvatar-root:last-child {
+  margin-left: 0 !important;
+}
+
+.ember-paper-react-tooltip.tooltip-cursor-pointer-enabled {
+  &:hover {
+    cursor: pointer;
+  }
+}

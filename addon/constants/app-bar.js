@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  APP_BAR: `${REACT_COMPONENT_PREFIX}AppBar`
+}
+
+const APP_BAR = {
+  ID: IDS.APP_BAR,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-app-bar`,
+}
+
+export {
+  APP_BAR
+}

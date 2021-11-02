@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from "./constants";
+
+const IDS = {
+  DIALOG_CONTENT: `${REACT_COMPONENT_PREFIX}DialogContent`
+}
+
+const DIALOG_CONTENT = {
+  ID: IDS.DIALOG_CONTENT,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-dialog-content`,
+}
+
+export {
+  DIALOG_CONTENT
+}
