@@ -38,10 +38,6 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.0-rc.1",
     "@mui/material": "^5.0.0-rc.1",
-    "angular-material-styles": "^1.1.21",
-    "broccoli-file-creator": "^2.1.1",
-    "broccoli-funnel": "^3.0.8",
-    "broccoli-merge-trees": "^4.2.0",
     "ember-auto-import": "^2.2.3",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^5.7.1",
@@ -54,7 +50,6 @@
     "inputmask": "^5.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "resolve": "^1.20.0",
     "sass": "^1.37.5",
     "uuid": "^8.3.2"
   },
