@@ -61,7 +61,7 @@ module('Integration | Component | r-paper-text-field', function(hooks) {
     assert.equal(testElement.options.length, 2, `option count for select does not match after removal update`);
   });
 
-  test('it applies the input mask corrctly', async function(assert) {
+  test('it applies the input mask corrctly when using native On change', async function(assert) {
     class MyContext {
       @tracked inputMaskTextValue = null;
       @tracked inputUnMaskedTextValue = null;
@@ -78,7 +78,7 @@ module('Integration | Component | r-paper-text-field', function(hooks) {
 
     await render(hbs`
       <div>
-        <RPaperTextField @id="test-me" @mask={{this.mask}} @onChange={{this.onInputTextInputMaskChanged}} />
+        <RPaperTextField @id="test-me" @mask={{this.mask}} @nativeOnChange={{true}} @onChange={{this.onInputTextInputMaskChanged}} />
       </div>
     `);
 
@@ -91,6 +91,36 @@ module('Integration | Component | r-paper-text-field', function(hooks) {
       await fillIn(testElement, '556655');
       assert.equal(this.ctx.inputUnMaskedTextValue, '', `unmasked text value is not what it should be: 'empty'`);
       assert.equal(this.ctx.inputMaskTextValue, '', `masked text value is not what it should be: 'empty'`);
+    });
+
+  });
+
+  test('it applies the input mask corrctly when NOT using native On change', async function(assert) {
+    class MyContext {
+      @tracked inputUnMaskedTextValue = null;
+    }
+    let ctx = new MyContext();
+    this.setProperties({ctx});
+
+    this.set('mask', 'aa-9{4}');
+    this.set('onInputTextInputMaskChanged', (unmaskedValue) => {
+      this.ctx.inputUnMaskedTextValue = unmaskedValue;
+    });
+
+
+    await render(hbs`
+      <div>
+        <RPaperTextField @id="test-me" @mask={{this.mask}} @onChange={{this.onInputTextInputMaskChanged}} />
+      </div>
+    `);
+
+    next(this, async function() {
+      const testElement = document.getElementById('test-me');
+      assert.equal(testElement.nodeName, 'INPUT', `element type is not an 'input'`);
+      await fillIn(testElement, 'bc5555');
+      assert.equal(this.ctx.inputUnMaskedTextValue, 'bc5555', `unmasked text value is not what it should be: 'bc5555'`);
+      await fillIn(testElement, '556655');
+      assert.equal(this.ctx.inputUnMaskedTextValue, '', `unmasked text value is not what it should be: 'empty'`);
     });
 
   });
