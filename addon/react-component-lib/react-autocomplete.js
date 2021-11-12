@@ -5,7 +5,8 @@ import { ReactConditionalThemeProvider } from './react-conditional-theme-provide
 import { ReactBase } from './base/react-base';
 import { AutocompletePropObj } from '../prop-files/autocomplete-props';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
-import { reactPropSifter } from "./utility/react-prop-sifter";
+import { reactPropSifter } from './utility/react-prop-sifter';
+import { reactPropRemover } from './utility/react-prop-remover';
 
 export class ReactAutocomplete extends ReactBase{
   constructor(props) {
@@ -19,7 +20,7 @@ export class ReactAutocomplete extends ReactBase{
     const siftedAutocompleteProps = reactPropSifter(this.props, AutocompletePropObj, false);
 
     siftedAutocompleteProps.staticProps['renderInput'] = this.renderTextField;
-    delete siftedTextFieldProps.ref;
+    reactPropRemover(siftedTextFieldProps, siftedAutocompleteProps);
 
     this.state = Object.assign({},
       siftedAutocompleteProps.stateProps,
@@ -53,8 +54,8 @@ export class ReactAutocomplete extends ReactBase{
     return (
       <TextField
         {...params}
-        inputRef={this.staticTextFieldProps.inputRef}
-        {...(this.placeStateProps(this.stateTextFieldProps))}
+        {...(this.placeStaticProps(this.staticTextFieldProps, params))}
+        {...(this.placeStateProps(this.stateTextFieldProps, params))}
       />
     )
   }

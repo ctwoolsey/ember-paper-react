@@ -9,7 +9,7 @@ function useInputMask(c){
       this.onChangeHandler = this.onChangeHandler.bind(this);
       this.inputRef = React.createRef();
 
-      if (this.args.mask) {
+      if (this.args.mask){
         if (this.args.maskDefaults) {
           Inputmask.extendDefaults(this.args.maskDefaults);
         }
@@ -39,14 +39,18 @@ function useInputMask(c){
     }
 
     onChangeHandler(event) {
-      if (this.args.onChange && this.args.mask) {
-        return this.args.onChange(event, this.inputmask.unmaskedvalue());
-      } else {
-        if (this.args.onChange) {
-          return this.args.onChange(event);
+      if (this.args.onChange) {
+        if (!this.args.nativeOnChange) {
+          if (this.args.mask) {
+            return this.args.onChange(this.inputmask.unmaskedvalue());
+          } else {
+            return this.args.onChange(event.target.value);
+          }
         } else {
-          return null;
+          return this.args.onChange(event, this.inputmask.unmaskedvalue());
         }
+      } else {
+        return null;
       }
     }
 

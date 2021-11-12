@@ -126,6 +126,13 @@ As the name implies, the template uses Ember's `in-element` helper.  This has th
 
 ## Enhanced render types
 Decorators are used for enhancing the existing render types.  
+
+###uses-error-validation
+To make `ember-changeset` validation work easier with the component add this decorator and the following to the `hbs` file:  
+```{{did-update this.setValidation @errors}} {{did-update this.setValidation @isTouched}}```  
+This works on any component that has `@helperText` & `@error` attributes.
+
+
 ### has-attribute-node-children
 >Note, that even though "icon" attributes by definition should return a react Icon, attribute-node-children are not needed.
 > All icon attributes take a javascript object of the format: {icon: ..., iconProps: ...} instead of using attribute-node-children.

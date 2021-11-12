@@ -2,9 +2,11 @@ import { TEXT_FIELD } from "../constants/text-field";
 import { ReactTextField } from '../react-component-lib/react-text-field';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import BaseInElementRender from "./base/base-in-element-render";
-import { useInputMask }  from '../decorators/use-input-mask'
+import { useInputMask }  from '../decorators/use-input-mask';
+import { usesErrorValidation } from '../decorators/uses-error-validation';
 import { next } from '@ember/runloop';
 
+@usesErrorValidation
 @useInputMask
 export default class RPaperTextFieldComponent extends BaseInElementRender {
   constructor() {
@@ -26,6 +28,22 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
         this.propsToPass.SelectProps = {};
       }
       this.propsToPass.SelectProps.native = true;
+    }
+
+    if (this.args.onChange) {
+      this.propsToPass.onChange = this.onChangeHandler;
+    }
+  }
+
+  onChangeHandler(event) {
+    if (this.args.onChange) {
+      if (!this.args.nativeOnChange) {
+          return this.args.onChange(event.target.value);
+      } else {
+        return this.args.onChange(event);
+      }
+    } else {
+      return null;
     }
   }
 

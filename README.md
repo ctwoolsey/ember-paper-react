@@ -160,32 +160,29 @@ The most basic usage is:
 <RPaperAutocomplete @label="My Label" @options={{this.myOptions}} @onChange={{this.onChangeHandler}}/>
 ```
 
+>This component supports validation messages:  
+>Normal `TextField` `error` and `helperText` fields are available. But special fields have been added to make validation
+>work easier with `ember-changeset`.  The following attributes have been added:  
+>* `@isTouched` - this field will need to be true to display the error messages passed to the next attribute
+>* `@errors` - this is an array of error validation messages.
+
+In addition to the defined options, the following options have been added for convenience:
+* `@popupClass` - this option will add this class name to the `popup` so that styling the popup can be unique to the component
+* `@readOnly` - this option makes the `autocomplete` act more like a normal select component.  This can also be achieved by setting 
+                `@inputProps` equal to an object `{ readOnly:  true }`.
+
 Note: The following options will not work unless a react Node is returned from the function:
 * `@renderGroup`
 * `@renderOption`
 * `@renderTags`
 * `@getLimitTagsText`
 
-`@renderInput` is fixed internally to use a `TextField` and cannot be changed. The options for the `TextField` are listed below.  
+`@renderInput` is fixed internally to use a `TextField` and cannot be changed.  
+All properties of the `TextField` are available for the `TextField` component unless the `Autocomplete` component uses the same property.
 
-*`@color`  
-*`@defaultValue`  
-*`@disabled`  
-*`@error`  
-*`@fullWidth`  
-*`@helperText`  
-*`@label`  
-*`@margin`  
-*`@maxRows`  
-*`@minRows`  
-*`@multiline`  
-*`@placeholder`  
-*`@required`  
-*`@rows`  
-*`@size`  
-*`@sx`  
-*`@value`  
-*`@variant`  
+If `@nativeOnChange={{true}}`:
+The `onChange` function will return the mui specified `(event, value, reason, details)`.  
+Otherwise, `@onChange` will return `(value)`.
 
 While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
 By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element.
@@ -273,6 +270,8 @@ The most basic usages are:
 <RPaperAvatar><RPaperIcon @reactIcon={{this.chipIcon}}/></RPaperAvatar>
 ```
 
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Avatar Group
 ***
@@ -313,6 +312,8 @@ The most basic usage is:
 </RPaperBadge>
 ```
 
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Button
 ***
@@ -322,7 +323,10 @@ The most basic usage is:
 ```angular2html
 <RPaperButton>{{content you want displayed}}</RPaperButton>
 ```
-Using the `@href` attribute in button will use ember's `transitionTo` method so that in app links work as expected.  To transition to an external link a fully qualified link should be used: ```http://...```
+Using the `@href` attribute in button will use ember's `transitionTo` method so that in app links work as expected.  To transition to an external link a fully qualified link should be used: ```http://...```  
+
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 
 ## Card
@@ -367,7 +371,8 @@ The most basic usage is:
 <RPaperRadio/>
 <RPaperSwitch/>
 ```
-
+The radio component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Chip
 ***
@@ -409,6 +414,8 @@ The most basic usages are:
 
 The `onClose` handler should close the drawer by setting `@open` = false.
 
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Dialog
 ***
@@ -430,7 +437,8 @@ The most common usage is:
   </RPaperDialogActions>
 </RPaperDialog>
 ```
-
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Icons
 ***
@@ -516,6 +524,8 @@ Note: `RPaperMenu` can use `@anchorEl` and provide a function that returns an HT
 element.  But to make life easier, `@triggerId` has been added to the attributes so the trigger element can 
 be referenced in the HTML.
 
+This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Paper
 ***
@@ -573,11 +583,39 @@ To use the mask feature the following options are available (only `@mask` is req
 * `@maskDefinitions`
 * `@maskAliases`
 
-When using input masking, the onChange function will return two values for convenience.  The first will be the `event` and the second will be the `unmasked value`.
+>This component supports validation messages:  
+>  Normal `TextField` `error` and `helperText` fields are available. But special fields have been added to make validation
+>  work easier with `ember-changeset`.  The following attributes have been added:
+>* `@isTouched` - this field will need to be true to display the error messages passed to the next attribute
+>* `@errors` - this is an array of error validation messages.
+
+Alternatively, a service is provided that can be injected that allows you to globally `InputMask`:
+```angular2html
+import { inject as service } from '@ember/service';
+
+export default class MyComponent extends Component {
+@service inputMask;
+
+  constructor() {
+    super(...arguments);
+    this.inputMask.extendAliases({
+      currencyNoDecimal: {
+        alias: 'currency',
+        digits: 0,
+        prefix: '$ ',
+      },
+    });
+  }
+}
+```
+
+If `@nativeOnChange={{true}}`:
+When using input masking, the onChange function will return two values for convenience.  The first will be the `event` and the second will be the `unmasked value`.  
+Otherwise, `@onChange` will return the unmasked value.
 
 Example:
 ```angular2html
-<RPaperTextField @label="InputMaskDemo" @mask={{this.mask}} @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
+<RPaperTextField @label="InputMaskDemo" @mask="currencyNoDecimal" @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
 <div>
   Unmasked Value: {{this.unMaskedTextValue}}
 </div>
