@@ -1,3 +1,5 @@
+import { next } from '@ember/runloop';
+
 function protectChildrenFromReactDestruction(c){
   return class ProtectChildrenFromReactDestruction extends c {
     constructor() {
@@ -18,6 +20,10 @@ function protectChildrenFromReactDestruction(c){
       } else {
         this.moveLocation = insertElement;
       }
+
+      next(this, function () {
+        this.args.onDisplayed && this.args.onDisplayed(true);
+      });
     }
 
     renderChildren() {
@@ -30,6 +36,7 @@ function protectChildrenFromReactDestruction(c){
       } else {
         this.moveLocation = this.childrenFragment;
       }
+      this.args.onDisplayed && this.args.onDisplayed(false);
     }
   }
 }

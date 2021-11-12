@@ -6,6 +6,7 @@ import { TestPropObj, PassedProps } from "../../../prop-files/react-prop-sifter-
 module('Unit | React Component Lib Utility | react-prop-sifter', function(hooks) {
   test('it creates props correctly', async function(assert) {
     assert.ok(true);
+
     let siftedProps = reactPropSifter(PassedProps, TestPropObj);
     assert.equal(Object.keys(siftedProps.stateProps).length, 6, `stateProps is correct length`);
     assert.equal(Object.keys(siftedProps.statefulPropsNotForComponent).length, 2, `statefulPropsNotForComponent is correct length`);

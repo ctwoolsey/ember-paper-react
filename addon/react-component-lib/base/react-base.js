@@ -23,7 +23,29 @@ export class ReactBase extends React.Component{
     this.propsNotForComponent = propsSifted.propsNotForComponent;
   }
 
-  placeStaticProps(staticProps) {
+  _isObject(itemToTest) {
+    if (itemToTest === null) { return false;}
+    return ((typeof itemToTest !== 'function') && (typeof itemToTest === 'object'));
+  }
+
+  _preserveReactParamObjectsWithPropObjects(propObject, params) {
+    /*
+      For some components where a subcomponent is used, React will pass params.
+      if the param is an object and the propObject has that same object, field could be overwritten
+      this will merge those so that the react params aren't overwritten.
+    */
+    if (params) {
+      for (let propName in params) {
+        if (this._isObject(params[propName])) {
+          if (Object.prototype.hasOwnProperty.call(propObject, propName)) {
+            propObject[propName] = Object.assign({}, params[propName], propObject[propName]);
+          }
+        }
+      }
+    }
+  }
+
+  placeStaticProps(staticProps, params) {
     let propObject = {};
     for (let propName in staticProps) {
       if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
@@ -33,10 +55,11 @@ export class ReactBase extends React.Component{
     }
 
     delete propObject.ref; //added separately
+    this._preserveReactParamObjectsWithPropObjects(propObject, params);
     return propObject;
   }
 
-  placeStateProps(statePropsForComponent) {
+  placeStateProps(statePropsForComponent, params) {
     let statePropObject = {};
     for (let propName in statePropsForComponent) {
       switch (propName) {
@@ -54,6 +77,7 @@ export class ReactBase extends React.Component{
       }
 
     }
+    this._preserveReactParamObjectsWithPropObjects(statePropObject, params);
     return statePropObject;
   }
 

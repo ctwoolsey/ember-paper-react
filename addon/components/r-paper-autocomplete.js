@@ -8,7 +8,9 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { AutocompletePropObj } from '../prop-files/autocomplete-props';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
+import { usesErrorValidation } from '../decorators/uses-error-validation';
 
+@usesErrorValidation
 @hasAttributeNodeChildren
 export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   constructor() {
@@ -26,6 +28,10 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.optionsFragment = null;
     this.headersFragment = null;
     this.dropDownElement = null;
+
+    if (this.args.open) {
+      setTimeout(this.onCheckIfDropDownOpened, 25);
+    }
   }
 
   get groupHeaders() {
@@ -44,6 +50,16 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
       this.propsToPass.options = [];
     }
     this.propsToPass.inputRef = this.inputRef;
+    if (this.args.readOnly) {
+      if (this.propsToPass.inputProps === null) {
+        this.propsToPass.inputProps = {};
+      }
+      this.propsToPass.inputProps.readOnly = true;
+    }
+
+    if (this.args.onChange) {
+      this.propsToPass.onChange = this.onChangeHandler;
+    }
   }
 
   onRenderAttributeNodeChildren() {
@@ -68,6 +84,19 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   }
 
   @action
+  onChangeHandler(event, value, reason, details) {
+    if (this.args.onChange) {
+      if (this.args.nativeOnChange) {
+        return this.args.onChange(event, value, reason, details);
+      } else {
+        return this.args.onChange(value);
+      }
+    } else {
+      return null;
+    }
+  }
+
+  @action
   onCloseHandler(event, reason) {
     this.dropDownObserver && this.dropDownObserver.disconnect();
     this.args.onClose && this.args.onClose(event, reason);
@@ -76,7 +105,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   @action
   onOpenHandler(event) {
     this.args.onOpen && this.args.onOpen(event);
-    if (this.optionsFragment || this.headersFragment) {
+    if (this.optionsFragment || this.headersFragment || this.args.popupClass) {
       setTimeout(this.onCheckIfDropDownOpened, 25);
     }
   }
@@ -90,6 +119,9 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
         const dropDownListBox = document.getElementById(dropDownId);
         if (dropDownListBox) {
           dropDownElement = dropDownListBox.closest('[role="presentation"]')
+          if (this.args.popupClass) {
+            dropDownElement.classList.add(this.args.popupClass);
+          }
         }
       }
     }
@@ -102,8 +134,10 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     //There may be other autocompletes that have their dropdown open, so find the one that just opened.
     this.dropDownElement = this.findDropDownElement();
     if (this.dropDownElement) {
-      this.dropDownObserver = this.createObserver(this.dropDownElement);
-      this.onDropDownOpened();
+      if (this.optionsFragment || this.headersFragment) {
+        this.dropDownObserver = this.createObserver(this.dropDownElement);
+        this.onDropDownOpened();
+      }
     } else {
       setTimeout(this.onCheckIfDropDownOpened, 25);
     }
