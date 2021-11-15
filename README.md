@@ -549,6 +549,49 @@ The most basic usage is:
 </RPaperRadioGroup>
 ```
 
+## Tabs
+***
+The basic usage is:
+```angular2html
+<div>
+  <RPaperTabs @value={{this.tabValue}} @onChange={{this.handleChange}} aria-label="basic tabs example">
+    <RPaperTab @value={{0}} @label="Item One" />
+    <RPaperTab @value={{1}} @label="Item Two" />
+    <RPaperTab @value={{2}} @label="Item Three" />
+  </RPaperTabs>
+  <RPaperTabPanel  @value={{this.tabValue}} @index={{0}}>Item 1</RPaperTabPanel>
+  <RPaperTabPanel  @value={{this.tabValue}} @index={{1}}>Item 2</RPaperTabPanel>
+  <RPaperTabPanel  @value={{this.tabValue}} @index={{2}}>Item 3</RPaperTabPanel>
+</div>
+```
+
+Where `this.handleChange` is:
+```angularjs
+@tracked tabValue = 0;
+
+@action
+handleChange(evt, newValue) {
+  this.tabValue = newValue;
+}
+```
+
+This differs slightly from the [Material-UI Tabs documentation](https://mui.com/components/tabs/).  With `ember-paper-react` `@value` is 
+required on the `<RPaperTab/>` component.  It behaves as an index.  
+
+If used as above, only one `RPaperTab` can be used per page because of the `aria-controls` and `id` fields default values.  
+If it was desired to have more than one `RPaperTab` component per page, the component could be customized like so:  
+```angular2html
+<div>
+  <RPaperTabs @value={{this.tabValue2}} @onChange={{this.handleChange2}} aria-label="basic tabs example">
+    <RPaperTab id="my-tab-0" aria-controls="my-tabpanel-0" @value={{0}} @label="Item One" />
+    <RPaperTab id="my-tab-1" aria-controls="my-tabpanel-1" @value={{1}} @label="Item Two" />
+    <RPaperTab id="my-tab-2" aria-controls="my-tabpanel-2" @value={{2}} @label="Item Three" />
+  </RPaperTabs>
+  <RPaperTabPanel id="my-tabpanel-0" aria-labelledby="my-tab-0" @value={{this.tabValue2}} @index={{0}}>Item 1</RPaperTabPanel>
+  <RPaperTabPanel id="my-tabpanel-1"  aria-labelledby="my-tab-1" @value={{this.tabValue2}} @index={{1}}>Item 2</RPaperTabPanel>
+  <RPaperTabPanel id="my-tabpanel-2"  aria-labelledby="my-tab-2" @value={{this.tabValue2}} @index={{2}}>Item 3</RPaperTabPanel>
+</div>
+```
 
 ## TextField
 ***
