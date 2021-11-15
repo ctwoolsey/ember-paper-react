@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from './constants';
+
+const IDS = {
+  TABS: `${REACT_COMPONENT_PREFIX}Tabs`
+}
+
+const TABS = {
+  ID: IDS.TABS,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-tabs`,
+}
+
+export {
+  TABS
+}
