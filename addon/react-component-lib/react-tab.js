@@ -15,14 +15,28 @@ export class ReactTab extends ReactBase{
   renderComponent() {
     const ComponentToRender = this.DefaultComponentToRender;
     const { value } = this.state;
-    return (
-      <ComponentToRender
-        ref={this.componentRef}
-        id={`simple-tab-${value}`}
-        aria-controls={`simple-tabpanel-${value}`}
-        {...(this.placeStaticProps(this.staticProps))}
-        {...(this.placeStateProps(this.statePropsForComponent))}
-      />
-    )
+
+    if (this.propsNotForComponent.href) {
+      return (
+        <ComponentToRender
+          ref={this.componentRef}
+          component='a'
+          {...(this.placeStaticProps(this.staticProps))}
+          {...(this.placeStateProps(this.statePropsForComponent))}
+          href={this.propsNotForComponent.href}
+        />
+      )
+    } else {
+      return (
+        <ComponentToRender
+          ref={this.componentRef}
+          id={`simple-tab-${value}`}
+          aria-controls={`simple-tabpanel-${value}`}
+          {...(this.placeStaticProps(this.staticProps))}
+          {...(this.placeStateProps(this.statePropsForComponent))}
+        />
+      )
+    }
+
   }
 }

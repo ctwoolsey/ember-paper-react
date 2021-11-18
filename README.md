@@ -374,6 +374,9 @@ The most basic usage is:
 The radio component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
 has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
+The checkbox component also adds the attribute `@nativeOnChange`. If set to true, the `@onChange` callback will return the native `event` object.
+The checked state can be found out `event.target.checked`.  If not set, or set to false, the `@onChange` callback will return the checked state.
+
 ## Chip
 ***
 [Explore React Material-UI Chips docs](https://mui.com/components/chips/)  
@@ -387,7 +390,8 @@ The most basic usages are:
 </RPaperChip>
 ```
 
-A chip can contain an icon or avatar but not both.  If an icon and avatar are provided, the icon will be displayed.
+A chip can contain an icon or avatar but not both.  If an icon and avatar are provided, the icon will be displayed.  
+Label can also be passed as an attribute node ```<:label></:label>``` to make HTML rendering easier.
 
 ## CircularProgress
 ***
@@ -437,7 +441,9 @@ The most common usage is:
   </RPaperDialogActions>
 </RPaperDialog>
 ```
-This component also adds the attribute `@onDisplayed`.  If used, the function passed to it will be called when the content
+This component adds the following attributes:
+* `@keepOpenOnClickOutside` - boolean value.  If set to true, the dialog will not close if the user clicks outside of the background.
+* `@onDisplayed` - If used, the function passed to it will be called when the content
 has been displayed.  This may be called more than once due to the nature of some components or the way React re-renders.
 
 ## Icons
@@ -590,6 +596,18 @@ If it was desired to have more than one `RPaperTab` component per page, the comp
   <RPaperTabPanel id="my-tabpanel-0" aria-labelledby="my-tab-0" @value={{this.tabValue2}} @index={{0}}>Item 1</RPaperTabPanel>
   <RPaperTabPanel id="my-tabpanel-1"  aria-labelledby="my-tab-1" @value={{this.tabValue2}} @index={{1}}>Item 2</RPaperTabPanel>
   <RPaperTabPanel id="my-tabpanel-2"  aria-labelledby="my-tab-2" @value={{this.tabValue2}} @index={{2}}>Item 3</RPaperTabPanel>
+</div>
+```
+
+This component can also be used to render router links:
+```angular2html
+<RPaperTabs @value={{this.currentRouteNormalizedName}} @onChange={{this.onTabChanged}} aria-label="tab-controls">
+  <RPaperTab @value="nomalizedName1" @label="Content" @href="myroute.link1"/>
+  <RPaperTab @value="nomalizedName2" @label="Testimonials" @href="myroute.link2"/>
+  <RPaperTab @value="nomalizedName3" @label="Licenses" @href="myroute.link3" />
+</RPaperTabs>
+<div class="tab-output-area">
+  {{outlet}}
 </div>
 ```
 

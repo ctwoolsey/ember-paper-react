@@ -4,4 +4,7 @@
   {{#if (has-block 'avatar')}}
     <AttributeNodeChild class="react=component {{this.avatar}}" @attribute={{this.avatar}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='avatar'}}</AttributeNodeChild>
   {{/if}}
+  {{#if (has-block 'label')}}
+    <AttributeNodeChild class="react=component {{this.label}}" @attribute={{this.label}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='label'}}</AttributeNodeChild>
+  {{/if}}
 </span>
