@@ -31,7 +31,7 @@ export default class RPaperTextFieldComponent extends BaseInElementRender {
     }
 
     if (this.args.onChange) {
-      this.propsToPass.onChange = this.onChangeHandler;
+      this.propsToPass.onChange = this.onChangeHandler.bind(this);
     }
   }
 

@@ -13,9 +13,8 @@ export class ReactDialog extends ReactBase{
     this.onKeyDown = this.onKeyDown.bind(this);
     this.backgroundClicked = false;
 
-    this.staticProps.onClose = this.onClose;
     this.initialize(DialogPropObj);
-
+    this.staticProps.onClose = this.onClose;
   }
 
   componentDidMount() {
@@ -43,11 +42,9 @@ export class ReactDialog extends ReactBase{
 
   onClose(event, reason) {
     if (this.props.keepOpenOnClickOutside && this.backgroundClicked) {
-      this.setOpen(true);
       this.backgroundClicked = false;
     } else {
       this.props.onClose(event, reason);
-      this.setOpen(false);
     }
   }
 }

@@ -12,6 +12,7 @@ export class ReactBase extends React.Component{
     this.staticProps = {};  //properties that are not connected to state
     this.statePropsForComponent = {};
     this.propsNotForComponent = {};
+    this.statefulPropsNotForComponent = {};
     this.DefaultComponentToRender = null;
   }
 
@@ -21,6 +22,7 @@ export class ReactBase extends React.Component{
     this.staticProps = propsSifted.staticProps;
     this.statePropsForComponent = propsSifted.stateProps;
     this.propsNotForComponent = propsSifted.propsNotForComponent;
+    this.statefulPropsNotForComponent = propsSifted.statefulPropsNotForComponent;
   }
 
   _isObject(itemToTest) {

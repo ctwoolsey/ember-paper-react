@@ -19,16 +19,27 @@ export default class RPaperChip extends BaseEmberPaperReact {
     return CHIP.ATTRIBUTE_COMPONENT.AVATAR;
   }
 
+  get label() {
+    return CHIP.ATTRIBUTE_COMPONENT.LABEL;
+  }
+
   onRenderAttributeNodeChildren() {
     if (!this.args.icon) {  //can't have icon and avatar in a chip so icon will take precedence
       const avatarHolder = this.reactRef.current.componentRef.current.getElementsByClassName(AVATAR.ROOT)[0];
-      const moveMethod = this.getAttributeMoveMethod(CHIP.ATTRIBUTE_COMPONENT.AVATAR);
-      if (moveMethod) {
-        moveMethod(avatarHolder);
+      const avatarMoveMethod = this.getAttributeMoveMethod(CHIP.ATTRIBUTE_COMPONENT.AVATAR);
+      if (avatarMoveMethod) {
+        avatarMoveMethod(avatarHolder);
       } else {
         //if no icon and no avatar then the blank avatar should be removed.
         avatarHolder.remove();
       }
     }
+
+    const labelHolder = this.reactRef.current.componentRef.current.getElementsByClassName(CHIP.LABEL_ROOT)[0];
+    const labelMoveMethod = this.getAttributeMoveMethod(CHIP.ATTRIBUTE_COMPONENT.LABEL);
+    if (labelMoveMethod && labelHolder) {
+      labelMoveMethod(labelHolder);
+    }
+
   }
 }

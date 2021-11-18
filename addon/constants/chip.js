@@ -7,8 +7,10 @@ const IDS = {
 const CHIP = {
   ID: IDS.CHIP,
   COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-chip`,
+  LABEL_ROOT: `${IDS.CHIP}-label`,
   ATTRIBUTE_COMPONENT: {
-    AVATAR: `avatar`
+    AVATAR: `avatar`,
+    LABEL: `label`
   }
 }
 

@@ -25,6 +25,7 @@ const props = {
 };
 
 const propsNotForComponent = {
+  keepOpenOnClickOutside: null
 }
 
 const stateProps = {

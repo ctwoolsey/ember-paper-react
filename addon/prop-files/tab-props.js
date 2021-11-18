@@ -16,6 +16,7 @@ const props = {
 };
 
 const propsNotForComponent = {
+  href: null
 }
 
 const stateProps = {

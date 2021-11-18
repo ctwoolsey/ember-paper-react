@@ -3,8 +3,10 @@ import { TAB } from '../constants/tab';
 import { TabPropObj } from '../prop-files/tab-props';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { mayBelongToReactGroup } from "../decorators/may-belong-to-react-group";
+import { overrideHref } from '../decorators/override-href';
 
 @mayBelongToReactGroup
+@overrideHref
 export default class RPaperTabComponent extends BaseEmberPaperReact {
   constructor() {
     super(...arguments);
