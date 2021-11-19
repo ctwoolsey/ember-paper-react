@@ -6,6 +6,8 @@ This project aims to bring React's Material-UI to ember octane.
 
 [Explore React Material-UI docs »](https://https://material-ui.com/)
 
+Examples/Demo can be found at: https://github.com/ctwoolsey/ember-paper-react-demo
+
 
 Compatibility
 ==============================================================================
