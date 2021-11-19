@@ -93,4 +93,20 @@ module('Integration | Component | r-paper-chip', function(hooks) {
     assert.equal(labelElement.textContent.trim(), 'my-chip');
     assert.equal(testElement.childElementCount, 1, `only label content was rendered`)
   });
+
+  test('it renders label through attribute node', async function(assert) {
+    await render(hbs`
+                    <div>
+                      <RPaperChip @id='test-me'>
+                        <:label>my-chip</:label>
+                      </RPaperChip>
+                    </div>
+                 `);
+
+    const testElement = document.getElementById('test-me');
+    const labelElement = testElement.querySelector('.MuiChip-label');
+    assert.ok(labelElement, `label element found`);
+    assert.equal(labelElement.textContent.trim(), 'my-chip');
+    assert.equal(testElement.childElementCount, 1, `only label content was rendered`)
+  });
 });
