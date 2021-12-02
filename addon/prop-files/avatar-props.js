@@ -2,33 +2,33 @@ import { ThemePropObj } from './theme-props';
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  alt: null,
-  children: null,
-  classes: null,
-  component: null,
-  imgProps: null,
-  sizes: null,
-  src: null,
-  srcSet: null,
-  sx: null,
-  variant: null,
-  ref: null
+  alt: undefined,
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  imgProps: undefined,
+  sizes: undefined,
+  src: undefined,
+  srcSet: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  imgProps: null,
-  sizes: null,
-  src: null,
-  srcSet: null,
-  sx: null,
-  variant: null
+  imgProps: undefined,
+  sizes: undefined,
+  src: undefined,
+  srcSet: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const AvatarProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

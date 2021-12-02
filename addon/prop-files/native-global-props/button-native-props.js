@@ -1,18 +1,18 @@
 import { GlobalHtmlPropObj } from './global-html-props';
 
 const props = {
-  autoFocus: null,
-  disabled: null,
-  form: null,
-  formAction: null,
-  formEnctype: null,
-  formMethod: null,
-  formNoValidate: null,
-  formTarget: null,
-  frameName: null,
-  name: null,
-  type: null,
-  value: null
+  autoFocus: undefined,
+  disabled: undefined,
+  form: undefined,
+  formAction: undefined,
+  formEnctype: undefined,
+  formMethod: undefined,
+  formNoValidate: undefined,
+  formTarget: undefined,
+  frameName: undefined,
+  name: undefined,
+  type: undefined,
+  value: undefined
 };
 
 const propsNotForComponent = {

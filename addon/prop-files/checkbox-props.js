@@ -2,44 +2,44 @@ import { ButtonBasePropObj } from './button-base-props';
 import { ThemePropObj } from './theme-props';
 
 const props = {
-  checked: null,
-  checkedIcon: null,
-  classes: null,
-  color: null,
-  defaultChecked: null,
-  disabled: null,
-  disableRipple: null,
-  icon: null,
-  id: null,
-  indeterminate: null,
-  indeterminateIcon: null,
-  inputProps: null,
-  inputRef: null,
-  onChange: null,
-  required: null,
-  size: null,
-  sx: null,
-  value: null,
-  ref: null
+  checked: undefined,
+  checkedIcon: undefined,
+  classes: undefined,
+  color: undefined,
+  defaultChecked: undefined,
+  disabled: undefined,
+  disableRipple: undefined,
+  icon: undefined,
+  id: undefined,
+  indeterminate: undefined,
+  indeterminateIcon: undefined,
+  inputProps: undefined,
+  inputRef: undefined,
+  onChange: undefined,
+  required: undefined,
+  size: undefined,
+  sx: undefined,
+  value: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  checked: null,
-  color: null,
-  disabled: null,
-  disableRipple: null,
-  indeterminate: null,
-  required: null,
-  size: null,
-  sx: null,
-  value: null
+  checked: undefined,
+  color: undefined,
+  disabled: undefined,
+  disableRipple: undefined,
+  indeterminate: undefined,
+  required: undefined,
+  size: undefined,
+  sx: undefined,
+  value: undefined
 }
 
 const statefulPropsNotForComponent = {
-  theme: null
+  theme: undefined
 }
 
 const CheckboxProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props) };

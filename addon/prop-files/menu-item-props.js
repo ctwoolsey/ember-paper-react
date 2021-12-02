@@ -1,27 +1,27 @@
 import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
-  autoFocus: null,
-  children: null,
-  classes: null,
-  component: null,
-  dense: null,
-  disableGutters: null,
-  divider: null,
-  focusVisibleClassName: null,
-  sx: null,
-  ref: null
+  autoFocus: undefined,
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  dense: undefined,
+  disableGutters: undefined,
+  divider: undefined,
+  focusVisibleClassName: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  sx: null
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const MenuItemProps = () => { return Object.assign({}, ButtonBasePropObj.props(), props) };

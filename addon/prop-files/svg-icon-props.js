@@ -2,32 +2,32 @@ import { ThemePropObj } from './theme-props';
 import { SvgNativePropObj} from "./native-global-props/svg-native-props";
 
 const props = {
-  children: null,
-  classes: null,
-  color: null,
-  component: null,
-  fontSize: null,
-  htmlColor: null,
-  shapeRendering: null,
-  sx: null,
-  titleAccess: null,
-  viewBox: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  component: undefined,
+  fontSize: undefined,
+  htmlColor: undefined,
+  shapeRendering: undefined,
+  sx: undefined,
+  titleAccess: undefined,
+  viewBox: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  color: null,
-  fontSize: null,
-  htmlColor: null,
-  sx: null,
-  viewBox: null
+  color: undefined,
+  fontSize: undefined,
+  htmlColor: undefined,
+  sx: undefined,
+  viewBox: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const SvgIconProps = () => { return Object.assign({}, ThemePropObj.props(), SvgNativePropObj.props(), props) };

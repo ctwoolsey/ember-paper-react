@@ -1,21 +1,21 @@
 import { ButtonNativePropObj } from './native-global-props/button-native-props';
 
 const props = {
-  action: null,
-  centerRipple: null,
-  children: null,
-  class: null,
-  component: null,
-  disabled: null,
-  disableRipple: null,
-  disableTouchRipple: null,
-  focusRipple: null,
-  focusVisibleClassName: null,
-  LinkComponent: null,
-  onFocusVisible: null,
-  sx: null,
-  TouchRippleProps: null,
-  ref: null
+  action: undefined,
+  centerRipple: undefined,
+  children: undefined,
+  class: undefined,
+  component: undefined,
+  disabled: undefined,
+  disableRipple: undefined,
+  disableTouchRipple: undefined,
+  focusRipple: undefined,
+  focusVisibleClassName: undefined,
+  LinkComponent: undefined,
+  onFocusVisible: undefined,
+  sx: undefined,
+  TouchRippleProps: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
@@ -25,7 +25,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const ButtonBaseProps = () => {return Object.assign({}, ButtonNativePropObj.props(), props)};

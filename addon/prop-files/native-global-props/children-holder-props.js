@@ -2,8 +2,8 @@ const props = {
 };
 
 const propsNotForComponent = {
-  reactRenderCallback: null,
-  saveChildrenCallback: null
+  reactRenderCallback: undefined,
+  saveChildrenCallback: undefined
 }
 
 const stateProps = {

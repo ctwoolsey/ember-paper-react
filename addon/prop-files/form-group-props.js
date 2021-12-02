@@ -1,23 +1,23 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  row: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  row: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  row: null,
-  sx: null
+  row: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const FormGroupProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

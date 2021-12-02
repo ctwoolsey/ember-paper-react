@@ -1,43 +1,43 @@
 import { ModalPropObj } from './modal-props';
 
 const props = {
-  open: null,
-  action: null,
-  anchorEl: null,
-  anchorOrigin: null,
-  anchorPosition: null,
-  anchorReference: null,
-  children: null,
-  classes: null,
-  container: null,
-  elevation: null,
-  marginThreshold: null,
-  onClose: null,
-  PaperProps: null,
-  sx: null,
-  transformOrigin: null,
-  TransitionComponent: null,
-  transitionDuration: null,
-  TransitionProps: null,
-  ref: null
+  open: undefined,
+  action: undefined,
+  anchorEl: undefined,
+  anchorOrigin: undefined,
+  anchorPosition: undefined,
+  anchorReference: undefined,
+  children: undefined,
+  classes: undefined,
+  container: undefined,
+  elevation: undefined,
+  marginThreshold: undefined,
+  onClose: undefined,
+  PaperProps: undefined,
+  sx: undefined,
+  transformOrigin: undefined,
+  TransitionComponent: undefined,
+  transitionDuration: undefined,
+  TransitionProps: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  open: null,
-  anchorOrigin: null,
-  anchorPosition: null,
-  elevation: null,
-  sx: null,
-  transformOrigin: null,
-  TransitionComponent: null,
-  transitionDuration: null
+  open: undefined,
+  anchorOrigin: undefined,
+  anchorPosition: undefined,
+  elevation: undefined,
+  sx: undefined,
+  transformOrigin: undefined,
+  TransitionComponent: undefined,
+  transitionDuration: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const PopoverProps = () => { return Object.assign({}, ModalPropObj.props(), props) };

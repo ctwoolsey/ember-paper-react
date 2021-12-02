@@ -2,35 +2,35 @@ import { FadePropObj } from './fade-props';
 import { GlobalHtmlPropObj } from './native-global-props/global-html-props';
 
 const props = {
-  open: null,
-  children: null,
-  classes: null,
-  component: null,
-  components: null,
-  componentsProps: null,
-  invisible: null,
-  sx: null,
-  transitionDuration: null,
-  ref: null
+  open: undefined,
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  components: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  sx: undefined,
+  transitionDuration: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  open: null,
+  open: undefined,
 
-  classes: null,
-  component: null,
-  components: null,
-  componentsProps: null,
-  invisible: null,
-  sx: null,
-  transitionDuration: null,
+  classes: undefined,
+  component: undefined,
+  components: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  sx: undefined,
+  transitionDuration: undefined,
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const BackdropProps = () => { return Object.assign({}, GlobalHtmlPropObj.props(), FadePropObj.props(), props)};

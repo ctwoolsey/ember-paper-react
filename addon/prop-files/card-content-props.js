@@ -1,22 +1,22 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  component: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  sx: null
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const CardContentProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

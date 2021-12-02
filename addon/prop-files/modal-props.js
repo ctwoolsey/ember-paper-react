@@ -1,40 +1,40 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  open: null,
-  BackdropComponent: null,
-  BackdropProps: null,
-  classes: null,
-  closeAfterTransition: null,
-  component: null,
-  components: null,
-  componentsProps: null,
-  container: null,
-  disableAutoFocus: null,
-  disableEnforceFocus: null,
-  disableEscapeKeyDown: null,
-  disablePortal: null,
-  disableRestoreFocus: null,
-  disableScrollLock: null,
-  hideBackdrop: null,
-  keepMounted: null,
-  onBackdropClick: null,
-  onClose: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  open: undefined,
+  BackdropComponent: undefined,
+  BackdropProps: undefined,
+  classes: undefined,
+  closeAfterTransition: undefined,
+  component: undefined,
+  components: undefined,
+  componentsProps: undefined,
+  container: undefined,
+  disableAutoFocus: undefined,
+  disableEnforceFocus: undefined,
+  disableEscapeKeyDown: undefined,
+  disablePortal: undefined,
+  disableRestoreFocus: undefined,
+  disableScrollLock: undefined,
+  hideBackdrop: undefined,
+  keepMounted: undefined,
+  onBackdropClick: undefined,
+  onClose: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  open: null,
-  sx: null
+  open: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const ModalProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

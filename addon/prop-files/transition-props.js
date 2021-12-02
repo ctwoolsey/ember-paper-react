@@ -1,20 +1,20 @@
 const props = {
-  nodeRef: null,
-  children: null,
-  in: null,
-  mountOnEnter: null,
-  unmountOnExit: null,
-  appear: null,
-  enter: null,
-  exit: null,
-  timeout: null,
-  addEndListener: null,
-  onEnter: null,
-  onEntering: null,
-  onEntered: null,
-  onExit: null,
-  onExiting: null,
-  onExited: null
+  nodeRef: undefined,
+  children: undefined,
+  in: undefined,
+  mountOnEnter: undefined,
+  unmountOnExit: undefined,
+  appear: undefined,
+  enter: undefined,
+  exit: undefined,
+  timeout: undefined,
+  addEndListener: undefined,
+  onEnter: undefined,
+  onEntering: undefined,
+  onEntered: undefined,
+  onExit: undefined,
+  onExiting: undefined,
+  onExited: undefined
 };
 
 const propsNotForComponent = {
@@ -24,7 +24,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const TransitionProps = () => { return Object.assign({}, props)};

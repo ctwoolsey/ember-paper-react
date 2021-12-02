@@ -2,29 +2,29 @@ import { ThemePropObj } from './theme-props';
 import { SpanNativePropObj } from './native-global-props/span-native-props';
 
 const props = {
-  baseClassName: null,
-  children: null,
-  classes: null,
-  color: null,
-  component: null,
-  fontSize: null,
-  sx: null,
-  ref: null
+  baseClassName: undefined,
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  component: undefined,
+  fontSize: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  baseClassName: null,
-  color: null,
-  fontSize: null,
-  sx: null
+  baseClassName: undefined,
+  color: undefined,
+  fontSize: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null,
-  iconName: null
+  children: undefined,
+  iconName: undefined
 }
 
 const IconProps = () => {return Object.assign({}, ThemePropObj.props(), SpanNativePropObj.props(), props)};

@@ -1,25 +1,25 @@
 const staticPropsA = {
-  a: null,
-  b: null,
-  w: null
+  a: undefined,
+  b: undefined,
+  w: undefined
 };
 
 const propsNotForComponentA = {
-  c: null,
-  d: null,
-  x: null
+  c: undefined,
+  d: undefined,
+  x: undefined
 }
 
 const statePropsA = {
-  e: null,
-  f: null,
-  y: null
+  e: undefined,
+  f: undefined,
+  y: undefined
 }
 
 const statefulPropsNotForComponentA = {
-  g: null,
-  h: null,
-  z: null
+  g: undefined,
+  h: undefined,
+  z: undefined
 }
 
 const TestSiftedPropObjA = {
@@ -32,27 +32,27 @@ const TestSiftedPropObjA = {
 ////
 
 const staticPropsB = {
-  a: null,
-  i: null,
-  w: null
+  a: undefined,
+  i: undefined,
+  w: undefined
 };
 
 const propsNotForComponentB = {
-  c: null,
-  j: null,
-  x: null
+  c: undefined,
+  j: undefined,
+  x: undefined
 }
 
 const statePropsB = {
-  e: null,
-  k: null,
-  y: null
+  e: undefined,
+  k: undefined,
+  y: undefined
 }
 
 const statefulPropsNotForComponentB = {
-  g: null,
-  l: null,
-  z: null
+  g: undefined,
+  l: undefined,
+  z: undefined
 }
 
 const TestSiftedPropObjB = {

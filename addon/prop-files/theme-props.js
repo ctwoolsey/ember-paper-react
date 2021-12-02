@@ -8,7 +8,7 @@ const propsNotForComponent = {
 }
 
 const statefulPropsNotForComponent = {
-  theme: null
+  theme: undefined
 }
 
 const ThemeProps = () => {return Object.assign({}, props)};

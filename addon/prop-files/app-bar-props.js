@@ -1,27 +1,27 @@
 import { PaperPropObj } from './paper-props';
 
 const props = {
-  children: null,
-  classes: null,
-  color: null,
-  enableColorOnDark: null,
-  position: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  enableColorOnDark: undefined,
+  position: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  color: null,
-  position: null,
-  sx: null
+  color: undefined,
+  position: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null,
-  theme: null
+  children: undefined,
+  theme: undefined
 }
 
 const AppBarProps = () => { return Object.assign({}, PaperPropObj.props(), props) };

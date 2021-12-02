@@ -2,29 +2,29 @@ import { ThemePropObj } from './theme-props';
 import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
-  classes: null,
-  disabled: null,
-  disableFocusRipple: null,
-  disableRipple: null,
-  icon: null,
-  iconPosition: null,
-  label: null,
-  sx: null,
-  value: null,
-  wrapped: null,
-  ref: null
+  classes: undefined,
+  disabled: undefined,
+  disableFocusRipple: undefined,
+  disableRipple: undefined,
+  icon: undefined,
+  iconPosition: undefined,
+  label: undefined,
+  sx: undefined,
+  value: undefined,
+  wrapped: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
-  href: null
+  href: undefined
 }
 
 const stateProps = {
-  disabled: null,
-  disableFocusRipple: null,
-  disableRipple: null,
-  sx: null,
-  value: null
+  disabled: undefined,
+  disableFocusRipple: undefined,
+  disableRipple: undefined,
+  sx: undefined,
+  value: undefined
 }
 
 const statefulPropsNotForComponent = {

@@ -1,12 +1,12 @@
 import { TransitionPropObj } from './transition-props'
 
 const props = {
-  appear: null,
-  children: null,
-  easing: null,
-  in: null,
-  timeout: null,
-  ref: null
+  appear: undefined,
+  children: undefined,
+  easing: undefined,
+  in: undefined,
+  timeout: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
@@ -16,7 +16,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const FadeProps = () => { return Object.assign({}, TransitionPropObj.props(), props)};
