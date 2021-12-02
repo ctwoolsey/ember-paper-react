@@ -1,31 +1,31 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  action: null,
-  avatar: null,
-  classes: null,
-  component: null,
-  disableTypography: null,
-  subheader: null,
-  subheaderTypographyProps: null,
-  sx: null,
-  title: null,
-  titleTypographyProps: null,
-  ref: null
+  action: undefined,
+  avatar: undefined,
+  classes: undefined,
+  component: undefined,
+  disableTypography: undefined,
+  subheader: undefined,
+  subheaderTypographyProps: undefined,
+  sx: undefined,
+  title: undefined,
+  titleTypographyProps: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  action: null,
-  avatar: null,
-  disableTypography: null,
-  subheader: null,
-  subheaderTypographyProps: null,
-  sx: null,
-  title: null,
-  titleTypographyProps: null
+  action: undefined,
+  avatar: undefined,
+  disableTypography: undefined,
+  subheader: undefined,
+  subheaderTypographyProps: undefined,
+  sx: undefined,
+  title: undefined,
+  titleTypographyProps: undefined
 }
 
 const statefulPropsNotForComponent = {

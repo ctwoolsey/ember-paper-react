@@ -1,11 +1,11 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  value: null,
-  index: null,
-  children: null,
-  classes: null,
-  ref: null
+  value: undefined,
+  index: undefined,
+  children: undefined,
+  classes: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
@@ -15,8 +15,8 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  value: null,
-  children: null
+  value: undefined,
+  children: undefined
 }
 
 const TabPanelProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

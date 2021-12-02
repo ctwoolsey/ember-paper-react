@@ -2,31 +2,31 @@ import { ThemePropObj } from './theme-props';
 import { SvgIconPropObj } from './svg-icon-props';
 
 const props = {
-  classes: null,
-  color: null,
-  disableShrink: null,
-  size: null,
-  sx: null,
-  thickness: null,
-  value: null,
-  variant: null,
-  ref: null
+  classes: undefined,
+  color: undefined,
+  disableShrink: undefined,
+  size: undefined,
+  sx: undefined,
+  thickness: undefined,
+  value: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  color: null,
-  size: null,
-  sx: null,
-  thickness: null,
-  value: null,
-  variant: null,
+  color: undefined,
+  size: undefined,
+  sx: undefined,
+  thickness: undefined,
+  value: undefined,
+  variant: undefined,
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const CircularProgressProps = () => { return Object.assign({}, ThemePropObj.props(), SvgIconPropObj.props(), props)};

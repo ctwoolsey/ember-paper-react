@@ -2,33 +2,33 @@ import { PopoverPropObj } from './popover-props';
 import { ChildrenHolderPropObj } from './native-global-props/children-holder-props';
 
 const props = {
-  open: null,
-  anchorEl: null,
-  autoFocus: null,
-  children: null,
-  classes: null,
-  disableAutoFocusItem: null,
-  MenuListProps: null,
-  onClose: null,
-  PopoverClasses: null,
-  sx: null,
-  transitionDuration: null,
-  TransitionProps: null,
-  variant: null,
-  ref: null
+  open: undefined,
+  anchorEl: undefined,
+  autoFocus: undefined,
+  children: undefined,
+  classes: undefined,
+  disableAutoFocusItem: undefined,
+  MenuListProps: undefined,
+  onClose: undefined,
+  PopoverClasses: undefined,
+  sx: undefined,
+  transitionDuration: undefined,
+  TransitionProps: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  open: null,
-  sx: null,
-  variant: null
+  open: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const MenuProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), PopoverPropObj.props(), props) };

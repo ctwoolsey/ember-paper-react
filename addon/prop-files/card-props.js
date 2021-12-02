@@ -1,23 +1,23 @@
 import { PaperPropObj } from './paper-props';
 
 const props = {
-  children: null,
-  classes: null,
-  raised: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  raised: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  raised: null,
-  sx: null
+  raised: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const CardProps = () => { return Object.assign({}, PaperPropObj.props(), props) };

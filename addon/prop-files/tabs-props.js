@@ -2,45 +2,45 @@ import { ThemePropObj } from './theme-props';
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  action: null,
-  allowScrollButtonsMobile: null,
-  centered: null,
-  children: null,
-  classes: null,
-  component: null,
-  indicatorColor: null,
-  onChange: null,
-  orientation: null,
-  ScrollButtonComponent: null,
-  scrollButtons: null,
-  selectionFollowsFocus: null,
-  sx: null,
-  TabIndicatorProps: null,
-  TabScrollButtonProps: null,
-  textColor: null,
-  value: null,
-  variant: null,
-  visibleScrollbar: null,
-  ref: null
+  action: undefined,
+  allowScrollButtonsMobile: undefined,
+  centered: undefined,
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  indicatorColor: undefined,
+  onChange: undefined,
+  orientation: undefined,
+  ScrollButtonComponent: undefined,
+  scrollButtons: undefined,
+  selectionFollowsFocus: undefined,
+  sx: undefined,
+  TabIndicatorProps: undefined,
+  TabScrollButtonProps: undefined,
+  textColor: undefined,
+  value: undefined,
+  variant: undefined,
+  visibleScrollbar: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  allowScrollButtonsMobile: null,
-  centered: null,
-  indicatorColor: null,
-  orientation: null,
-  sx: null,
-  textColor: null,
-  value: null,
-  variant: null,
-  visibleScrollbar: null
+  allowScrollButtonsMobile: undefined,
+  centered: undefined,
+  indicatorColor: undefined,
+  orientation: undefined,
+  sx: undefined,
+  textColor: undefined,
+  value: undefined,
+  variant: undefined,
+  visibleScrollbar: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const TabsProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

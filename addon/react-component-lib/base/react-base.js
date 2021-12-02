@@ -50,7 +50,7 @@ export class ReactBase extends React.Component{
   placeStaticProps(staticProps, params) {
     let propObject = {};
     for (let propName in staticProps) {
-      if (staticProps[propName] !== null && staticProps[propName] !== undefined) {
+      if (staticProps[propName] !== undefined) {
         propObject[propName] = staticProps[propName];
         this.loadIconIfIcon(propName, propObject);
       }
@@ -71,7 +71,7 @@ export class ReactBase extends React.Component{
           }
           break;
         default:
-          if (this.state[propName] !== null && this.state[propName] !== undefined) {
+          if (this.state[propName] !== undefined) {
             statePropObject[propName] = this.state[propName];
             this.loadIconIfIcon(propName, statePropObject);
           }

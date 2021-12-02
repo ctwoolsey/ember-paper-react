@@ -2,36 +2,36 @@ import { ThemePropObj } from './theme-props';
 import { ButtonBasePropObj } from './button-base-props';
 
 const props = {
-  children: null,
-  classes: null,
-  color: null,
-  component: null,
-  disabled: null,
-  disableFocusRipple: null,
-  disableRipple: null,
-  href: null,
-  size: null,
-  sx: null,
-  variant: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  component: undefined,
+  disabled: undefined,
+  disableFocusRipple: undefined,
+  disableRipple: undefined,
+  href: undefined,
+  size: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  color: null,
-  disabled: null,
-  disableFocusRipple: null,
-  disableRipple: null,
-  href: null,
-  size: null,
-  sx: null,
-  variant: null
+  color: undefined,
+  disabled: undefined,
+  disableFocusRipple: undefined,
+  disableRipple: undefined,
+  href: undefined,
+  size: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const FabProps = () => { return Object.assign({}, ThemePropObj.props(), ButtonBasePropObj.props(), props) };

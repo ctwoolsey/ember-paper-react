@@ -2,33 +2,33 @@ import { DivNativePropObj } from './native-global-props/div-native-props';
 import { ChildrenHolderPropObj } from './native-global-props/children-holder-props';
 
 const props = {
-  anchor: null,
-  children: null,
-  classes: null,
-  elevation: null,
-  hideBackdrop: null,
-  ModalProps: null,
-  onClose: null,
-  open: null,
-  PaperProps: null,
-  SlideProps: null,
-  sx: null,
-  transitionDuration: null,
-  variant: null,
-  ref: null
+  anchor: undefined,
+  children: undefined,
+  classes: undefined,
+  elevation: undefined,
+  hideBackdrop: undefined,
+  ModalProps: undefined,
+  onClose: undefined,
+  open: undefined,
+  PaperProps: undefined,
+  SlideProps: undefined,
+  sx: undefined,
+  transitionDuration: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  open: null,
-  sx: null,
-  variant: null
+  open: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const DrawerProps = () => { return Object.assign({}, ChildrenHolderPropObj.props(), DivNativePropObj.props(), props) };

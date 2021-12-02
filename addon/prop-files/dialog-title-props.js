@@ -1,21 +1,21 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const stateProps = {
-  sx: null
+  sx: undefined
 }
 
 const propsNotForComponent = {
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const DialogTitleProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

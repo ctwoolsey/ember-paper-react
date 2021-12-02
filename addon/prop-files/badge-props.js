@@ -2,42 +2,42 @@ import { ThemePropObj } from './theme-props';
 import { BadgeUnstyledPropObj } from "./badge-unstyled-props";
 
 const props = {
-  anchorOrigin: null,
-  badgeContent: null,
-  children: null,
-  classes: null,
-  color: null,
-  component: null,
-  components: null,
-  componentsProps: null,
-  invisible: null,
-  max: null,
-  overlap: null,
-  showZero: null,
-  sx: null,
-  variant: null,
-  ref: null
+  anchorOrigin: undefined,
+  badgeContent: undefined,
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  component: undefined,
+  components: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  max: undefined,
+  overlap: undefined,
+  showZero: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
-  anchorOrigin: null,
-  badgeContent: null,
-  color: null,
-  componentsProps: null,
-  invisible: null,
-  max: null,
-  overlap: null,
-  showZero: null,
-  sx: null,
-  variant: null
+  anchorOrigin: undefined,
+  badgeContent: undefined,
+  color: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  max: undefined,
+  overlap: undefined,
+  showZero: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const stateProps = {
-  sx: null
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const BadgeProps = () => { return Object.assign({}, ThemePropObj.props(), BadgeUnstyledPropObj.props(), props) };

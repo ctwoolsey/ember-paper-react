@@ -1,37 +1,37 @@
 import { SpanNativePropObj } from './native-global-props/span-native-props';
 
 const props = {
-  anchorOrigin: null,
-  badgeContent: null,
-  children: null,
-  classes: null,
-  component: null,
-  components: null,
-  componentsProps: null,
-  invisible: null,
-  max: null,
-  overlap: null,
-  showZero: null,
-  variant: null,
-  ref: null
+  anchorOrigin: undefined,
+  badgeContent: undefined,
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  components: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  max: undefined,
+  overlap: undefined,
+  showZero: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  anchorOrigin: null,
-  badgeContent: null,
-  componentsProps: null,
-  invisible: null,
-  max: null,
-  overlap: null,
-  showZero: null,
-  variant: null,
+  anchorOrigin: undefined,
+  badgeContent: undefined,
+  componentsProps: undefined,
+  invisible: undefined,
+  max: undefined,
+  overlap: undefined,
+  showZero: undefined,
+  variant: undefined,
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const BadgeUnstyledProps = () => { return Object.assign({}, SpanNativePropObj.props(), props) };

@@ -5,10 +5,10 @@ const props = {
   d: 'D',
   e: 'E',
   label: '',
-  id: null,
+  id: undefined,
   class: 'myClass',
-  ref: null,
-  theme: null
+  ref: undefined,
+  theme: undefined
 };
 
 export { props }

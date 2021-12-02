@@ -1,12 +1,12 @@
 import { FormGroupPropObj } from './form-group-props';
 
 const props = {
-  children: null,
-  defaultValue: null,
-  name: null,
-  onChange: null,
-  value: null,
-  ref: null
+  children: undefined,
+  defaultValue: undefined,
+  name: undefined,
+  onChange: undefined,
+  value: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
@@ -16,7 +16,7 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const RadioGroupProps = () => { return Object.assign({}, FormGroupPropObj.props(), props) };

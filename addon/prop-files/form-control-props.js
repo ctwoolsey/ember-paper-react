@@ -2,40 +2,40 @@ import { DivNativePropObj } from './native-global-props/div-native-props';
 import { ThemePropObj } from './theme-props';
 
 const props = {
-  children: null,
-  classes: null,
-  color: null,
-  component: null,
-  disabled: null,
-  error: null,
-  focused: null,
-  fullWidth: null,
-  hiddenLabel: null,
-  margin: null,
-  required: null,
-  size: null,
-  sx: null,
-  variant: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  color: undefined,
+  component: undefined,
+  disabled: undefined,
+  error: undefined,
+  focused: undefined,
+  fullWidth: undefined,
+  hiddenLabel: undefined,
+  margin: undefined,
+  required: undefined,
+  size: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  color: null,
-  disabled: null,
-  error: null,
-  focused: null,
-  fullWidth: null,
-  hiddenLabel: null,
-  required: null,
-  sx: null,
-  variant: null
+  color: undefined,
+  disabled: undefined,
+  error: undefined,
+  focused: undefined,
+  fullWidth: undefined,
+  hiddenLabel: undefined,
+  required: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const FormControlProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

@@ -2,40 +2,40 @@ import { DivNativePropObj } from './native-global-props/div-native-props';
 import { ThemePropObj } from './theme-props';
 
 const props = {
-  avatar: null,
-  classes: null,
-  clickable: null,
-  color: null,
-  component: null,
-  deleteIcon: null,
-  disabled: null,
-  icon: null,
-  label: null,
-  onDelete: null,
-  size: null,
-  sx: null,
-  variant: null,
-  ref: null
+  avatar: undefined,
+  classes: undefined,
+  clickable: undefined,
+  color: undefined,
+  component: undefined,
+  deleteIcon: undefined,
+  disabled: undefined,
+  icon: undefined,
+  label: undefined,
+  onDelete: undefined,
+  size: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
-  avatar: null //avatar is only set via attribute children
+  avatar: undefined //avatar is only set via attribute children
 }
 
 const stateProps = {
-  clickable: null,
-  color: null,
-  deleteIcon: null,
-  disabled: null,
-  icon: null,
-  label: null,
-  size: null,
-  sx: null,
-  variant: null
+  clickable: undefined,
+  color: undefined,
+  deleteIcon: undefined,
+  disabled: undefined,
+  icon: undefined,
+  label: undefined,
+  size: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  theme: null
+  theme: undefined
 }
 
 const ChipProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

@@ -1,25 +1,25 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  component: null,
-  disableGutters: null,
-  sx: null,
-  variant: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  disableGutters: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  sx: null,
-  variant: null
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const ToolbarProps = () => {return Object.assign({}, DivNativePropObj.props(), props)};

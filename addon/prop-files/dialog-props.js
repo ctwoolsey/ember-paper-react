@@ -2,39 +2,39 @@ import { ModalPropObj } from './modal-props';
 import { ChildrenHolderPropObj } from './native-global-props/children-holder-props';
 
 const props = {
-  open: null,
-  ariaDescribedBy: null,
-  ariaLabelledBy: null,
-  BackdropComponent: null,
-  children: null,
-  classes: null,
-  disableEscapeKeyDown: null,
-  fullScreen: null,
-  fullWidth: null,
-  maxWidth: null,
-  onBackdropClick: null,
-  onClose: null,
-  PaperComponent: null,
-  PaperProps: null,
-  scroll: null,
-  sx: null,
-  TransitionComponent: null,
-  transitionDuration: null,
-  TransitionProps: null,
-  ref: null
+  open: undefined,
+  ariaDescribedBy: undefined,
+  ariaLabelledBy: undefined,
+  BackdropComponent: undefined,
+  children: undefined,
+  classes: undefined,
+  disableEscapeKeyDown: undefined,
+  fullScreen: undefined,
+  fullWidth: undefined,
+  maxWidth: undefined,
+  onBackdropClick: undefined,
+  onClose: undefined,
+  PaperComponent: undefined,
+  PaperProps: undefined,
+  scroll: undefined,
+  sx: undefined,
+  TransitionComponent: undefined,
+  transitionDuration: undefined,
+  TransitionProps: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
-  keepOpenOnClickOutside: null
+  keepOpenOnClickOutside: undefined
 }
 
 const stateProps = {
-  children: null,
-  open: null,
-  fullScreen: null,
-  fullWidth: null,
-  maxWidth: null,
-  sx: null
+  children: undefined,
+  open: undefined,
+  fullScreen: undefined,
+  fullWidth: undefined,
+  maxWidth: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {

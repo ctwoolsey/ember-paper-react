@@ -64,6 +64,10 @@ There are four objects:
 * stateProps - properties from the material-ui component that the user would like to be stateful (i.e. react to changes from ember)
 * statefulPropsNotForComponent - user defined props that the user would like to react to changes from ember
 
+All props should be initialized to `undefined` as opposed to `null` as null can be a valid value that `React` expects.  
+For example when using controlled inputs on the `Autocomplete` component.  A null value is a valid initial `value` were an  
+initial value of `undefined` signifies that the component should be an uncontrolled value.
+
 This is done so that `props` in the prop file will stay pure to what was defined in the specification.
 `stateProps` will duplicate what is in the `props` section as it just calls out what should be stateful. 
 `propsNotForComponent` should generally be unique as should `statefulPropsNotForComponent`.  There are exceptions for 

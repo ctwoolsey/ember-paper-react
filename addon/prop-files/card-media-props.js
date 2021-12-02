@@ -1,26 +1,26 @@
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  component: null,
-  image: null,
-  src: null,
-  sx: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  image: undefined,
+  src: undefined,
+  sx: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  image: null,
-  src: null,
-  sx: null
+  image: undefined,
+  src: undefined,
+  sx: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const CardMediaProps = () => { return Object.assign({}, DivNativePropObj.props(), props) };

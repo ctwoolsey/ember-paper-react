@@ -1,28 +1,28 @@
 import { GlobalSvgPropObj } from "./global-svg-props";
 
 const props = {
-  baseProfile: null,
-  contentScriptType: null,
-  contentStyleType: null,
-  height: null,
-  preserveAspectRatio: null,
-  version: null,
-  viewBox: null,
-  width: null,
-  x: null,
-  y: null
+  baseProfile: undefined,
+  contentScriptType: undefined,
+  contentStyleType: undefined,
+  height: undefined,
+  preserveAspectRatio: undefined,
+  version: undefined,
+  viewBox: undefined,
+  width: undefined,
+  x: undefined,
+  y: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  height: null,
-  preserveAspectRatio: null,
-  viewBox: null,
-  width: null,
-  x: null,
-  y: null
+  height: undefined,
+  preserveAspectRatio: undefined,
+  viewBox: undefined,
+  width: undefined,
+  x: undefined,
+  y: undefined
 }
 
 const statefulPropsNotForComponent = {

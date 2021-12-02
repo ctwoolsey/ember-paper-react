@@ -51,7 +51,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     }
     this.propsToPass.inputRef = this.inputRef;
     if (this.args.readOnly) {
-      if (this.propsToPass.inputProps === null) {
+      if (this.propsToPass.inputProps === undefined) {
         this.propsToPass.inputProps = {};
       }
       this.propsToPass.inputProps.readOnly = true;

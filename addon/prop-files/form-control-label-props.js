@@ -1,36 +1,36 @@
 import { LabelNativePropObj } from './native-global-props/label-native-props';
 
 const props = {
-  control: null,
-  checked: null,
-  classes: null,
-  componentsProps: null,
-  disabled: null,
-  disableTypography: null,
-  inputRef: null,
-  label: null,
-  labelPlacement: null,
-  onChange: null,
-  sx: null,
-  value: null,
-  ref: null
+  control: undefined,
+  checked: undefined,
+  classes: undefined,
+  componentsProps: undefined,
+  disabled: undefined,
+  disableTypography: undefined,
+  inputRef: undefined,
+  label: undefined,
+  labelPlacement: undefined,
+  onChange: undefined,
+  sx: undefined,
+  value: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  checked: null,
-  disabled: null,
-  disableTypography: null,
-  label: null,
-  labelPlacement: null,
-  sx: null,
-  value: null
+  checked: undefined,
+  disabled: undefined,
+  disableTypography: undefined,
+  label: undefined,
+  labelPlacement: undefined,
+  sx: undefined,
+  value: undefined
 }
 
 const statefulPropsNotForComponent = {
-  theme: null
+  theme: undefined
 }
 
 const FormControlLabelProps = () => { return Object.assign({}, LabelNativePropObj.props(), props) };

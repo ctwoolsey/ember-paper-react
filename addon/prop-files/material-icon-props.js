@@ -10,7 +10,7 @@ const propsNotForComponent = {
 }
 
 const statefulPropsNotForComponent = {
-  reactIcon: null
+  reactIcon: undefined
 }
 
 const MaterialIconProps = () => { return Object.assign({}, SvgIconPropObj.props(), props) };

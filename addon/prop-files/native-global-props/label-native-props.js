@@ -1,7 +1,7 @@
 import { GlobalHtmlPropObj } from "./global-html-props";
 
 const props = {
-  for: null
+  for: undefined
 };
 
 const propsNotForComponent = {

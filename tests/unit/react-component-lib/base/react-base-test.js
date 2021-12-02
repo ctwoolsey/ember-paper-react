@@ -64,7 +64,7 @@ module('Unit | React Component Lib Base | react-base', function(hooks) {
 
   test('it correctly creates statePropsObj', function(assert) {
     reactBase.initialize(TestPropObj);
-    reactBase.setState({c: null}); //set c to null so test can confirm that 'c' is not passed on
+    reactBase.setState({c: undefined}); //set c to undefined so test can confirm that 'c' is not passed on
     const statePropsToPlace = reactBase.placeStateProps(reactBase.statePropsForComponent);
     assert.equal(Object.keys(statePropsToPlace).length, 3, `statePropsToPlace length is correct`);
     assert.ok(Object.prototype.hasOwnProperty.call(statePropsToPlace,'b'), `statePropsToPlace found 'b'`);

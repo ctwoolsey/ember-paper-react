@@ -2,28 +2,28 @@ import { ThemePropObj } from './theme-props';
 import { DivNativePropObj } from './native-global-props/div-native-props';
 
 const props = {
-  children: null,
-  classes: null,
-  component: null,
-  elevation: null,
-  square: null,
-  sx: null,
-  variant: null,
-  ref: null
+  children: undefined,
+  classes: undefined,
+  component: undefined,
+  elevation: undefined,
+  square: undefined,
+  sx: undefined,
+  variant: undefined,
+  ref: undefined
 };
 
 const propsNotForComponent = {
 }
 
 const stateProps = {
-  elevation: null,
-  square: null,
-  sx: null,
-  variant: null
+  elevation: undefined,
+  square: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
-  children: null
+  children: undefined
 }
 
 const PaperProps = () => {return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props)};
