@@ -1,9 +1,11 @@
 import { action } from '@ember/object';
+import { next } from '@ember/runloop';
 
 function usesErrorValidation(c){
   return class UsesErrorValidation extends c {
     constructor() {
       super(...arguments);
+      this.setValidation();
     }
 
     get isTouched() {
@@ -18,8 +20,10 @@ function usesErrorValidation(c){
     setValidation() {
       if (this.isTouched && this.errors &&
         ((Array.isArray(this.errors) && this.errors.length > 0) || !Array.isArray(this.errors))) {
+        next(this, function () {
           this.setError(true);
           this.setHelperText(this.errors);
+        });
       } else {
         this.setError(false);
         this.setHelperText([]);
