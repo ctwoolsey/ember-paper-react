@@ -7,12 +7,12 @@ export class ReactTextField extends ReactBase{
   constructor(props) {
     super(props);
     this.cursorPosition = 0;
+    this.componentCursorChanged = false;
     if (props.inputRef === undefined) {
       props.inputRef = React.createRef();
     }
     this.initialize(TextFieldPropObj);
 
-    this.setCursorPositionFromClick = this.setCursorPositionFromClick.bind(this);
     this.setCursorPositionOnKeyDown = this.setCursorPositionOnKeyDown.bind(this);
   }
 
@@ -29,23 +29,23 @@ export class ReactTextField extends ReactBase{
   }
 
   componentDidMount() {
-    this.props.inputRef.current.addEventListener('click', this.setCursorPositionFromClick);
     this.props.inputRef.current.addEventListener('keydown', this.setCursorPositionOnKeyDown);
-  }
-
-  setCursorPositionFromClick() {
-    this.cursorPosition = this.staticProps.inputRef.current.selectionStart;
   }
 
   setCursorPositionOnKeyDown(e) {
     const cursorPosition = this.staticProps.inputRef.current.selectionStart;
+    this.componentCursorChanged = true;
     switch (e.keyCode) {
       case 8: //Backspace
-      case 37: //ArrowLeft
         this.cursorPosition = cursorPosition - 1;
         break;
+      case 37: //ArrowLeft
+        //this.cursorPosition = cursorPosition - 1;
+        this.componentCursorChanged = false;
+        break;
       case 39: //ArrowRight
-        this.cursorPosition = cursorPosition + 1;
+        //this.cursorPosition = cursorPosition + 1;
+        this.componentCursorChanged = false;
         break;
       case 46: //Delete
         this.cursorPosition = cursorPosition;
@@ -57,17 +57,20 @@ export class ReactTextField extends ReactBase{
     if (this.cursorPosition < 0) {
       this.cursorPosition = 0;
     }
+
     console.log(`KeyDown: ${cursorPosition} => ${this.cursorPosition}`);
   }
 
   componentDidUpdate() {
-    this.staticProps.inputRef.current.focus();
-    this.staticProps.inputRef.current.setSelectionRange(this.cursorPosition, this.cursorPosition);
-    console.log(`Component updated: ${this.staticProps.inputRef.current.selectionStart}`);
+    if (this.componentCursorChanged) {
+      this.componentCursorChanged = false;
+      this.staticProps.inputRef.current.focus();
+      this.staticProps.inputRef.current.setSelectionRange(this.cursorPosition, this.cursorPosition);
+      console.log(`Component updated: ${this.staticProps.inputRef.current.selectionStart}`);
+    }
   }
 
   componentWillUnmount() {
-    this.props.inputRef.current.removeEventListener('click', this.setCursorPositionFromClick);
     this.props.inputRef.current.removeEventListener('onkeydown', this.setCursorPositionOnKeyDown);
   }
 }
