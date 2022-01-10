@@ -9,7 +9,6 @@ const props = {
   allowLeadingZeros: undefined,
   prefix: undefined,
   suffix: undefined,
-  value: undefined,
   defaultValue: undefined,
   isNumericString: undefined,
   displayType: undefined,

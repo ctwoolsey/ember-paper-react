@@ -112,7 +112,9 @@ export class ReactBase extends React.Component{
         value = this.formatStyle(value);
       }
 
-      this.setState({ [propName]: value })
+      this.setState({ [propName]: value });
+
+      console.log(`State prop ${propName} updated: ${value}`);
     }
   }
 

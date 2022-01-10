@@ -67,4 +67,32 @@ export class ReactNumberFormatTextField extends ReactBase{
       />
     )
   }
+
+  // eslint-disable-next-line no-unused-vars
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (this.hasFocus) {
+      this.selectionStart = this.inputEl.selectionStart;
+      this.selectionEnd = this.inputEl.selectionEnd;
+    } else {
+      this.selectionStart = null;
+      this.selectionEnd = null;
+    }
+    return true;
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.selectionStart && this.selectionEnd) {
+      this.inputEl.focus();
+      this.inputEl.setSelectionRange(this.selectionStart, this.selectionEnd);
+    }
+  }
+
+  get hasFocus() {
+    return this.inputEl === document.activeElement;
+  }
+
+  get inputEl() {
+    return this.componentRef.current.querySelector(".MuiInputBase-input");
+  }
 }
