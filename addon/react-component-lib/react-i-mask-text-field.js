@@ -11,9 +11,9 @@ export class ReactIMaskTextField extends ReactBase{
   constructor(props) {
     super(props);
     this.iMaskValue = '';
+    this.isControlledValue = false;
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.initialize();
-    this.handleBlur = this.handleBlur.bind(this);
-    this.ignoreBlur = false;
   }
 
   initialize() {
@@ -21,12 +21,7 @@ export class ReactIMaskTextField extends ReactBase{
     const siftedMaskedTextFieldProps = reactPropSifter(this.props, IMaskTextFieldPropObj, false);
 
     reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps);
-
-
-    if (this.props.value) {
-      this.iMaskValue = this.props.value;
-    }
-    console.log(`this.props.value: ${this.props.value}; iMaskValue: ${this.iMaskValue}`);
+    this.isControlledValue = this.props.value !== undefined;
 
     this.state = Object.assign({},
       siftedMaskedTextFieldProps.stateProps,
@@ -54,11 +49,16 @@ export class ReactIMaskTextField extends ReactBase{
         {...(this.placeStateProps(this.stateMaskedTextFieldProps))}
         onAccept={(maskedValue, iMask) => {
           console.log('in onAccept');
-          console.log(`Unmasked: ${iMask.unmaskedValue}, this.iMaskValue: ${this.iMaskValue}, value: ${this.state.value}`);
+          console.log(`Unmasked: ${iMask.unmaskedValue}, maskedValue: ${maskedValue}, value: ${this.state.value}`);
+          let skipOnChange = false;
           this.iMaskValue = maskedValue;
-          //if (iMask.unmaskedValue !== this.state.value && this.state.value !== undefined) {
-          if (iMask.unmaskedValue !== this.state.value) {
-            console.log('calling onChange');
+          if (this.isControlledValue && iMask.unmaskedValue === this.state.value) {
+            skipOnChange = true;
+          }
+          if (!this.isControlledValue && this.iMaskValue === this.state.iMaskValue) {
+            skipOnChange = true;
+          }
+          if (!skipOnChange) {
             onChange({
               target: {
                 value: iMask.unmaskedValue,
@@ -71,56 +71,11 @@ export class ReactIMaskTextField extends ReactBase{
     );
   }
 
-  setStateProp(propName, value) {
-    console.log(`setStateProp [${propName}]:${value}`);
-    if (propName !== 'value') {
-      super.setStateProp(propName, value);
-    } else {
-      this.ignoreBlur = true;
-      //commenting below out, control doesn't update form other value && when directly inputting to controlled, doesn't save value.
-      this.setState({ iMaskValue: value, value: value });
+  onChangeHandler(event) {
+    if (!this.isControlledValue) {
+      this.setState( { iMaskValue: this.iMaskValue });
     }
-  }
-
-  handleBlur(e) {
-    if (this.ignoreBlur) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
-      console.log('ignoring blur');
-      this.ignoreBlur = false;
-    } else {
-      console.log(`handle blur, setting ${this.iMaskValue}`);
-      this.setState({ iMaskValue: this.iMaskValue });
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(`Should component update? Input focus: ${this.hasFocus}`);
-    const update = !this.ignoreBlur || !this.hasFocus;
-    this.ignoreBlur = false;
-    return update;
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('component updated');
-    this.inputEl.removeEventListener('blur', this.handleBlur);
-    this.inputEl.addEventListener('blur', this.handleBlur);
-  }
-
-  get hasFocus() {
-    return this.inputEl === document.activeElement;
-  }
-
-  get inputEl() {
-    return this.componentRef.current.querySelector(".MuiInputBase-input");
-  }
-
-  componentDidMount() {
-    this.inputEl.addEventListener('blur', this.handleBlur);
-  }
-
-  componentWillUnmount() {
-    this.inputEl.removeEventListener('blur', this.handleBlur);
+    this.props.onChange && this.props.onChange(event);
   }
 
   renderComponent() {
@@ -129,19 +84,45 @@ export class ReactIMaskTextField extends ReactBase{
 
     /* iMaskValue is set and used in case the user doesn't have @value defined.
        IMaskValue requires the value property to be set. */
-    const {
-      iMaskValue
-    } = this.state;
 
     return (
       <TextField
         ref={this.componentRef}
         {...(this.placeStaticProps(this.staticTextFieldProps))}
         {...(this.placeStateProps(this.stateTextFieldProps))}
-        value={iMaskValue}
+        value={ this.isControlledValue ? this.state.value : this.state.iMaskValue }
+        onChange={ this.onChangeHandler }
         InputProps={inputProps }
       />
     )
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (this.hasFocus) {
+      this.selectionStart = this.inputEl.selectionStart;
+      this.selectionEnd = this.inputEl.selectionEnd;
+    } else {
+      this.selectionStart = null;
+      this.selectionEnd = null;
+    }
+    return true;
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.selectionStart && this.selectionEnd) {
+      this.inputEl.focus();
+      this.inputEl.setSelectionRange(this.selectionStart, this.selectionEnd);
+    }
+  }
+
+  get hasFocus() {
+    return this.inputEl === document.activeElement;
+  }
+
+  get inputEl() {
+    return this.componentRef.current.querySelector(".MuiInputBase-input");
   }
 }
 
