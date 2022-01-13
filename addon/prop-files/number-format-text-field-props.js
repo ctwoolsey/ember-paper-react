@@ -30,6 +30,7 @@ const propsNotForComponent = {
 }
 
 const stateProps = {
+  value: undefined
 }
 
 const statefulPropsNotForComponent = {

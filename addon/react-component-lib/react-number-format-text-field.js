@@ -17,7 +17,7 @@ export class ReactNumberFormatTextField extends ReactBase{
     const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
     const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatTextFieldPropObj, false);
 
-    reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps);
+    reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
 
     this.state = Object.assign({},
       siftedMaskedTextFieldProps.stateProps,

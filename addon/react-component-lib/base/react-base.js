@@ -113,8 +113,6 @@ export class ReactBase extends React.Component{
       }
 
       this.setState({ [propName]: value });
-
-      console.log(`State prop ${propName} updated: ${value}`);
     }
   }
 
