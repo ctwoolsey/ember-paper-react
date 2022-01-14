@@ -46,7 +46,6 @@ export class ReactIMaskTextField extends ReactBase{
         {...(this.placeStateProps(this.stateMaskedTextFieldProps))}
         onAccept={(maskedValue, iMask) => {
           if (iMask.unmaskedValue !== this.state.value) {
-            console.log(`called onChange, cursor pos: ${this.inputEl.selectionStart}`);
             onChange({
               target: {
                 value: iMask.unmaskedValue,
