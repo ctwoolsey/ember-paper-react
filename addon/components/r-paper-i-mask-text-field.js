@@ -11,6 +11,7 @@ import { next } from '@ember/runloop';
 
 @usesErrorValidation
 @changeHandlerValueReturn
+@usesErrorValidation
 export default class RPaperIMaskTextFieldComponent extends BaseEmberPaperReact {
   @service inputMaskTypes;
 

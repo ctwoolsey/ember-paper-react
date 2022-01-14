@@ -28,7 +28,7 @@ This addon requires the use of SASS.
 >$ ember install --save ember-cli-sass
 
 In the `ember-cli-build.js` file add the following:
-```angular2html
+```handlebars
 let app = new EmberApp(defaults, {
     // Add options here
     sassOptions: {
@@ -56,7 +56,7 @@ If you wish to theme the material-ui components using predefined colors from mat
 To use the material-ui theme palette globally, inject the service `themeManager`.  This should be done within application.js.
 
 <i>application.js</i>
-```angular2html
+```handlebars
 import pink from '@mui/material/colors/pink';
 import green from '@mui/material/colors/green';
 
@@ -90,7 +90,7 @@ or
 # Components
 A few important notes that effect all components:  
 >Components need to have a parent html tag at some level.  This cannot be a wrap of the `{{outlet}}` tag.  This can be at the page level in a controler template like so:
->```angular2html
+>```handlebars
 ><div id="some-page">
 >  <components/>
 ></div>
@@ -98,7 +98,7 @@ A few important notes that effect all components:
 
 >`role` and `aria-*` and `data-*` these attributes will be recognized on all components. It is the user's responsibility
 >to make sure the component should have a `role` or `aria-*` attribute.  These fields can be static or dynamic:
->```angular2html
+>```handlebars
 ><RPaperComponent @role={{this.role}} @aria-label={{this.label}} @data-counter={{this.counter}}/>
 ><RPaperComponent role='button' aria-label='myLabel' data-counter='1'/>
 >```  
@@ -110,7 +110,7 @@ A few important notes that effect all components:
 >Components that have `icon` as an attribute take an icon object.  The form of this object is:  
 > {icon: ..., iconProps: ...}  
 > if no iconProps are needed the icon can be passed directly.
->```angular2html
+>```handlebars
 ><RPaperButton @startIcon={{this.icon}}>Button</RPaperButton>
 >
 >//react material-ui icon
@@ -144,7 +144,7 @@ All properties listed on the Material-ui site are available are implemented on t
 [Explore React Material-UI AppBar docs](https://mui.com/components/app-bar/)
 
 The most basic usages are:
-```angular2html
+```handlebars
 <RPaperAppBar @position="static">
   <RPaperToolbar>
     <div>My App bar</div>
@@ -158,7 +158,7 @@ The most basic usages are:
 [Explore React Material-UI Autocomplete docs](https://mui.com/components/autocomplete/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperAutocomplete @label="My Label" @options={{this.myOptions}} @onChange={{this.onChangeHandler}}/>
 ```
 
@@ -190,7 +190,7 @@ While options and groupings can all be set through passed arguments, it is possi
 By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element.
 If using custom text in the options, to ensure that autocomplete updates these options, `@filterOptions` must be used as in the example below.
 
-```angular2html
+```handlebars
 <RPaperAutocomplete  @options={{this.filmOptions}} @label="ComboBox"
                      @getOptionLabel={{this.movieOptionLabel}} 
                      @groupBy={{this.movieGrouping}}
@@ -267,7 +267,7 @@ createGroupHeaders() {
 
 This component does not use theme in React.  The color of the avatar can be set by `@sx`, `@class`, or `@style`.
 The most basic usages are:
-```angular2html
+```handlebars
 <RPaperAvatar>H</RPaperAvatar>
 <RPaperAvatar><RPaperIcon @reactIcon={{this.chipIcon}}/></RPaperAvatar>
 ```
@@ -279,7 +279,7 @@ has been displayed.  This may be called more than once due to the nature of some
 ***
 [Explore React Material-UI Avatar docs](https://mui.com/api/avatar-group/)  
 An example usage is:
-```angular2html
+```handlebars
 <RPaperAvatarGroup @max={{this.maxAvatarGroupSize}} @variant={{this.avatarVariant}} @spacing={{this.avatarGroupSpacing}}>
   {{#each this.avatarContentList as |avatarContentItem|}}
     <RPaperAvatar>{{avatarContentItem}}</RPaperAvatar>
@@ -294,7 +294,7 @@ An example usage is:
 [Explore React Material-UI Backdrop docs](https://mui.com/components/backdrop/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperButton @onClick={{this.onShowBackdropClicked}}>Show backdrop</RPaperButton>
 <RPaperBackdrop
   @open={{this.isBackdropOpen}}
@@ -308,7 +308,7 @@ The most basic usage is:
 [Explore React Material-UI Badge docs](https://mui.com/components/badges/)
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperBadge @badgeContent={{4}}>
   Some Content
 </RPaperBadge>
@@ -322,7 +322,7 @@ has been displayed.  This may be called more than once due to the nature of some
 [Explore React Material-UI Button docs](https://mui.com/components/buttons/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperButton>{{content you want displayed}}</RPaperButton>
 ```
 Using the `@href` attribute in button will use ember's `transitionTo` method so that in app links work as expected.  To transition to an external link a fully qualified link should be used: ```http://...```  
@@ -336,7 +336,7 @@ has been displayed.  This may be called more than once due to the nature of some
 [Explore React Material-UI Card docs](https://mui.com/components/cards/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperCard>
   <RPaperCardHeader @title="This is the header" @subheader="Some subheader.">
     <:avatar><RPaperAvatar>Y</RPaperAvatar></:avatar>
@@ -368,7 +368,7 @@ In the `RPaperCardHeader` the following attributes can be written as children li
 [Explore React Material-UI Radio Button docs](https://mui.com/components/radio-buttons/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperCheckbox/>
 <RPaperRadio/>
 <RPaperSwitch/>
@@ -384,7 +384,7 @@ The checked state can be found out `event.target.checked`.  If not set, or set t
 [Explore React Material-UI Chips docs](https://mui.com/components/chips/)  
 
 The most basic usages are:
-```angular2html
+```handlebars
 <RPaperChip @label="My Label"/>
 <RPaperChip @icon={{this.chipIconObj}} @label="icon chip"/>
 <RPaperChip @label="Avatar Chip"/>
@@ -400,7 +400,7 @@ Label can also be passed as an attribute node ```<:label></:label>``` to make HT
 [Explore React Material-UI Progress docs](https://mui.com/components/progress/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperCircularProgress/>
 ```
 
@@ -412,7 +412,7 @@ This component is usually used with `<RPaperBackdrop/>`
 [Explore React Material-UI Drawers docs](https://mui.com/components/drawers/)  
 
 The most basic usages are:
-```angular2html
+```handlebars
 <RPaperDrawer @anchor="top" @open={{this.drawerTopOpen}} @onClose={{this.onTopDrawerClose}}>
   <div>Top Content</div>
 </RPaperDrawer>
@@ -428,7 +428,7 @@ has been displayed.  This may be called more than once due to the nature of some
 [Explore React Material-UI Dialog docs](https://mui.com/components/dialogs/)  
 
 The most common usage is:
-```angular2html
+```handlebars
 <RPaperDialog @open={{this.dialogOpen}}>
   <RPaperDialogTitle>
     My Dialog Title
@@ -453,7 +453,7 @@ has been displayed.  This may be called more than once due to the nature of some
 [Explore React Material-UI Icon docs](https://mui.com/components/icons/)  
 
 There are four different ways of creating icons, similar to the React Icon specification.
-```angular2html
+```handlebars
 <RPaperIcon @baseClassName="material-icons-two-tone" @iconName="add_circle"/>  //Google Material Font Item
 <RPaperIcon @baseClassName="fas" @class="fa-award"/>  //Font Awesome Font
 <RPaperIcon @reactIcon={{this.chipIcon}}/> //React Material-UI Icon
@@ -467,7 +467,7 @@ Properties for icons are found in the documentation for `Icon` or `SvgIcon`.
 
 To use a `Font Icon`: 
 In the head of the `index.html` file add the icon fonts you want to use.  For example:
-```angular2html
+```handlebars
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Material+Icons+Two+Tone"
@@ -478,7 +478,7 @@ To use a `Fontawesome Icon`
 Note: the ember-fontawesome package will not work for react based font awesome icons.
 In the ember app:
 1) In the head of the `index.html` file add the fontawesome fonts you want to use.  For example: 
-```angular2html
+```handlebars
 <link
   rel="stylesheet"
   href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
@@ -500,7 +500,7 @@ To use a `SVG Icon with path`
 [Explore React Material-UI Fab docs](https://mui.com/components/floating-action-button/)
 
 Basic Usage:
-```angular2html
+```handlebars
 <RPaperFab>
   <RPaperIcon ... /> //Any RPaperIcon
 </RPaperFab>
@@ -511,7 +511,7 @@ Basic Usage:
 [Explore React Material-UI Icon docs](https://mui.com/components/buttons/#icon-button)
 
 Basic Usage:
-```angular2html
+```handlebars
 <RPaperIconButton>
   <RPaperIcon ... /> //Any RPaperIcon
 </RPaperIconButton>
@@ -519,7 +519,7 @@ Basic Usage:
 ## Menu/MenuItem
 ***
 The most basic usages are:
-```angular2html
+```handlebars
 <RPaperButton id="menuTrigger" @onClick={{this.onToggleMenu}}>Toggle Menu</RPaperButton>
 <RPaperMenu @triggerId="menuTrigger" @open={{this.menuOpen}} @onClose={{this.onMenuClose}}>
   <RPaperMenuItem @onClick={{this.onMenuItemClicked}}>Menu Item 1</RPaperMenuItem>
@@ -540,7 +540,7 @@ has been displayed.  This may be called more than once due to the nature of some
 [Explore React Material-UI Paper docs](https://mui.com/components/paper/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaper @elevation={{24}} @square={{false}}>Here is My Paper</RPaper>
 ```
 
@@ -549,7 +549,7 @@ The most basic usage is:
 [Explore React Material-UI Radio Group docs](https://mui.com/components/radio-buttons/#radio-group)
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperRadioGroup @name="radio-group" @defaultValue="myValue" @onChange={{this.onRadioGroupChange}}>
   {{#each this.radioGroups as |radioGroup|}}
     <RPaperRadio @label={{radioGroup}} @value={{radioGroup}}/>
@@ -560,7 +560,7 @@ The most basic usage is:
 ## Tabs
 ***
 The basic usage is:
-```angular2html
+```handlebars
 <div>
   <RPaperTabs @value={{this.tabValue}} @onChange={{this.handleChange}} aria-label="basic tabs example">
     <RPaperTab @value={{0}} @label="Item One" />
@@ -588,7 +588,7 @@ required on the `<RPaperTab/>` component.  It behaves as an index.
 
 If used as above, only one `RPaperTab` can be used per page because of the `aria-controls` and `id` fields default values.  
 If it was desired to have more than one `RPaperTab` component per page, the component could be customized like so:  
-```angular2html
+```handlebars
 <div>
   <RPaperTabs @value={{this.tabValue2}} @onChange={{this.handleChange2}} aria-label="basic tabs example">
     <RPaperTab id="my-tab-0" aria-controls="my-tabpanel-0" @value={{0}} @label="Item One" />
@@ -602,7 +602,7 @@ If it was desired to have more than one `RPaperTab` component per page, the comp
 ```
 
 This component can also be used to render router links:
-```angular2html
+```handlebars
 <RPaperTabs @value={{this.currentRouteNormalizedName}} @onChange={{this.onTabChanged}} aria-label="tab-controls">
   <RPaperTab @value="nomalizedName1" @label="Content" @href="myroute.link1"/>
   <RPaperTab @value="nomalizedName2" @label="Testimonials" @href="myroute.link2"/>
@@ -618,13 +618,16 @@ This component can also be used to render router links:
 [Explore React Material-UI Textfield docs](https://mui.com/components/text-fields/)  
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperTextField @label"My Label" @value={{this.textFieldValue}} @onChange={{this.onTextFieldChanged}}/>
 ```
+
+Unless `@nativeValue` is set to true, the onChange function will return the value.  If the event object is desired, set `@nativeValue={{true}}`.  
+
 Note: this component can also act as a select component.  When `@select={{true}}` is set, the component will automatically add the object `{native:true}` to the `selectProps` property.  `<option/>` tags are the only supported children of this component.  When functioning as a select, only native mode is currently supported.  
 When using the component as a select component, the selected value can be initialized by setting `@value` to the value desired.  `@value` and `@onChange`
 must be set so that the select updates when the user changes the value of the select.
-```angular2html
+```handlebars
 @tracked inputTextValue = 'some-initial-value';
 
 <RPaperTextField @label="Filled" @variant="filled" @value={{this.inputTextValue}} @onChange={{this.onInputTextChanged}} @select={{true}}>
@@ -637,80 +640,133 @@ must be set so that the select updates when the user changes the value of the se
 ```
 <i>Input Masking</i>
 ***
-This `TextField` has the capability for input masking.  It uses the [inputmask](https://github.com/RobinHerbots/Inputmask/) library.
+The following Components are available
+`<RPaperNumberFormatTextField/>` and `<RPaperIMaskTextField/>`
 
-To use the mask feature the following options are available (only `@mask` is required):
+## TextField - IMaskTextField
+***
+This component uses all of the regular TextField properties as well as that of ReactNumberFormat.  
+[Explore iMask Docs](https://imask.js.org/)
 
-* `@mask` - In the `inputmask` documentation this is the object or string that is input into the `Inputmask()` initializer.
-* `@maskDefaults`
-* `@maskDefinitions`
-* `@maskAliases`
-
->This component supports validation messages:  
->  Normal `TextField` `error` and `helperText` fields are available. But special fields have been added to make validation
->  work easier with `ember-changeset`.  The following attributes have been added:
->* `@isTouched` - this field will need to be true to display the error messages passed to the next attribute
->* `@errors` - this is an array of error validation messages.
-
-Alternatively, a service is provided that can be injected that allows you to globally `InputMask`:
-```angular2html
-import { inject as service } from '@ember/service';
-
-export default class MyComponent extends Component {
-@service inputMask;
+The service `inputMaskTypes` is available to predefine masks for this component.
+```javascript
+export default class TestClass extends Component {
+  @service inputMaskTypes
 
   constructor() {
     super(...arguments);
-    this.inputMask.extendAliases({
-      currencyNoDecimal: {
-        alias: 'currency',
-        digits: 0,
-        prefix: '$ ',
+
+    const currencyNoDecimalIMask = {
+      mask: '$num',
+      blocks: {
+        num: {
+          mask: Number,
+          thousandsSeparator: ',',
+        },
       },
-    });
+    };
+
+    const percentageWithDecimalIMask = {
+      mask: [
+        {
+          mask: '',
+        },
+        {
+          mask: 'num %',
+          lazy: false,
+          blocks: {
+            num: {
+              mask: Number,
+              scale: 3,
+              min: 1,
+              max: 100,
+              radix: '.',
+              mapToRadix: [','],
+            },
+          },
+        }
+      ]
+    };
+
+    this.inputMaskTypes.addIMaskType(
+      'currencyNoDecimal',
+      currencyNoDecimalIMask
+    );
+
+    this.inputMaskTypes.addIMaskType(
+      'percentageWithDecimal',
+      percentageWithDecimalIMask
+    );
   }
 }
+```
+And to use it:
+```handlebars
+<RPaperIMaskTextField @label="Currency IMask" @maskName="currencyNoDecimal"/>
+<RPaperIMaskTextField @label="I Mask Percentage"  @maskName="percentageWithDecimal"/>
 ```
 
 If `@nativeOnChange={{true}}`:
-When using input masking, the onChange function will return two values for convenience.  The first will be the `event` and the second will be the `unmasked value`.  
-Otherwise, `@onChange` will return the unmasked value.
+The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
 
-Example:
-```angular2html
-<RPaperTextField @label="InputMaskDemo" @mask="currencyNoDecimal" @value={{this.unMaskedTextValue}} @onChange={{this.onChangeHandler}}/>
-<div>
-  Unmasked Value: {{this.unMaskedTextValue}}
-</div>
-<div>
-  Masked Value: {{this.maskedTextValue}}
-</div>
-```
-```angular2html
-//in controller
-export default class ApplicationController extends Controller {
-  @tracked unMaskedTextValue;
-  @tracked maskedTextValue;
+
+## TextField - NumberFormatTextField
+***
+This component uses all of the regular TextField properties as well as that of ReactNumberFormat.  
+[Explore React Number Format Docs](https://github.com/s-yadav/react-number-format)  
+
+This component will only accept numbers as input.
+
+The service `inputMaskTypes` is available to predefine masks for this component.
+```javascript
+export default class TestClass extends Component {
+  @service inputMaskTypes
 
   constructor() {
     super(...arguments);
-    this.mask = 'aa-9{4}';
-  }
 
-  @action
-  onChangeHandler(event, unmaskedValue) {
-    this.maskedTextValue = event.target.value;
-    this.unMaskedTextValue = unmaskedValue;
+    const currencyNoDecimalNMask = {
+      thousandSeparator: true,
+      prefix: '$ ',
+      decimalScale: 0,
+    };
+
+    const percentageWithDecimalNFMask = {
+      suffix: ' %',
+      decimalScale: 2,
+      isAllowed: (value) => {
+        return value.floatValue <= 100 || value.value === '';
+      },
+    };
+
+    this.inputMaskTypes.addNumberFormatType(
+      'currencyNoDecimal',
+      currencyNoDecimalNMask
+    );
+
+    this.inputMaskTypes.addNumberFormatType(
+      'percentageWithDecimal',
+      percentageWithDecimalNFMask
+    );
   }
 }
 ```
+And to use it:
+```handlebars
+<RPaperNumberFormatTextField @label="Regular NMask" @maskName="currencyNoDecimal"/>
+<RPaperNumberFormatTextField @label="NF Percent Mask" @maskName="percentageWithDecimal"/>
+```
+
+If `@nativeOnChange={{true}}`:
+The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
+
 
 ## Tooltip
 ***
 [Explore React Material-UI Tooltip docs](https://mui.com/components/tooltips/)    
 
 The most basic usage is:
-```angular2html
+```handlebars
 <RPaperTooltip @title={{this.myTooltipContent}}>
 Hover over me!
 </RPaperTooltip>
