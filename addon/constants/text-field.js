@@ -7,7 +7,8 @@ const IDS = {
 const TEXT_FIELD = {
   ID: IDS.TEXT_FIELD,
   COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-text-field`,
-  INSERT_CLASS: `${REACT_COMPONENT_PREFIX}NativeSelect-select`
+  INSERT_CLASS: `${REACT_COMPONENT_PREFIX}NativeSelect-select`,
+  BASE_INPUT_CLASS: `${REACT_COMPONENT_PREFIX}InputBase-input`
 }
 
 export {

@@ -1,4 +1,4 @@
-import { action } from '@ember/object';
+import { TEXT_FIELD } from '../../constants/text-field';
 
 function adjustInputMaskCursor(c){
   return class AdjustInputMaskCursor extends c {
@@ -11,7 +11,6 @@ function adjustInputMaskCursor(c){
 
     // eslint-disable-next-line no-unused-vars
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-      console.log(`shouldComponentUpdate, cursor pos: ${this.inputEl.selectionStart}`);
       if (this.hasFocus) {
         this.selectionStart = this.inputEl.selectionStart;
         this.selectionEnd = this.inputEl.selectionEnd;
@@ -24,7 +23,6 @@ function adjustInputMaskCursor(c){
 
     // eslint-disable-next-line no-unused-vars
     componentDidUpdate(prevProps, prevState, snapshot) {
-      console.log('componentDidUpdate');
       if (this.selectionStart !== null && this.selectionEnd !== null) {
         this.inputEl.focus();
         this.inputEl.setSelectionRange(this.selectionStart, this.selectionEnd);
@@ -36,7 +34,7 @@ function adjustInputMaskCursor(c){
     }
 
     get inputEl() {
-      return this.componentRef.current.querySelector(".MuiInputBase-input");
+      return this.componentRef.current.querySelector(TEXT_FIELD.BASE_INPUT_CLASS);
     }
 
   }
