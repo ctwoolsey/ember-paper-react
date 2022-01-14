@@ -214,19 +214,6 @@ The following decorators add capabilities to components and simplify the code.
 If a component like `<RPaperButton>` uses an `href` attribute it will break react's routing.  React requires `<LinkTo>`
 or `TransitionTo`.  Placing an `@overrideHref` decorator on `RPaperButton` converts the `href` into a `TransitionTo` usage.
 
-### use-input-mask
-If a component has an input and uses an `inputRef`, using `@useInputMask` will allow add certain `input mask` attributes
-on the component. The following link is to the input mask library used: [inputmask](https://github.com/RobinHerbots/Inputmask/)
-
-To use the mask feature the following attributes become available (only `@mask` is required):
-* `@mask` - In the `inputmask` documentation this is the object or string that is input into the `Inputmask()` initializer.
-* `@maskDefaults`
-* `@maskDefinitions`
-* `@maskAliases`  
-  
-This will also automatically update the change handler so that the method will return the `event` and `unmasked value`.
-If no `@mask` is defined, the change handler will only return the `event`.
-
 ## Understanding the React Side
 Part of the magic of ember is that arguments that change can update the component.  In React this is done by changing 
 `state`. The modifier `ember-paper-reactable` links the two.  An ember `arg` change will trigger a `state` change if 

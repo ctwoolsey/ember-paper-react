@@ -6,6 +6,7 @@ import { next } from '@ember/runloop';
 import { TestSimpleRender } from "../standard-tests/rendering-tests";
 import { hbs } from 'ember-cli-htmlbars';
 import { tracked } from "@glimmer/tracking";
+import { act, fireEvent } from '@testing-library/react';
 
 module('Integration | Component | r-paper-text-field', function(hooks) {
   setupRenderingTest(hooks);
@@ -61,66 +62,64 @@ module('Integration | Component | r-paper-text-field', function(hooks) {
     assert.equal(testElement.options.length, 2, `option count for select does not match after removal update`);
   });
 
-  test('it applies the input mask corrctly when using native On change', async function(assert) {
+  test('using native onChange returns the event object', async function(assert) {
     class MyContext {
-      @tracked inputMaskTextValue = null;
-      @tracked inputUnMaskedTextValue = null;
+      @tracked textValue = null;
+      @tracked evtObj = null;
     }
     let ctx = new MyContext();
     this.setProperties({ctx});
 
-    this.set('mask', 'aa-9{4}');
-    this.set('onInputTextInputMaskChanged', (evt, unmaskedValue) => {
-      this.ctx.inputMaskTextValue = evt.target.value;
-      this.ctx.inputUnMaskedTextValue = unmaskedValue;
+    this.set('onInputTextChanged', (evt) => {
+      this.ctx.textValue = evt.target.value;
     });
 
 
     await render(hbs`
       <div>
-        <RPaperTextField @id="test-me" @mask={{this.mask}} @nativeOnChange={{true}} @onChange={{this.onInputTextInputMaskChanged}} />
+        <RPaperTextField @id="test-me" @nativeOnChange={{true}} @onChange={{this.onInputTextChanged}} />
       </div>
     `);
 
     next(this, async function() {
       const testElement = document.getElementById('test-me');
-      assert.equal(testElement.nodeName, 'INPUT', `element type is not an 'input'`);
-      await fillIn(testElement, 'bc5555');
-      assert.equal(this.ctx.inputUnMaskedTextValue, 'bc5555', `unmasked text value is not what it should be: 'bc5555'`);
-      assert.equal(this.ctx.inputMaskTextValue, 'bc-5555', `masked text value is not what it should be: 'bc-5555`);
-      await fillIn(testElement, '556655');
-      assert.equal(this.ctx.inputUnMaskedTextValue, '', `unmasked text value is not what it should be: 'empty'`);
-      assert.equal(this.ctx.inputMaskTextValue, '', `masked text value is not what it should be: 'empty'`);
+      assert.equal(testElement.nodeName, 'INPUT', `element is an 'input'`);
+      act(() => {
+        testElement.focus();
+        fireEvent.change(document.activeElement, {target: {value: 'bc5555'}});
+      });
+      assert.equal(this.ctx.textValue, 'bc5555', `text value is what it should be: 'bc5555'`);
     });
 
   });
 
-  test('it applies the input mask corrctly when NOT using native On change', async function(assert) {
+  test('using onChange returns the value object', async function(assert) {
     class MyContext {
-      @tracked inputUnMaskedTextValue = null;
+      @tracked textValue = null;
+      @tracked evtObj = null;
     }
     let ctx = new MyContext();
     this.setProperties({ctx});
 
-    this.set('mask', 'aa-9{4}');
-    this.set('onInputTextInputMaskChanged', (unmaskedValue) => {
-      this.ctx.inputUnMaskedTextValue = unmaskedValue;
+    this.set('onInputTextChanged', (value) => {
+      this.ctx.textValue = value;
     });
 
 
     await render(hbs`
       <div>
-        <RPaperTextField @id="test-me" @mask={{this.mask}} @onChange={{this.onInputTextInputMaskChanged}} />
+        <RPaperTextField @id="test-me" @onChange={{this.onInputTextChanged}} />
       </div>
     `);
 
     next(this, async function() {
       const testElement = document.getElementById('test-me');
-      assert.equal(testElement.nodeName, 'INPUT', `element type is not an 'input'`);
-      await fillIn(testElement, 'bc5555');
-      assert.equal(this.ctx.inputUnMaskedTextValue, 'bc5555', `unmasked text value is not what it should be: 'bc5555'`);
-      await fillIn(testElement, '556655');
-      assert.equal(this.ctx.inputUnMaskedTextValue, '', `unmasked text value is not what it should be: 'empty'`);
+      assert.equal(testElement.nodeName, 'INPUT', `element is an 'input'`);
+      act(() => {
+        testElement.focus();
+        fireEvent.change(document.activeElement, {target: {value: 'bc5555'}});
+      });
+      assert.equal(this.ctx.textValue, 'bc5555', `text value is what it should be: 'bc5555'`);
     });
 
   });
