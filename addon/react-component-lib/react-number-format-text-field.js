@@ -6,7 +6,9 @@ import { reactPropSifter } from './utility/react-prop-sifter';
 import { reactPropRemover } from './utility/react-prop-remover';
 import TextField from '@mui/material/TextField';
 import React from 'react';
+import { adjustInputMaskCursor } from '../decorators/for-react/adjust-input-mask-cursor';
 
+@adjustInputMaskCursor
 export class ReactNumberFormatTextField extends ReactBase{
   constructor(props) {
     super(props);
@@ -46,7 +48,7 @@ export class ReactNumberFormatTextField extends ReactBase{
           onChange({
             target: {
               value: values.value,
-              formattedValue: values.formattedValue,
+              maskedValue: values.formattedValue,
             },
           });
         }}
@@ -66,33 +68,5 @@ export class ReactNumberFormatTextField extends ReactBase{
         InputProps={inputProps}
       />
     )
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    if (this.hasFocus) {
-      this.selectionStart = this.inputEl.selectionStart;
-      this.selectionEnd = this.inputEl.selectionEnd;
-    } else {
-      this.selectionStart = null;
-      this.selectionEnd = null;
-    }
-    return true;
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.selectionStart && this.selectionEnd) {
-      this.inputEl.focus();
-      this.inputEl.setSelectionRange(this.selectionStart, this.selectionEnd);
-    }
-  }
-
-  get hasFocus() {
-    return this.inputEl === document.activeElement;
-  }
-
-  get inputEl() {
-    return this.componentRef.current.querySelector(".MuiInputBase-input");
   }
 }

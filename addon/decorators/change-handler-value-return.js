@@ -12,6 +12,7 @@ function changeHandlerValueReturn(c){
 
     @action
     onChangeHandler(event) {
+      super.onChangeHandler && super.onChangeHandler(event);
       if (this.args.onChange) {
         if (!this.args.nativeOnChange) {
           this.args.onChange(event.target.value);

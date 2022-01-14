@@ -6,6 +6,8 @@ import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { usesErrorValidation } from '../decorators/uses-error-validation';
 import { changeHandlerValueReturn } from '../decorators/change-handler-value-return';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
+import { next } from '@ember/runloop';
 
 @usesErrorValidation
 @changeHandlerValueReturn
@@ -24,6 +26,20 @@ export default class RPaperIMaskTextFieldComponent extends BaseEmberPaperReact {
     if (this.args.maskName) {
       const mask = this.inputMaskTypes.getIMaskType(this.args.maskName);
       Object.assign(this.propsToPass, mask);
+    }
+    this.propsToPass.onChange = this.onChangeHandler;
+
+    if (this.args.value === undefined) {
+      this.propsToPass.value = '';
+    }
+  }
+
+  @action
+  onChangeHandler(event) {
+    if (this.args.value === undefined) {
+      next(this, () => {
+        this.changeReactState('value', event.target.value);
+      });
     }
   }
 }
