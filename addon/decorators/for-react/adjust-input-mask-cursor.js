@@ -34,7 +34,7 @@ function adjustInputMaskCursor(c){
     }
 
     get inputEl() {
-      return this.componentRef.current.querySelector(TEXT_FIELD.BASE_INPUT_CLASS);
+      return this.componentRef.current.querySelector(`.${TEXT_FIELD.BASE_INPUT_CLASS}`);
     }
 
   }
