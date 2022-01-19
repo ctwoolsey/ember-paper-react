@@ -9,7 +9,6 @@ import { inject as service } from '@ember/service';
 
 @usesErrorValidation
 @changeHandlerValueReturn
-@usesErrorValidation
 export default class RPaperNumberFormatTextFieldComponent extends BaseEmberPaperReact {
   @service inputMaskTypes;
 
