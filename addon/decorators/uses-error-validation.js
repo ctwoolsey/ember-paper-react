@@ -1,5 +1,6 @@
 import { action } from '@ember/object';
 import { next } from '@ember/runloop';
+import { reactCreateKeyedList } from '../react-component-lib/utility/react-create-keyed-list';
 
 function usesErrorValidation(c){
   return class UsesErrorValidation extends c {
@@ -35,16 +36,7 @@ function usesErrorValidation(c){
     }
 
     setHelperText(value) {
-      const helperTextArray = [];
-      if (Array.isArray(value)) {
-        for(let i = 0; i < value.length; i++) {
-          helperTextArray.push(value[i]);
-          if (i !== value.length - 1) {
-            helperTextArray.push(<br></br>);
-          }
-        }
-      }
-      this.changeReactState('helperText', helperTextArray);
+      this.changeReactState('helperText', reactCreateKeyedList(value));
     }
 
   }
