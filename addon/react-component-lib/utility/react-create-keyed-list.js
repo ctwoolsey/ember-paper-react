@@ -8,7 +8,7 @@ function reactCreateKeyedList(value) {
 
   if (Array.isArray(value)) {
     const listItems = value.map( (value, index) => {
-      return <span className='ember-paper-react-validation-helper-text-span' key={index}>value</span>
+      return <span className='ember-paper-react-validation-helper-text-span' key={index}>{ value }</span>
       }
     );
     return <>{listItems}</>
