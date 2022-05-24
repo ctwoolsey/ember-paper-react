@@ -62,6 +62,26 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     }
   }
 
+  get labelProp() {
+    return this.args.label;
+  }
+
+  renderElementItems() {
+    this.labelPropShowHide();
+    super.renderElementItems();
+  }
+
+  labelPropShowHide() {
+    if (this.reactRef && this.reactRef.current.componentRef.current) {
+      //const fieldset = this.reactRef.current.componentRef.current.querySelector('fieldset legend');
+      if (this.labelProp) {
+        this.reactRef.current.componentRef.current.classList.remove('legendHidden');
+      } else {
+        this.reactRef.current.componentRef.current.classList.add('legendHidden');
+      }
+    }
+  }
+
   onRenderAttributeNodeChildren() {
     this.optionsFragment = this.getAttributeFragment(AUTOCOMPLETE.ATTRIBUTE_COMPONENT.OPTIONS);
     this.headersFragment = this.getAttributeFragment(AUTOCOMPLETE.ATTRIBUTE_COMPONENT.GROUP_HEADERS);

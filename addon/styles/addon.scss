@@ -20,3 +20,7 @@
 .ember-paper-react-validation-helper-text-span {
   display: block;
 }
+
+.ember-paper-react-autocomplete.legendHidden fieldset legend{
+  display: none;
+}

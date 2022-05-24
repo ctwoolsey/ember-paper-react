@@ -33,6 +33,24 @@ export class ReactAutocomplete extends ReactBase{
     this.stateTextFieldProps = siftedTextFieldProps.stateProps;
   }
 
+  /*componentDidMount() {
+    const fieldset = this.componentRef.current.querySelector('fieldset legend');
+    if (this.state.label) {
+      fieldset.classList.remove('ember-paper-react-hide');
+    } else {
+      fieldset.classList.add('ember-paper-react-hide');
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const fieldset = this.componentRef.current.querySelector('fieldset legend');
+    if (this.state.label) {
+      fieldset.classList.remove('ember-paper-react-hide');
+    } else {
+      fieldset.classList.add('ember-paper-react-hide');
+    }
+  }*/
+
 
   render() {
     const {
