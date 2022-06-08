@@ -113,7 +113,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   findDropDownElement() {
     let dropDownElement = null;
     const reactElement = this.reactRef.current && this.reactRef.current.componentRef.current;
-    if (reactElement && reactElement.getAttribute('aria-expanded')) {
+    if (reactElement && reactElement.getAttribute('aria-owns')) {
       const dropDownId = reactElement.getAttribute('aria-owns');
       if (dropDownId) {
         const dropDownListBox = document.getElementById(dropDownId);
