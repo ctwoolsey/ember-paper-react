@@ -2,9 +2,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { NOT_SET_COMPONENT_TYPE } from '../../constants/constants';
 import React from 'react';
-import { scheduleOnce } from '@ember/runloop';
+import { scheduleOnce, later } from '@ember/runloop';
 import Component from '@glimmer/component';
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 export default class BaseEmberPaperReact extends Component {
   @service themeManager;
@@ -96,19 +97,19 @@ export default class BaseEmberPaperReact extends Component {
 
   @action
   changeReactState(stateName, value) {
-    if (this.reactRef) {
+    if (this.reactRef && this.reactRef.current) {
       if (stateName === 'class') {
         value = this.mergeClassWithClassString();
       }
       this.reactRef.current.setStateProp(stateName, value);
+    } else {
+      later(this, this.changeReactState, 25, stateName, value);
     }
   }
 
   @action
   renderElement() {
-    const reactElement = this.reactRef && this.reactRef.current.componentRef.current;
-    reactElement &&  this.el.insertAdjacentElement('afterend', reactElement);
-
+    this.el.insertAdjacentElement('afterend', this.reactRef.current.componentRef.current);
     this.renderElementItems();
 
     this.el.remove();
@@ -219,8 +220,11 @@ export default class BaseEmberPaperReact extends Component {
     scheduleOnce('render', this, this.checkIfCanRender);
     if (this.reactElement) {
       const ReactComponent = this.reactElement;
+
       const reactPortal = ReactDOM.createPortal(<ReactComponent {...this.propsToPass}/>, this.el.parentNode);
-      ReactDOM.render(reactPortal, document.createElement('div'));
+      const container = document.createElement('div');
+      const root = createRoot(container);
+      root.render(reactPortal);
     }
   }
 

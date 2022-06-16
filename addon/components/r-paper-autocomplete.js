@@ -9,6 +9,7 @@ import { AutocompletePropObj } from '../prop-files/autocomplete-props';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { hasAttributeNodeChildren } from "../decorators/has-attribute-node-children";
 import { usesErrorValidation } from '../decorators/uses-error-validation';
+import { later } from '@ember/runloop';
 
 @usesErrorValidation
 @hasAttributeNodeChildren
@@ -30,7 +31,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
     this.dropDownElement = null;
 
     if (this.args.open) {
-      setTimeout(this.onCheckIfDropDownOpened, 25);
+      later(this, this.onCheckIfDropDownOpened, 25);
     }
   }
 
@@ -106,7 +107,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   onOpenHandler(event) {
     this.args.onOpen && this.args.onOpen(event);
     if (this.optionsFragment || this.headersFragment || this.args.popupClass) {
-      setTimeout(this.onCheckIfDropDownOpened, 25);
+      later(this, this.onCheckIfDropDownOpened, 25);
     }
   }
 
@@ -139,7 +140,7 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
         this.onDropDownOpened();
       }
     } else {
-      setTimeout(this.onCheckIfDropDownOpened, 25);
+      later(this, this.onCheckIfDropDownOpened, 25);
     }
   }
 

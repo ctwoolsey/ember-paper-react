@@ -1,4 +1,5 @@
 import Chip from '@mui/material/Chip';
+import React from 'react';
 import { ReactBase } from './base/react-base';
 import {ChipPropObj} from '../prop-files/chip-props';
 import Avatar from "@mui/material/Avatar";

@@ -10,7 +10,7 @@ module('Integration | Component | r-paper-menu-item', function(hooks) {
   setupRenderingTest(hooks);
 
   TestStandardLocationRender('RPaperMenuItem');
-  TestStandardLocationDynamicRender('RPaperMenuItem', 1);
+  TestStandardLocationDynamicRender('RPaperMenuItem');
   TestStandardLocationChangingContent('RPaperMenuItem')
 });
 

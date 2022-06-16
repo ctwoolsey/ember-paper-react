@@ -10,7 +10,7 @@ module('Integration | Component | r-paper-card-action-area', function(hooks) {
   setupRenderingTest(hooks);
 
   TestStandardLocationRender('RPaperCardActionArea');
-  TestStandardLocationDynamicRender('RPaperCardActionArea', 1);
+  TestStandardLocationDynamicRender('RPaperCardActionArea');
   TestStandardLocationChangingContent('RPaperCardActionArea');
 });
 

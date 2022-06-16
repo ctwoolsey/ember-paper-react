@@ -1,5 +1,5 @@
 import { GLOBAL_STRINGS } from "../../constants/constants";
-import React from 'react';
+import React from 'react'
 
 export class ReactChildrenHolder extends React.Component{
   constructor(props) {

@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { A } from '@ember/array';
+import { later } from '@ember/runloop';
 
 export default class RenderStackService extends Service {
 
@@ -32,23 +33,42 @@ export default class RenderStackService extends Service {
 
   renderNext() {
     //render in the order inserted from the bottom of the stack
-    let callbackObj = this.renderStack.shiftObject();
+    const callbackObj = this.renderStack.objectAt(0);
     if (callbackObj) {
-      callbackObj.callbackFn.apply(callbackObj.thisPtr);
+      if (!callbackObj.thisPtr.reactRef.current) {
+        later(this, this.renderNext, 25);
+      } else {
+        this.renderStack.shiftObject();
+        callbackObj.callbackFn.apply(callbackObj.thisPtr);
+      }
     } else {
       this.renderLater();
     }
   }
 
   renderLast() {
-    let callbackObj = this.renderStack.popObject();
+    const callbackObj = this.renderStack.lastObject;
+
     if (callbackObj) {
-      callbackObj.callbackFn.apply(callbackObj.thisPtr);
+      if (!callbackObj.thisPtr.reactRef.current) {
+        later(this, this.renderLast, 25);
+      } else {
+        this.renderStack.popObject();
+        callbackObj.callbackFn.apply(callbackObj.thisPtr);
+      }
     }
   }
 
   renderLater() {
-    const callbackObj = this.renderLaterStack.popObject();
-    callbackObj && callbackObj.callbackFn.apply(callbackObj.thisPtr);
+    const callbackObj = this.renderLaterStack.lastObject;
+
+    if (callbackObj) {
+      if (!callbackObj.thisPtr.reactRef.current) {
+        later(this, this.renderLater, 25);
+      } else {
+        this.renderLaterStack.popObject();
+        callbackObj.callbackFn.apply(callbackObj.thisPtr);
+      }
+    }
   }
 }

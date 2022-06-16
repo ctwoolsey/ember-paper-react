@@ -1,4 +1,5 @@
 import SvgIcon from '@mui/material/SvgIcon'
+import React from 'react';
 import { ReactBase } from './base/react-base';
 import { SvgIconPropObj } from '../prop-files/svg-icon-props';
 

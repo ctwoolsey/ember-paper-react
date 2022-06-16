@@ -156,12 +156,14 @@ module('Integration | Component | r-paper-autocomplete', function(hooks) {
     let testElement = document.getElementById('test-me');
     assert.ok(testElement, `rendered basic autocomplete`);
 
-    act(() => {
+    await act(() => {
       testElement.focus();
       fireEvent.change(document.activeElement, { target: { value: 'B' } });
     });
+
     let presentationElement = document.getElementsByClassName(AUTOCOMPLETE.PRESENTATION_CLASS);
     assert.ok(presentationElement, `options pop up found`);
+
     let foundOptions = presentationElement[0].querySelectorAll(AUTOCOMPLETE.DROP_DOWN_ITEM_HTML_ELEMENT);
     assert.equal(foundOptions.length, 3, `correct number of options`);
 
