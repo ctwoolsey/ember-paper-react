@@ -225,7 +225,6 @@ export default class BaseEmberPaperReact extends Component {
       const container = document.createElement('div');
       const root = createRoot(container);
       root.render(reactPortal);
-
     }
   }
 
