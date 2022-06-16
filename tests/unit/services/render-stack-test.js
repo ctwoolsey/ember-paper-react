@@ -21,7 +21,9 @@ module('Unit | Service | render-stack', function(hooks) {
       this.callbackCalled = true;
     }
 
-    const thisPtr = this;
+    const thisPtr = {
+      reactRef: { current: true }
+    };
 
     service.addRenderCallback(callbackFn, thisPtr);
 
@@ -44,7 +46,9 @@ module('Unit | Service | render-stack', function(hooks) {
       this.laterCallbackCalled = true;
     }
 
-    const thisPtr = this;
+    const thisPtr = {
+      reactRef: { current: true }
+    };
 
     service.addRenderCallback(callbackFn, thisPtr);
     service.addRenderLaterCallback(laterCallbackFn, thisPtr);

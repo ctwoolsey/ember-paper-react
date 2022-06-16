@@ -1,11 +1,12 @@
 import { MENU } from "../constants/menu";
 import { ReactMenu } from '../react-component-lib/react-menu';
-import { protectChildrenFromReactDestruction } from "../decorators/protect-children-from-react-destruction";
+import { renderLater } from '../decorators/render-later';
 import { MenuPropObj } from '../prop-files/menu-props';
 import BaseInElementRender from "./base/base-in-element-render";
 import { action } from '@ember/object';
+import { later } from '@ember/runloop';
 
-@protectChildrenFromReactDestruction
+@renderLater
 export default class RPaperMenuComponent extends BaseInElementRender {
   constructor() {
     super(...arguments);
@@ -29,7 +30,7 @@ export default class RPaperMenuComponent extends BaseInElementRender {
         this.setAnchorElByTriggerId();
         super.createReactComponent();
       } else {
-        setTimeout(this.createReactComponent, 25);
+        later(this, this.createReactComponent, 25);
       }
     } else {
       super.createReactComponent();

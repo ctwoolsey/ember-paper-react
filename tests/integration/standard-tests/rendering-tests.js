@@ -20,9 +20,8 @@ const TestStandardLocationRender = (ComponentToRender) => {
   });
 };
 
-const TestStandardLocationDynamicRender = (ComponentToRender, extraElementsToRemove) => {
+const TestStandardLocationDynamicRender = (ComponentToRender) => {
   test('it renders dynamic content correctly', async function(assert) {
-    extraElementsToRemove = extraElementsToRemove ? extraElementsToRemove : 0;
     class MyContext {
       @tracked eachTest = [1,2,3];
     }
@@ -41,15 +40,15 @@ const TestStandardLocationDynamicRender = (ComponentToRender, extraElementsToRem
 
     let testElement;
     testElement = document.getElementById('test-me');
-    assert.equal(testElement.childElementCount, 3+extraElementsToRemove, `Children count does not match initial count`);
+    assert.equal(testElement.childElementCount, 3, `Children count does not match initial count`);
 
     ctx.eachTest = [1,2,3,4];
     await settled();
-    assert.equal(testElement.childElementCount, 4+extraElementsToRemove, `Children count does not match added count`);
+    assert.equal(testElement.childElementCount, 4, `Children count does not match added count`);
 
     ctx.eachTest = [1,2];
     await settled();
-    assert.equal(testElement.childElementCount, 2+extraElementsToRemove, `Children count does not match removed count`);
+    assert.equal(testElement.childElementCount, 2, `Children count does not match removed count`);
   });
 };
 

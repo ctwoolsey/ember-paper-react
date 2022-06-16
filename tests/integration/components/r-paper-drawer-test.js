@@ -49,7 +49,7 @@ module('Integration | Component | r-paper-drawer', function(hooks) {
 
     await render(hbs`
       <div>
-        <RPaperDrawer @id='test-me' @open={{this.ctx.drawerOpen}} >
+        <RPaperDrawer @id='test-me' @open={{this.ctx.drawerOpen}} @variant="temporary" >
           {{#each this.ctx.contentList as |contentItem|}}
             <div>{{contentItem}}</div>
           {{/each}}
