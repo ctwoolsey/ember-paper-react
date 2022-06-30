@@ -8,6 +8,7 @@ export default class EmberPaperReactableModifier extends Modifier {
     super(...arguments);
     this.insertedFn = this.args.positional[0];
     this.changeReactStateFn = this.args.positional[1];
+    this._filteredState = this._filteredState.bind(this);
     this.initializeState();
   }
 
@@ -22,10 +23,13 @@ export default class EmberPaperReactableModifier extends Modifier {
   }
 
   getChangedStateObject() {
+    //returns an array of changedStateObjects
+    return this.state.filter(this._filteredState);
+  }
+
+  _filteredState(stateObj) {
     const argValues = this.args.positional[2];
-    return this.state.find((stateObj) => {
-      return stateObj.value !== argValues[stateObj.propName];
-    });
+    return stateObj.value !== argValues[stateObj.propName];
   }
 
   updateState(stateToChange) {
@@ -40,10 +44,13 @@ export default class EmberPaperReactableModifier extends Modifier {
 
   didUpdateArguments() {
     super.didUpdateArguments();
-    const changedStateObj = this.getChangedStateObject();
-    if (changedStateObj) {
-      this.updateState(changedStateObj);
-      this.changeReactStateFn && this.changeReactStateFn(changedStateObj.propName, changedStateObj.value);
+    const changedStateObjArr = this.getChangedStateObject();
+
+    if (changedStateObjArr && changedStateObjArr.length > 0) {
+      changedStateObjArr.forEach((changedStateObj) => {
+        this.updateState(changedStateObj);
+        this.changeReactStateFn && this.changeReactStateFn(changedStateObj.propName, changedStateObj.value);
+      });
     }
   }
 }
