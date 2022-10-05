@@ -8,15 +8,15 @@ import { tracked } from "@glimmer/tracking";
 import { act, fireEvent } from '@testing-library/react';
 import { TEXT_FIELD } from 'ember-paper-react/constants/text-field';
 
-module('Integration | Component | r-paper-number-format-text-field', function(hooks) {
+module('Integration | Component | r-paper-number-format-numeric-text-field', function(hooks) {
   setupRenderingTest(hooks);
 
-  TestSimpleRender('RPaperNumberFormatTextField');
+  TestSimpleRender('RPaperNumberFormatNumericTextField');
 
   test('it displays the correct text value', async function(assert) {
 
     await render(hbs`
-      <RPaperTextField @id="test-me" @value="some-value" />
+      <RPaperNumberFormatNumericTextField @id="test-me" @value="some-value" />
     `);
 
     next(this, function() {
@@ -46,7 +46,7 @@ module('Integration | Component | r-paper-number-format-text-field', function(ho
 
     await render(hbs`
       <div>
-        <RPaperNumberFormatTextField @id="test-me" @thousandSeparator={{this.thousandSeparator}} @prefix={{this.prefix}} @decimalScale={{this.decimalScale}} @nativeOnChange={{true}} @value="1234" @onChange={{this.onInputTextInputMaskChanged}} />
+        <RPaperNumberFormatNumericTextField @id="test-me" @thousandSeparator={{this.thousandSeparator}} @prefix={{this.prefix}} @decimalScale={{this.decimalScale}} @nativeOnChange={{true}} @value="1234" @onChange={{this.onInputTextInputMaskChanged}} />
       </div>
     `);
 
@@ -74,7 +74,7 @@ module('Integration | Component | r-paper-number-format-text-field', function(ho
 
     await render(hbs`
       <div>
-        <RPaperNumberFormatTextField @id="test-me" @isTouched={{this.ctx.isTouched}} @errors={{this.ctx.errors}} />
+        <RPaperNumberFormatNumericTextField @id="test-me" @isTouched={{this.ctx.isTouched}} @errors={{this.ctx.errors}} />
       </div>
     `);
 

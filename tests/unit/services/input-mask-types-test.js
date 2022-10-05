@@ -15,10 +15,10 @@ module('Unit | Service | input-mask-types', function(hooks) {
 
     let service = this.owner.lookup('service:input-mask-types');
     assert.equal(Object.keys(service.iMaskTypes).length, 0, `iMaskTypes is empty`);
-    assert.equal(Object.keys(service.numberFormatTypes).length, 0, `numberFormatTypes is empty`);
+    assert.equal(Object.keys(service.numberFormatNumericTypes).length, 0, `numberFormatNumericTypes is empty`);
     service.addIMaskType('a', obj1);
-    service.addNumberFormatType('b', obj2);
-    assert.equal(service.getIMaskType('a'), obj1, `iMaskTypes a correctly returned object`);
-    assert.equal(service.getNumberFormatType('b'), obj2, `numberFormatTypes a correctly returned object`);
+    service.addNumberFormatNumericType('b', obj2);
+    assert.equal(service.getIMaskType('a'), obj1, `iMaskTypes correctly returned object`);
+    assert.equal(service.getNumberFormatNumericType('b'), obj2, `numberFormatNumericTypes correctly returned object`);
   });
 });
