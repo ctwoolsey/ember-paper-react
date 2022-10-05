@@ -710,9 +710,9 @@ If `@nativeOnChange={{true}}`:
 The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
 
 
-## TextField - NumberFormatTextField
+## TextField - NumberFormatNumericTextField
 ***
-This component uses all of the regular TextField properties as well as that of ReactNumberFormat.  
+This component uses all of the regular TextField properties as well as that of ReactNumberFormat Numeric.  
 [Explore React Number Format Docs](https://github.com/s-yadav/react-number-format)  
 
 This component will only accept numbers as input.
@@ -739,12 +739,12 @@ export default class TestClass extends Component {
       },
     };
 
-    this.inputMaskTypes.addNumberFormatType(
+    this.inputMaskTypes.addNumberFormatNumericType(
       'currencyNoDecimal',
       currencyNoDecimalNMask
     );
 
-    this.inputMaskTypes.addNumberFormatType(
+    this.inputMaskTypes.addNumberFormatNumericType(
       'percentageWithDecimal',
       percentageWithDecimalNFMask
     );
@@ -753,13 +753,50 @@ export default class TestClass extends Component {
 ```
 And to use it:
 ```handlebars
-<RPaperNumberFormatTextField @label="Regular NMask" @maskName="currencyNoDecimal"/>
-<RPaperNumberFormatTextField @label="NF Percent Mask" @maskName="percentageWithDecimal"/>
+<RPaperNumberFormatNumericTextField @label="Regular NMask" @maskName="currencyNoDecimal"/>
+<RPaperNumberFormatNumericTextField @label="NF Percent Mask" @maskName="percentageWithDecimal"/>
 ```
 
 If `@nativeOnChange={{true}}`:
 The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
 
+This component will by default select the entire text area when focus is received.  If this trait is not desired, the attribute `@selectAllOnFocus={{false}}` must be explicitly set.
+
+## TextField - NumberFormatPatternTextField
+***
+This component uses all of the regular TextField properties as well as that of ReactNumberFormat Pattern.  
+[Explore React Number Format Docs](https://github.com/s-yadav/react-number-format)
+
+This component will only accept numbers as input.
+
+The service `inputMaskTypes` is available to predefine masks for this component.
+```javascript
+export default class TestClass extends Component {
+  @service inputMaskTypes
+
+  constructor() {
+    super(...arguments);
+
+    const myPatternFormat = {
+      format: "### ###",
+    };
+
+    this.inputMaskTypes.addNumberFormatPatternType(
+      'myPattern',
+      myPatternFormat
+    );
+  }
+}
+```
+And to use it:
+```handlebars
+<RPaperNumberFormatPatternTextField @label="Format Mask" @maskName="myPattern"/>
+```
+
+If `@nativeOnChange={{true}}`:
+The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
+
+This component will by default select the entire text area when focus is received.  If this trait is not desired, the attribute `@selectAllOnFocus={{false}}` must be explicitly set.
 
 ## Tooltip
 ***
