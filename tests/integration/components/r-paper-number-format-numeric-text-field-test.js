@@ -16,13 +16,13 @@ module('Integration | Component | r-paper-number-format-numeric-text-field', fun
   test('it displays the correct text value', async function(assert) {
 
     await render(hbs`
-      <RPaperNumberFormatNumericTextField @id="test-me" @value="some-value" />
+      <RPaperNumberFormatNumericTextField @id="test-me" @value="1234" />
     `);
 
     next(this, function() {
       const testElement = document.getElementById('test-me');
       assert.equal(testElement.nodeName, 'INPUT', `element type is an 'input'`);
-      assert.equal(testElement.value, 'some-value', `input value matched passed value`);
+      assert.equal(testElement.value, '1234', `input value matched passed value`);
     });
   });
 
