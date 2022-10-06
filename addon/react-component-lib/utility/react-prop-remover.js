@@ -33,7 +33,7 @@ function _removeProps(unifiedProps, siftedProps) {
 function reactPropRemover(siftedProps, siftedPropsToRemove, exceptions) {
   exceptions = exceptions ? exceptions : [];
 
-  const unifiedProps = _unifySiftedProps(siftedPropsToRemove, exceptions);
+  let unifiedProps = _unifySiftedProps(siftedPropsToRemove, exceptions);
 
   _removeProps(unifiedProps, siftedProps.staticProps);
   _removeProps(unifiedProps, siftedProps.stateProps);

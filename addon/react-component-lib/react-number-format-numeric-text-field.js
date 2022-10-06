@@ -14,10 +14,12 @@ export class ReactNumberFormatNumericTextField extends ReactBase{
   }
 
   initialize() {
-    const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
+    let siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
     const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatNumericTextFieldPropObj, false);
 
-    reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
+    //siftedTextFieldProps = reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
+    siftedTextFieldProps = reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps);
+    delete siftedTextFieldProps.stateProps['onChange'];
 
     this.state = Object.assign({},
       siftedMaskedTextFieldProps.stateProps,
