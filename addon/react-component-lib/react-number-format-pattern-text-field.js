@@ -39,6 +39,7 @@ export class ReactNumberFormatPatternTextField extends ReactBase{
         {...(this.placeStateProps(this.stateMaskedTextFieldProps))}
         {...(this.placeStaticProps(this.staticTextFieldProps))}
         {...(this.placeStateProps(this.stateTextFieldProps))}
+        onChange={() => {}}
         onValueChange={(values, sourceInfo) => {
           onChange && onChange({
             target: {
@@ -46,9 +47,7 @@ export class ReactNumberFormatPatternTextField extends ReactBase{
               maskedValue: values.formattedValue,
             },
           });
-
           onValueChange && onValueChange(values, sourceInfo);
-
         }}
         customInput={TextField}
       />
