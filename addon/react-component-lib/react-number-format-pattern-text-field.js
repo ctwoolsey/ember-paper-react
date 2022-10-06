@@ -14,10 +14,10 @@ export class ReactNumberFormatPatternTextField extends ReactBase{
   }
 
   initialize() {
-    const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
+    let siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
     const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatPatternTextFieldPropObj, false);
 
-    reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
+    siftedTextFieldProps = reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value, onChange']);
 
     this.state = Object.assign({},
       siftedMaskedTextFieldProps.stateProps,
@@ -28,44 +28,31 @@ export class ReactNumberFormatPatternTextField extends ReactBase{
     this.staticTextFieldProps = siftedTextFieldProps.staticProps;
     this.stateMaskedTextFieldProps = siftedMaskedTextFieldProps.stateProps;
     this.stateTextFieldProps = siftedTextFieldProps.stateProps;
-
-    this.MaskedTextField = this.MaskedTextField.bind(this);
-
   }
 
-  MaskedTextField(props, ref) {
-    const { onChange, ...other } = props;
-
+  renderComponent() {
+    const { onChange, onValueChange } = this.props;
     return (
       <PatternFormat
-        {...other}
-        getInputRef={ref}
+        getInputRef={this.componentRef}
         {...(this.placeStaticProps(this.staticMaskedTextFieldProps))}
         {...(this.placeStateProps(this.stateMaskedTextFieldProps))}
-        onValueChange={(values) => {
-          onChange({
+        {...(this.placeStaticProps(this.staticTextFieldProps))}
+        {...(this.placeStateProps(this.stateTextFieldProps))}
+        onValueChange={(values, sourceInfo) => {
+          onChange && onChange({
             target: {
               value: values.floatValue,
               maskedValue: values.formattedValue,
             },
           });
+
+          onValueChange && onValueChange(values, sourceInfo);
+
         }}
+        customInput={TextField}
       />
     );
-  }
-
-  renderComponent() {
-    const MaskedTextField = React.forwardRef(this.MaskedTextField);
-    const inputProps = Object.assign({}, this.staticTextFieldProps.InputProps, { inputComponent: MaskedTextField });
-
-    return (
-      <TextField
-        ref={this.componentRef}
-        {...(this.placeStaticProps(this.staticTextFieldProps))}
-        {...(this.placeStateProps(this.stateTextFieldProps))}
-        InputProps={inputProps}
-      />
-    )
   }
 }
 
