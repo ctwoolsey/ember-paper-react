@@ -14,10 +14,10 @@ export class ReactNumberFormatNumericTextField extends ReactBase{
   }
 
   initialize() {
-    const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
+    let siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
     const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatNumericTextFieldPropObj, false);
 
-    reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
+    siftedTextFieldProps = reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value, onChange']);
 
     this.state = Object.assign({},
       siftedMaskedTextFieldProps.stateProps,
@@ -29,11 +29,11 @@ export class ReactNumberFormatNumericTextField extends ReactBase{
     this.stateMaskedTextFieldProps = siftedMaskedTextFieldProps.stateProps;
     this.stateTextFieldProps = siftedTextFieldProps.stateProps;
 
-    this.MaskedTextField = this.MaskedTextField.bind(this);
+    //this.MaskedTextField = this.MaskedTextField.bind(this);
 
   }
 
-  MaskedTextField(props, ref) {
+  /*MaskedTextField(props, ref) {
     const { onChange, ...other } = props;
 
     return (
@@ -52,10 +52,33 @@ export class ReactNumberFormatNumericTextField extends ReactBase{
         }}
       />
     );
-  }
+  }*/
 
   renderComponent() {
-    const MaskedTextField = React.forwardRef(this.MaskedTextField);
+    const { onChange, onValueChange } = this.props;
+    return (
+      <NumericFormat
+        getInputRef={this.componentRef}
+        {...(this.placeStaticProps(this.staticMaskedTextFieldProps))}
+        {...(this.placeStateProps(this.stateMaskedTextFieldProps))}
+        {...(this.placeStaticProps(this.staticTextFieldProps))}
+        {...(this.placeStateProps(this.stateTextFieldProps))}
+        onValueChange={(values, sourceInfo) => {
+          onChange && onChange({
+            target: {
+              value: values.floatValue,
+              maskedValue: values.formattedValue,
+            },
+          });
+
+          onValueChange && onValueChange(values, sourceInfo);
+
+        }}
+        customInput={TextField}
+      />
+    );
+
+    /*const MaskedTextField = React.forwardRef(this.MaskedTextField);
     const inputProps = Object.assign({}, this.staticTextFieldProps.InputProps, { inputComponent: MaskedTextField });
 
     return (
@@ -65,6 +88,6 @@ export class ReactNumberFormatNumericTextField extends ReactBase{
         {...(this.placeStateProps(this.stateTextFieldProps))}
         InputProps={inputProps}
       />
-    )
+    )*/
   }
 }
