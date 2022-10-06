@@ -16,6 +16,7 @@
 * `ember test` – Runs the test suite on the current Ember version
 * `ember test --server` – Runs the test suite in "watch mode"
 * `ember try:each` – Runs the test suite against multiple Ember versions
+* To Run on Browser - `ember serve`  then - `localhost:4200/tests`
 
 ## Generating Basic Component
 * `ember g r-paper <dasherized-react-component-name>`  

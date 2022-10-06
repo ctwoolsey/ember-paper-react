@@ -75,7 +75,7 @@ module('Integration | Component | r-paper-i-mask-text-field', function(hooks) {
 
     await render(hbs`
       <div>
-        <RPaperNumberFormatTextField @id="test-me" @isTouched={{this.ctx.isTouched}} @errors={{this.ctx.errors}} />
+        <RPaperIMaskTextField @id="test-me" @isTouched={{this.ctx.isTouched}} @errors={{this.ctx.errors}} />
       </div>
     `);
 

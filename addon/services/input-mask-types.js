@@ -4,15 +4,20 @@ export default class InputMaskTypesService extends Service {
   constructor() {
     super();
     this.iMaskTypes = {};
-    this.numberFormatTypes = {};
+    this.numberFormatNumericTypes = {};
+    this.numberFormatPatternTypes = {};
   }
 
   addIMaskType(identifier, maskObject) {
     this.iMaskTypes[identifier] = maskObject;
   }
 
-  addNumberFormatType(identifier, maskObject) {
-    this.numberFormatTypes[identifier] = maskObject;
+  addNumberFormatNumericType(identifier, maskObject) {
+    this.numberFormatNumericTypes[identifier] = maskObject;
+  }
+
+  addNumberFormatPatternType(identifier, maskObject) {
+    this.numberFormatPatternTypes[identifier] = maskObject;
   }
 
   getIMaskType(identifier) {
@@ -23,9 +28,17 @@ export default class InputMaskTypesService extends Service {
     }
   }
 
-  getNumberFormatType(identifier) {
-    if (this.numberFormatTypes[identifier]) {
-      return this.numberFormatTypes[identifier];
+  getNumberFormatNumericType(identifier) {
+    if (this.numberFormatNumericTypes[identifier]) {
+      return this.numberFormatNumericTypes[identifier];
+    } else {
+      return {};
+    }
+  }
+
+  getNumberFormatPatternType(identifier) {
+    if (this.numberFormatPatternTypes[identifier]) {
+      return this.numberFormatPatternTypes[identifier];
     } else {
       return {};
     }

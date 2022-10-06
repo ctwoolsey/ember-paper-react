@@ -12,13 +12,17 @@ module('Unit | Service | input-mask-types', function(hooks) {
   test('sets and retrieves mask types', function(assert) {
     const obj1 = {a:1};
     const obj2 = {b:1};
+    const obj3 = {c:1};
 
     let service = this.owner.lookup('service:input-mask-types');
     assert.equal(Object.keys(service.iMaskTypes).length, 0, `iMaskTypes is empty`);
-    assert.equal(Object.keys(service.numberFormatTypes).length, 0, `numberFormatTypes is empty`);
+    assert.equal(Object.keys(service.numberFormatNumericTypes).length, 0, `numberFormatNumericTypes is empty`);
+    assert.equal(Object.keys(service.numberFormatPatternTypes).length, 0, `numberFormatPatternTypes is empty`);
     service.addIMaskType('a', obj1);
-    service.addNumberFormatType('b', obj2);
-    assert.equal(service.getIMaskType('a'), obj1, `iMaskTypes a correctly returned object`);
-    assert.equal(service.getNumberFormatType('b'), obj2, `numberFormatTypes a correctly returned object`);
+    service.addNumberFormatNumericType('b', obj2);
+    service.addNumberFormatPatternType('c', obj3);
+    assert.equal(service.getIMaskType('a'), obj1, `iMaskTypes correctly returned object`);
+    assert.equal(service.getNumberFormatNumericType('b'), obj2, `numberFormatNumericTypes correctly returned object`);
+    assert.equal(service.getNumberFormatPatternType('c'), obj3, `numberFormatPatternTypes correctly returned object`);
   });
 });

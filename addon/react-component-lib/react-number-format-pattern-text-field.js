@@ -1,15 +1,13 @@
-import NumberFormat from 'react-number-format';
+import { PatternFormat } from 'react-number-format';
 import { ReactBase } from './base/react-base';
-import { NumberFormatTextFieldPropObj } from '../prop-files/number-format-text-field-props';
+import { NumberFormatPatternTextFieldPropObj } from '../prop-files/number-format-pattern-text-field-props';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { reactPropSifter } from './utility/react-prop-sifter';
 import { reactPropRemover } from './utility/react-prop-remover';
 import TextField from '@mui/material/TextField';
 import React from 'react';
-import { adjustInputMaskCursor } from '../decorators/for-react/adjust-input-mask-cursor';
 
-@adjustInputMaskCursor
-export class ReactNumberFormatTextField extends ReactBase{
+export class ReactNumberFormatPatternTextField extends ReactBase{
   constructor(props) {
     super(props);
     this.initialize();
@@ -17,7 +15,7 @@ export class ReactNumberFormatTextField extends ReactBase{
 
   initialize() {
     const siftedTextFieldProps = reactPropSifter(this.props, TextFieldPropObj);
-    const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatTextFieldPropObj, false);
+    const siftedMaskedTextFieldProps = reactPropSifter(this.props, NumberFormatPatternTextFieldPropObj, false);
 
     reactPropRemover(siftedTextFieldProps, siftedMaskedTextFieldProps, ['value']);
 
@@ -39,7 +37,7 @@ export class ReactNumberFormatTextField extends ReactBase{
     const { onChange, ...other } = props;
 
     return (
-      <NumberFormat
+      <PatternFormat
         {...other}
         getInputRef={ref}
         {...(this.placeStaticProps(this.staticMaskedTextFieldProps))}
@@ -47,7 +45,7 @@ export class ReactNumberFormatTextField extends ReactBase{
         onValueChange={(values) => {
           onChange({
             target: {
-              value: values.value,
+              value: values.floatValue,
               maskedValue: values.formattedValue,
             },
           });
@@ -70,3 +68,4 @@ export class ReactNumberFormatTextField extends ReactBase{
     )
   }
 }
+
