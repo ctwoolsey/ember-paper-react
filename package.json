@@ -1,6 +1,6 @@
 {
   "name": "ember-paper-react",
-  "version": "3.0.1-beta.14",
+  "version": "3.0.2-beta.15",
   "description": "An ember paper implementation built on react material-ui components",
   "keywords": [
     "ember-addon",
