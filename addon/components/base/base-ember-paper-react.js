@@ -103,7 +103,7 @@ export default class BaseEmberPaperReact extends Component {
       }
       this.reactRef.current.setStateProp(stateName, value);
     } else {
-      later(this, this.changeReactState, 25, stateName, value);
+      later(this, this.changeReactState, stateName, value, 25);
     }
   }
 
