@@ -13,13 +13,18 @@ function selectTextOnFocus(c){
     @action
     onFocusHandler(event) {
       this.args.onFocus && this.args.onFocus(event);
-      if (this.args.selectAllOnFocus !== false) {
+      if (this.args.clearOnFocus) {
         later(this, function() {
-          this.reactRef.current.componentRef.current.querySelector(`.${TEXT_FIELD.BASE_INPUT_CLASS}`).select();
+          this.changeReactState('value', '');
         }, 50);
+      } else {
+        if (this.args.selectAllOnFocus !== false) {
+          later(this, function() {
+            this.reactRef.current.componentRef.current.querySelector(`.${TEXT_FIELD.BASE_INPUT_CLASS}`).select();
+          }, 50);
+        }
       }
     }
-
   }
 }
 
