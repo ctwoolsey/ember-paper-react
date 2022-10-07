@@ -761,6 +761,7 @@ If `@nativeOnChange={{true}}`:
 The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
 
 This component will by default select the entire text area when focus is received.  If this trait is not desired, the attribute `@selectAllOnFocus={{false}}` must be explicitly set.
+If `@clearOnFocus={{true}}` then instead of selecting the entire area, the value will be cleared.  If the user does not set a value, the previous value will be restored.
 
 ## TextField - NumberFormatPatternTextField
 ***
@@ -797,6 +798,7 @@ If `@nativeOnChange={{true}}`:
 The onChange function will return the event object.  If `nativeOnChange` is not defined or false, the unmasked value will be returned.  The event object returns the following object a target object with a `value` and `maskedValue`.
 
 This component will by default select the entire text area when focus is received.  If this trait is not desired, the attribute `@selectAllOnFocus={{false}}` must be explicitly set.
+If `@clearOnFocus={{true}}` then instead of selecting the entire area, the value will be cleared.  If the user does not set a value, the previous value will be restored.
 
 ## Tooltip
 ***
