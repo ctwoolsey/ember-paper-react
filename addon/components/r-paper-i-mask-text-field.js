@@ -27,20 +27,20 @@ export default class RPaperIMaskTextFieldComponent extends BaseEmberPaperReact {
       const mask = this.inputMaskTypes.getIMaskType(this.args.maskName);
       Object.assign(this.propsToPass, mask);
     }
-    this.propsToPass.onChange = this.onChangeHandler;
+    //this.propsToPass.onChange = this.onChangeHandler;
 
     if (this.args.value === undefined) {
       this.propsToPass.value = '';
     }
   }
 
-  @action
+  /*@action
   onChangeHandler(event) {
     if (this.args.value === undefined) {
       next(this, () => {
         this.changeReactState('value', event.target.value);
       });
     }
-  }
+  }*/
 }
 

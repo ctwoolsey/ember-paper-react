@@ -1,5 +1,7 @@
 const props = {
   mask: undefined,
+  accept: undefined,
+  complete: undefined,
   prepare: undefined,
   commit: undefined,
   lazy: undefined,
