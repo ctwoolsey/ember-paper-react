@@ -5,12 +5,12 @@ import { TextFieldPropObj } from '../prop-files/text-field-props';
 import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { usesErrorValidation } from '../decorators/uses-error-validation';
 import { changeHandlerValueReturn } from '../decorators/change-handler-value-return';
-import { selectTextOnFocus } from '../decorators/select-text-on-focus';
+import { selectTextOrClearOnFocus } from '../decorators/select-text-or-clear-on-focus';
 import { inject as service } from '@ember/service';
 
 @usesErrorValidation
 @changeHandlerValueReturn
-@selectTextOnFocus
+@selectTextOrClearOnFocus
 export default class RPaperNumberFormatPatternTextFieldComponent extends BaseEmberPaperReact {
   @service inputMaskTypes;
 
