@@ -19,7 +19,11 @@ function reactCreateIcon(iconObject) {
     if (iconObject) {
       return React.createElement(iconObject);
     } else {
-      return null;
+      if (iconObject === false) {
+        return false;
+      } else {
+        return null;
+      }
     }
   }
 }
