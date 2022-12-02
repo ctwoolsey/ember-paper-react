@@ -26,8 +26,18 @@ const propsNotForComponent = {
 
 const stateProps = {
   action: undefined,
+  anchorOrigin: undefined,
+  autoHideDuration: undefined,
+  ClickAwayListenerProps: undefined,
+  ContentProps: undefined,
+  disableWindowBlurListener: undefined,
+  key: undefined,
+  message: undefined,
   open: undefined,
-  sx: undefined
+  resumeHideDuration: undefined,
+  sx: undefined,
+  transitionDuration: undefined,
+  TransitionProps: undefined
 }
 
 const statefulPropsNotForComponent = {
