@@ -25,7 +25,16 @@ const propsNotForComponent = {
 
 const stateProps = {
   action: undefined,
-  sx: undefined
+  closeText: undefined,
+  color: undefined,
+  icon: undefined,
+  iconMapping: undefined,
+  role: undefined,
+  severity: undefined,
+  slotProps: undefined,
+  slots: undefined,
+  sx: undefined,
+  variant: undefined
 }
 
 const statefulPropsNotForComponent = {
