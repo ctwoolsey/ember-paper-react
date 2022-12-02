@@ -145,27 +145,35 @@ export class ReactBase extends React.Component{
     }
   }
 
+  renderComponentChildren(ComponentToRender) {
+    return (
+      <ComponentToRender
+        ref={this.componentRef}
+        {...(this.placeStaticProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      >
+        {this.renderChildren()}
+      </ComponentToRender>
+    )
+  }
+
+  renderComponentNoChildren(ComponentToRender) {
+    return (
+      <ComponentToRender
+        ref={this.componentRef}
+        {...(this.placeStaticProps(this.staticProps))}
+        {...(this.placeStateProps(this.statePropsForComponent))}
+      />
+    )
+  }
+
   renderComponent() {
     const ComponentToRender = this.DefaultComponentToRender;
-    //can't simplify this code because react component like chip can't have any children even null.
+    //can't simplify this code because react component like chip can't have any children even null. here the prop children will be missing
     if (Object.prototype.hasOwnProperty.call(this.props, 'children')) {
-      return (
-        <ComponentToRender
-          ref={this.componentRef}
-          {...(this.placeStaticProps(this.staticProps))}
-          {...(this.placeStateProps(this.statePropsForComponent))}
-        >
-          {this.renderChildren()}
-        </ComponentToRender>
-      )
+      return this.renderComponentChildren(ComponentToRender);
     } else {
-      return (
-        <ComponentToRender
-          ref={this.componentRef}
-          {...(this.placeStaticProps(this.staticProps))}
-          {...(this.placeStateProps(this.statePropsForComponent))}
-        />
-      )
+      return this.renderComponentNoChildren(ComponentToRender);
     }
   }
 

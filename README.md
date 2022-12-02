@@ -138,6 +138,35 @@ A few important notes that effect all components:
 All properties listed on the Material-ui site are available are implemented on the components with the use of `@`.  Properties that might be dynamic and change are implemented so that they will update accordingly.  Properties or functions that return a ReactNode will generally not work unless you pass or return a ReactNode.  Some components have special ways of dealing with this known as `Attribute Children`.
 
 
+## Alert
+***
+[Explore React Material-UI Alert docs](https://mui.com/material-ui/react-alert/)
+
+The most basic usages are:
+```handlebars
+<RPaperAlert @severity="info">
+  <RPaperToolbar>
+    <:message>Information Message</:message>
+    <:action><button>Okay</button></:action>
+  </RPaperToolbar>
+</RPaperAlert>
+
+<RPaperAlert @severity="error">
+  <RPaperToolbar>
+    <RPaperAlertTitle>Error</RPaperAlertTitle>
+    This is an error alert — check it out!
+  </RPaperToolbar>
+</RPaperAlert>
+
+<RPaperAlert @severity="error">
+    <:message>
+        <RPaperAlertTitle>Error</RPaperAlertTitle>
+        This is an error alert — check it out!
+    </:message>
+    <:action><RPaperButton @color="inherit" @size="small" @onClick={{this.actionClicked}}>OKAY</RPaperButton></:action>
+</RPaperAlert>
+```
+Note: any time an action is needed use the named block methods as shown.
 
 ## AppBar/Toolbar
 ***
@@ -555,6 +584,30 @@ The most basic usage is:
     <RPaperRadio @label={{radioGroup}} @value={{radioGroup}}/>
   {{/each}}
 </RPaperRadioGroup>
+```
+
+## Snackbar
+***
+[Explore React Material-UI Snackbar docs](https://mui.com/material-ui/react-snackbar/)
+
+The most basic usage is:
+```handlebars
+<RPaperSnackbar
+  @open={{this.simpleSnackbarOpen}}
+  @message='Note archived'
+  @onClose={{this.simpleSnackbarOnClose}}
+  @autoHideDuration={{2000}}
+  @anchorOrigin={{this.simpleSnackbarPosition}}>
+    <:action><button onClick={{this.actionClicked}}>OKAY</button></:action>
+</RPaperSnackbar>
+
+<RPaperSnackbar
+  @open={{this.alertSnackbarOpen}}
+  @onClose={{this.alertSnackbarOnClose}}
+  @autoHideDuration={{5000}}
+  @anchorOrigin={{this.alertSnackbarPosition}}>
+    <RPaperAlert @severity="info">This is an info alert — check it out!</RPaperAlert>
+</RPaperSnackbar>
 ```
 
 ## Tabs
