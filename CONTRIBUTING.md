@@ -190,7 +190,7 @@ does.
 ### render-later
 This decorator incorporates the `protect-children-from-react-destruction` decorator.  Some components render
 their children into a portal and are not displayed immediately.  It will keep children from being
-rendered into a non-existant element.  By using with the `protect-children-from-react-destruction` decorator, when the 
+rendered into a non-existent element.  By using with the `protect-children-from-react-destruction` decorator, when the 
 React element is ready to display the children, the children will be rendered correctly.
 
 `renderLater()` can be overridden to provide custom rendering as in `RPaperDrawer`.  

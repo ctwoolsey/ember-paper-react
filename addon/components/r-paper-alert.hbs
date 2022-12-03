@@ -1,0 +1,14 @@
+<span class={{this.componentType}} ...attributes
+  {{ember-paper-reactable this.inserted this.changeReactState this.changeArgs}}
+>
+    {{#if (has-block 'message')}}
+      <AttributeNodeChild class="react=component {{this.message}}" @attribute={{this.message}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='message'}}</AttributeNodeChild>
+    {{/if}}
+    {{#if (has-block 'default')}}
+      <AttributeNodeChild class="react=component {{this.message}}" @attribute={{this.message}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='default'}}</AttributeNodeChild>
+    {{/if}}
+    {{#if (has-block 'action')}}
+      <AttributeNodeChild class="react=component {{this.action}}" @attribute={{this.action}} @loadAttributeInfo={{this.loadAttributeInfo}}>{{yield to='action'}}</AttributeNodeChild>
+    {{/if}}
+
+</span>
