@@ -435,6 +435,23 @@ The most basic usage is:
 
 This component is usually used with `<RPaperBackdrop/>`
 
+## DatePicker
+***
+[Explore React Material-UI DatePicker docs](https://mui.com/x/react-date-pickers/date-picker/)
+
+The most basic usages are:
+```handlebars
+<RPaperDatePicker @label="Basic Example"
+                  @onChange={{this.datePickerOnChange}}
+                  @value={{this.datePickerValue}}
+                  @locale={{this.locale}}/>
+```
+This component supports validation using the following attributes:
+```handlebars
+@isTouched - this field will need to be true to display the error messages passed to the next attribute
+@errors - this is an array of error validation messages.
+```
+
 
 ## Drawer
 ***
