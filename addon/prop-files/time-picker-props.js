@@ -4,35 +4,33 @@ const props = {
   onChange: undefined,
   renderInput: undefined,
   acceptRegex: undefined,
+  ampm: undefined,
+  ampmInClock: undefined,
   className: undefined,
   closeOnSelect: undefined,
   components: undefined,
   componentsProps: undefined,
-  dayOfWeekFormatter: undefined,
-  defaultCalendarMonth: undefined,
   desktopModeMediaQuery: undefined,
   DialogProps: undefined,
   disabled: undefined,
-  disableFuture: undefined,
-  disableHighlightToday: undefined,
+  disableIgnoringDatePartForTimeValidation: undefined,
   disableMaskedInput: undefined,
   disableOpenPicker: undefined,
-  disablePast: undefined,
+  getClockLabelText: undefined,
   getOpenDialogAriaText: undefined,
   InputAdornmentProps: undefined,
   inputFormat: undefined,
   inputRef: undefined,
-  loading: undefined,
   mask: undefined,
-  maxDate: undefined,
-  minDate: undefined,
+  maxTime: undefined,
+  minTime: undefined,
+  minutesStep: undefined,
   onAccept: undefined,
   onClose: undefined,
   onError: undefined,
   onMonthChange: undefined,
   onOpen: undefined,
   onViewChange: undefined,
-  onYearChange: undefined,
   open: undefined,
   OpenPickerButtonProps: undefined,
   openTo: undefined,
@@ -40,22 +38,15 @@ const props = {
   PaperProps: undefined,
   PopperProps: undefined,
   readOnly: undefined,
-  reduceAnimations: undefined,
-  renderDay: undefined,
-  renderLoading: undefined,
   rifmFormatter: undefined,
-  shouldDisableDate: undefined,
-  shouldDisableMonth: undefined,
-  shouldDisableYear: undefined,
-  showDaysOutsideCurrentMonth: undefined,
+  shouldDisableTime: undefined,
   showToolbar: undefined,
   ToolbarComponent: undefined,
-  toolbarFormat: undefined,
-  toolbarPlaceholder: undefined,
   toolbarTitle: undefined,
   TransitionComponent: undefined,
   value: undefined,
   views: undefined,
+  ref: undefined,
 };
 
 const propsNotForComponent = {
@@ -63,23 +54,22 @@ const propsNotForComponent = {
 
 const stateProps = {
   acceptRegex: undefined,
+  ampm: undefined,
+  ampmInClock: undefined,
   className: undefined,
   closeOnSelect: undefined,
   components: undefined,
   componentsProps: undefined,
-  defaultCalendarMonth: undefined,
   desktopModeMediaQuery: undefined,
   DialogProps: undefined,
   disabled: undefined,
-  disableFuture: undefined,
-  disableHighlightToday: undefined,
+  disableIgnoringDatePartForTimeValidation: undefined,
   disableMaskedInput: undefined,
   disableOpenPicker: undefined,
-  disablePast: undefined,
-  loading: undefined,
   mask: undefined,
-  maxDate: undefined,
-  minDate: undefined,
+  maxTime: undefined,
+  minTime: undefined,
+  minutesStep: undefined,
   open: undefined,
   OpenPickerButtonProps: undefined,
   openTo: undefined,
@@ -87,11 +77,8 @@ const stateProps = {
   PaperProps: undefined,
   PopperProps: undefined,
   readOnly: undefined,
-  reduceAnimations: undefined,
-  showDaysOutsideCurrentMonth: undefined,
+  shouldDisableTime: undefined,
   showToolbar: undefined,
-  toolbarFormat: undefined,
-  toolbarPlaceholder: undefined,
   toolbarTitle: undefined,
   value: undefined,
   views: undefined,
@@ -101,16 +88,16 @@ const statefulPropsNotForComponent = {
   locale: undefined,
 }
 
-const DatePickerProps = () => { return Object.assign({}, ThemePropObj.props(), props) };
-const DatePickerStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), stateProps) };
-const DatePickerPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), propsNotForComponent)};
-const DatePickerStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
+const TimePickerProps = () => { return Object.assign({}, ThemePropObj.props(), props) };
+const TimePickerStateProps = () => {return Object.assign({}, ThemePropObj.stateProps(), stateProps) };
+const TimePickerPropsNotForComponent = () => {return Object.assign({}, ThemePropObj.propsNotForComponent(), propsNotForComponent)};
+const TimePickerStatePropsNotForComponent = () => {return Object.assign({}, ThemePropObj.statefulPropsNotForComponent(), statefulPropsNotForComponent)};
 
-const DatePickerPropObj = {
-  props: DatePickerProps,
-  stateProps: DatePickerStateProps,
-  propsNotForComponent: DatePickerPropsNotForComponent,
-  statefulPropsNotForComponent: DatePickerStatePropsNotForComponent
+const TimePickerPropObj = {
+  props: TimePickerProps,
+  stateProps: TimePickerStateProps,
+  propsNotForComponent: TimePickerPropsNotForComponent,
+  statefulPropsNotForComponent: TimePickerStatePropsNotForComponent
 }
 
-export { DatePickerPropObj }
+export { TimePickerPropObj }
