@@ -7,7 +7,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | r-paper-static-time-picker', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it creates a static time picker and opens correctly', async function(assert) {
+  test('it creates a static time picker', async function(assert) {
 
     class MyContext {
       @tracked value = '';
@@ -25,9 +25,9 @@ module('Integration | Component | r-paper-static-time-picker', function(hooks) {
                         @onChange={{this.onChange}}
                        />
     `);
-    
-    const datePicker = document.getElementsByClassName('ember-paper-react-static-time-picker')[0];
-    assert.ok(datePicker, 'StaticTimePicker found');
+
+    const staticTimePicker = document.getElementsByClassName('ember-paper-react-static-time-picker')[0];
+    assert.ok(staticTimePicker, 'StaticTimePicker found');
   });
 });
 
