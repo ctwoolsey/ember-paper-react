@@ -435,6 +435,39 @@ The most basic usage is:
 
 This component is usually used with `<RPaperBackdrop/>`
 
+## DatePicker
+***
+[Explore React Material-UI DatePicker docs](https://mui.com/x/react-date-pickers/date-picker/)
+
+The most basic usages are:
+```handlebars
+<RPaperDatePicker @label="Basic Example"
+                  @onChange={{this.datePickerOnChange}}
+                  @value={{this.datePickerValue}}
+                  @locale={{this.locale}}/>
+```
+This component supports validation using the following attributes:
+```handlebars
+@isTouched - this field will need to be true to display the error messages passed to the next attribute
+@errors - this is an array of error validation messages.
+```
+
+## DateTimePicker
+***
+[Explore React Material-UI DateTimePicker docs](https://mui.com/x/react-date-pickers/date-time-picker/)
+
+The most basic usages are:
+```handlebars
+<RPaperDateTimePicker @label="Date/Time Picker"
+                      @onChange={{this.dateTimePickerOnChange}}
+                      @value={{this.dateTimePickerValue}}
+                      @locale={{this.locale}}/>
+```
+This component supports validation using the following attributes:
+```handlebars
+@isTouched - this field will need to be true to display the error messages passed to the next attribute
+@errors - this is an array of error validation messages.
+```
 
 ## Drawer
 ***
@@ -665,6 +698,22 @@ This component can also be used to render router links:
   {{outlet}}
 </div>
 ```
+## StaticTimePicker
+***
+[Explore React Material-UI TimePicker docs](https://mui.com/x/react-date-pickers/time-picker/#static-mode)
+
+The most basic usages are:
+```handlebars
+<RPaperStaticTimePicker @label="Basic Example"
+                        @onChange={{this.staticTimePickerOnChange}}
+                        @value={{this.staticTimePickerValue}}
+                        @locale={{this.locale}}/>
+```
+This component supports validation using the following attributes:
+```handlebars
+@isTouched - this field will need to be true to display the error messages passed to the next attribute
+@errors - this is an array of error validation messages.
+```
 
 ## TextField
 ***
@@ -852,6 +901,25 @@ The onChange function will return the event object.  If `nativeOnChange` is not 
 
 This component will by default select the entire text area when focus is received.  If this trait is not desired, the attribute `@selectAllOnFocus={{false}}` must be explicitly set.
 If `@clearOnFocus={{true}}` then instead of selecting the entire area, the value will be cleared.  If the user does not set a value, the previous value will be restored.
+
+## TimePicker
+***
+[Explore React Material-UI TimePicker docs](https://mui.com/x/react-date-pickers/time-picker/)
+
+The most basic usages are:
+```handlebars
+<RPaperTimePicker @label="Basic Example"
+                  @onChange={{this.timePickerOnChange}}
+                  @value={{this.timePickerValue}}
+                  @locale={{this.locale}}
+                  @isTouched={{true}}
+                  @errors={{this.errors}}/>
+```
+This component supports validation using the following attributes:
+```handlebars
+@isTouched - this field will need to be true to display the error messages passed to the next attribute
+@errors - this is an array of error validation messages.
+```
 
 ## Tooltip
 ***

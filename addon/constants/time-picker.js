@@ -1,0 +1,14 @@
+import { REACT_COMPONENT_PREFIX, BASE_EMBER_COMPONENT_PREFIX } from './constants';
+
+const IDS = {
+  TIME_PICKER: `${REACT_COMPONENT_PREFIX}TimePicker`
+}
+
+const TIME_PICKER = {
+  ID: IDS.TIME_PICKER,
+  COMPONENT_TYPE: `${BASE_EMBER_COMPONENT_PREFIX}-time-picker`,
+}
+
+export {
+  TIME_PICKER
+}
