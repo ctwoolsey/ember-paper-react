@@ -74,7 +74,6 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  locale: undefined,
 }
 
 const StaticTimePickerProps = () => { return Object.assign({}, ThemePropObj.props(), DivNativePropObj.props(), props) };

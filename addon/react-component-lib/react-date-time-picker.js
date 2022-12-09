@@ -8,6 +8,6 @@ export class ReactDateTimePicker extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = DateTimePicker;
-    this.initializeWithTextField(DateTimePickerPropObj);
+    this.initializeDateOrTimeComponent(DateTimePickerPropObj);
   }
 }
