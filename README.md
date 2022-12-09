@@ -444,8 +444,11 @@ The most basic usages are:
 <RPaperDatePicker @label="Basic Example"
                   @onChange={{this.datePickerOnChange}}
                   @value={{this.datePickerValue}}
-                  @locale={{this.locale}}/>
+                  @adapterLocale={{this.locale}}/>
 ```
+All attributes from `LocalizationProvider` are supported. The attribute `dateAdapter` defaults to using `AdapterMoment`
+if not specified in the component.
+
 This component supports validation using the following attributes:
 ```handlebars
 @isTouched - this field will need to be true to display the error messages passed to the next attribute
@@ -461,8 +464,11 @@ The most basic usages are:
 <RPaperDateTimePicker @label="Date/Time Picker"
                       @onChange={{this.dateTimePickerOnChange}}
                       @value={{this.dateTimePickerValue}}
-                      @locale={{this.locale}}/>
+                      @adapterLocale={{this.locale}}/>
 ```
+All attributes from `LocalizationProvider` are supported. The attribute `dateAdapter` defaults to using `AdapterMoment`
+if not specified in the component.
+
 This component supports validation using the following attributes:
 ```handlebars
 @isTouched - this field will need to be true to display the error messages passed to the next attribute
@@ -707,8 +713,11 @@ The most basic usages are:
 <RPaperStaticTimePicker @label="Basic Example"
                         @onChange={{this.staticTimePickerOnChange}}
                         @value={{this.staticTimePickerValue}}
-                        @locale={{this.locale}}/>
+                        @adapterLocale={{this.locale}}/>
 ```
+All attributes from `LocalizationProvider` are supported. The attribute `dateAdapter` defaults to using `AdapterMoment`
+if not specified in the component.
+
 This component supports validation using the following attributes:
 ```handlebars
 @isTouched - this field will need to be true to display the error messages passed to the next attribute
@@ -911,10 +920,13 @@ The most basic usages are:
 <RPaperTimePicker @label="Basic Example"
                   @onChange={{this.timePickerOnChange}}
                   @value={{this.timePickerValue}}
-                  @locale={{this.locale}}
+                  @adapterLocale={{this.locale}}
                   @isTouched={{true}}
                   @errors={{this.errors}}/>
 ```
+All attributes from `LocalizationProvider` are supported. The attribute `dateAdapter` defaults to using `AdapterMoment`
+if not specified in the component.
+
 This component supports validation using the following attributes:
 ```handlebars
 @isTouched - this field will need to be true to display the error messages passed to the next attribute

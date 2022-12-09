@@ -98,7 +98,6 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  locale: undefined,
 }
 
 const DatePickerProps = () => { return Object.assign({}, ThemePropObj.props(), props) };

@@ -85,7 +85,6 @@ const stateProps = {
 }
 
 const statefulPropsNotForComponent = {
-  locale: undefined,
 }
 
 const TimePickerProps = () => { return Object.assign({}, ThemePropObj.props(), props) };

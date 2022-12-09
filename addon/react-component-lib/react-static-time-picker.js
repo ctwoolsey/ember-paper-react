@@ -8,6 +8,6 @@ export class ReactStaticTimePicker extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = StaticTimePicker;
-    this.initializeWithTextField(StaticTimePickerPropObj);
+    this.initializeDateOrTimeComponent(StaticTimePickerPropObj);
   }
 }

@@ -8,6 +8,6 @@ export class ReactTimePicker extends ReactBase{
   constructor(props) {
     super(props);
     this.DefaultComponentToRender = TimePicker;
-    this.initializeWithTextField(TimePickerPropObj);
+    this.initializeDateOrTimeComponent(TimePickerPropObj);
   }
 }
