@@ -1,6 +1,6 @@
 {
   "name": "ember-paper-react",
-  "version": "4.0.0-beta.17",
+  "version": "4.0.0-beta.20",
   "description": "An ember paper implementation built on react material-ui components",
   "keywords": [
     "ember-addon",
@@ -39,6 +39,7 @@
     "@mui/icons-material": "5.8.3",
     "@mui/lab": "5.0.0-alpha.85",
     "@mui/material": "5.8.3",
+    "@mui/x-date-pickers": "5.0.9",
     "ember-auto-import": "2.2.3",
     "ember-cli-babel": "7.26.6",
     "ember-cli-htmlbars": "5.7.1",
