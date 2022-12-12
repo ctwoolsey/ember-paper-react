@@ -6,7 +6,7 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { usesErrorValidation } from '../decorators/uses-error-validation';
 import { changeHandlerValueReturn } from '../decorators/change-handler-value-return';
 import { selectTextOrClearOnFocus } from '../decorators/select-text-or-clear-on-focus';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 @usesErrorValidation
 @changeHandlerValueReturn

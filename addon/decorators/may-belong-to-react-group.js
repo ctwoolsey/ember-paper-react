@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { v4 as uuidv4 } from 'uuid';
 import React from "react";
 import { protectChildrenFromReactDestruction } from "./protect-children-from-react-destruction";

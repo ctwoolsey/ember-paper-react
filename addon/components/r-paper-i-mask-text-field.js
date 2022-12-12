@@ -5,7 +5,7 @@ import BaseEmberPaperReact from './base/base-ember-paper-react';
 import { TextFieldPropObj } from '../prop-files/text-field-props';
 import { usesErrorValidation } from '../decorators/uses-error-validation';
 import { changeHandlerValueReturn } from '../decorators/change-handler-value-return';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { next } from '@ember/runloop';
 

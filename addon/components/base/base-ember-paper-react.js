@@ -1,5 +1,5 @@
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { NOT_SET_COMPONENT_TYPE } from '../../constants/constants';
 import React from 'react';
 import { scheduleOnce, later } from '@ember/runloop';
