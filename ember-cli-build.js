@@ -4,9 +4,7 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
-    babel: {
-      plugins: ['@babel/plugin-transform-react-jsx', '@babel/plugin-syntax-jsx']
-    },
+    // Add options here
   });
 
   /*
