@@ -1,6 +1,6 @@
 {
   "name": "ember-paper-react",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "An ember paper implementation built on react material-ui components",
   "keywords": [
     "ember-addon",
@@ -67,8 +67,8 @@
     "@testing-library/react": "13.3.0",
     "babel-eslint": "10.1.0",
     "broccoli-asset-rev": "3.0.0",
-    "concurrently": "^7.6.0",
-    "ember-cli": "~4.9.1",
+    "concurrently": "7.6.0",
+    "ember-cli": "4.9.1",
     "ember-cli-dependency-checker": "3.3.1",
     "ember-cli-inject-live-reload": "2.1.0",
     "ember-cli-sri": "2.1.1",

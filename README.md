@@ -213,7 +213,8 @@ All properties of the `TextField` are available for the `TextField` component un
 
 If `@nativeOnChange={{true}}`:
 The `onChange` function will return the mui specified `(event, value, reason, details)`.  
-Otherwise, `@onChange` will return `(value)`.
+Otherwise, `@onChange` will return `(value)`.  
+If `@multiple={{true}}` the `value` returned will be an `EmberArray`.
 
 While options and groupings can all be set through passed arguments, it is possible if desired to customize the grouping headers or options.
 By using `<:groupHeaders>` or `<:options>` those sections may be customized.  Each customization must be wrapped within a `<li>` element.
