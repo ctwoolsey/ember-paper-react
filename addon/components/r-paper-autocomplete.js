@@ -88,9 +88,17 @@ export default class RPaperAutocompleteComponent extends BaseEmberPaperReact {
   onChangeHandler(event, value, reason, details) {
     if (this.args.onChange) {
       if (this.args.nativeOnChange) {
-        return this.args.onChange(event, value, reason, details);
+        if (this.args.multiple) {
+          return this.args.onChange(event, A(value), reason, details);
+        } else {
+          return this.args.onChange(event, value, reason, details);
+        }
       } else {
-        return this.args.onChange(value);
+        if (this.args.multiple) {
+          return this.args.onChange(A(value));
+        } else {
+          return this.args.onChange(value);
+        }
       }
     } else {
       return null;
